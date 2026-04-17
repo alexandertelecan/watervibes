@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
 import "../globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
 });
@@ -15,6 +15,7 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
+  axes: ["opsz", "SOFT"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function AdminRootLayout({
   return (
     <html
       lang="en"
-      className={cn(inter.variable, fraunces.variable, "h-full antialiased")}
+      className={cn(manrope.variable, fraunces.variable, "h-full antialiased")}
     >
       <body className="min-h-full bg-background text-foreground">
         {children}

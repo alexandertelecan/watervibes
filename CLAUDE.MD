@@ -22,6 +22,7 @@
 8. **Accessibility is not optional.** Every interactive element must be keyboard-reachable with a visible focus ring.
 9. **Mobile-first.** Write the mobile layout first, enhance upward.
 10. **Ask before scope creep.** New page, new dependency, new service → confirm with the user.
+11. **Design changes must reference `docs/DESIGN.md`.** Tokens, typography, motion, layout rules all live there. If what you're building isn't in DESIGN.md, stop and propose an addition before implementing.
 
 ---
 
@@ -44,6 +45,12 @@
 ├── package.json                            # deps + pnpm scripts (dev, build, seed, …)
 ├── pnpm-workspace.yaml                     # pnpm workspace marker
 │
+├── docs/
+│   ├── DESIGN.md                           # authoritative visual direction (palette, type, motion, components)
+│   ├── IMAGERY.md                          # curated Unsplash picks mapped to site roles
+│   └── skills/
+│       └── frontend-design.md              # design-thinking reference (distinctive, non-generic UI)
+│
 ├── messages/
 │   ├── en.json                             # English UI strings
 │   └── ro.json                             # Romanian UI strings
@@ -62,29 +69,52 @@
     ├── app/
     │   ├── favicon.ico
     │   ├── globals.css                     # Tailwind v4 + CSS custom properties (design tokens)
+    │   ├── sitemap.ts                      # MetadataRoute.Sitemap — /en, /ro static paths + product slugs from MongoDB
+    │   ├── robots.ts                       # MetadataRoute.Robots — allow /, disallow /admin/ + /api/, sitemap ref
     │   │
     │   ├── [locale]/                       # all public pages live here (bilingual)
-    │   │   ├── layout.tsx                  # header + footer + fonts + NextIntlClientProvider + sonner Toaster
+    │   │   ├── layout.tsx                  # header + footer + fonts + SkipToContent + <main id="main"> + metadata template + og image
     │   │   ├── page.tsx                    # HOME → components/home/* (Hero + Featured + Testimonials + CTA)
+    │   │   ├── not-found.tsx               # localized 404 — rendered by notFound() inside [locale]
+    │   │   ├── error.tsx                   # "use client" — localized error boundary (Try again + Back home)
+    │   │   ├── [...rest]/page.tsx          # catch-all — triggers notFound() so unknown localized paths hit not-found.tsx
+    │   │   ├── about/
+    │   │   │   └── page.tsx                # ABOUT page (server) → hero + story + values + HomeCTA, FadeIn sections
     │   │   ├── catalog/
     │   │   │   ├── page.tsx                # CATALOG list → components/catalog/*
-    │   │   │   └── [slug]/page.tsx         # PRODUCT DETAIL → components/product/*
+    │   │   │   ├── loading.tsx             # skeleton grid (9 cards) + filter placeholder
+    │   │   │   └── [slug]/
+    │   │   │       ├── page.tsx            # PRODUCT DETAIL → components/product/*
+    │   │   │       └── loading.tsx         # skeleton gallery + text placeholders
     │   │   └── contact/
     │   │       └── page.tsx                # CONTACT page (server) → components/contact/ContactForm
     │   │
     │   ├── admin/                          # ENGLISH-ONLY — internal CMS, never locale-prefixed
     │   │   ├── layout.tsx                  # root html/body/fonts for the /admin tree (public — includes /admin/login)
     │   │   ├── login/page.tsx              # "use client" — POSTs password to /api/admin/login, redirects on success
-    │   │   └── (protected)/                # route group — auth guard + sidebar apply only here
-    │   │       ├── layout.tsx              # server: await requireAdmin() + renders <AdminSidebar /> + <main>
-    │   │       └── page.tsx                # /admin dashboard — product/testimonial count cards + manage links
+    │   │   └── (protected)/                # route group — auth guard + sidebar + Toaster apply only here
+    │   │       ├── layout.tsx              # server: await requireAdmin() + renders <AdminSidebar /> + <main> + <Toaster />
+    │   │       ├── error.tsx               # "use client" — English-only admin error boundary (Try again + Back to dashboard)
+    │   │       ├── page.tsx                # /admin dashboard — product/testimonial count cards + manage links
+    │   │       ├── products/
+    │   │       │   ├── page.tsx            # list → <ProductsTable /> + "New product" link
+    │   │       │   ├── loading.tsx         # skeleton table (6 rows)
+    │   │       │   ├── new/page.tsx        # renders <ProductForm mode="create" />
+    │   │       │   └── [id]/page.tsx       # loads product by id → <ProductForm mode="edit" />
+    │   │       └── testimonials/
+    │   │           ├── page.tsx            # list → <TestimonialsTable /> + "New testimonial" link
+    │   │           ├── new/page.tsx        # renders <TestimonialForm mode="create" />
+    │   │           └── [id]/page.tsx       # loads testimonial by id → <TestimonialForm mode="edit" />
     │   │
     │   └── api/
     │       ├── contact/
     │       │   └── route.ts                # POST → zod + Resend send; in-memory IP rate limit
     │       ├── products/
     │       │   ├── route.ts                # GET (public list), POST (admin — verifies session cookie)
-    │       │   └── [id]/route.ts           # GET / PUT / DELETE by id (mutations verify session cookie)
+    │       │   └── [id]/route.ts           # GET / PUT / DELETE by id (mutations verify session cookie; PUT is full replace)
+    │       ├── testimonials/
+    │       │   ├── route.ts                # GET (public list), POST (admin — verifies session cookie)
+    │       │   └── [id]/route.ts           # GET / PUT / DELETE by id (admin for mutations)
     │       └── admin/
     │           ├── login/route.ts          # POST only — zod + bcrypt compare + sets wv_admin JWT cookie; 5/IP/10m rate limit
     │           ├── logout/route.ts         # POST only — clears wv_admin cookie
@@ -103,18 +133,34 @@
     │   │   └── textarea.tsx
     │   │
     │   ├── layout/
-    │   │   ├── Header.tsx                  # top nav + logo + language switcher
+    │   │   ├── Header.tsx                  # top nav + logo + language switcher + MobileNav trigger
     │   │   ├── Footer.tsx                  # footer nav + contact line
-    │   │   └── LanguageSwitcher.tsx        # EN/RO toggle preserving route
+    │   │   ├── LanguageSwitcher.tsx        # EN/RO toggle preserving route (aria-current on active)
+    │   │   ├── MobileNav.tsx               # "use client" — Sheet-based mobile menu (focus trap, Esc closes)
+    │   │   └── SkipToContent.tsx           # server — visible-on-focus "Skip to main content" link → #main
     │   │
     │   ├── admin/
-    │   │   └── AdminSidebar.tsx            # "use client" — fixed-width sidebar + active nav item + sign-out button
+    │   │   ├── AdminSidebar.tsx            # "use client" — fixed-width sidebar + active nav item + sign-out button
+    │   │   ├── BilingualField.tsx          # "use client" — EN/RO side-by-side input/textarea pair for react-hook-form
+    │   │   ├── DataTable.tsx               # "use client" — generic <table> (columns, rows, emptyMessage, getRowKey)
+    │   │   ├── DeleteDialog.tsx            # "use client" — shadcn Dialog for destructive confirm
+    │   │   ├── FormSection.tsx             # server wrapper — titled form section w/ divider
+    │   │   ├── ProductForm.tsx             # "use client" — the big product create/edit form (composes Basics/Variant/Features/Images)
+    │   │   ├── ProductFormBasics.tsx       # "use client" — slug/order/featured section for ProductForm
+    │   │   ├── ProductFormFeatures.tsx     # "use client" — bilingual feature bullets (useFieldArray)
+    │   │   ├── ProductFormImages.tsx       # "use client" — image-URL rows with thumbnails (TODO: Cloudinary upload)
+    │   │   ├── ProductFormVariant.tsx      # "use client" — size/color/colorHex section (auto-fills hex from color)
+    │   │   ├── ProductsTable.tsx           # "use client" — products list table + delete dialog state
+    │   │   ├── TestimonialForm.tsx         # "use client" — testimonial create/edit form
+    │   │   ├── TestimonialsTable.tsx       # "use client" — testimonials list table + delete dialog state
+    │   │   └── product-form-types.ts      # zod schema + ProductFormValues shared by ProductForm sections
     │   │
     │   ├── shared/
-    │   │   ├── Container.tsx               # max-w-6xl mx-auto px-6 wrapper
-    │   │   ├── SectionHeading.tsx          # eyebrow + h2 + optional lede
+    │   │   ├── Button.tsx                  # brand Button (primary/accent/outline/ghost) + optional trailing arrow — DESIGN.md §5
+    │   │   ├── Container.tsx               # mx-auto wrapper with size: narrow | default | wide
+    │   │   ├── SectionHeading.tsx          # asymmetric (default) or center — eyebrow + h2 + floated lede per DESIGN.md §5
     │   │   ├── PriceTag.tsx                # formatted EUR price display
-    │   │   └── FadeIn.tsx                  # client wrapper — framer-motion scroll fade-up
+    │   │   └── FadeIn.tsx                  # "use client" — fade-up reveal + optional animated terracotta hairline
     │   │
     │   ├── home/                           # homepage-only sections
     │   │   ├── Hero.tsx                    # full-bleed video hero + CTAs
@@ -126,6 +172,7 @@
     │   │   ├── CatalogGrid.tsx             # responsive product grid
     │   │   ├── CatalogFilters.tsx          # size + color filters (client, URL-state)
     │   │   ├── ProductCard.tsx             # card for grid item
+    │   │   ├── ProductCardSkeleton.tsx     # shimmer placeholder matching ProductCard's rounded-2xl frame
     │   │   └── EmptyState.tsx              # shown when filters return zero
     │   │
     │   ├── product/
@@ -145,17 +192,19 @@
     │
     ├── lib/
     │   ├── db.ts                           # Mongoose cached connection — ALWAYS use this
-    │   ├── utils.ts                        # cn() (tailwind-merge)
+    │   ├── utils.ts                        # cn() (tailwind-merge) + slugify()
     │   ├── constants.ts                    # CONTACT_EMAIL, SIZES, COLORS, etc.
     │   ├── seed-data.ts                    # 8 products + 4 testimonials for `pnpm seed`
     │   ├── resend.ts                       # Resend singleton + sendContactEmail() helper (server-only)
     │   ├── auth.ts                         # bcrypt + jose crypto: verifyPassword, signSessionToken, verifySessionToken, cookie options (Edge-safe)
     │   ├── auth-server.ts                  # Node-only: isAdmin() / requireAdmin() — reads cookies() from next/headers
+    │   ├── serializers.ts                  # serializeProduct / serializeTestimonial — converts Mongoose docs to plain JSON for client components
     │   ├── models/
     │   │   ├── Product.ts                  # Mongoose schema (bilingual fields)
     │   │   └── Testimonial.ts              # Mongoose schema (bilingual quote + rating)
     │   └── validators/
     │       ├── product.ts                  # zod schema for product create/update
+    │       ├── testimonial.ts              # zod schema for testimonial create/update
     │       └── contact.ts                  # zod schema for contact form (client + server)
     │
     └── types/
@@ -164,7 +213,9 @@
         └── testimonial.ts                  # Testimonial TS types
 ```
 
-**Not yet built (tracked in PLAN.md):** `src/app/[locale]/about`, `src/app/admin/(protected)/products/*`, `src/app/admin/(protected)/testimonials/*`, `src/app/api/testimonials/*`, `src/components/admin/{ProductForm,TestimonialForm,ImageUploader,…}`, `src/components/layout/MobileNav.tsx`, `src/lib/validators/testimonial.ts`, `src/hooks/*`.
+**Not yet built (tracked in PLAN.md):** `src/components/admin/ImageUploader.tsx` (Cloudinary — TODO in ProductFormImages.tsx), `/public/og-image.jpg` (1200x630 — TODO in root layout metadata), `src/hooks/*`.
+
+**Status: Phase 6 complete — production-ready v1.**
 
 ### Quick lookup — "where does X live?"
 
@@ -182,27 +233,49 @@
 | The product detail page                 | [src/app/[locale]/catalog/[slug]/page.tsx](src/app/[locale]/catalog/[slug]/page.tsx) + [src/components/product/](src/components/product/) |
 | The contact page                        | [src/app/[locale]/contact/page.tsx](src/app/[locale]/contact/page.tsx)   |
 | The contact form (client)               | [src/components/contact/ContactForm.tsx](src/components/contact/ContactForm.tsx) |
+| The About page                          | [src/app/[locale]/about/page.tsx](src/app/[locale]/about/page.tsx)       |
+| Localized 404 / error boundary          | [not-found](src/app/[locale]/not-found.tsx) + [error](src/app/[locale]/error.tsx) + catch-all [...rest]/page.tsx |
+| Admin error boundary                    | [src/app/admin/(protected)/error.tsx](src/app/admin/(protected)/error.tsx) |
+| Sitemap / Robots                        | [src/app/sitemap.ts](src/app/sitemap.ts) + [src/app/robots.ts](src/app/robots.ts) |
+| Loading skeletons                       | [catalog](src/app/[locale]/catalog/loading.tsx), [product](src/app/[locale]/catalog/[slug]/loading.tsx), [admin products](src/app/admin/(protected)/products/loading.tsx) + [ProductCardSkeleton](src/components/catalog/ProductCardSkeleton.tsx) |
+| Skip-to-content link                    | [src/components/layout/SkipToContent.tsx](src/components/layout/SkipToContent.tsx) |
+| Mobile navigation (Sheet)               | [src/components/layout/MobileNav.tsx](src/components/layout/MobileNav.tsx) |
 | Contact submit API                      | [src/app/api/contact/route.ts](src/app/api/contact/route.ts)             |
 | Resend client / sendContactEmail        | [src/lib/resend.ts](src/lib/resend.ts)                                   |
 | Product list/create API                 | [src/app/api/products/route.ts](src/app/api/products/route.ts)           |
 | Product detail/mutate API               | [src/app/api/products/[id]/route.ts](src/app/api/products/[id]/route.ts) |
+| Testimonials list/create API            | [src/app/api/testimonials/route.ts](src/app/api/testimonials/route.ts)   |
+| Testimonial detail/mutate API           | [src/app/api/testimonials/[id]/route.ts](src/app/api/testimonials/[id]/route.ts) |
 | Admin login page                        | [src/app/admin/login/page.tsx](src/app/admin/login/page.tsx)             |
 | Admin dashboard (shell)                 | [src/app/admin/(protected)/page.tsx](src/app/admin/(protected)/page.tsx) |
 | Admin shell layout (sidebar + guard)    | [src/app/admin/(protected)/layout.tsx](src/app/admin/(protected)/layout.tsx) |
 | Admin sidebar (nav + logout)            | [src/components/admin/AdminSidebar.tsx](src/components/admin/AdminSidebar.tsx) |
+| Admin products list                     | [src/app/admin/(protected)/products/page.tsx](src/app/admin/(protected)/products/page.tsx) + [ProductsTable](src/components/admin/ProductsTable.tsx) |
+| Admin product create/edit (form shell)  | [new](src/app/admin/(protected)/products/new/page.tsx) + [edit](src/app/admin/(protected)/products/[id]/page.tsx) |
+| Product admin form (big one)            | [src/components/admin/ProductForm.tsx](src/components/admin/ProductForm.tsx) + [sections](src/components/admin/) (ProductForm*.tsx) |
+| Admin testimonials list                 | [src/app/admin/(protected)/testimonials/page.tsx](src/app/admin/(protected)/testimonials/page.tsx) + [TestimonialsTable](src/components/admin/TestimonialsTable.tsx) |
+| Admin testimonial create/edit           | [new](src/app/admin/(protected)/testimonials/new/page.tsx) + [edit](src/app/admin/(protected)/testimonials/[id]/page.tsx) |
+| Testimonial admin form                  | [src/components/admin/TestimonialForm.tsx](src/components/admin/TestimonialForm.tsx) |
+| Shared admin primitives                 | [DataTable](src/components/admin/DataTable.tsx), [DeleteDialog](src/components/admin/DeleteDialog.tsx), [BilingualField](src/components/admin/BilingualField.tsx), [FormSection](src/components/admin/FormSection.tsx) |
 | Admin auth (crypto, cookie, JWT)        | [src/lib/auth.ts](src/lib/auth.ts) + [src/proxy.ts](src/proxy.ts)        |
 | Admin session helpers (server only)     | [src/lib/auth-server.ts](src/lib/auth-server.ts)                         |
 | Admin login / logout / session APIs     | [src/app/api/admin/login/route.ts](src/app/api/admin/login/route.ts), [logout](src/app/api/admin/logout/route.ts), [session](src/app/api/admin/session/route.ts) |
 | The DB connection                       | [src/lib/db.ts](src/lib/db.ts)                                           |
+| Mongo → plain-JSON serializers          | [src/lib/serializers.ts](src/lib/serializers.ts)                         |
 | Product schema (Mongoose)               | [src/lib/models/Product.ts](src/lib/models/Product.ts)                   |
 | Testimonial schema (Mongoose)           | [src/lib/models/Testimonial.ts](src/lib/models/Testimonial.ts)           |
-| Zod validation                          | [src/lib/validators/](src/lib/validators/) *(`product.ts`, `contact.ts`)* |
+| Zod validation                          | [src/lib/validators/](src/lib/validators/) *(`product.ts`, `testimonial.ts`, `contact.ts`)* |
 | i18n routing / locales                  | [src/i18n/routing.ts](src/i18n/routing.ts)                               |
 | i18n middleware (locale guard)          | [src/proxy.ts](src/proxy.ts)                                             |
 | Typed Link / useRouter                  | [src/i18n/navigation.ts](src/i18n/navigation.ts)                         |
 | Translations                            | [messages/en.json](messages/en.json), [messages/ro.json](messages/ro.json) |
 | Color palette / design tokens           | [src/app/globals.css](src/app/globals.css)                               |
+| Slugify / cn utilities                  | [src/lib/utils.ts](src/lib/utils.ts)                                     |
 | Shared UI (Container, Heading, Price)   | [src/components/shared/](src/components/shared/)                         |
+| Brand Button primitive                  | [src/components/shared/Button.tsx](src/components/shared/Button.tsx)     |
+| Authoritative design spec               | [docs/DESIGN.md](docs/DESIGN.md)                                         |
+| Curated imagery pointers                | [docs/IMAGERY.md](docs/IMAGERY.md)                                       |
+| Frontend-design skill reference         | [docs/skills/frontend-design.md](docs/skills/frontend-design.md)         |
 | shadcn primitives                       | [src/components/ui/](src/components/ui/)                                 |
 | Header / Footer / Language switcher     | [src/components/layout/](src/components/layout/)                         |
 | Seed data                               | [src/lib/seed-data.ts](src/lib/seed-data.ts)                             |
@@ -260,24 +333,7 @@ Do not swap any of these without asking.
 
 ## 5. Design Tokens (authoritative)
 
-Defined in `src/app/globals.css`:
-
-| Token          | Value     | Use                             |
-| -------------- | --------- | ------------------------------- |
-| `--background` | `#FBFBF9` | page background                 |
-| `--foreground` | `#0E1A24` | body text, headings             |
-| `--primary`    | `#0A6E8C` | primary buttons, links, accents |
-| `--accent`     | `#E8F1F2` | soft section backgrounds        |
-| `--muted`      | `#6B7280` | secondary text                  |
-| `--border`     | `#E5E7EB` | dividers, card borders          |
-
-- **Heading font:** Fraunces (serif)
-- **Body font:** Inter (sans)
-- **Radius:** `rounded-2xl` cards · `rounded-xl` buttons/inputs
-- **Section rhythm:** `py-24 md:py-32`, `max-w-6xl mx-auto px-6`
-- **Motion:** 300ms ease-out, small translate + fade only
-
-Reach for `src/components/shared/Container.tsx`, `SectionHeading.tsx`, `FadeIn.tsx` instead of reinventing spacing/motion.
+See [`docs/DESIGN.md`](./docs/DESIGN.md) §1 for the authoritative palette, typography scale, radii, shadows, and motion. Tokens live in [`src/app/globals.css`](./src/app/globals.css). Reach for `src/components/shared/Container.tsx`, `SectionHeading.tsx`, `FadeIn.tsx`, `Button.tsx` instead of reinventing spacing, headings, motion, or buttons.
 
 ---
 

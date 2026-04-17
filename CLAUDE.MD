@@ -254,6 +254,8 @@ Failure to maintain §3 forces future sessions to re-explore the repo, which was
 
 Do not swap any of these without asking.
 
+**Design system reference:** [`docs/skills/frontend-design.md`](./docs/skills/frontend-design.md) — read before any UI change. It is the design authority for this project alongside `docs/DESIGN.md` (the project's committed visual direction).
+
 ---
 
 ## 5. Design Tokens (authoritative)

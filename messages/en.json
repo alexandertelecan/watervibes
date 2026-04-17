@@ -1,0 +1,34 @@
+{
+  "brand": {
+    "name": "WaterVibes",
+    "tagline": "Premium jacuzzis, crafted for calm."
+  },
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "about": "About",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "cta": {
+    "browseCatalog": "Browse catalog",
+    "requestQuote": "Request a quote",
+    "getInTouch": "Get in touch"
+  },
+  "language": {
+    "switcher": "Language",
+    "en": "English",
+    "ro": "Romanian"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "sections": {
+      "explore": "Explore",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "placeholder": "Home content arrives in Phase 3."
+  }
+}

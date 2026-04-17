@@ -1,0 +1,34 @@
+{
+  "brand": {
+    "name": "WaterVibes",
+    "tagline": "Jacuzzi premium, create pentru liniște."
+  },
+  "nav": {
+    "home": "Acasă",
+    "catalog": "Catalog",
+    "about": "Despre",
+    "contact": "Contact",
+    "openMenu": "Deschide meniul",
+    "closeMenu": "Închide meniul"
+  },
+  "cta": {
+    "browseCatalog": "Vezi catalogul",
+    "requestQuote": "Cere o ofertă",
+    "getInTouch": "Ia legătura"
+  },
+  "language": {
+    "switcher": "Limbă",
+    "en": "Engleză",
+    "ro": "Română"
+  },
+  "footer": {
+    "rights": "Toate drepturile rezervate.",
+    "sections": {
+      "explore": "Explorează",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "placeholder": "Conținutul paginii de start apare în Faza 3."
+  }
+}

@@ -220,7 +220,7 @@
 
 **Not yet built (tracked in PLAN.md):** `src/components/admin/ImageUploader.tsx` (Cloudinary — TODO in ProductFormImages.tsx), `/public/og-image.jpg` (1200x630 — TODO in root layout metadata), `src/hooks/*`.
 
-**Status: Phase 6 complete — production-ready v1.**
+**Status: Redesign complete — warm tactile.**
 
 ### Quick lookup — "where does X live?"
 

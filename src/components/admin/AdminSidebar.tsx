@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/shared/Button";
 import { cn } from "@/lib/utils";
 
 type NavItem = { href: string; label: string };
@@ -20,6 +20,10 @@ function isActive(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+// DESIGN.md §5 — AdminSidebar
+// Active nav item gets a 3px accent left border + bg-surface fill.
+// Inactive items are transparent with a subtle surface hover. Wordmark
+// is Fraunces text-h3. Logout is our brand ghost Button.
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
@@ -39,27 +43,31 @@ export function AdminSidebar() {
   return (
     <aside className="flex w-64 shrink-0 flex-col border-r border-border bg-background">
       <div className="border-b border-border px-6 py-6">
-        <div className="font-[var(--font-fraunces)] text-lg font-semibold tracking-tight">
-          WaterVibes Admin
-        </div>
+        <div className="text-h3 text-foreground">WaterVibes Admin</div>
       </div>
       <nav className="flex-1 px-3 py-4">
-        <ul className="space-y-1">
+        <ul className="flex flex-col gap-1">
           {NAV_ITEMS.map((item) => {
             const active = isActive(pathname, item.href);
             return (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={cn(
-                    "block rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    "focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none",
-                    active
-                      ? "bg-accent text-foreground"
-                      : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
-                  )}
                   aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "relative block rounded-md py-2 pl-4 pr-3 text-sm font-medium transition-colors",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                    active
+                      ? "bg-surface text-foreground"
+                      : "text-muted-foreground hover:bg-surface/50 hover:text-foreground",
+                  )}
                 >
+                  {active ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-y-1 left-0 w-0.75 rounded-full bg-accent"
+                    />
+                  ) : null}
                   {item.label}
                 </Link>
               </li>
@@ -67,14 +75,15 @@ export function AdminSidebar() {
           })}
         </ul>
       </nav>
-      <div className="border-t border-border p-3">
+      <div className="border-t border-border p-4">
         <Button
-          variant="outline"
+          variant="ghost"
+          size="sm"
           onClick={handleLogout}
           disabled={loggingOut}
-          className="h-9 w-full"
+          className="w-full justify-start"
         >
-          {loggingOut ? "Signing out…" : "Sign out"}
+          <span>{loggingOut ? "Signing out…" : "Sign out"}</span>
         </Button>
       </div>
     </aside>

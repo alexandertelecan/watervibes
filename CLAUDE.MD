@@ -49,29 +49,46 @@
 │   └── ro.json                             # Romanian UI strings
 │
 ├── public/
-│   └── *.svg                               # Next.js scaffold SVGs (file, globe, next, vercel, window) — brand assets TBD
+│   ├── *.svg                               # Next.js scaffold SVGs (file, globe, next, vercel, window) — brand assets TBD
+│   └── videos/
+│       └── hero.mp4                        # homepage hero background video (local)
 │
 ├── scripts/
 │   └── seed.ts                             # `pnpm seed` — wipes + reseeds Mongo from lib/seed-data.ts
 │
 └── src/
-    ├── proxy.ts                            # next-intl middleware (locale routing); re-exported as middleware by Next — will also host admin auth guard
+    ├── proxy.ts                            # Next.js 16 proxy (middleware): i18n routing for public pages + JWT guard for /admin and /api/admin
     │
     ├── app/
     │   ├── favicon.ico
     │   ├── globals.css                     # Tailwind v4 + CSS custom properties (design tokens)
     │   │
-    │   ├── [locale]/                       # all public pages live here
-    │   │   ├── layout.tsx                  # header + footer + fonts + NextIntlClientProvider
-    │   │   ├── page.tsx                    # HOME (placeholder — components/home/* not built yet)
-    │   │   └── catalog/
-    │   │       ├── page.tsx                # CATALOG list → components/catalog/*
-    │   │       └── [slug]/page.tsx         # PRODUCT DETAIL → components/product/*
+    │   ├── [locale]/                       # all public pages live here (bilingual)
+    │   │   ├── layout.tsx                  # header + footer + fonts + NextIntlClientProvider + sonner Toaster
+    │   │   ├── page.tsx                    # HOME → components/home/* (Hero + Featured + Testimonials + CTA)
+    │   │   ├── catalog/
+    │   │   │   ├── page.tsx                # CATALOG list → components/catalog/*
+    │   │   │   └── [slug]/page.tsx         # PRODUCT DETAIL → components/product/*
+    │   │   └── contact/
+    │   │       └── page.tsx                # CONTACT page (server) → components/contact/ContactForm
+    │   │
+    │   ├── admin/                          # ENGLISH-ONLY — internal CMS, never locale-prefixed
+    │   │   ├── layout.tsx                  # root html/body/fonts for the /admin tree (public — includes /admin/login)
+    │   │   ├── login/page.tsx              # "use client" — POSTs password to /api/admin/login, redirects on success
+    │   │   └── (protected)/                # route group — auth guard + sidebar apply only here
+    │   │       ├── layout.tsx              # server: await requireAdmin() + renders <AdminSidebar /> + <main>
+    │   │       └── page.tsx                # /admin dashboard — product/testimonial count cards + manage links
     │   │
     │   └── api/
-    │       └── products/
-    │           ├── route.ts                # GET (public list), POST (admin create)
-    │           └── [id]/route.ts           # GET / PUT / DELETE by id
+    │       ├── contact/
+    │       │   └── route.ts                # POST → zod + Resend send; in-memory IP rate limit
+    │       ├── products/
+    │       │   ├── route.ts                # GET (public list), POST (admin — verifies session cookie)
+    │       │   └── [id]/route.ts           # GET / PUT / DELETE by id (mutations verify session cookie)
+    │       └── admin/
+    │           ├── login/route.ts          # POST only — zod + bcrypt compare + sets wv_admin JWT cookie; 5/IP/10m rate limit
+    │           ├── logout/route.ts         # POST only — clears wv_admin cookie
+    │           └── session/route.ts        # GET only — returns { authenticated: boolean }
     │
     ├── components/
     │   ├── ui/                             # shadcn primitives — DO NOT hand-edit
@@ -90,10 +107,20 @@
     │   │   ├── Footer.tsx                  # footer nav + contact line
     │   │   └── LanguageSwitcher.tsx        # EN/RO toggle preserving route
     │   │
+    │   ├── admin/
+    │   │   └── AdminSidebar.tsx            # "use client" — fixed-width sidebar + active nav item + sign-out button
+    │   │
     │   ├── shared/
     │   │   ├── Container.tsx               # max-w-6xl mx-auto px-6 wrapper
     │   │   ├── SectionHeading.tsx          # eyebrow + h2 + optional lede
-    │   │   └── PriceTag.tsx                # formatted EUR price display
+    │   │   ├── PriceTag.tsx                # formatted EUR price display
+    │   │   └── FadeIn.tsx                  # client wrapper — framer-motion scroll fade-up
+    │   │
+    │   ├── home/                           # homepage-only sections
+    │   │   ├── Hero.tsx                    # full-bleed video hero + CTAs
+    │   │   ├── FeaturedProducts.tsx        # featured:true products, reuses ProductCard
+    │   │   ├── Testimonials.tsx            # featured:true testimonial grid (bg-accent)
+    │   │   └── HomeCTA.tsx                 # closing banner → /contact
     │   │
     │   ├── catalog/
     │   │   ├── CatalogGrid.tsx             # responsive product grid
@@ -101,12 +128,15 @@
     │   │   ├── ProductCard.tsx             # card for grid item
     │   │   └── EmptyState.tsx              # shown when filters return zero
     │   │
-    │   └── product/
-    │       ├── ProductGallery.tsx          # primary image + thumbnails
-    │       ├── ProductSpecs.tsx            # dimensions / capacity / power table
-    │       ├── ProductFeatures.tsx         # bilingual feature bullets
-    │       ├── ColorSwatch.tsx             # color chip (single-color per SKU)
-    │       └── QuoteCTA.tsx                # "Request a quote" CTA → /contact
+    │   ├── product/
+    │   │   ├── ProductGallery.tsx          # primary image + thumbnails
+    │   │   ├── ProductSpecs.tsx            # dimensions / capacity / power table
+    │   │   ├── ProductFeatures.tsx         # bilingual feature bullets
+    │   │   ├── ColorSwatch.tsx             # color chip (single-color per SKU)
+    │   │   └── QuoteCTA.tsx                # "Request a quote" CTA → /contact
+    │   │
+    │   └── contact/
+    │       └── ContactForm.tsx             # "use client" — react-hook-form + zod → POST /api/contact
     │
     ├── i18n/                               # next-intl configuration (not lib/i18n.ts)
     │   ├── routing.ts                      # locales, defaultLocale, pathnames
@@ -118,11 +148,15 @@
     │   ├── utils.ts                        # cn() (tailwind-merge)
     │   ├── constants.ts                    # CONTACT_EMAIL, SIZES, COLORS, etc.
     │   ├── seed-data.ts                    # 8 products + 4 testimonials for `pnpm seed`
+    │   ├── resend.ts                       # Resend singleton + sendContactEmail() helper (server-only)
+    │   ├── auth.ts                         # bcrypt + jose crypto: verifyPassword, signSessionToken, verifySessionToken, cookie options (Edge-safe)
+    │   ├── auth-server.ts                  # Node-only: isAdmin() / requireAdmin() — reads cookies() from next/headers
     │   ├── models/
     │   │   ├── Product.ts                  # Mongoose schema (bilingual fields)
     │   │   └── Testimonial.ts              # Mongoose schema (bilingual quote + rating)
     │   └── validators/
-    │       └── product.ts                  # zod schema for product create/update
+    │       ├── product.ts                  # zod schema for product create/update
+    │       └── contact.ts                  # zod schema for contact form (client + server)
     │
     └── types/
         ├── index.ts                        # re-exports
@@ -130,23 +164,39 @@
         └── testimonial.ts                  # Testimonial TS types
 ```
 
-**Not yet built (tracked in PLAN.md):** `src/app/[locale]/about`, `src/app/[locale]/contact`, `src/app/admin/*`, `src/app/api/contact`, `src/app/api/testimonials`, `src/app/api/admin`, `src/components/home/*`, `src/components/contact/*`, `src/components/admin/*`, `src/components/layout/MobileNav.tsx`, `src/components/shared/FadeIn.tsx`, `src/lib/auth.ts`, `src/lib/resend.ts`, `src/lib/validators/{testimonial,contact}.ts`, `src/hooks/*`.
+**Not yet built (tracked in PLAN.md):** `src/app/[locale]/about`, `src/app/admin/(protected)/products/*`, `src/app/admin/(protected)/testimonials/*`, `src/app/api/testimonials/*`, `src/components/admin/{ProductForm,TestimonialForm,ImageUploader,…}`, `src/components/layout/MobileNav.tsx`, `src/lib/validators/testimonial.ts`, `src/hooks/*`.
 
 ### Quick lookup — "where does X live?"
 
 | If you need to edit…                    | Go to…                                                                   |
 | --------------------------------------- | ------------------------------------------------------------------------ |
 | Public root layout (header/footer/i18n) | [src/app/[locale]/layout.tsx](src/app/[locale]/layout.tsx)               |
-| The homepage                            | [src/app/[locale]/page.tsx](src/app/[locale]/page.tsx) *(hero TBD)*      |
+| The homepage (composition)              | [src/app/[locale]/page.tsx](src/app/[locale]/page.tsx) → [src/components/home/](src/components/home/) |
+| The hero section                        | [src/components/home/Hero.tsx](src/components/home/Hero.tsx)             |
+| Homepage featured-products grid         | [src/components/home/FeaturedProducts.tsx](src/components/home/FeaturedProducts.tsx) |
+| Homepage testimonials grid              | [src/components/home/Testimonials.tsx](src/components/home/Testimonials.tsx) |
+| Homepage closing CTA                    | [src/components/home/HomeCTA.tsx](src/components/home/HomeCTA.tsx)       |
+| Scroll fade-up motion wrapper           | [src/components/shared/FadeIn.tsx](src/components/shared/FadeIn.tsx)     |
 | The catalog list                        | [src/app/[locale]/catalog/page.tsx](src/app/[locale]/catalog/page.tsx)   |
 | The catalog filters                     | [src/components/catalog/CatalogFilters.tsx](src/components/catalog/CatalogFilters.tsx) |
 | The product detail page                 | [src/app/[locale]/catalog/[slug]/page.tsx](src/app/[locale]/catalog/[slug]/page.tsx) + [src/components/product/](src/components/product/) |
+| The contact page                        | [src/app/[locale]/contact/page.tsx](src/app/[locale]/contact/page.tsx)   |
+| The contact form (client)               | [src/components/contact/ContactForm.tsx](src/components/contact/ContactForm.tsx) |
+| Contact submit API                      | [src/app/api/contact/route.ts](src/app/api/contact/route.ts)             |
+| Resend client / sendContactEmail        | [src/lib/resend.ts](src/lib/resend.ts)                                   |
 | Product list/create API                 | [src/app/api/products/route.ts](src/app/api/products/route.ts)           |
 | Product detail/mutate API               | [src/app/api/products/[id]/route.ts](src/app/api/products/[id]/route.ts) |
+| Admin login page                        | [src/app/admin/login/page.tsx](src/app/admin/login/page.tsx)             |
+| Admin dashboard (shell)                 | [src/app/admin/(protected)/page.tsx](src/app/admin/(protected)/page.tsx) |
+| Admin shell layout (sidebar + guard)    | [src/app/admin/(protected)/layout.tsx](src/app/admin/(protected)/layout.tsx) |
+| Admin sidebar (nav + logout)            | [src/components/admin/AdminSidebar.tsx](src/components/admin/AdminSidebar.tsx) |
+| Admin auth (crypto, cookie, JWT)        | [src/lib/auth.ts](src/lib/auth.ts) + [src/proxy.ts](src/proxy.ts)        |
+| Admin session helpers (server only)     | [src/lib/auth-server.ts](src/lib/auth-server.ts)                         |
+| Admin login / logout / session APIs     | [src/app/api/admin/login/route.ts](src/app/api/admin/login/route.ts), [logout](src/app/api/admin/logout/route.ts), [session](src/app/api/admin/session/route.ts) |
 | The DB connection                       | [src/lib/db.ts](src/lib/db.ts)                                           |
 | Product schema (Mongoose)               | [src/lib/models/Product.ts](src/lib/models/Product.ts)                   |
 | Testimonial schema (Mongoose)           | [src/lib/models/Testimonial.ts](src/lib/models/Testimonial.ts)           |
-| Zod validation                          | [src/lib/validators/](src/lib/validators/) *(only `product.ts` so far)*  |
+| Zod validation                          | [src/lib/validators/](src/lib/validators/) *(`product.ts`, `contact.ts`)* |
 | i18n routing / locales                  | [src/i18n/routing.ts](src/i18n/routing.ts)                               |
 | i18n middleware (locale guard)          | [src/proxy.ts](src/proxy.ts)                                             |
 | Typed Link / useRouter                  | [src/i18n/navigation.ts](src/i18n/navigation.ts)                         |

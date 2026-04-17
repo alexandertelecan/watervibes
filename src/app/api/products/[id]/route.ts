@@ -1,16 +1,12 @@
 import mongoose from "mongoose";
 import type { NextRequest } from "next/server";
 
+import { isAdmin } from "@/lib/auth-server";
 import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
 import { productUpdateSchema } from "@/lib/validators/product";
 
 type RouteContext = { params: Promise<{ id: string }> };
-
-function isAuthorizedAdmin(): boolean {
-  // TODO(Phase 5): verify JWT cookie issued by /api/admin/login.
-  return false;
-}
 
 function identifierQuery(id: string): Record<string, unknown> {
   return mongoose.Types.ObjectId.isValid(id)
@@ -39,7 +35,7 @@ export async function GET(_request: NextRequest, { params }: RouteContext) {
 }
 
 export async function PUT(request: NextRequest, { params }: RouteContext) {
-  if (!isAuthorizedAdmin()) {
+  if (!(await isAdmin())) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -71,7 +67,7 @@ export async function PUT(request: NextRequest, { params }: RouteContext) {
 }
 
 export async function DELETE(request: NextRequest, { params }: RouteContext) {
-  if (!isAuthorizedAdmin()) {
+  if (!(await isAdmin())) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 
+import { isAdmin } from "@/lib/auth-server";
 import { PRODUCT_SIZES } from "@/lib/constants";
 import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
@@ -14,11 +15,6 @@ function splitCsv(value: string | undefined): string[] {
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-}
-
-function isAuthorizedAdmin(): boolean {
-  // TODO(Phase 5): verify JWT cookie issued by /api/admin/login.
-  return false;
 }
 
 export async function GET(request: NextRequest) {
@@ -54,7 +50,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!isAuthorizedAdmin()) {
+  if (!(await isAdmin())) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -27,96 +27,165 @@
 
 ## 3. Repo Map (where to find things)
 
+> Reflects the actual state of the repo (tracked files + in-progress additions). Anything in `PLAN.md` but missing below has not been built yet. Keep this map in sync — see §3a.
+
 ```
 .
-├── PLAN.md                             # spec — read for product decisions
-├── CLAUDE.md                           # this file — read for workflow rules
-├── README.md                           # human-facing setup
-├── .env.example                        # env var reference
-├── middleware.ts                       # i18n routing + admin auth guard
+├── PLAN.md                                 # product spec — read for product decisions
+├── CLAUDE.md                               # this file — workflow rules
+├── AGENTS.md                               # cross-agent operating notes
+├── README.md                               # human-facing setup
+├── .env.example                            # env var reference
+├── components.json                         # shadcn/ui generator config
+├── eslint.config.mjs                       # ESLint flat config
+├── next.config.ts                          # Next.js config (next-intl plugin wiring)
+├── postcss.config.mjs                      # PostCSS / Tailwind v4 pipeline
+├── tsconfig.json                           # TypeScript config + @/ path alias
+├── package.json                            # deps + pnpm scripts (dev, build, seed, …)
+├── pnpm-workspace.yaml                     # pnpm workspace marker
 │
 ├── messages/
-│   ├── en.json                         # English UI strings (nav, buttons, labels)
-│   └── ro.json                         # Romanian UI strings
+│   ├── en.json                             # English UI strings
+│   └── ro.json                             # Romanian UI strings
 │
 ├── public/
-│   ├── videos/hero.mp4                 # or reference a Cloudinary URL
-│   └── images/                         # logo, og-image, brand statics
+│   └── *.svg                               # Next.js scaffold SVGs (file, globe, next, vercel, window) — brand assets TBD
 │
-├── src/
-│   ├── app/
-│   │   ├── [locale]/                   # all public pages live here
-│   │   │   ├── layout.tsx              # header + footer + fonts + i18n provider
-│   │   │   ├── page.tsx                # HOME  → components/home/*
-│   │   │   ├── catalog/
-│   │   │   │   ├── page.tsx            # CATALOG → components/catalog/*
-│   │   │   │   └── [slug]/page.tsx     # PRODUCT DETAIL → components/product/*
-│   │   │   ├── about/page.tsx
-│   │   │   └── contact/page.tsx        # → components/contact/ContactForm
-│   │   │
-│   │   ├── admin/                      # protected by middleware
-│   │   │   ├── layout.tsx
-│   │   │   ├── page.tsx                # dashboard
-│   │   │   ├── login/page.tsx
-│   │   │   ├── products/{page,new,[id]}
-│   │   │   └── testimonials/{page,new,[id]}
-│   │   │
-│   │   ├── api/
-│   │   │   ├── contact/route.ts        # POST → Resend (no DB write)
-│   │   │   ├── products/route.ts       # GET (public), POST (admin)
-│   │   │   ├── products/[id]/route.ts  # GET, PUT, DELETE
-│   │   │   ├── testimonials/route.ts
-│   │   │   ├── testimonials/[id]/route.ts
-│   │   │   └── admin/{login,logout}/route.ts
-│   │   │
-│   │   └── globals.css                 # Tailwind + CSS custom properties
-│   │
-│   ├── components/
-│   │   ├── ui/                         # shadcn primitives — DO NOT rewrite by hand
-│   │   ├── layout/                     # Header, Footer, LanguageSwitcher, MobileNav
-│   │   ├── home/                       # Hero, FeaturedProducts, Testimonials, HomeCTA
-│   │   ├── catalog/                    # CatalogGrid, CatalogFilters, ProductCard, EmptyState
-│   │   ├── product/                    # ProductGallery, ProductSpecs, ProductFeatures, ColorSwatch, QuoteCTA
-│   │   ├── contact/                    # ContactForm
-│   │   ├── admin/                      # AdminSidebar, ProductForm, TestimonialForm, DataTable, DeleteDialog
-│   │   └── shared/                     # Container, SectionHeading, PriceTag, FadeIn
-│   │
-│   ├── lib/
-│   │   ├── db.ts                       # Mongoose cached connection — ALWAYS use this
-│   │   ├── models/Product.ts
-│   │   ├── models/Testimonial.ts
-│   │   ├── auth.ts                     # bcrypt + jose JWT helpers
-│   │   ├── resend.ts                   # Resend client + sendContactEmail()
-│   │   ├── validators/{product,testimonial,contact}.ts   # zod schemas
-│   │   ├── i18n.ts                     # next-intl config
-│   │   ├── constants.ts                # CONTACT_EMAIL, SIZES, COLORS, etc.
-│   │   ├── utils.ts                    # cn(), formatPrice, slugify
-│   │   └── seed-data.ts                # 8 products + 4 testimonials
-│   │
-│   ├── hooks/useProducts.ts, useFilters.ts
-│   └── types/{product,testimonial,index}.ts
+├── scripts/
+│   └── seed.ts                             # `pnpm seed` — wipes + reseeds Mongo from lib/seed-data.ts
 │
-└── scripts/seed.ts                     # pnpm seed
+└── src/
+    ├── proxy.ts                            # next-intl middleware (locale routing); re-exported as middleware by Next — will also host admin auth guard
+    │
+    ├── app/
+    │   ├── favicon.ico
+    │   ├── globals.css                     # Tailwind v4 + CSS custom properties (design tokens)
+    │   │
+    │   ├── [locale]/                       # all public pages live here
+    │   │   ├── layout.tsx                  # header + footer + fonts + NextIntlClientProvider
+    │   │   ├── page.tsx                    # HOME (placeholder — components/home/* not built yet)
+    │   │   └── catalog/
+    │   │       ├── page.tsx                # CATALOG list → components/catalog/*
+    │   │       └── [slug]/page.tsx         # PRODUCT DETAIL → components/product/*
+    │   │
+    │   └── api/
+    │       └── products/
+    │           ├── route.ts                # GET (public list), POST (admin create)
+    │           └── [id]/route.ts           # GET / PUT / DELETE by id
+    │
+    ├── components/
+    │   ├── ui/                             # shadcn primitives — DO NOT hand-edit
+    │   │   ├── button.tsx
+    │   │   ├── dialog.tsx
+    │   │   ├── dropdown-menu.tsx
+    │   │   ├── input.tsx
+    │   │   ├── label.tsx
+    │   │   ├── select.tsx
+    │   │   ├── sheet.tsx
+    │   │   ├── sonner.tsx                  # toast container
+    │   │   └── textarea.tsx
+    │   │
+    │   ├── layout/
+    │   │   ├── Header.tsx                  # top nav + logo + language switcher
+    │   │   ├── Footer.tsx                  # footer nav + contact line
+    │   │   └── LanguageSwitcher.tsx        # EN/RO toggle preserving route
+    │   │
+    │   ├── shared/
+    │   │   ├── Container.tsx               # max-w-6xl mx-auto px-6 wrapper
+    │   │   ├── SectionHeading.tsx          # eyebrow + h2 + optional lede
+    │   │   └── PriceTag.tsx                # formatted EUR price display
+    │   │
+    │   ├── catalog/
+    │   │   ├── CatalogGrid.tsx             # responsive product grid
+    │   │   ├── CatalogFilters.tsx          # size + color filters (client, URL-state)
+    │   │   ├── ProductCard.tsx             # card for grid item
+    │   │   └── EmptyState.tsx              # shown when filters return zero
+    │   │
+    │   └── product/
+    │       ├── ProductGallery.tsx          # primary image + thumbnails
+    │       ├── ProductSpecs.tsx            # dimensions / capacity / power table
+    │       ├── ProductFeatures.tsx         # bilingual feature bullets
+    │       ├── ColorSwatch.tsx             # color chip (single-color per SKU)
+    │       └── QuoteCTA.tsx                # "Request a quote" CTA → /contact
+    │
+    ├── i18n/                               # next-intl configuration (not lib/i18n.ts)
+    │   ├── routing.ts                      # locales, defaultLocale, pathnames
+    │   ├── navigation.ts                   # typed Link / useRouter wrappers
+    │   └── request.ts                      # per-request locale/messages loader
+    │
+    ├── lib/
+    │   ├── db.ts                           # Mongoose cached connection — ALWAYS use this
+    │   ├── utils.ts                        # cn() (tailwind-merge)
+    │   ├── constants.ts                    # CONTACT_EMAIL, SIZES, COLORS, etc.
+    │   ├── seed-data.ts                    # 8 products + 4 testimonials for `pnpm seed`
+    │   ├── models/
+    │   │   ├── Product.ts                  # Mongoose schema (bilingual fields)
+    │   │   └── Testimonial.ts              # Mongoose schema (bilingual quote + rating)
+    │   └── validators/
+    │       └── product.ts                  # zod schema for product create/update
+    │
+    └── types/
+        ├── index.ts                        # re-exports
+        ├── product.ts                      # Product TS types (mirrors Mongoose model)
+        └── testimonial.ts                  # Testimonial TS types
 ```
+
+**Not yet built (tracked in PLAN.md):** `src/app/[locale]/about`, `src/app/[locale]/contact`, `src/app/admin/*`, `src/app/api/contact`, `src/app/api/testimonials`, `src/app/api/admin`, `src/components/home/*`, `src/components/contact/*`, `src/components/admin/*`, `src/components/layout/MobileNav.tsx`, `src/components/shared/FadeIn.tsx`, `src/lib/auth.ts`, `src/lib/resend.ts`, `src/lib/validators/{testimonial,contact}.ts`, `src/hooks/*`.
 
 ### Quick lookup — "where does X live?"
 
-| If you need to edit…                  | Go to…                                                                    |
-| ------------------------------------- | ------------------------------------------------------------------------- |
-| The homepage hero                     | `src/components/home/Hero.tsx`                                            |
-| The catalog filters                   | `src/components/catalog/CatalogFilters.tsx`                               |
-| The product detail layout             | `src/app/[locale]/catalog/[slug]/page.tsx` + `src/components/product/*`   |
-| The contact form                      | `src/components/contact/ContactForm.tsx` + `src/app/api/contact/route.ts` |
-| Email sending logic                   | `src/lib/resend.ts`                                                       |
-| The DB connection                     | `src/lib/db.ts`                                                           |
-| Product schema                        | `src/lib/models/Product.ts`                                               |
-| Zod validation                        | `src/lib/validators/*.ts`                                                 |
-| Admin auth                            | `src/lib/auth.ts` + `middleware.ts`                                       |
-| Translations                          | `messages/en.json`, `messages/ro.json`                                    |
-| Color palette / design tokens         | `src/app/globals.css`                                                     |
-| Shared UI like headings or containers | `src/components/shared/`                                                  |
-| shadcn primitives                     | `src/components/ui/`                                                      |
-| Seed data                             | `src/lib/seed-data.ts`                                                    |
+| If you need to edit…                    | Go to…                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------ |
+| Public root layout (header/footer/i18n) | [src/app/[locale]/layout.tsx](src/app/[locale]/layout.tsx)               |
+| The homepage                            | [src/app/[locale]/page.tsx](src/app/[locale]/page.tsx) *(hero TBD)*      |
+| The catalog list                        | [src/app/[locale]/catalog/page.tsx](src/app/[locale]/catalog/page.tsx)   |
+| The catalog filters                     | [src/components/catalog/CatalogFilters.tsx](src/components/catalog/CatalogFilters.tsx) |
+| The product detail page                 | [src/app/[locale]/catalog/[slug]/page.tsx](src/app/[locale]/catalog/[slug]/page.tsx) + [src/components/product/](src/components/product/) |
+| Product list/create API                 | [src/app/api/products/route.ts](src/app/api/products/route.ts)           |
+| Product detail/mutate API               | [src/app/api/products/[id]/route.ts](src/app/api/products/[id]/route.ts) |
+| The DB connection                       | [src/lib/db.ts](src/lib/db.ts)                                           |
+| Product schema (Mongoose)               | [src/lib/models/Product.ts](src/lib/models/Product.ts)                   |
+| Testimonial schema (Mongoose)           | [src/lib/models/Testimonial.ts](src/lib/models/Testimonial.ts)           |
+| Zod validation                          | [src/lib/validators/](src/lib/validators/) *(only `product.ts` so far)*  |
+| i18n routing / locales                  | [src/i18n/routing.ts](src/i18n/routing.ts)                               |
+| i18n middleware (locale guard)          | [src/proxy.ts](src/proxy.ts)                                             |
+| Typed Link / useRouter                  | [src/i18n/navigation.ts](src/i18n/navigation.ts)                         |
+| Translations                            | [messages/en.json](messages/en.json), [messages/ro.json](messages/ro.json) |
+| Color palette / design tokens           | [src/app/globals.css](src/app/globals.css)                               |
+| Shared UI (Container, Heading, Price)   | [src/components/shared/](src/components/shared/)                         |
+| shadcn primitives                       | [src/components/ui/](src/components/ui/)                                 |
+| Header / Footer / Language switcher     | [src/components/layout/](src/components/layout/)                         |
+| Seed data                               | [src/lib/seed-data.ts](src/lib/seed-data.ts)                             |
+| Seed runner                             | [scripts/seed.ts](scripts/seed.ts)                                       |
+| App-wide constants                      | [src/lib/constants.ts](src/lib/constants.ts)                             |
+| Shared TS types                         | [src/types/](src/types/)                                                 |
+
+---
+
+## 3a. Keeping the Repo Map Accurate (MANDATORY)
+
+The repo map in §3 is the single source of navigation truth for every future session. It MUST stay in sync with reality.
+
+Whenever you, Claude, do ANY of the following, you MUST update §3 in the SAME commit:
+
+- Create a new file in `src/`, `app/`, `components/`, `lib/`, `hooks/`, `types/`, `scripts/`, `messages/`, or `public/`
+- Delete a file from any of those locations
+- Rename or move a file
+- Significantly change what a file does (enough that its one-line description is no longer accurate)
+
+Rules:
+1. The update is NOT optional and NOT a follow-up commit — it ships with the code change.
+2. Update BOTH the tree diagram AND the "Quick lookup" table if the change affects navigation.
+3. If you add a whole new subfolder (e.g., `src/components/blog/`), add it to the tree with a short comment explaining its purpose.
+4. If you're unsure whether a file is "significant enough" to map, include it. Err on the side of over-documenting.
+5. Before finishing any task, re-read §3 and confirm it matches your actual changes. If it doesn't, fix §3 before committing.
+
+Self-check at end of every task:
+- [ ] Did I create, delete, rename, or repurpose any files?
+- [ ] If yes, did I update §3 (tree + lookup table) to match?
+- [ ] Does every path I mention in §3 resolve to a real file?
+
+Failure to maintain §3 forces future sessions to re-explore the repo, which wastes time and context. Treat §3 like a build artifact: if the code changes, §3 changes.
 
 ---
 

@@ -1,9 +1,11 @@
+import type { ProductColor, ProductSize } from "@/lib/constants";
+
+export { PRODUCT_SIZES } from "@/lib/constants";
+export type { ProductColor, ProductSize } from "@/lib/constants";
+
 export type Locale = "en" | "ro";
 export type Bilingual = { en: string; ro: string };
 export type BilingualList = { en: string[]; ro: string[] };
-
-export const PRODUCT_SIZES = ["2-person", "4-person", "6+person"] as const;
-export type ProductSize = (typeof PRODUCT_SIZES)[number];
 
 export type ProductSpecs = {
   dimensions: string;
@@ -21,7 +23,7 @@ export type Product = {
   tagline: Bilingual;
   description: Bilingual;
   size: ProductSize;
-  color: string;
+  color: ProductColor;
   colorHex: string;
   price: number;
   images: string[];

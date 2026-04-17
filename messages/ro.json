@@ -30,5 +30,52 @@
   },
   "home": {
     "placeholder": "Conținutul paginii de start apare în Faza 3."
+  },
+  "catalog": {
+    "title": "Catalog",
+    "description": "Opt jacuzzi, proiectate după ritmul serilor tale.",
+    "filters": {
+      "size": "Dimensiune",
+      "color": "Culoare",
+      "clear": "Șterge tot",
+      "showFilters": "Filtre"
+    },
+    "empty": {
+      "title": "Niciun rezultat încă",
+      "message": "Niciun jacuzzi nu se potrivește filtrelor selectate. Încearcă să relaxezi o condiție.",
+      "clearFilters": "Șterge filtrele"
+    }
+  },
+  "product": {
+    "specs": {
+      "title": "Specificații",
+      "dimensions": "Dimensiuni",
+      "jets": "Duze",
+      "capacity": "Capacitate (persoane)",
+      "power": "Consum",
+      "weightEmpty": "Greutate (gol)",
+      "weightFull": "Greutate (plin)"
+    },
+    "features": {
+      "title": "Ce este inclus"
+    },
+    "quote": {
+      "primary": "Cere o ofertă",
+      "secondary": "Vezi specificațiile"
+    }
+  },
+  "common": {
+    "sizes": {
+      "2-person": "2 persoane",
+      "4-person": "4 persoane",
+      "6+person": "6+ persoane"
+    },
+    "colors": {
+      "white": "Alb",
+      "graphite": "Grafit",
+      "teak": "Teak",
+      "pearl": "Perlat",
+      "midnight": "Midnight"
+    }
   }
 }

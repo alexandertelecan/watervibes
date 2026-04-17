@@ -30,5 +30,52 @@
   },
   "home": {
     "placeholder": "Home content arrives in Phase 3."
+  },
+  "catalog": {
+    "title": "Catalog",
+    "description": "Eight jacuzzis, designed around the pace of your evenings.",
+    "filters": {
+      "size": "Size",
+      "color": "Color",
+      "clear": "Clear all",
+      "showFilters": "Filters"
+    },
+    "empty": {
+      "title": "Nothing matches yet",
+      "message": "No jacuzzis fit the filters you've selected. Try loosening a constraint.",
+      "clearFilters": "Clear filters"
+    }
+  },
+  "product": {
+    "specs": {
+      "title": "Specifications",
+      "dimensions": "Dimensions",
+      "jets": "Jets",
+      "capacity": "Capacity (persons)",
+      "power": "Power draw",
+      "weightEmpty": "Weight (empty)",
+      "weightFull": "Weight (full)"
+    },
+    "features": {
+      "title": "What's included"
+    },
+    "quote": {
+      "primary": "Request a quote",
+      "secondary": "See specs"
+    }
+  },
+  "common": {
+    "sizes": {
+      "2-person": "2-person",
+      "4-person": "4-person",
+      "6+person": "6+ person"
+    },
+    "colors": {
+      "white": "White",
+      "graphite": "Graphite",
+      "teak": "Teak",
+      "pearl": "Pearl",
+      "midnight": "Midnight"
+    }
   }
 }

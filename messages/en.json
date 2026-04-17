@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "WaterVibes",
-    "tagline": "Premium jacuzzis, crafted for calm."
+    "tagline": "Relaxation, as part of everyday life."
   },
   "nav": {
     "home": "Home",
@@ -23,19 +23,151 @@
   },
   "footer": {
     "rights": "All rights reserved.",
+    "madeIn": "Made in Romania",
+    "photoCredit": "Imagery: placeholders — photography TBD.",
     "sections": {
+      "company": "Company",
       "explore": "Explore",
       "contact": "Contact"
     }
   },
-  "home": {
-    "placeholder": "Home content arrives in Phase 3."
+  "hero": {
+    "eyebrow": "Premium hydrotherapy",
+    "headline": "Relaxation, as part of life.",
+    "subhead": "WaterVibes jacuzzis for homes, guesthouses and hotels — selected carefully for comfort, efficient hydromassage and reliable technical systems.",
+    "ctaPrimary": "Explore the Collection",
+    "ctaSecondary": "Request a Quote",
+    "ordinal": "N° 01 · Soak"
+  },
+  "featured": {
+    "eyebrow": "Favourites",
+    "title": "Models chosen with care",
+    "description": "A short list from the full catalog — chosen for the right balance of size, finish, and hydromassage experience.",
+    "viewAll": "View the full collection",
+    "breakerQuote": "We don't just sell products. We build experiences of relaxation that can be part of everyday life.",
+    "breakerAttribution": "WaterVibes"
+  },
+  "brandStory": {
+    "eyebrow": "About us",
+    "title": "Relaxation, as part of life",
+    "pullquote": "To bring real relaxation closer to people.",
+    "paragraph1": "Life keeps getting busier. Time for quiet keeps getting shorter. We believe relaxation should be part of everyday life — not just something you look for on holiday or at a spa.",
+    "paragraph2": "WaterVibes offers jacuzzis for private homes, guesthouses and hotels. We select models that deliver comfort, efficient hydromassage, and reliable technical systems. Each jacuzzi is chosen to provide a genuine experience of relaxation through water.",
+    "paragraph3": "WaterVibes doesn't just offer products. It creates spaces of relaxation that can become part of your everyday life."
+  },
+  "testimonials": {
+    "eyebrow": "From the terrace",
+    "title": "Quiet recommendations from people who use theirs daily"
+  },
+  "homeCta": {
+    "eyebrow": "The next step",
+    "headline": "Create your relaxation space.",
+    "subhead": "Tell us about your space. We'll come back with size options, a delivered price, and installation steps — within one business day.",
+    "button": "Get in Touch"
+  },
+  "meta": {
+    "home": {
+      "title": "WaterVibes — Relaxation, as part of life",
+      "description": "Jacuzzis selected carefully for homes, guesthouses and hotels. Comfort, efficient hydromassage, and reliable technical systems. Browse the catalog."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Tell us about your space. We'll reply within one business day with size options, a delivered price, and installation steps."
+    },
+    "about": {
+      "title": "About",
+      "description": "Why WaterVibes exists, how we build the offering, and what exactly we offer. Three chapters about relaxation becoming part of everyday life."
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About WaterVibes",
+      "title": "Relaxation, as part of life",
+      "subhead": "Three chapters on why we exist, how we build the offering, and what exactly we offer."
+    },
+    "chapter1": {
+      "eyebrow": "Chapter 01",
+      "title": "Why WaterVibes exists",
+      "paragraph1": "WaterVibes grew out of a simple idea. People need real relaxation. Life gets busy. Schedules fill up. Moments of quiet become rare. Many people look for relaxation on holidays or at spas — and that calm disappears the moment they come home.",
+      "paragraph2": "We believe relaxation shouldn't be an occasional luxury. It should be part of everyday life. Every home, guesthouse or hotel can have a space dedicated to relaxation. A place where the body lets go. A place where the mind stops running the day's pace. A place where people spend time that matters.",
+      "paragraph3": "Water has a real effect on the body. Hydromassage relaxes muscles. The warmth of the water reduces tension. The jets stimulate circulation. Within a few minutes, a deep state of relaxation sets in. That's where the WaterVibes idea starts. We don't just sell products — we build experiences of relaxation that can be part of everyday life.",
+      "paragraph4": "A jacuzzi changes how people use the space around their home. The terrace becomes a place to relax. The courtyard becomes a place to meet. The evening becomes a moment of quiet. For guesthouses and hotels, the experience matters even more — a space with a jacuzzi turns a simple stay into something memorable. WaterVibes exists for this: to make real relaxation accessible in every home and in every place dedicated to hospitality."
+    },
+    "chapter2": {
+      "eyebrow": "Chapter 02",
+      "title": "How we do it",
+      "paragraph1": "WaterVibes builds its offering with a clear goal: to provide relaxation solutions that fit as many spaces, styles and needs as possible.",
+      "paragraph2": "We select every jacuzzi model carefully. We look at comfort, material quality, hydromassage performance, and the reliability of the technical systems. We choose models that deliver a genuine spa experience and that can be used constantly, without compromises.",
+      "paragraph3": "The WaterVibes portfolio is designed to cover a wide range of requirements. We offer jacuzzis in different sizes — for two people, for families, or for larger groups. There are compact models for smaller terraces or courtyards, and spacious models for guesthouses or hotels.",
+      "paragraph4": "We include models with different jet configurations for hydromassage. Each seat in a jacuzzi offers a different kind of massage, designed to relax muscles and release accumulated tension.",
+      "paragraph5": "Design matters. We select jacuzzis in colours and finishes that integrate easily into modern or classic spaces. A jacuzzi should complete the terrace, the garden, or the relaxation zone — and become part of the atmosphere of the place. Technology matters just as much. We select filtration, heating, and water-control systems chosen for comfort and optimal energy use.",
+      "paragraph6": "The process continues with consultation on choosing the right model. We review the available space, how many people will use the jacuzzi, and how it will sit in the relaxation area. We provide guidance and recommendations for installation, so each customer understands the technical requirements and the steps needed to mount the jacuzzi correctly."
+    },
+    "chapter3": {
+      "eyebrow": "Chapter 03",
+      "title": "What we actually offer",
+      "paragraph1": "WaterVibes offers water-based relaxation solutions for both private residences and hospitality venues. We select and supply modern jacuzzis designed for comfort, durability, and a real hydromassage experience.",
+      "paragraph2": "Each model is chosen to answer a different use — from private spaces to guesthouses and hotels that want to offer guests something extra, or for quality time with friends.",
+      "paragraph3": "Depending on the space and preferences, customers can choose indoor or outdoor models, with different sizes, seat counts, jet configurations and colour options. The goal is for each customer to find a model that fits both the available space and the style of the place.",
+      "paragraph4": "Consultation is part of what we offer. We help customers understand the differences between models and choose the right variant for their space, the number of users, and how they want to use the jacuzzi. Through this product selection and the support behind it, WaterVibes makes the spa experience more accessible and easier to integrate."
+    }
+  },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "title": "Let's talk about your space",
+    "description": "Share a few details about your space and what you're looking for. We'll reply within one business day with options and a delivered price.",
+    "aside": {
+      "pullquote": "We believe relaxation shouldn't be an occasional luxury. It should be part of everyday life.",
+      "pullquoteAttribution": "WaterVibes"
+    },
+    "info": {
+      "emailLabel": "Email",
+      "email": "hello@watervibes.example",
+      "phoneLabel": "Phone",
+      "phone": "+40 700 000 000",
+      "addressLabel": "Studio",
+      "address": "București, Romania",
+      "hoursLabel": "Hours",
+      "hours": "Mon–Fri · 9:00–18:00"
+    },
+    "form": {
+      "name": "Your name",
+      "email": "Email address",
+      "phone": "Phone",
+      "phoneOptional": "(optional)",
+      "message": "Your message",
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "quoteContextLabel": "Quote for",
+      "validation": {
+        "nameMin": "Please enter your full name.",
+        "emailInvalid": "Please enter a valid email address.",
+        "messageMin": "A short message helps us reply well — 10 characters minimum.",
+        "messageMax": "Please keep your message under 2000 characters."
+      },
+      "success": {
+        "title": "Thanks — your message is on its way.",
+        "message": "We'll be in touch shortly. In the meantime, feel free to keep browsing the collection.",
+        "sendAnother": "Send another message"
+      },
+      "error": {
+        "generic": "Something went wrong. Please try again or email us directly at {email}.",
+        "rateLimit": "You've sent several messages already. Please wait a few minutes before trying again."
+      }
+    },
+    "toast": {
+      "success": "Message sent. We'll be in touch.",
+      "error": "We couldn't send your message. Please try again."
+    }
   },
   "catalog": {
     "title": "Catalog",
-    "description": "Eight jacuzzis, designed around the pace of your evenings.",
+    "description": "Jacuzzis selected carefully — for homes, guesthouses and hotels.",
     "filters": {
       "size": "Size",
+      "sizeAny": "Any size",
+      "sizeMinLabel": "Small",
+      "sizeMaxLabel": "Large",
       "color": "Color",
       "clear": "Clear all",
       "showFilters": "Filters"
@@ -64,6 +196,18 @@
       "secondary": "See specs"
     }
   },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "message": "The page you were looking for isn't here. It may have moved, or never existed.",
+      "cta": "Back to homepage"
+    },
+    "generic": {
+      "title": "Something went wrong",
+      "message": "An unexpected error happened on our side. You can try again, or head back home.",
+      "retry": "Try again"
+    }
+  },
   "common": {
     "sizes": {
       "2-person": "2-person",
@@ -76,6 +220,12 @@
       "teak": "Teak",
       "pearl": "Pearl",
       "midnight": "Midnight"
+    },
+    "a11y": {
+      "skipToContent": "Skip to main content",
+      "changeLanguage": "Change language",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     }
   }
 }

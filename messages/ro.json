@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "WaterVibes",
-    "tagline": "Jacuzzi premium, create pentru liniște."
+    "tagline": "Relaxarea, ca parte din viața de zi cu zi."
   },
   "nav": {
     "home": "Acasă",
@@ -23,19 +23,151 @@
   },
   "footer": {
     "rights": "Toate drepturile rezervate.",
+    "madeIn": "Făcut în România",
+    "photoCredit": "Imagini: placeholder — fotografii în curs.",
     "sections": {
+      "company": "Companie",
       "explore": "Explorează",
       "contact": "Contact"
     }
   },
-  "home": {
-    "placeholder": "Conținutul paginii de start apare în Faza 3."
+  "hero": {
+    "eyebrow": "Hidroterapie premium",
+    "headline": "Relaxarea, ca parte din viață.",
+    "subhead": "Jacuzzi WaterVibes pentru casă, pensiune sau hotel — selectate cu atenție pentru confort, hidromasaj eficient și sisteme tehnice fiabile.",
+    "ctaPrimary": "Descoperă colecția",
+    "ctaSecondary": "Cere o ofertă",
+    "ordinal": "N° 01 · Relaxare"
+  },
+  "featured": {
+    "eyebrow": "Preferate",
+    "title": "Modele selectate cu atenție",
+    "description": "O selecție scurtă din catalogul complet — aleasă pentru echilibrul potrivit între dimensiune, finisaj și experiența de hidromasaj.",
+    "viewAll": "Vezi catalogul complet",
+    "breakerQuote": "Nu vindem doar produse. Construim experiențe de relaxare care pot face parte din viața de zi cu zi.",
+    "breakerAttribution": "WaterVibes"
+  },
+  "brandStory": {
+    "eyebrow": "Despre noi",
+    "title": "Relaxarea, ca parte din viață",
+    "pullquote": "Să aducă relaxarea reală mai aproape de oameni.",
+    "paragraph1": "Viața devine tot mai aglomerată. Timpul pentru liniște devine limitat. Noi credem că relaxarea trebuie să facă parte din viața de zi cu zi, nu doar din vacanțe sau vizite la spa.",
+    "paragraph2": "WaterVibes oferă jacuzzi pentru locuințe private, pensiuni și hoteluri. Selectăm modele care oferă confort, hidromasaj eficient și sisteme tehnice fiabile. Fiecare jacuzzi este ales pentru a oferi o experiență autentică de relaxare prin apă.",
+    "paragraph3": "WaterVibes nu oferă doar produse. Creează spații de relaxare care pot deveni parte din viața ta de zi cu zi."
+  },
+  "testimonials": {
+    "eyebrow": "De pe terasă",
+    "title": "Recomandări discrete de la oameni care își folosesc jacuzzi-ul zilnic"
+  },
+  "homeCta": {
+    "eyebrow": "Pasul următor",
+    "headline": "Creează spațiul tău de relaxare.",
+    "subhead": "Spune-ne despre spațiul tău. Îți răspundem cu variante de dimensiune, un preț cu livrare și pașii de instalare — într-o zi lucrătoare.",
+    "button": "Ia legătura"
+  },
+  "meta": {
+    "home": {
+      "title": "WaterVibes — Relaxarea, ca parte din viață",
+      "description": "Jacuzzi selectate cu atenție pentru casă, pensiune sau hotel. Confort, hidromasaj eficient și sisteme tehnice fiabile. Vezi catalogul."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Spune-ne despre spațiul tău. Îți răspundem cu variante de dimensiune, un preț cu livrare și pașii de instalare într-o zi lucrătoare."
+    },
+    "about": {
+      "title": "Despre",
+      "description": "De ce există WaterVibes, cum construim oferta și ce oferim mai exact. Trei capitole despre relaxarea care devine parte din viața de zi cu zi."
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Despre WaterVibes",
+      "title": "Relaxarea, ca parte din viață",
+      "subhead": "Trei capitole despre de ce existăm, cum construim oferta și ce oferim mai exact."
+    },
+    "chapter1": {
+      "eyebrow": "Capitolul 01",
+      "title": "De ce există WaterVibes",
+      "paragraph1": "WaterVibes a apărut dintr-o idee simplă. Oamenii au nevoie de relaxare reală. Viața devine aglomerată. Programul devine tot mai încărcat. Momentele de liniște devin rare. Mulți oameni caută relaxare în vacanțe sau în centre spa. Acea stare de liniște dispare când se întorc acasă.",
+      "paragraph2": "Noi credem că relaxarea nu trebuie să fie un lux ocazional. Trebuie să fie parte din viața de zi cu zi. Credem că fiecare casă, pensiune sau hotel poate avea un spațiu dedicat relaxării. Un loc unde corpul se detensionează. Un loc unde mintea se oprește din ritmul zilnic. Un loc unde oamenii petrec timp de calitate.",
+      "paragraph3": "Apa are un efect real asupra corpului. Hidromasajul relaxează mușchii. Căldura apei reduce tensiunea. Jeturile stimulează circulația. În câteva minute apare o stare profundă de relaxare. De aici pornește ideea WaterVibes. Nu vindem doar produse. Construim experiențe de relaxare care pot face parte din viața de zi cu zi.",
+      "paragraph4": "Un jacuzzi schimbă modul în care oamenii folosesc spațiul din jurul casei. Terasa devine loc de relaxare. Curtea devine loc de întâlnire. Seara devine moment de liniște. Pentru pensiuni și hoteluri, experiența devine și mai importantă — un spațiu cu jacuzzi transformă o simplă cazare într-o experiență memorabilă. WaterVibes există pentru acest motiv: vrem ca relaxarea reală să fie accesibilă în fiecare casă și în fiecare loc dedicat ospitalității."
+    },
+    "chapter2": {
+      "eyebrow": "Capitolul 02",
+      "title": "Cum facem asta",
+      "paragraph1": "WaterVibes își construiește oferta cu un obiectiv clar: să ofere soluții de relaxare care se potrivesc cât mai multor spații, stiluri și nevoi.",
+      "paragraph2": "Selectăm fiecare model de jacuzzi cu atenție. Analizăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Alegem modele care oferă o experiență reală de spa și care pot fi folosite constant, fără compromisuri.",
+      "paragraph3": "Portofoliul WaterVibes este gândit pentru a acoperi cât mai multe cerințe. Oferim jacuzzi în diferite dimensiuni — pentru două persoane, pentru familie sau pentru grupuri mai mari. Există modele compacte pentru terase sau curți mai mici și modele spațioase pentru pensiuni sau hoteluri.",
+      "paragraph4": "Includem modele cu configurații diferite de jeturi pentru hidromasaj. Fiecare poziție din jacuzzi oferă un tip diferit de masaj, conceput pentru relaxarea mușchilor și reducerea tensiunii acumulate.",
+      "paragraph5": "Designul are un rol important. Selectăm jacuzzi în culori și finisaje care se integrează ușor în spații moderne sau clasice. Un jacuzzi trebuie să completeze terasa, grădina sau zona de relaxare și să devină parte din atmosfera locului. Tehnologia contează la fel de mult — alegem sisteme de filtrare, încălzire și control al apei pentru confort și consum de energie optim.",
+      "paragraph6": "Procesul continuă cu consultanța pentru alegerea modelului potrivit. Analizăm spațiul disponibil, numărul de persoane care vor folosi jacuzzi-ul și modul în care acesta va fi integrat. Oferim ghidare și recomandări pentru instalare, astfel încât fiecare client să înțeleagă cerințele tehnice și pașii necesari pentru montajul corect."
+    },
+    "chapter3": {
+      "eyebrow": "Capitolul 03",
+      "title": "Ce oferim mai exact",
+      "paragraph1": "WaterVibes oferă soluții dedicate relaxării prin apă, adaptate atât locuințelor private, cât și locațiilor din domeniul ospitalității. Selectăm și punem la dispoziție jacuzzi moderne concepute pentru confort, durabilitate și experiență reală de hidromasaj.",
+      "paragraph2": "Fiecare model este ales pentru a răspunde unor nevoi diferite — de la spații private până la pensiuni sau hoteluri care doresc să ofere o experiență suplimentară oaspeților, sau pentru timp de calitate cu prietenii.",
+      "paragraph3": "În funcție de spațiu și preferințe, clienții pot alege modele pentru interior sau exterior, cu diferite dimensiuni, număr de locuri, configurații de jeturi și variante de culori. Scopul este ca fiecare client să găsească un model care se potrivește atât spațiului disponibil, cât și stilului locului.",
+      "paragraph4": "Un rol important îl are și consultanța. Ajutăm clienții să înțeleagă diferențele dintre modele și să aleagă varianta potrivită pentru spațiul lor, pentru numărul de utilizatori și pentru modul în care doresc să folosească jacuzzi-ul. Prin această selecție de produse și prin suportul oferit, WaterVibes face experiența spa mai accesibilă și mai ușor de integrat."
+    }
+  },
+  "contact": {
+    "eyebrow": "Ia legătura",
+    "title": "Hai să vorbim despre spațiul tău",
+    "description": "Dă-ne câteva detalii despre spațiul tău și ce cauți. Îți răspundem într-o zi lucrătoare cu variante și un preț cu livrare.",
+    "aside": {
+      "pullquote": "Credem că relaxarea nu trebuie să fie un lux ocazional. Trebuie să fie parte din viața de zi cu zi.",
+      "pullquoteAttribution": "WaterVibes"
+    },
+    "info": {
+      "emailLabel": "Email",
+      "email": "hello@watervibes.example",
+      "phoneLabel": "Telefon",
+      "phone": "+40 700 000 000",
+      "addressLabel": "Atelier",
+      "address": "București, România",
+      "hoursLabel": "Program",
+      "hours": "Luni–Vineri · 9:00–18:00"
+    },
+    "form": {
+      "name": "Numele tău",
+      "email": "Adresă de email",
+      "phone": "Telefon",
+      "phoneOptional": "(opțional)",
+      "message": "Mesajul tău",
+      "submit": "Trimite mesajul",
+      "submitting": "Se trimite…",
+      "quoteContextLabel": "Ofertă pentru",
+      "validation": {
+        "nameMin": "Te rugăm să introduci numele complet.",
+        "emailInvalid": "Te rugăm să introduci o adresă de email validă.",
+        "messageMin": "Un mesaj scurt ne ajută să răspundem bine — minim 10 caractere.",
+        "messageMax": "Te rugăm să păstrezi mesajul sub 2000 de caractere."
+      },
+      "success": {
+        "title": "Mulțumim — mesajul tău este pe drum.",
+        "message": "Revenim în curând cu un răspuns. Între timp, simte-te liber să continui să explorezi colecția.",
+        "sendAnother": "Trimite un alt mesaj"
+      },
+      "error": {
+        "generic": "Ceva nu a mers bine. Te rugăm să încerci din nou sau scrie-ne direct la {email}.",
+        "rateLimit": "Ai trimis deja mai multe mesaje. Te rugăm să aștepți câteva minute înainte de a încerca din nou."
+      }
+    },
+    "toast": {
+      "success": "Mesaj trimis. Revenim în curând.",
+      "error": "Nu am putut trimite mesajul. Te rugăm să încerci din nou."
+    }
   },
   "catalog": {
     "title": "Catalog",
-    "description": "Opt jacuzzi, proiectate după ritmul serilor tale.",
+    "description": "Jacuzzi selectate cu atenție — pentru casă, pensiune sau hotel.",
     "filters": {
       "size": "Dimensiune",
+      "sizeAny": "Orice dimensiune",
+      "sizeMinLabel": "Mic",
+      "sizeMaxLabel": "Mare",
       "color": "Culoare",
       "clear": "Șterge tot",
       "showFilters": "Filtre"
@@ -64,6 +196,18 @@
       "secondary": "Vezi specificațiile"
     }
   },
+  "errors": {
+    "notFound": {
+      "title": "Pagina nu a fost găsită",
+      "message": "Pagina pe care o cauți nu se află aici. Poate a fost mutată sau nu a existat niciodată.",
+      "cta": "Înapoi la pagina principală"
+    },
+    "generic": {
+      "title": "Ceva nu a mers bine",
+      "message": "S-a întâmplat o eroare neașteptată de partea noastră. Poți încerca din nou sau revino la pagina principală.",
+      "retry": "Încearcă din nou"
+    }
+  },
   "common": {
     "sizes": {
       "2-person": "2 persoane",
@@ -76,6 +220,12 @@
       "teak": "Teak",
       "pearl": "Perlat",
       "midnight": "Midnight"
+    },
+    "a11y": {
+      "skipToContent": "Sari la conținutul principal",
+      "changeLanguage": "Schimbă limba",
+      "openMenu": "Deschide meniul",
+      "closeMenu": "Închide meniul"
     }
   }
 }

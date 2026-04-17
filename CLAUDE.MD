@@ -129,14 +129,16 @@
     │   │   ├── label.tsx
     │   │   ├── select.tsx
     │   │   ├── sheet.tsx
+    │   │   ├── slider.tsx                  # Radix Slider wrapper — catalog size filter
     │   │   ├── sonner.tsx                  # toast container
     │   │   └── textarea.tsx
     │   │
     │   ├── layout/
-    │   │   ├── Header.tsx                  # top nav + logo + language switcher + MobileNav trigger
-    │   │   ├── Footer.tsx                  # footer nav + contact line
+    │   │   ├── Header.tsx                  # server — brand wordmark + 4-item nav + LanguageSwitcher + Request-a-quote Button
+    │   │   ├── Footer.tsx                  # server — 3-col on surface + oversized wordmark watermark + photo credit
     │   │   ├── LanguageSwitcher.tsx        # EN/RO toggle preserving route (aria-current on active)
     │   │   ├── MobileNav.tsx               # "use client" — Sheet-based mobile menu (focus trap, Esc closes)
+    │   │   ├── ScrolledHeader.tsx          # "use client" — IntersectionObserver shrink-on-scroll chrome wrapper
     │   │   └── SkipToContent.tsx           # server — visible-on-focus "Skip to main content" link → #main
     │   │
     │   ├── admin/
@@ -158,15 +160,18 @@
     │   ├── shared/
     │   │   ├── Button.tsx                  # brand Button (primary/accent/outline/ghost) + optional trailing arrow — DESIGN.md §5
     │   │   ├── Container.tsx               # mx-auto wrapper with size: narrow | default | wide
-    │   │   ├── SectionHeading.tsx          # asymmetric (default) or center — eyebrow + h2 + floated lede per DESIGN.md §5
+    │   │   ├── FadeIn.tsx                  # "use client" — fade-up reveal + optional animated terracotta hairline
+    │   │   ├── ImagePlaceholder.tsx        # warm-surface container with cross-hatch linen + role label — used for the 5 IMAGERY.md roles pending URLs
     │   │   ├── PriceTag.tsx                # formatted EUR price display
-    │   │   └── FadeIn.tsx                  # "use client" — fade-up reveal + optional animated terracotta hairline
+    │   │   └── SectionHeading.tsx          # asymmetric (default) or center — eyebrow + h2 + floated lede per DESIGN.md §5
     │   │
     │   ├── home/                           # homepage-only sections
-    │   │   ├── Hero.tsx                    # full-bleed video hero + CTAs
-    │   │   ├── FeaturedProducts.tsx        # featured:true products, reuses ProductCard
-    │   │   ├── Testimonials.tsx            # featured:true testimonial grid (bg-accent)
-    │   │   └── HomeCTA.tsx                 # closing banner → /contact
+    │   │   ├── Hero.tsx                    # server — video + cream→primary gradient + 7/12 display headline + rotated ordinal eyebrow
+    │   │   ├── FeaturedProducts.tsx        # server — grid; after 6 products a full-bleed pull-quote breaks the grid (Goop borrow)
+    │   │   ├── BrandStory.tsx              # server — asymmetric short brand story between Featured and Testimonials (Oura gradient borrow)
+    │   │   ├── Testimonials.tsx            # server — fetches + renders the hero quote; hand-off to TestimonialsClient for auto-advance
+    │   │   ├── TestimonialsClient.tsx      # "use client" — auto-advancing hero quote + filmstrip (10s, pauses on hover / out-of-view / reduced motion)
+    │   │   └── HomeCTA.tsx                 # server — closing banner on primary; Button accent → /contact
     │   │
     │   ├── catalog/
     │   │   ├── CatalogGrid.tsx             # responsive product grid
@@ -273,6 +278,11 @@
 | Slugify / cn utilities                  | [src/lib/utils.ts](src/lib/utils.ts)                                     |
 | Shared UI (Container, Heading, Price)   | [src/components/shared/](src/components/shared/)                         |
 | Brand Button primitive                  | [src/components/shared/Button.tsx](src/components/shared/Button.tsx)     |
+| Imagery placeholder (5 photo roles)     | [src/components/shared/ImagePlaceholder.tsx](src/components/shared/ImagePlaceholder.tsx) |
+| Homepage brand-story section            | [src/components/home/BrandStory.tsx](src/components/home/BrandStory.tsx) |
+| Testimonials auto-advance client        | [src/components/home/TestimonialsClient.tsx](src/components/home/TestimonialsClient.tsx) |
+| Scroll-shrinking header wrapper         | [src/components/layout/ScrolledHeader.tsx](src/components/layout/ScrolledHeader.tsx) |
+| Catalog size-filter slider              | [src/components/ui/slider.tsx](src/components/ui/slider.tsx)             |
 | Authoritative design spec               | [docs/DESIGN.md](docs/DESIGN.md)                                         |
 | Curated imagery pointers                | [docs/IMAGERY.md](docs/IMAGERY.md)                                       |
 | Frontend-design skill reference         | [docs/skills/frontend-design.md](docs/skills/frontend-design.md)         |

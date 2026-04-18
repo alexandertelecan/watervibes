@@ -5,7 +5,7 @@ import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-
+// commit push
 // DESIGN.md §5 — Hero
 // Airbnb-warm commercial: parallax video backdrop at ~55% opacity under a
 // transparent→charcoal gradient for text legibility. Big chunky headline

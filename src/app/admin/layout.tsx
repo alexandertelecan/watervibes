@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
@@ -11,11 +11,14 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const fraunces = Fraunces({
+// `--font-fraunces` is a historical CSS variable name; we now load Plus
+// Jakarta Sans into it to avoid a 28-file rename. See the public layout
+// for the same note.
+const jakarta = Plus_Jakarta_Sans({
   variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "SOFT"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -31,7 +34,7 @@ export default function AdminRootLayout({
   return (
     <html
       lang="en"
-      className={cn(manrope.variable, fraunces.variable, "h-full antialiased")}
+      className={cn(manrope.variable, jakarta.variable, "h-full antialiased")}
     >
       <body className="min-h-full bg-background text-foreground">
         {children}

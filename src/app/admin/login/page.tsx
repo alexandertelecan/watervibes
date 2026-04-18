@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 
 // DESIGN.md §5 (Admin) — login is the one admin page where a touch of
 // brand warmth is welcome. Surface card on bg-background, rounded-lg
-// (24px), shadow-md. Fraunces wordmark at the top, single password
+// (16px), shadow-md. Display-sans wordmark at the top, single password
 // field, brand primary Button. Austere but present.
 export default function AdminLoginPage() {
   const router = useRouter();

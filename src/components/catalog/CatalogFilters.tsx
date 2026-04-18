@@ -1,6 +1,6 @@
 "use client";
 
-import { SlidersHorizontal, X } from "lucide-react";
+import { Check, SlidersHorizontal, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -24,11 +24,9 @@ function parseMulti(value: string | null): string[] {
 }
 
 // DESIGN.md §5 — CatalogFilters
-// Desktop: sticky left rail. Size becomes a labeled 0-5 slider (0 = any,
-// 1-2 = 2-person, 3 = 4-person, 4-5 = 6+). Single-select on desktop —
-// multi-select on mobile via the Sheet (chips). Colors are pills with a
-// small color sample inside.
-// URL state stays backward-compatible: ?size=CSV&color=CSV.
+// Desktop: sticky left rail. Size is a labeled 0–5 slider (0 = any, 1-2 =
+// 2-person, 3 = 4-person, 4-5 = 6+). Mobile: chip grid inside a Sheet.
+// URL state stays CSV-backward-compatible: ?size=CSV&color=CSV.
 
 const SIZE_BUCKETS: { max: number; size: ProductSize }[] = [
   { max: 2, size: "2-person" },
@@ -105,18 +103,40 @@ export function CatalogFilters() {
     pushParams(next);
   };
 
-  const primarySize: ProductSize | null = (selectedSizes[0] as ProductSize) ?? null;
+  const primarySize: ProductSize | null =
+    (selectedSizes[0] as ProductSize) ?? null;
   const currentSliderValue = sizeToSlider(primarySize);
   const currentSizeLabel = primarySize
     ? t(SIZES.find((s) => s.value === primarySize)!.labelKey)
     : t("catalog.filters.sizeAny");
 
-  // Sidebar body — desktop uses slider; Sheet body uses chips.
   const desktopBody = (
     <div className="flex flex-col gap-10">
+      <header className="flex items-center justify-between">
+        <h2 className="text-eyebrow text-foreground">
+          {t("catalog.filters.showFilters")}
+        </h2>
+        {activeCount > 0 ? (
+          <button
+            type="button"
+            onClick={clearAll}
+            className="text-[11px] font-semibold uppercase tracking-[0.08em] text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            {t("catalog.filters.clear")}
+          </button>
+        ) : null}
+      </header>
+
       <FilterGroup title={t("catalog.filters.size")}>
         <div className="flex flex-col gap-4">
-          <p className="text-small text-foreground">{currentSizeLabel}</p>
+          <p
+            className={cn(
+              "text-sm font-semibold",
+              primarySize ? "text-foreground" : "text-muted-foreground",
+            )}
+          >
+            {currentSizeLabel}
+          </p>
           <Slider
             min={0}
             max={5}
@@ -133,25 +153,12 @@ export function CatalogFilters() {
       </FilterGroup>
 
       <FilterGroup title={t("catalog.filters.color")}>
-        <ColorPills
+        <ColorList
           selected={selectedColors}
           onToggle={(v) => toggleColor(v)}
           t={t}
         />
       </FilterGroup>
-
-      {activeCount > 0 ? (
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={clearAll}
-          className="self-start"
-        >
-          <X aria-hidden="true" className="size-3.5" />
-          <span>{t("catalog.filters.clear")}</span>
-        </Button>
-      ) : null}
     </div>
   );
 
@@ -168,11 +175,11 @@ export function CatalogFilters() {
                 aria-pressed={checked}
                 onClick={() => toggleSize(s.value)}
                 className={cn(
-                  "rounded-full border px-4 py-2 text-small transition-colors",
+                  "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   checked
-                    ? "border-accent bg-accent text-accent-foreground"
-                    : "border-border bg-transparent text-foreground hover:border-accent/60",
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border bg-transparent text-foreground hover:border-foreground",
                 )}
               >
                 {t(s.labelKey)}
@@ -182,7 +189,7 @@ export function CatalogFilters() {
         </div>
       </FilterGroup>
       <FilterGroup title={t("catalog.filters.color")}>
-        <ColorPills
+        <ColorList
           selected={selectedColors}
           onToggle={(v) => toggleColor(v)}
           t={t}
@@ -229,7 +236,7 @@ export function CatalogFilters() {
           </SheetContent>
         </Sheet>
       </div>
-      <aside className="hidden lg:sticky lg:top-28 lg:block lg:w-64 lg:flex-shrink-0">
+      <aside className="hidden lg:sticky lg:top-28 lg:block lg:w-64 lg:shrink-0">
         {desktopBody}
       </aside>
     </>
@@ -254,7 +261,7 @@ function FilterGroup({
   );
 }
 
-function ColorPills({
+function ColorList({
   selected,
   onToggle,
   t,
@@ -264,34 +271,42 @@ function ColorPills({
   t: (key: string) => string;
 }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <ul className="flex flex-col gap-1.5">
       {COLORS.map((c) => {
         const isSelected = selected.includes(c.value);
         const label = t(c.labelKey);
         return (
-          <button
-            key={c.value}
-            type="button"
-            aria-pressed={isSelected}
-            aria-label={label}
-            onClick={() => onToggle(c.value)}
-            className={cn(
-              "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-small transition-colors",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-              isSelected
-                ? "border-accent bg-surface text-foreground"
-                : "border-border bg-transparent text-foreground/80 hover:border-accent/60",
-            )}
-          >
-            <span
-              aria-hidden="true"
-              className="inline-block size-3.5 rounded-full border border-border/70"
-              style={{ backgroundColor: c.hex }}
-            />
-            <span>{label}</span>
-          </button>
+          <li key={c.value}>
+            <button
+              type="button"
+              aria-pressed={isSelected}
+              aria-label={label}
+              onClick={() => onToggle(c.value)}
+              className={cn(
+                "group/color flex w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-sm transition-colors",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                isSelected
+                  ? "border-foreground bg-surface text-foreground"
+                  : "border-border bg-transparent text-foreground/80 hover:border-foreground hover:bg-surface/60",
+              )}
+            >
+              <span className="inline-flex items-center gap-3">
+                <span
+                  aria-hidden="true"
+                  className="inline-block size-4 rounded-full ring-1 ring-border/70"
+                  style={{ backgroundColor: c.hex }}
+                />
+                <span className={isSelected ? "font-semibold" : undefined}>
+                  {label}
+                </span>
+              </span>
+              {isSelected ? (
+                <Check aria-hidden="true" className="size-4 text-accent" />
+              ) : null}
+            </button>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }

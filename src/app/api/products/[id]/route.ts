@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 import { isAdmin } from "@/lib/auth-server";
 import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
-import { productUpdateSchema } from "@/lib/validators/product";
+import { productSchema } from "@/lib/validators/product";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -43,7 +43,7 @@ export async function PUT(request: NextRequest, { params }: RouteContext) {
     await dbConnect();
     const { id } = await params;
     const body = await request.json();
-    const parsed = productUpdateSchema.safeParse(body);
+    const parsed = productSchema.safeParse(body);
     if (!parsed.success) {
       return Response.json(
         { error: "Invalid body", issues: parsed.error.issues },

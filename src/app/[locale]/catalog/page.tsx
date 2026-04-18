@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
+import type { SortOrder } from "mongoose";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CatalogGrid } from "@/components/catalog/CatalogGrid";
+import {
+  CATALOG_SORT_VALUES,
+  CatalogToolbar,
+  type CatalogSort,
+} from "@/components/catalog/CatalogToolbar";
+import { SizeRibbon } from "@/components/catalog/SizeRibbon";
 import { Container } from "@/components/shared/Container";
-import { SectionHeading } from "@/components/shared/SectionHeading";
 import { routing } from "@/i18n/routing";
 import { PRODUCT_SIZES } from "@/lib/constants";
 import { dbConnect } from "@/lib/db";
@@ -13,7 +19,7 @@ import { ProductModel } from "@/lib/models/Product";
 import type { Locale, Product, ProductColor } from "@/types/product";
 
 type PageParams = { locale: string };
-type PageSearch = { size?: string; color?: string };
+type PageSearch = { size?: string; color?: string; sort?: string };
 
 function splitCsv(value: string | undefined): string[] {
   if (!value) return [];
@@ -26,6 +32,27 @@ function assertLocale(value: string): Locale {
     : (routing.defaultLocale as Locale);
 }
 
+function parseSort(value: string | undefined): CatalogSort {
+  if (!value) return "featured";
+  return (CATALOG_SORT_VALUES as readonly string[]).includes(value)
+    ? (value as CatalogSort)
+    : "featured";
+}
+
+function mongoSortFor(sort: CatalogSort): Record<string, SortOrder> {
+  switch (sort) {
+    case "priceAsc":
+      return { price: 1, createdAt: -1 };
+    case "priceDesc":
+      return { price: -1, createdAt: -1 };
+    case "newest":
+      return { createdAt: -1 };
+    case "featured":
+    default:
+      return { featured: -1, order: 1, createdAt: -1 };
+  }
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -33,9 +60,26 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "catalog" });
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const path = `/${locale}/catalog`;
   return {
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: `${siteUrl}${path}`,
+      languages: {
+        en: `${siteUrl}/en/catalog`,
+        ro: `${siteUrl}/ro/catalog`,
+      },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: `${siteUrl}${path}`,
+      locale,
+      type: "website",
+      images: ["/og-image.jpg"],
+    },
   };
 }
 
@@ -57,6 +101,7 @@ export default async function CatalogPage({
     (PRODUCT_SIZES as readonly string[]).includes(s),
   );
   const colors = splitCsv(sp.color);
+  const sort = parseSort(sp.sort);
 
   await dbConnect();
   const filter: Record<string, unknown> = {};
@@ -64,7 +109,7 @@ export default async function CatalogPage({
   if (colors.length) filter.color = { $in: colors };
 
   const docs = await ProductModel.find(filter)
-    .sort({ order: 1, createdAt: -1 })
+    .sort(mongoSortFor(sort))
     .lean();
 
   const products: Product[] = docs.map((doc) => ({
@@ -87,16 +132,58 @@ export default async function CatalogPage({
   }));
 
   return (
-    <Container as="section" className="py-16 md:py-24">
-      <SectionHeading title={t("title")} description={t("description")} />
-      <div className="mt-12 flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-12">
-        <Suspense fallback={null}>
-          <CatalogFilters />
-        </Suspense>
-        <div className="flex-1">
-          <CatalogGrid products={products} locale={locale} />
+    <>
+      {/* Intro band — editorial asymmetric header on the surface seam */}
+      <section className="relative overflow-hidden border-b border-border/80 bg-surface/60 pt-16 pb-14 md:pt-24 md:pb-16">
+        {/* corner watermark — oversize wordmark lives in the negative space */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-10 -top-4 hidden select-none font-display text-[11rem] font-bold leading-none tracking-[-0.04em] text-foreground/4 md:block"
+        >
+          WV
         </div>
-      </div>
-    </Container>
+        <Container>
+          <div className="grid gap-8 md:grid-cols-12 md:gap-12">
+            <div className="md:col-span-7">
+              <div className="flex items-center gap-3">
+                <span aria-hidden="true" className="h-px w-10 bg-accent" />
+                <span className="text-eyebrow text-accent">
+                  {t("eyebrow")}
+                </span>
+              </div>
+              <h1 className="mt-5 text-h1 text-foreground">{t("title")}</h1>
+            </div>
+            <p className="text-lede text-muted-foreground md:col-span-5 md:col-start-8 md:self-end">
+              {t("description")}
+            </p>
+          </div>
+
+          <div className="mt-10 md:mt-12">
+            <Suspense fallback={null}>
+              <SizeRibbon />
+            </Suspense>
+          </div>
+        </Container>
+      </section>
+
+      {/* Results section */}
+      <Container as="section" className="py-12 md:py-16">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
+          <Suspense fallback={null}>
+            <CatalogFilters />
+          </Suspense>
+
+          <div className="min-w-0 flex-1">
+            <Suspense fallback={null}>
+              <CatalogToolbar count={products.length} />
+            </Suspense>
+
+            <div className="mt-10 md:mt-12">
+              <CatalogGrid products={products} locale={locale} />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 }

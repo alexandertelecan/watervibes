@@ -36,21 +36,31 @@
     "headline": "Relaxation, as part of life.",
     "subhead": "WaterVibes jacuzzis for homes, guesthouses and hotels — selected carefully for comfort, efficient hydromassage and reliable technical systems.",
     "ctaPrimary": "Explore the Collection",
-    "ctaSecondary": "Request a Quote",
-    "ordinal": "N° 01 · Soak"
+    "ctaSecondary": "Request a Quote"
   },
   "featured": {
-    "eyebrow": "Favourites",
-    "title": "Models chosen with care",
-    "description": "A short list from the full catalog — chosen for the right balance of size, finish, and hydromassage experience.",
-    "viewAll": "View the full collection",
-    "breakerQuote": "We don't just sell products. We build experiences of relaxation that can be part of everyday life.",
-    "breakerAttribution": "WaterVibes"
+    "eyebrow": "Featured models",
+    "title": "Picked for how you'll actually use them",
+    "description": "Three models from the catalog — selected for the right balance of size, finish, and hydromassage experience.",
+    "viewAll": "Show all models",
+    "viewProduct": "View product",
+    "finish": "Finish",
+    "fromPrice": "From",
+    "save": "Save",
+    "persons": "{count, plural, one {# person} other {# persons}}"
   },
   "brandStory": {
     "eyebrow": "About us",
+    "serial": "MMXXIV",
     "title": "Relaxation, as part of life",
-    "pullquote": "To bring real relaxation closer to people.",
+    "intro": "A short take on why we exist, what we offer, and what we promise — in three places.",
+    "pullquote": "To bring real relaxation closer to people — every day, not just on holidays.",
+    "attribution": "WaterVibes",
+    "pillars": {
+      "01": "Context",
+      "02": "Offering",
+      "03": "Promise"
+    },
     "paragraph1": "Life keeps getting busier. Time for quiet keeps getting shorter. We believe relaxation should be part of everyday life — not just something you look for on holiday or at a spa.",
     "paragraph2": "WaterVibes offers jacuzzis for private homes, guesthouses and hotels. We select models that deliver comfort, efficient hydromassage, and reliable technical systems. Each jacuzzi is chosen to provide a genuine experience of relaxation through water.",
     "paragraph3": "WaterVibes doesn't just offer products. It creates spaces of relaxation that can become part of your everyday life."
@@ -63,7 +73,12 @@
     "eyebrow": "The next step",
     "headline": "Create your relaxation space.",
     "subhead": "Tell us about your space. We'll come back with size options, a delivered price, and installation steps — within one business day.",
-    "button": "Get in Touch"
+    "button": "Get in Touch",
+    "trust": {
+      "reply": "One business day reply",
+      "price": "Delivered price included",
+      "installation": "Installation steps included"
+    }
   },
   "meta": {
     "home": {
@@ -161,8 +176,11 @@
     }
   },
   "catalog": {
-    "title": "Catalog",
-    "description": "Jacuzzis selected carefully — for homes, guesthouses and hotels.",
+    "title": "The collection",
+    "eyebrow": "Catalog",
+    "description": "Every jacuzzi on this page is chosen for how it feels to live with — quiet motors, honest finishes, hydromassage that still works on the hundredth night.",
+    "kicker": "{count, plural, =0 {No matches} one {# jacuzzi} other {# jacuzzis}}",
+    "allSizes": "All sizes",
     "filters": {
       "size": "Size",
       "sizeAny": "Any size",
@@ -170,30 +188,84 @@
       "sizeMaxLabel": "Large",
       "color": "Color",
       "clear": "Clear all",
-      "showFilters": "Filters"
+      "clearOne": "Remove filter",
+      "showFilters": "Filters",
+      "active": "Active filters",
+      "activeCount": "{count, plural, one {# active} other {# active}}"
+    },
+    "sort": {
+      "label": "Sort by",
+      "featured": "Featured",
+      "priceAsc": "Price: low to high",
+      "priceDesc": "Price: high to low",
+      "newest": "Newest"
+    },
+    "card": {
+      "from": "From",
+      "favorite": "Save for later"
     },
     "empty": {
-      "title": "Nothing matches yet",
-      "message": "No jacuzzis fit the filters you've selected. Try loosening a constraint.",
-      "clearFilters": "Clear filters"
+      "title": "Nothing matches — yet.",
+      "message": "No jacuzzis fit the filters you've selected. Try loosening a size or color constraint, or start fresh.",
+      "clearFilters": "Clear all filters"
     }
   },
   "product": {
+    "breadcrumb": {
+      "catalog": "The collection",
+      "back": "Back to collection"
+    },
+    "masthead": {
+      "eyebrow": "A WaterVibes model",
+      "dossier": "Dossier",
+      "model": "Model"
+    },
+    "gallery": {
+      "frame": "Frame",
+      "prev": "Previous image",
+      "next": "Next image",
+      "noImages": "Imagery pending"
+    },
+    "price": {
+      "from": "From",
+      "includes": "VAT and delivery in Romania included."
+    },
+    "description": {
+      "eyebrow": "About this model"
+    },
     "specs": {
       "title": "Specifications",
+      "eyebrow": "At a glance",
       "dimensions": "Dimensions",
       "jets": "Jets",
       "capacity": "Capacity (persons)",
       "power": "Power draw",
       "weightEmpty": "Weight (empty)",
-      "weightFull": "Weight (full)"
+      "weightFull": "Weight (full)",
+      "units": {
+        "jets": "stainless jets",
+        "seats": "seats",
+        "power": "peak draw",
+        "footprint": "footprint",
+        "weightEmpty": "shell weight",
+        "weightFull": "filled weight"
+      }
     },
     "features": {
-      "title": "What's included"
+      "title": "What's included",
+      "eyebrow": "Included"
     },
     "quote": {
       "primary": "Request a quote",
-      "secondary": "See specs"
+      "secondary": "See specs",
+      "eyebrow": "Ready when you are",
+      "note": "One business day reply · No obligation"
+    },
+    "closing": {
+      "eyebrow": "The next step",
+      "title": "Let's talk through your space.",
+      "description": "Tell us a few details. We'll come back with size options, a delivered price, and a clear install path — within one business day.",
+      "primary": "Start the conversation"
     }
   },
   "errors": {

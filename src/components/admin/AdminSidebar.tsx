@@ -23,7 +23,7 @@ function isActive(pathname: string, href: string): boolean {
 // DESIGN.md §5 — AdminSidebar
 // Active nav item gets a 3px accent left border + bg-surface fill.
 // Inactive items are transparent with a subtle surface hover. Wordmark
-// is Fraunces text-h3. Logout is our brand ghost Button.
+// is display-sans text-h3. Logout is our brand ghost Button.
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();

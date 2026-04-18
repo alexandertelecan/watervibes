@@ -52,13 +52,18 @@
 
 ### Visual Language
 
-- **Palette:**
-  - `--background`: `#FBFBF9` (warm off-white)
-  - `--foreground`: `#0E1A24` (deep navy-black)
-  - `--primary`: `#0A6E8C` (calm water teal)
-  - `--accent`: `#E8F1F2` (soft pale blue)
-  - `--muted`: `#6B7280`
-  - `--border`: `#E5E7EB`
+- **Palette:** (authoritative values live in [docs/DESIGN.md §1](./docs/DESIGN.md) — keep in sync there)
+  - `--background`: `#FFFFFF` (pure white)
+  - `--foreground`: `#222222` (charcoal ink — Airbnb's exact)
+  - `--primary`: `#222222` (charcoal — filled buttons)
+  - `--accent`: `#0E7C8E` (aqua-teal — signature brand color, CTA fills)
+  - `--accent-tint`: `#2BA9BB` (lighter aqua — hover/decor)
+  - `--muted-foreground`: `#6A6A6A` (medium gray)
+  - `--border`: `#DDDDDD` (Airbnb card-border hairline)
+- **Typography:**
+  - Display + headings: **Plus Jakarta Sans** (700 weight — chunky, humanist, Airbnb-Cereal-adjacent). Loaded into historical `--font-fraunces` CSS var.
+  - Body: **Manrope** (kept).
+- **Buttons:** pill (`rounded-full`) across every size and variant.
 - **Typography:**
   - Headings: **Fraunces** (serif, editorial feel) or **Instrument Serif**
   - Body: **Inter** (sans, clean)

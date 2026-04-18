@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // DESIGN.md §4.1–4.2 — the "settling" reveal.
-// Fade-up over 500ms with out-expo easing. Optional terracotta hairline
+// Fade-up over 500ms with out-expo easing. Optional aqua hairline
 // that draws left-to-right over 600ms at +100ms delay — the signature
 // motion that pairs with SectionHeading. Reduced-motion fallback is
 // covered in globals.css via prefers-reduced-motion, which clamps all
@@ -17,7 +17,7 @@ type FadeInProps = {
   children: React.ReactNode;
   delay?: number;
   className?: string;
-  /** When true, renders an animated terracotta hairline above children. */
+  /** When true, renders an animated aqua hairline above children. */
   underline?: boolean;
 };
 

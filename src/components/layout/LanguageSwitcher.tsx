@@ -8,7 +8,7 @@ import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 export function LanguageSwitcher({ className }: { className?: string }) {
-  const t = useTranslations("language");
+  const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -28,7 +28,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         className,
       )}
       role="group"
-      aria-label={t("switcher")}
+      aria-label={t("common.a11y.changeLanguage")}
     >
       {routing.locales.map((code) => {
         const active = code === locale;
@@ -38,7 +38,9 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             type="button"
             onClick={() => onSelect(code)}
             disabled={isPending}
+            aria-label={t(`language.${code}`)}
             aria-pressed={active}
+            aria-current={active ? "true" : undefined}
             className={cn(
               "rounded-full px-3 py-1 uppercase tracking-wider transition-colors",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",

@@ -134,10 +134,11 @@
     │   │   └── textarea.tsx
     │   │
     │   ├── layout/
-    │   │   ├── Header.tsx                  # server — brand wordmark + 4-item nav + LanguageSwitcher + Request-a-quote Button
+    │   │   ├── Header.tsx                  # server — brand wordmark + <HeaderNav/> + LanguageSwitcher + Request-a-quote Button
+    │   │   ├── HeaderNav.tsx               # "use client" — desktop pill-capsule nav with usePathname-driven active state (aqua fill on current route)
     │   │   ├── Footer.tsx                  # server — 3-col on surface + oversized wordmark watermark + photo credit
     │   │   ├── LanguageSwitcher.tsx        # EN/RO toggle preserving route (aria-current on active)
-    │   │   ├── MobileNav.tsx               # "use client" — Sheet-based mobile menu (focus trap, Esc closes)
+    │   │   ├── MobileNav.tsx               # "use client" — Sheet-based mobile menu (focus trap, Esc closes, aqua-fill active state)
     │   │   ├── ScrolledHeader.tsx          # "use client" — IntersectionObserver shrink-on-scroll chrome wrapper
     │   │   └── SkipToContent.tsx           # server — visible-on-focus "Skip to main content" link → #main
     │   │
@@ -160,25 +161,28 @@
     │   ├── shared/
     │   │   ├── Button.tsx                  # brand Button (primary/accent/outline/ghost) + optional trailing arrow — DESIGN.md §5
     │   │   ├── Container.tsx               # mx-auto wrapper with size: narrow | default | wide
-    │   │   ├── FadeIn.tsx                  # "use client" — fade-up reveal + optional animated terracotta hairline
-    │   │   ├── ImagePlaceholder.tsx        # warm-surface container with cross-hatch linen + role label — used for the 5 IMAGERY.md roles pending URLs
+    │   │   ├── FadeIn.tsx                  # "use client" — fade-up reveal + optional animated aqua hairline
+    │   │   ├── ImagePlaceholder.tsx        # surface container with diagonal hairline pattern + role label — used for the 5 IMAGERY.md roles pending URLs
     │   │   ├── PriceTag.tsx                # formatted EUR price display
     │   │   └── SectionHeading.tsx          # asymmetric (default) or center — eyebrow + h2 + floated lede per DESIGN.md §5
     │   │
     │   ├── home/                           # homepage-only sections
-    │   │   ├── Hero.tsx                    # server — video + cream→primary gradient + 7/12 display headline + rotated ordinal eyebrow
-    │   │   ├── FeaturedProducts.tsx        # server — grid; after 6 products a full-bleed pull-quote breaks the grid (Goop borrow)
-    │   │   ├── BrandStory.tsx              # server — asymmetric short brand story between Featured and Testimonials (Oura gradient borrow)
-    │   │   ├── Testimonials.tsx            # server — fetches + renders the hero quote; hand-off to TestimonialsClient for auto-advance
-    │   │   ├── TestimonialsClient.tsx      # "use client" — auto-advancing hero quote + filmstrip (10s, pauses on hover / out-of-view / reduced motion)
-    │   │   └── HomeCTA.tsx                 # server — closing banner on primary; Button accent → /contact
+    │   │   ├── Hero.tsx                    # server — min-h 92vh, parallax video + transparent→charcoal gradient + bottom-fade to background, big display headline + two pill CTAs
+    │   │   ├── HeroVideo.tsx               # "use client" — motion.div with useScroll/useTransform parallax (0→80px) + scale 1.15 overhang; respects prefers-reduced-motion
+    │   │   ├── FeaturedProducts.tsx        # server — Airbnb-style listing cards: 3 products (featured first, filled from most-recent) in a 3-col grid — image 4:5, size pill top-left, heart icon top-right, "From €X,XXX" below
+    │   │   ├── BrandStory.tsx              # server — marginalia strip + asymmetric title+aqua-pullquote panel + 3 numbered pillars (Context/Offering/Promise) with vertical rules; water-ripple motifs as decoration
+    │   │   ├── Testimonials.tsx            # server — fetches + renders the hero quote; hand-off to TestimonialsClient for spotlight+rail
+    │   │   ├── TestimonialsClient.tsx      # "use client" — spotlight card + rail of clickable mini cards, 5-star rating rows, Fraunces author monograms, 10s auto-advance (pauses on hover / out-of-view / reduced motion), AnimatePresence cross-fade
+    │   │   └── HomeCTA.tsx                 # server — charcoal slab with soft aqua glows, display headline + CTA + mailto fallback, hairline, 3-item trust strip (Clock/Tag/Wrench icons)
     │   │
     │   ├── catalog/
     │   │   ├── CatalogGrid.tsx             # responsive product grid
-    │   │   ├── CatalogFilters.tsx          # size + color filters (client, URL-state)
-    │   │   ├── ProductCard.tsx             # card for grid item
-    │   │   ├── ProductCardSkeleton.tsx     # shimmer placeholder matching ProductCard's rounded-2xl frame
-    │   │   └── EmptyState.tsx              # shown when filters return zero
+    │   │   ├── CatalogFilters.tsx          # "use client" — sticky sidebar: size slider + color list (desktop) / Sheet chips (mobile); URL-state
+    │   │   ├── CatalogToolbar.tsx          # "use client" — result count + sort select (featured/price/newest) + dismissable active-filter chips
+    │   │   ├── SizeRibbon.tsx              # "use client" — Airbnb-style horizontal size pill ribbon (quick single-select size filter)
+    │   │   ├── ProductCard.tsx             # grid card: frosted size pill + heart glyph overlay, alternating 4:5/5:6, fabric swatch strip, name/tagline/From-price
+    │   │   ├── ProductCardSkeleton.tsx     # shimmer placeholder matching ProductCard (pill + heart + 3-line meta)
+    │   │   └── EmptyState.tsx              # shown when filters return zero — surface panel with aqua wash + brand Button
     │   │
     │   ├── product/
     │   │   ├── ProductGallery.tsx          # primary image + thumbnails
@@ -220,7 +224,7 @@
 
 **Not yet built (tracked in PLAN.md):** `src/components/admin/ImageUploader.tsx` (Cloudinary — TODO in ProductFormImages.tsx), `/public/og-image.jpg` (1200x630 — TODO in root layout metadata), `src/hooks/*`.
 
-**Status: Redesign complete — warm tactile.**
+**Status: Redesign complete — Airbnb-warm commercial (white + charcoal + aqua, pill buttons, Plus Jakarta Sans display).**
 
 ### Quick lookup — "where does X live?"
 
@@ -229,12 +233,15 @@
 | Public root layout (header/footer/i18n) | [src/app/[locale]/layout.tsx](src/app/[locale]/layout.tsx)               |
 | The homepage (composition)              | [src/app/[locale]/page.tsx](src/app/[locale]/page.tsx) → [src/components/home/](src/components/home/) |
 | The hero section                        | [src/components/home/Hero.tsx](src/components/home/Hero.tsx)             |
+| Hero parallax video (client)            | [src/components/home/HeroVideo.tsx](src/components/home/HeroVideo.tsx)   |
 | Homepage featured-products grid         | [src/components/home/FeaturedProducts.tsx](src/components/home/FeaturedProducts.tsx) |
 | Homepage testimonials grid              | [src/components/home/Testimonials.tsx](src/components/home/Testimonials.tsx) |
 | Homepage closing CTA                    | [src/components/home/HomeCTA.tsx](src/components/home/HomeCTA.tsx)       |
 | Scroll fade-up motion wrapper           | [src/components/shared/FadeIn.tsx](src/components/shared/FadeIn.tsx)     |
-| The catalog list                        | [src/app/[locale]/catalog/page.tsx](src/app/[locale]/catalog/page.tsx)   |
-| The catalog filters                     | [src/components/catalog/CatalogFilters.tsx](src/components/catalog/CatalogFilters.tsx) |
+| The catalog list                        | [src/app/[locale]/catalog/page.tsx](src/app/[locale]/catalog/page.tsx) — intro band + SizeRibbon + sticky filter rail + CatalogToolbar + grid |
+| The catalog filters (sidebar)           | [src/components/catalog/CatalogFilters.tsx](src/components/catalog/CatalogFilters.tsx) |
+| The catalog toolbar (sort + active chips) | [src/components/catalog/CatalogToolbar.tsx](src/components/catalog/CatalogToolbar.tsx) |
+| The catalog size ribbon (Airbnb chips)  | [src/components/catalog/SizeRibbon.tsx](src/components/catalog/SizeRibbon.tsx) |
 | The product detail page                 | [src/app/[locale]/catalog/[slug]/page.tsx](src/app/[locale]/catalog/[slug]/page.tsx) + [src/components/product/](src/components/product/) |
 | The contact page                        | [src/app/[locale]/contact/page.tsx](src/app/[locale]/contact/page.tsx)   |
 | The contact form (client)               | [src/components/contact/ContactForm.tsx](src/components/contact/ContactForm.tsx) |

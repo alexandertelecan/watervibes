@@ -1,37 +1,105 @@
 import { getTranslations } from "next-intl/server";
 
+import { cn } from "@/lib/utils";
 import type { ProductSpecs as Specs } from "@/types/product";
+
+// DESIGN.md §5 — "At a glance" specs. Numbers become the aesthetic language.
+// Each spec is a stat-block: thin top hairline, small index numeral in aqua,
+// the value set large in Plus Jakarta Sans 700, and a quiet eyebrow label.
+// The jets count is treated as the signature stat at display scale.
+type StatSize = "display" | "large" | "medium";
+
+type StatEntry = {
+  index: string;
+  value: string;
+  label: string;
+  size: StatSize;
+};
+
+const VALUE_SIZE: Record<StatSize, string> = {
+  display:
+    "text-[clamp(4rem,3rem+4vw,6rem)] leading-[0.9] font-bold tracking-[-0.04em]",
+  large:
+    "text-[clamp(2.25rem,1.8rem+1.6vw,3rem)] leading-[1] font-bold tracking-[-0.03em]",
+  medium:
+    "text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] leading-[1.05] font-bold tracking-[-0.025em]",
+};
 
 export async function ProductSpecs({ specs }: { specs: Specs }) {
   const t = await getTranslations("product.specs");
 
-  const rows: { label: string; value: string | number }[] = [
-    { label: t("dimensions"), value: specs.dimensions },
-    { label: t("jets"), value: specs.jets },
-    { label: t("capacity"), value: specs.capacity },
-    { label: t("power"), value: specs.power },
-    { label: t("weightEmpty"), value: specs.weightEmpty },
-    { label: t("weightFull"), value: specs.weightFull },
+  const stats: StatEntry[] = [
+    {
+      index: "01",
+      value: String(specs.jets),
+      label: t("units.jets"),
+      size: "display",
+    },
+    {
+      index: "02",
+      value: String(specs.capacity),
+      label: t("units.seats"),
+      size: "display",
+    },
+    {
+      index: "03",
+      value: specs.power,
+      label: t("units.power"),
+      size: "large",
+    },
+    {
+      index: "04",
+      value: specs.dimensions,
+      label: t("units.footprint"),
+      size: "medium",
+    },
+    {
+      index: "05",
+      value: specs.weightEmpty,
+      label: t("units.weightEmpty"),
+      size: "large",
+    },
+    {
+      index: "06",
+      value: specs.weightFull,
+      label: t("units.weightFull"),
+      size: "large",
+    },
   ];
 
   return (
-    <section aria-labelledby="specs-heading">
-      <h2
-        id="specs-heading"
-        className="mb-6 font-heading text-2xl text-foreground"
-      >
-        {t("title")}
-      </h2>
-      <dl className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
-        {rows.map((row) => (
+    <section aria-labelledby="specs-heading" className="flex flex-col gap-10">
+      <div className="flex flex-col gap-2">
+        <span className="text-eyebrow text-accent">{t("eyebrow")}</span>
+        <h2
+          id="specs-heading"
+          className="text-h2 text-foreground font-heading"
+        >
+          {t("title")}
+        </h2>
+      </div>
+
+      <dl className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 md:gap-x-10 md:gap-y-14">
+        {stats.map((stat) => (
           <div
-            key={row.label}
-            className="flex flex-col gap-1 border-t border-border pt-3"
+            key={stat.index}
+            className="flex flex-col gap-4 border-t border-foreground/15 pt-5"
           >
-            <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              {row.label}
-            </dt>
-            <dd className="text-sm text-foreground">{row.value}</dd>
+            <div className="flex items-center gap-3">
+              <span className="text-eyebrow tabular-nums text-accent">
+                {stat.index}
+              </span>
+              <span className="h-px flex-1 bg-border" />
+            </div>
+            <dd
+              className={cn(
+                "font-heading text-foreground tabular-nums",
+                VALUE_SIZE[stat.size],
+              )}
+            >
+              {stat.value}
+            </dd>
+            <dt className="text-eyebrow text-muted-foreground">{stat.label}</dt>
           </div>
         ))}
       </dl>

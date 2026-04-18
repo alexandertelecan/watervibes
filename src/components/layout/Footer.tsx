@@ -4,15 +4,15 @@ import { Container } from "@/components/shared/Container";
 import { Link } from "@/i18n/navigation";
 
 // DESIGN.md §5 — Footer
-// Three-column grid on --surface with a big Fraunces watermark behind the
-// columns at 6% opacity. Full-width terracotta divider above the columns.
+// Three-column grid on --surface with a big display-sans watermark behind
+// the columns at 6% opacity. Full-width aqua divider above the columns.
 // Photo credit line sits with "Made in Romania" in the microline.
 export function Footer() {
   const t = useTranslations();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="grain-overlay relative mt-24 isolate overflow-hidden bg-surface pt-16 md:pt-24">
+    <footer className="relative isolate overflow-hidden bg-surface pt-16 md:pt-24">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-accent" />
 
       {/* Oversized wordmark watermark behind the columns (decorative). */}

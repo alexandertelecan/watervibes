@@ -10,9 +10,9 @@ type ImagePlaceholderProps = {
 };
 
 // Placeholder container for the 5 Unsplash roles catalogued in docs/IMAGERY.md.
-// Warm surface fill + a subtle repeating hairline pattern so it doesn't read as
-// a broken empty box. Caller swaps this out for <Image src={...} /> once a
-// canonical CDN URL is provided (per IMAGERY.md §0).
+// Pale glacial surface fill + a subtle repeating hairline pattern so it doesn't
+// read as a broken empty box. Caller swaps this out for <Image src={...} />
+// once a canonical CDN URL is provided (per IMAGERY.md §0).
 export function ImagePlaceholder({
   role,
   aspect,
@@ -25,8 +25,8 @@ export function ImagePlaceholder({
       aria-label={role ? `Placeholder: ${role}` : "Image placeholder"}
       className={cn(
         "relative isolate overflow-hidden bg-surface",
-        // Diagonal cross-hatch of border-color hairlines — reads as "linen"
-        // without pulling in an extra SVG. Purely decorative.
+        // Diagonal cross-hatch of border-color hairlines — reads as quiet
+        // chalk texture without pulling in an extra SVG. Purely decorative.
         "bg-[repeating-linear-gradient(45deg,transparent_0_18px,color-mix(in_oklab,var(--border)_60%,transparent)_18px_19px)]",
         aspect,
         className,

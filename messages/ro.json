@@ -36,21 +36,31 @@
     "headline": "Relaxarea, ca parte din viață.",
     "subhead": "Jacuzzi WaterVibes pentru casă, pensiune sau hotel — selectate cu atenție pentru confort, hidromasaj eficient și sisteme tehnice fiabile.",
     "ctaPrimary": "Descoperă colecția",
-    "ctaSecondary": "Cere o ofertă",
-    "ordinal": "N° 01 · Relaxare"
+    "ctaSecondary": "Cere o ofertă"
   },
   "featured": {
-    "eyebrow": "Preferate",
-    "title": "Modele selectate cu atenție",
-    "description": "O selecție scurtă din catalogul complet — aleasă pentru echilibrul potrivit între dimensiune, finisaj și experiența de hidromasaj.",
-    "viewAll": "Vezi catalogul complet",
-    "breakerQuote": "Nu vindem doar produse. Construim experiențe de relaxare care pot face parte din viața de zi cu zi.",
-    "breakerAttribution": "WaterVibes"
+    "eyebrow": "Modele recomandate",
+    "title": "Alese pentru cum le vei folosi",
+    "description": "Trei modele din catalog — selectate pentru echilibrul potrivit între dimensiune, finisaj și experiența de hidromasaj.",
+    "viewAll": "Vezi toate modelele",
+    "viewProduct": "Vezi produsul",
+    "finish": "Finisaj",
+    "fromPrice": "De la",
+    "save": "Salvează",
+    "persons": "{count, plural, one {# persoană} few {# persoane} other {# de persoane}}"
   },
   "brandStory": {
     "eyebrow": "Despre noi",
+    "serial": "MMXXIV",
     "title": "Relaxarea, ca parte din viață",
-    "pullquote": "Să aducă relaxarea reală mai aproape de oameni.",
+    "intro": "O scurtă privire asupra motivului pentru care existăm, ce oferim și ce promitem — în trei capitole.",
+    "pullquote": "Să aducă relaxarea reală mai aproape de oameni — în fiecare zi, nu doar în vacanțe.",
+    "attribution": "WaterVibes",
+    "pillars": {
+      "01": "Context",
+      "02": "Oferta",
+      "03": "Promisiune"
+    },
     "paragraph1": "Viața devine tot mai aglomerată. Timpul pentru liniște devine limitat. Noi credem că relaxarea trebuie să facă parte din viața de zi cu zi, nu doar din vacanțe sau vizite la spa.",
     "paragraph2": "WaterVibes oferă jacuzzi pentru locuințe private, pensiuni și hoteluri. Selectăm modele care oferă confort, hidromasaj eficient și sisteme tehnice fiabile. Fiecare jacuzzi este ales pentru a oferi o experiență autentică de relaxare prin apă.",
     "paragraph3": "WaterVibes nu oferă doar produse. Creează spații de relaxare care pot deveni parte din viața ta de zi cu zi."
@@ -63,7 +73,12 @@
     "eyebrow": "Pasul următor",
     "headline": "Creează spațiul tău de relaxare.",
     "subhead": "Spune-ne despre spațiul tău. Îți răspundem cu variante de dimensiune, un preț cu livrare și pașii de instalare — într-o zi lucrătoare.",
-    "button": "Ia legătura"
+    "button": "Ia legătura",
+    "trust": {
+      "reply": "Răspuns într-o zi lucrătoare",
+      "price": "Preț cu livrare inclus",
+      "installation": "Pași de instalare incluși"
+    }
   },
   "meta": {
     "home": {
@@ -161,8 +176,11 @@
     }
   },
   "catalog": {
-    "title": "Catalog",
-    "description": "Jacuzzi selectate cu atenție — pentru casă, pensiune sau hotel.",
+    "title": "Colecția",
+    "eyebrow": "Catalog",
+    "description": "Fiecare jacuzzi de pe această pagină este ales pentru cum se simte să îl ai — motoare silențioase, finisaje oneste, hidromasaj care funcționează și după a suta seară.",
+    "kicker": "{count, plural, =0 {Niciun rezultat} one {# jacuzzi} few {# jacuzzi} other {# de jacuzzi}}",
+    "allSizes": "Toate dimensiunile",
     "filters": {
       "size": "Dimensiune",
       "sizeAny": "Orice dimensiune",
@@ -170,30 +188,84 @@
       "sizeMaxLabel": "Mare",
       "color": "Culoare",
       "clear": "Șterge tot",
-      "showFilters": "Filtre"
+      "clearOne": "Elimină filtrul",
+      "showFilters": "Filtre",
+      "active": "Filtre active",
+      "activeCount": "{count, plural, one {# activ} few {# active} other {# active}}"
+    },
+    "sort": {
+      "label": "Sortează după",
+      "featured": "Recomandate",
+      "priceAsc": "Preț: de la mic la mare",
+      "priceDesc": "Preț: de la mare la mic",
+      "newest": "Cele mai noi"
+    },
+    "card": {
+      "from": "De la",
+      "favorite": "Salvează pentru mai târziu"
     },
     "empty": {
-      "title": "Niciun rezultat încă",
-      "message": "Niciun jacuzzi nu se potrivește filtrelor selectate. Încearcă să relaxezi o condiție.",
-      "clearFilters": "Șterge filtrele"
+      "title": "Niciun rezultat — încă.",
+      "message": "Niciun jacuzzi nu se potrivește filtrelor selectate. Încearcă să relaxezi o condiție de dimensiune sau culoare, sau ia-o de la zero.",
+      "clearFilters": "Șterge toate filtrele"
     }
   },
   "product": {
+    "breadcrumb": {
+      "catalog": "Colecția",
+      "back": "Înapoi la colecție"
+    },
+    "masthead": {
+      "eyebrow": "Un model WaterVibes",
+      "dossier": "Dosar",
+      "model": "Model"
+    },
+    "gallery": {
+      "frame": "Cadru",
+      "prev": "Imaginea anterioară",
+      "next": "Imaginea următoare",
+      "noImages": "Fotografii în pregătire"
+    },
+    "price": {
+      "from": "De la",
+      "includes": "TVA și livrare în România incluse."
+    },
+    "description": {
+      "eyebrow": "Despre acest model"
+    },
     "specs": {
       "title": "Specificații",
+      "eyebrow": "Pe scurt",
       "dimensions": "Dimensiuni",
       "jets": "Duze",
       "capacity": "Capacitate (persoane)",
       "power": "Consum",
       "weightEmpty": "Greutate (gol)",
-      "weightFull": "Greutate (plin)"
+      "weightFull": "Greutate (plin)",
+      "units": {
+        "jets": "duze inox",
+        "seats": "locuri",
+        "power": "consum maxim",
+        "footprint": "amprentă",
+        "weightEmpty": "greutate carcasă",
+        "weightFull": "greutate cu apă"
+      }
     },
     "features": {
-      "title": "Ce este inclus"
+      "title": "Ce este inclus",
+      "eyebrow": "Incluse"
     },
     "quote": {
       "primary": "Cere o ofertă",
-      "secondary": "Vezi specificațiile"
+      "secondary": "Vezi specificațiile",
+      "eyebrow": "Gata când decizi tu",
+      "note": "Răspundem într-o zi lucrătoare · Fără obligații"
+    },
+    "closing": {
+      "eyebrow": "Pasul următor",
+      "title": "Hai să vorbim despre spațiul tău.",
+      "description": "Spune-ne câteva detalii. Revenim cu opțiuni de mărime, prețul livrat și pașii de instalare — într-o zi lucrătoare.",
+      "primary": "Începe conversația"
     }
   },
   "errors": {

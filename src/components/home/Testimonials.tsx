@@ -17,11 +17,11 @@ function assertLocale(value: string): Locale {
 }
 
 // DESIGN.md §5 — Testimonials
-// One hero quote at a time, large Fraunces italic, with an oversize
-// terracotta quotation mark hanging in the left margin. Filmstrip of the
-// rest auto-advances every 10s (paused on hover / out-of-viewport / reduced
+// One hero quote at a time, large display-sans italic, with an oversize
+// aqua quotation mark hanging in the left margin. Filmstrip of the rest
+// auto-advances every 10s (paused on hover / out-of-viewport / reduced
 // motion) — that logic lives in TestimonialsClient.
-// Background is --surface with a grain overlay per DESIGN.md §3.3.
+// Background is --surface (#F7F7F7).
 export async function Testimonials() {
   await dbConnect();
   const docs = await TestimonialModel.find({ featured: true }).limit(6).lean();
@@ -42,7 +42,7 @@ export async function Testimonials() {
   }));
 
   return (
-    <section className="grain-overlay relative bg-surface py-24 md:py-32">
+    <section className="relative bg-surface py-24 md:py-32">
       <Container as="div">
         <FadeIn underline>
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />

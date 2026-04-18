@@ -1,58 +1,50 @@
 import { getTranslations } from "next-intl/server";
 
+import { HeroVideo } from "@/components/home/HeroVideo";
 import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 // DESIGN.md §5 — Hero
-// Video plays at ~50% opacity; a cream→primary vertical gradient is laid
-// over it so the foreground reads as "dusk through linen." Headline sits
-// left-aligned in the first 7 of 12 columns. Right rail shows a rotated
-// eyebrow "No. 01 / Soak" with a short terracotta rule. One CTA only —
-// variant="primary" with trailing arrow.
+// Airbnb-warm commercial: parallax video backdrop at ~55% opacity under a
+// transparent→charcoal gradient for text legibility. Big chunky headline
+// in Plus Jakarta Sans. Two pill CTAs — filled accent primary, outline
+// secondary. Bottom fade gradient bleeds the dark slab into the next
+// section's white. Snap-start anchors the section for the homepage's
+// proximity snap scroll.
 export async function Hero() {
   const t = await getTranslations("hero");
 
   return (
     <section className="relative isolate overflow-hidden bg-foreground text-primary-foreground">
-      <video
-        aria-hidden="true"
-        autoPlay
-        muted
-        loop
-        playsInline
-        // Placeholder hero imagery — slot in a URL from IMAGERY.md §1.1 when
-        // picked. Without a poster the section still renders cleanly on the
-        // gradient alone.
-        className="absolute inset-0 -z-20 h-full w-full object-cover opacity-50"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+      <HeroVideo />
 
-      {/* "Dusk through linen" — cream at top fading to deep green at bottom.
-          Laid over the video so the palette reads as our tokens, not the
-          footage. */}
+      {/* Soft aqua glow fields — same treatment as HomeCTA: depth on the
+          dark slab without committing to a linear gradient darkening. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-background/10 via-primary/25 to-primary/70"
+        className="pointer-events-none absolute -top-40 -right-40 -z-10 h-144 w-xl rounded-full bg-accent/25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-32 -left-40 -z-10 h-96 w-96 rounded-full bg-accent-tint/10 blur-3xl"
       />
 
       <Container
         as="div"
         size="wide"
-        className={cn(
-          "grid min-h-[85vh] gap-10 py-28 md:grid-cols-12 md:py-40",
-        )}
+        className={cn("grid min-h-[92vh] gap-10 py-24 md:py-32")}
       >
-        <div className="flex flex-col justify-end gap-8 md:col-span-7">
+        <div className="flex max-w-3xl flex-col justify-end gap-7">
           <h1 className="text-display text-primary-foreground">
             {t("headline")}
           </h1>
           <p className="text-lede max-w-xl text-primary-foreground/85">
             {t("subhead")}
           </p>
-          <div>
+
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button asChild variant="accent" size="lg" className="gap-2">
               <Link href="/catalog">
                 <span>{t("ctaPrimary")}</span>
@@ -72,26 +64,16 @@ export async function Hero() {
                 </svg>
               </Link>
             </Button>
-          </div>
-        </div>
-
-        {/* Right rail — vertical eyebrow. Hidden on mobile where the single
-            column would swallow it. */}
-        <div
-          aria-hidden="true"
-          className="hidden items-start justify-end md:col-span-5 md:flex"
-        >
-          <div className="flex flex-col items-end gap-4 pt-4">
-            <span className="h-px w-10 bg-accent" />
-            <span
-              className="text-eyebrow text-accent-foreground/90"
-              style={{
-                writingMode: "vertical-rl",
-                transform: "rotate(180deg)",
-              }}
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-primary-foreground/40 bg-primary-foreground/5 text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground/15"
             >
-              {t("ordinal")}
-            </span>
+              <Link href="/contact">
+                <span>{t("ctaSecondary")}</span>
+              </Link>
+            </Button>
           </div>
         </div>
       </Container>

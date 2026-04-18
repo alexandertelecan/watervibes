@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Fraunces, Manrope } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/layout/Footer";
@@ -19,13 +19,14 @@ const manrope = Manrope({
   display: "swap",
 });
 
-// opsz + SOFT axes exposed so .text-display can dial in the soft,
-// large-display cut per DESIGN.md §2.1.
-const fraunces = Fraunces({
+// Plus Jakarta Sans is our display face — chunky, humanist, Airbnb-Cereal
+// adjacent. The CSS custom-property name `--font-fraunces` is historical
+// (we used to ship Fraunces); kept to avoid renaming across 28+ files.
+const jakarta = Plus_Jakarta_Sans({
   variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "SOFT"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export function generateStaticParams() {
@@ -74,7 +75,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={cn(manrope.variable, fraunces.variable, "h-full antialiased")}
+      className={cn(manrope.variable, jakarta.variable, "h-full antialiased")}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <NextIntlClientProvider>

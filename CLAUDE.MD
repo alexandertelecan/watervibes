@@ -79,7 +79,7 @@
     │   │   ├── error.tsx                   # "use client" — localized error boundary (Try again + Back home)
     │   │   ├── [...rest]/page.tsx          # catch-all — triggers notFound() so unknown localized paths hit not-found.tsx
     │   │   ├── about/
-    │   │   │   └── page.tsx                # ABOUT page (server) → hero + story + values + HomeCTA, FadeIn sections
+    │   │   │   └── page.tsx                # ABOUT page (server) → masthead hero w/ magazine TOC (dotted leaders) + 3 chapters in distinct registers (manifesto / craft log on --surface / inverted collage+quote) + centered signature band + HomeCTA
     │   │   ├── catalog/
     │   │   │   ├── page.tsx                # CATALOG list → components/catalog/*
     │   │   │   ├── loading.tsx             # skeleton grid (9 cards) + filter placeholder

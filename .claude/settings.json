@@ -23,7 +23,29 @@
       "Bash(curl -s -o __TRACKED_VAR__.jpg 'https://images.unsplash.com/__TRACKED_VAR__?auto=format&fit=crop&w=900&q=70')",
       "Bash(curl -s -o /tmp/wv-brandstory.jpg \"https://images.unsplash.com/photo-1681168716884-e3254c4a0148?q=80&w=1400&auto=format&fit=crop\")",
       "Bash(pnpm -s tsc --noEmit)",
-      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")"
+      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(lsof -i :3000 -sTCP:LISTEN -t)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/catalog/azure-4)",
+      "Bash(npm install *)",
+      "Read(//Users/alexandertelecan/.npm/_logs/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/admin/products)",
+      "Bash(lsof -ti:3000)",
+      "Bash(lsof -ti:3001)",
+      "Bash(curl -sS http://localhost:3000 -o /tmp/wv-home.html)",
+      "Bash(curl -sS http://localhost:3001 -o /tmp/wv-home-3001.html)",
+      "Bash(ps -p 39963 -o pid,command)",
+      "Bash(ps -p 40007 -o pid,command)",
+      "Bash(curl -v -s http://127.0.0.1:3000/)",
+      "Bash(curl -sS http://127.0.0.1:3000/)",
+      "Bash(node /tmp/wv-inspect.js)",
+      "Bash(pkill -f \"remote-debugging-port=9222\")",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/admin/products)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
     ]
   }
 }

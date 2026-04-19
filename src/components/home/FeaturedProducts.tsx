@@ -1,6 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import {
+  FeaturedProductsRail,
+  type FeaturedRailItem,
+} from "@/components/home/FeaturedProductsRail";
 import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
@@ -13,30 +16,36 @@ import type { ProductColor } from "@/types/product";
 const TITLE = "Cele mai vândute";
 const LEDE =
   "Modele preferate de clienți pentru utilizare zilnică, acasă sau în spații turistice.";
-const VIEW_ALL = "Descoperă întreaga colecție";
+const VIEW_ALL = "Descoperiți întreaga colecție";
 
 export async function FeaturedProducts() {
   await dbConnect();
 
-  const featured = await ProductModel.find({ featured: true })
+  const products = await ProductModel.find({ featured: true })
     .sort({ order: 1 })
-    .limit(3)
     .lean();
-
-  let products = featured;
-  if (products.length < 3) {
-    const filler = await ProductModel.find({
-      _id: { $nin: featured.map((p) => p._id) },
-    })
-      .sort({ createdAt: -1 })
-      .limit(3 - products.length)
-      .lean();
-    products = [...products, ...filler];
-  }
 
   if (products.length === 0) {
     return null;
   }
+
+  const items: FeaturedRailItem[] = products.map((doc) => {
+    const capacity = doc.specs.capacity;
+    return {
+      id: String(doc._id),
+      href: `/catalog/${doc.slug}`,
+      name: doc.name,
+      capacity,
+      image: doc.images?.[0],
+      imageAlt: productAltText({
+        name: doc.name,
+        size: doc.size,
+        color: doc.color as ProductColor,
+        specs: { capacity },
+      }),
+      priceLabel: formatPrice(doc.price),
+    };
+  });
 
   return (
     <section className="py-24 md:py-32">
@@ -45,34 +54,14 @@ export async function FeaturedProducts() {
           <h2 className="text-h1 text-foreground">{TITLE}</h2>
           <p className="mt-5 text-lede text-muted-foreground">{LEDE}</p>
         </FadeIn>
+      </Container>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 lg:gap-10">
-          {products.map((doc, i) => {
-            const capacity = doc.specs.capacity;
-            const priceLabel = formatPrice(doc.price);
-            const altText = productAltText({
-              name: doc.name,
-              size: doc.size,
-              color: doc.color as ProductColor,
-              specs: { capacity },
-            });
+      <FadeIn className="mt-12 md:mt-16">
+        <FeaturedProductsRail items={items} />
+      </FadeIn>
 
-            return (
-              <FadeIn key={String(doc._id)} delay={Math.min(i, 3) * 0.08}>
-                <ListingCard
-                  href={`/catalog/${doc.slug}`}
-                  name={doc.name}
-                  capacity={capacity}
-                  image={doc.images?.[0]}
-                  imageAlt={altText}
-                  priceLabel={priceLabel}
-                />
-              </FadeIn>
-            );
-          })}
-        </div>
-
-        <div className="mt-14 flex justify-center md:mt-20">
+      <Container as="div" size="wide" className="mt-14 md:mt-20">
+        <div className="flex justify-center">
           <Button
             asChild
             variant="outline"
@@ -100,59 +89,5 @@ export async function FeaturedProducts() {
         </div>
       </Container>
     </section>
-  );
-}
-
-function ListingCard({
-  href,
-  name,
-  capacity,
-  image,
-  imageAlt,
-  priceLabel,
-}: {
-  href: string;
-  name: string;
-  capacity: number;
-  image?: string;
-  imageAlt: string;
-  priceLabel: string;
-}) {
-  const capacityLabel = `${capacity} persoane`;
-
-  return (
-    <Link
-      href={href}
-      aria-label={`${name}, ${capacityLabel}, ${priceLabel}`}
-      className="group/card block rounded-(--radius-lg) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-    >
-      <div className="transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:-translate-y-1">
-        <div className="relative aspect-square overflow-hidden rounded-(--radius-lg) bg-surface">
-          {image ? (
-            <Image
-              src={image}
-              alt={imageAlt}
-              fill
-              sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-              className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.03]"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-eyebrow text-muted-foreground">
-              {name}
-            </div>
-          )}
-        </div>
-
-        <div className="mt-6 px-1">
-          <h3 className="text-h3 text-foreground">{name}</h3>
-          <p className="mt-1 text-small text-muted-foreground">
-            {capacityLabel}
-          </p>
-          <p className="mt-3 text-body font-semibold text-foreground tabular-nums">
-            {priceLabel}
-          </p>
-        </div>
-      </div>
-    </Link>
   );
 }

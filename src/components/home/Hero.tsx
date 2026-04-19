@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[calc(100dvh-4rem)] flex-col overflow-hidden bg-foreground text-primary-foreground">
+    <section className="relative isolate flex min-h-[calc(98dvh)] flex-col overflow-hidden bg-foreground text-primary-foreground">
       <HeroVideo />
 
       <HeroOrb />

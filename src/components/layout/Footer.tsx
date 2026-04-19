@@ -23,12 +23,12 @@ const INFO_LINKS = [
 const ANPC_BANNERS = [
   {
     href: "https://anpc.ro/ce-este-sal/",
-    src: "/anpc-sal.png",
+    src: "/anpc-sal.jpg",
     alt: "ANPC — Soluționarea alternativă a litigiilor (SAL)",
   },
   {
     href: "https://ec.europa.eu/consumers/odr",
-    src: "/anpc-sol.png",
+    src: "/anpc-sol.avif",
     alt: "ANPC — Soluționarea online a litigiilor (SOL)",
   },
 ] as const;
@@ -37,12 +37,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative isolate overflow-hidden bg-accent bg-linear-to-br from-accent-tint to-accent text-white">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-56 -left-24 h-144 w-xl rounded-full bg-white/10 blur-3xl"
-      />
-
+    <footer className="relative isolate overflow-hidden bg-accent text-white">
       <Container as="div" size="wide" className="relative z-10">
         <div className="flex flex-col pt-24 md:pt-32">
           <FadeIn>

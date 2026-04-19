@@ -27,7 +27,7 @@ export const productSchema = z.object({
   color: z.string().min(1),
   colorHex: hexColor,
   price: z.number().positive(),
-  images: z.array(z.url()).min(1),
+  images: z.array(z.string().min(1)).min(1),
   specs: specsSchema,
   features: z.array(z.string().min(1)).default([]),
   featured: z.boolean().default(false),

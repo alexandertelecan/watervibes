@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { PRODUCT_SIZES } from "@/lib/constants";
-
 const specs = z.object({
   dimensions: z.string().min(1),
   jets: z.number().int().min(0),
@@ -11,19 +9,26 @@ const specs = z.object({
   weightFull: z.string().min(1),
 });
 
+// `size` is intentionally NOT in this schema — the admin UI lets the operator
+// set capacity freely; the server-side `size` bucket is derived from capacity
+// at submit time so existing catalog filters keep working.
 export const productFormSchema = z.object({
+  // Optional in the form because we auto-derive from `name` on submit when
+  // empty (e.g. brand-new products). The server validator still requires it.
   slug: z
     .string()
-    .min(1)
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug must be kebab-case"),
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug must be kebab-case")
+    .optional()
+    .or(z.literal("")),
   name: z.string().min(1),
   tagline: z.string().min(1),
   description: z.string().min(1),
-  size: z.enum(PRODUCT_SIZES as unknown as [string, ...string[]]),
-  color: z.string().min(1),
-  colorHex: z.string().regex(/^#[0-9a-fA-F]{6}$/, "colorHex must be #RRGGBB"),
-  price: z.number().positive(),
-  images: z.array(z.url()).min(1),
+  color: z.string().min(1, "Adăugați un nume pentru culoare"),
+  colorHex: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Cod hex invalid"),
+  price: z.number().positive("Introduceți un preț"),
+  images: z
+    .array(z.string().min(1))
+    .min(1, "Adăugați cel puțin o imagine"),
   specs,
   features: z.array(z.string().min(1)),
   featured: z.boolean(),

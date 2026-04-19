@@ -1,41 +1,48 @@
 "use client";
 
-import { ArrowUpDown, X } from "lucide-react";
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  ChevronDown,
+  Clock,
+  Sparkles,
+  X,
+  type LucideIcon,
+} from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
+import type { ColorOption } from "@/components/catalog/CatalogFilters";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { COLORS, SIZES } from "@/lib/constants";
+  CATALOG_SORT_VALUES,
+  DEFAULT_SORT,
+  SORT_LABELS,
+  type CatalogSort,
+} from "@/components/catalog/catalog-sort";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-export const CATALOG_SORT_VALUES = [
-  "featured",
-  "priceAsc",
-  "priceDesc",
-  "newest",
-] as const;
-export type CatalogSort = (typeof CATALOG_SORT_VALUES)[number];
-
-const DEFAULT_SORT: CatalogSort = "featured";
-
-const SORT_LABELS: Record<CatalogSort, string> = {
-  featured: "Recomandate",
-  priceAsc: "Preț: de la mic la mare",
-  priceDesc: "Preț: de la mare la mic",
-  newest: "Cele mai noi",
+const SORT_ICONS: Record<CatalogSort, LucideIcon> = {
+  featured: Sparkles,
+  priceAsc: ArrowUpNarrowWide,
+  priceDesc: ArrowDownNarrowWide,
+  newest: Clock,
 };
 
 const L = {
   sortLabel: "Sortați după",
+  sortPrefix: "Sortați",
   active: "Filtre active",
   clear: "Ștergeți tot",
   clearOne: "Eliminați filtrul",
+  persons: (n: number) => (n === 1 ? "1 persoană" : `${n} persoane`),
 } as const;
 
 function parseSort(value: string | null): CatalogSort {
@@ -50,6 +57,12 @@ function parseCsv(value: string | null): string[] {
   return value.split(",").map((v) => v.trim()).filter(Boolean);
 }
 
+function parseNumberParam(value: string | null): number | null {
+  if (value === null || value === "") return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
 function formatKicker(count: number): string {
   if (count === 0) return "Niciun rezultat";
   if (count === 1) return "1 jacuzzi";
@@ -61,39 +74,61 @@ function formatActiveCount(count: number): string {
   return count === 1 ? "1 activ" : `${count} active`;
 }
 
-export function CatalogToolbar({ count }: { count: number }) {
+type CatalogToolbarProps = {
+  count: number;
+  priceMin: number;
+  priceMax: number;
+  colors: ColorOption[];
+};
+
+export function CatalogToolbar({
+  count,
+  priceMin,
+  priceMax,
+  colors: colorOptions,
+}: CatalogToolbarProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const sort = parseSort(searchParams.get("sort"));
-  const sizes = useMemo(
-    () => parseCsv(searchParams.get("size")),
+  const capacities = useMemo(
+    () =>
+      parseCsv(searchParams.get("capacity"))
+        .map((v) => Number(v))
+        .filter((n) => Number.isFinite(n)),
     [searchParams],
   );
   const colors = useMemo(
     () => parseCsv(searchParams.get("color")),
     [searchParams],
   );
-  const activeCount = sizes.length + colors.length;
+
+  const urlPriceMinRaw = parseNumberParam(searchParams.get("priceMin"));
+  const urlPriceMaxRaw = parseNumberParam(searchParams.get("priceMax"));
+  const urlPriceMin =
+    urlPriceMinRaw !== null && urlPriceMinRaw > priceMin
+      ? Math.min(urlPriceMinRaw, priceMax)
+      : priceMin;
+  const urlPriceMax =
+    urlPriceMaxRaw !== null && urlPriceMaxRaw < priceMax
+      ? Math.max(urlPriceMaxRaw, priceMin)
+      : priceMax;
+  const priceActive = urlPriceMin > priceMin || urlPriceMax < priceMax;
+
+  const activeCount =
+    capacities.length + colors.length + (priceActive ? 1 : 0);
 
   const pushParams = (next: URLSearchParams) => {
     const qs = next.toString();
     router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
 
-  const onSortChange = (value: string) => {
+  const removeCapacity = (value: number) => {
     const next = new URLSearchParams(searchParams.toString());
-    if (!value || value === DEFAULT_SORT) next.delete("sort");
-    else next.set("sort", value);
-    pushParams(next);
-  };
-
-  const removeSize = (value: string) => {
-    const next = new URLSearchParams(searchParams.toString());
-    const remaining = sizes.filter((v) => v !== value);
-    if (remaining.length) next.set("size", remaining.join(","));
-    else next.delete("size");
+    const remaining = capacities.filter((v) => v !== value);
+    if (remaining.length) next.set("capacity", remaining.join(","));
+    else next.delete("capacity");
     pushParams(next);
   };
 
@@ -105,12 +140,31 @@ export function CatalogToolbar({ count }: { count: number }) {
     pushParams(next);
   };
 
-  const clearAll = () => {
+  const removePrice = () => {
     const next = new URLSearchParams(searchParams.toString());
-    next.delete("size");
-    next.delete("color");
+    next.delete("priceMin");
+    next.delete("priceMax");
     pushParams(next);
   };
+
+  const clearAll = () => {
+    const next = new URLSearchParams(searchParams.toString());
+    next.delete("capacity");
+    next.delete("color");
+    next.delete("priceMin");
+    next.delete("priceMax");
+    pushParams(next);
+  };
+
+  const onSortChange = (value: string) => {
+    if (!(CATALOG_SORT_VALUES as readonly string[]).includes(value)) return;
+    const next = new URLSearchParams(searchParams.toString());
+    if (value === DEFAULT_SORT) next.delete("sort");
+    else next.set("sort", value);
+    pushParams(next);
+  };
+
+  const ActiveSortIcon = SORT_ICONS[sort];
 
   return (
     <div className="flex flex-col gap-5">
@@ -126,50 +180,87 @@ export function CatalogToolbar({ count }: { count: number }) {
           ) : null}
         </div>
 
-        <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 text-eyebrow text-muted-foreground">
-            <ArrowUpDown aria-hidden="true" className="size-3.5" />
-            {L.sortLabel}
-          </span>
-          <Select value={sort} onValueChange={onSortChange}>
-            <SelectTrigger
-              aria-label={L.sortLabel}
-              className={cn(
-                "h-10 gap-2 rounded-full border-foreground/15 bg-background pl-4 pr-3 text-sm font-semibold text-foreground shadow-sm",
-                "hover:border-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                "data-[size=default]:h-10",
-              )}
-            >
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent align="end" className="min-w-48">
-              {CATALOG_SORT_VALUES.map((v) => (
-                <SelectItem key={v} value={v}>
-                  {SORT_LABELS[v]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            aria-label={L.sortLabel}
+            className={cn(
+              "group/sort inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background pl-4 pr-3 text-sm text-foreground shadow-sm transition-colors",
+              "hover:border-foreground",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "data-[state=open]:border-foreground",
+            )}
+          >
+            <ActiveSortIcon aria-hidden="true" className="size-4 text-accent" />
+            <span className="hidden text-muted-foreground sm:inline">
+              {L.sortPrefix}
+            </span>
+            <span
+              aria-hidden="true"
+              className="hidden h-4 w-px bg-border sm:inline-block"
+            />
+            <span className="font-semibold">{SORT_LABELS[sort]}</span>
+            <ChevronDown
+              aria-hidden="true"
+              className="size-4 text-muted-foreground transition-transform duration-200 group-data-[state=open]/sort:rotate-180"
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            sideOffset={8}
+            className="w-60 rounded-(--radius-lg) p-1.5 shadow-lg"
+          >
+            <DropdownMenuRadioGroup value={sort} onValueChange={onSortChange}>
+              {CATALOG_SORT_VALUES.map((v) => {
+                const Icon = SORT_ICONS[v];
+                const active = v === sort;
+                return (
+                  <DropdownMenuRadioItem
+                    key={v}
+                    value={v}
+                    className={cn(
+                      "flex cursor-pointer items-center gap-3 rounded-md py-2.5 pl-3 pr-9 text-sm text-foreground transition-colors",
+                      active ? "bg-accent/5 font-semibold" : "font-medium",
+                    )}
+                  >
+                    <Icon
+                      aria-hidden="true"
+                      className={cn(
+                        "size-4 shrink-0 transition-colors",
+                        active ? "text-accent" : "text-muted-foreground",
+                      )}
+                    />
+                    <span>{SORT_LABELS[v]}</span>
+                  </DropdownMenuRadioItem>
+                );
+              })}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {activeCount > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-eyebrow text-muted-foreground">{L.active}</span>
-          {sizes.map((v) => {
-            const entry = SIZES.find((s) => s.value === v);
-            if (!entry) return null;
-            return (
-              <FilterChip
-                key={`size-${v}`}
-                label={entry.label}
-                removeLabel={L.clearOne}
-                onRemove={() => removeSize(v)}
-              />
-            );
-          })}
+          {priceActive ? (
+            <PriceChip
+              min={urlPriceMin}
+              max={urlPriceMax}
+              showMin={urlPriceMin > priceMin}
+              showMax={urlPriceMax < priceMax}
+              removeLabel={L.clearOne}
+              onRemove={removePrice}
+            />
+          ) : null}
+          {capacities.map((n) => (
+            <FilterChip
+              key={`capacity-${n}`}
+              label={L.persons(n)}
+              removeLabel={L.clearOne}
+              onRemove={() => removeCapacity(n)}
+            />
+          ))}
           {colors.map((v) => {
-            const entry = COLORS.find((c) => c.value === v);
+            const entry = colorOptions.find((c) => c.value === v);
             if (!entry) return null;
             return (
               <FilterChip
@@ -191,6 +282,54 @@ export function CatalogToolbar({ count }: { count: number }) {
         </div>
       ) : null}
     </div>
+  );
+}
+
+function PriceChip({
+  min,
+  max,
+  showMin,
+  showMax,
+  removeLabel,
+  onRemove,
+}: {
+  min: number;
+  max: number;
+  showMin: boolean;
+  showMax: boolean;
+  removeLabel: string;
+  onRemove: () => void;
+}) {
+  const ariaLabel = `${removeLabel}: ${formatPrice(min)} ${formatPrice(max)}`;
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface py-1 pl-3 pr-1 text-foreground shadow-xs">
+      <span className="inline-flex items-baseline gap-3 text-sm tabular-nums">
+        {showMin ? (
+          <span className="inline-flex items-baseline gap-1">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              Min
+            </span>
+            <span>{formatPrice(min)}</span>
+          </span>
+        ) : null}
+        {showMax ? (
+          <span className="inline-flex items-baseline gap-1">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              Max
+            </span>
+            <span>{formatPrice(max)}</span>
+          </span>
+        ) : null}
+      </span>
+      <button
+        type="button"
+        onClick={onRemove}
+        aria-label={ariaLabel}
+        className="inline-flex size-6 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+      >
+        <X aria-hidden="true" className="size-3.5" />
+      </button>
+    </span>
   );
 }
 

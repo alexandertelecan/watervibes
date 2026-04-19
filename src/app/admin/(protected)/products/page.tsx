@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import Link from "next/link";
 
 import { ProductsTable } from "@/components/admin/ProductsTable";
@@ -22,27 +23,47 @@ async function loadProducts(): Promise<Product[]> {
 
 export default async function AdminProductsPage() {
   const products = await loadProducts();
+  const featuredCount = products.filter((p) => p.featured).length;
+  const averagePrice =
+    products.length > 0
+      ? Math.round(
+          products.reduce((sum, p) => sum + p.price, 0) / products.length,
+        )
+      : 0;
 
   return (
     <div className="mx-auto max-w-6xl">
-      <header className="mb-6 flex items-center justify-between">
+      <header className="mb-10 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <h1 className="font-[var(--font-fraunces)] text-3xl font-semibold tracking-tight">
-            Products
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+            Catalog
+          </p>
+          <h1 className="mt-2 font-(family-name:--font-fraunces) text-3xl font-semibold tracking-tight">
+            Produse
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {products.length} total
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+            Gestionați colecția dumneavoastră de jacuzzi-uri. Căutați, filtrați
+            după mărime sau culoare și editați fișa fiecărui model.
           </p>
         </div>
         <Link
           href="/admin/products/new"
-          className="inline-flex h-10 items-center rounded-xl bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+          className="group/new inline-flex h-11 items-center gap-2 rounded-full bg-accent px-5 text-sm font-medium text-accent-foreground shadow-sm transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-accent-tint hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
-          New product
+          <Plus
+            aria-hidden="true"
+            className="size-4 transition-transform duration-300 group-hover/new:rotate-90"
+          />
+          Produs nou
         </Link>
       </header>
 
-      <ProductsTable products={products} />
+      <ProductsTable
+        products={products}
+        totalCount={products.length}
+        featuredCount={featuredCount}
+        averagePrice={averagePrice}
+      />
     </div>
   );
 }

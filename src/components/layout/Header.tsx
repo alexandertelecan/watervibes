@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Lock } from "lucide-react";
 
 import { HeaderNav } from "@/components/layout/HeaderNav";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -7,7 +8,7 @@ import { Container } from "@/components/shared/Container";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 h-16 bg-accent text-accent-foreground shadow-[0_1px_0_0_hsl(0_0%_100%/0.08)]">
+    <header className="fixed top-0 z-40 h-16 bg-accent text-accent-foreground min-w-full">
       <Container
         as="div"
         size="wide"
@@ -21,6 +22,13 @@ export function Header() {
         </Link>
         <HeaderNav />
         <div className="flex items-center gap-3">
+          <Link
+            href="/admin/login"
+            aria-label="Admin"
+            className="hidden rounded-sm p-1.5 text-accent-foreground/50 transition-colors duration-200 hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-accent md:inline-flex"
+          >
+            <Lock aria-hidden="true" className="size-3.5" />
+          </Link>
           <Button
             asChild
             size="sm"

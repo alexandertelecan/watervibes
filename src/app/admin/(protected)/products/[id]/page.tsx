@@ -1,3 +1,4 @@
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import mongoose from "mongoose";
 import { notFound } from "next/navigation";
@@ -26,19 +27,51 @@ export default async function EditProductPage({
   if (!product) notFound();
 
   return (
-    <div className="mx-auto max-w-4xl">
-      <header className="mb-8">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground">
-          <Link href="/admin/products" className="hover:text-foreground">
-            Products
+    <div className="mx-auto max-w-5xl">
+      <header className="mb-10">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground"
+        >
+          <Link
+            href="/admin"
+            className="transition-colors hover:text-foreground"
+          >
+            Panou
           </Link>
-          <span aria-hidden="true"> / </span>
-          <span className="text-foreground">Edit</span>
+          <ChevronRight aria-hidden="true" className="size-3 opacity-60" />
+          <Link
+            href="/admin/products"
+            className="transition-colors hover:text-foreground"
+          >
+            Produse
+          </Link>
+          <ChevronRight aria-hidden="true" className="size-3 opacity-60" />
+          <span className="text-foreground">Editare</span>
+        </nav>
+
+        <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <h1 className="font-(family-name:--font-fraunces) text-3xl font-semibold tracking-tight sm:text-4xl">
+              {product.name}
+            </h1>
+            <p className="mt-2 font-mono text-xs text-muted-foreground">
+              /{product.slug}
+            </p>
+          </div>
+          <Link
+            href={`/catalog/${product.slug}`}
+            target="_blank"
+            rel="noreferrer"
+            className="group/view inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium text-foreground transition-all duration-200 hover:border-foreground hover:bg-surface"
+          >
+            <span>Vedeți pe site</span>
+            <ArrowUpRight
+              aria-hidden="true"
+              className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/view:-translate-y-0.5 group-hover/view:translate-x-0.5"
+            />
+          </Link>
         </div>
-        <h1 className="mt-2 font-[var(--font-fraunces)] text-3xl font-semibold tracking-tight">
-          {product.name}
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">/{product.slug}</p>
       </header>
 
       <ProductForm mode="edit" initialData={product} />

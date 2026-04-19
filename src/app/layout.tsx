@@ -3,6 +3,7 @@ import { Fraunces, Manrope, Plus_Jakarta_Sans } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PublicChrome } from "@/components/layout/PublicChrome";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { Toaster } from "@/components/ui/sonner";
@@ -121,11 +122,15 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <SkipToContent />
-        <Header />
+        <PublicChrome>
+          <Header />
+        </PublicChrome>
         <main id="main" className="flex-1">
           {children}
         </main>
-        <Footer />
+        <PublicChrome>
+          <Footer />
+        </PublicChrome>
         <Toaster position="bottom-right" richColors />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </body>

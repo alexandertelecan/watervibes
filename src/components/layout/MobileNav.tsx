@@ -27,7 +27,7 @@ export function MobileNav() {
 
   const links: NavLink[] = [
     { href: "/", label: "Acasă" },
-    { href: "/catalog", label: "Jacuzzi" },
+    { href: "/catalog", label: "Catalog" },
     { href: "/about", label: "Despre noi" },
     { href: "/contact", label: "Contact" },
   ];

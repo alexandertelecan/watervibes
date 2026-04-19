@@ -11,18 +11,13 @@ import { DataTable, type ColumnDef } from "@/components/admin/DataTable";
 import { DeleteDialog } from "@/components/admin/DeleteDialog";
 import { ColorSwatch } from "@/components/product/ColorSwatch";
 import { Button } from "@/components/ui/button";
+import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 
 type ProductsTableProps = {
   products: Product[];
 };
-
-const priceFormatter = new Intl.NumberFormat("en-IE", {
-  style: "currency",
-  currency: "EUR",
-  maximumFractionDigits: 0,
-});
 
 function truncate(value: string, max: number): string {
   return value.length > max ? `${value.slice(0, max - 1)}…` : value;
@@ -42,7 +37,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
         { method: "DELETE" },
       );
       if (response.ok) {
-        toast.success(`Deleted ${pending.name.en}`);
+        toast.success(`Deleted ${pending.name}`);
         setPending(null);
         router.refresh();
         return;
@@ -89,7 +84,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
       render: (product) => (
         <div className="flex flex-col">
           <span className="font-medium text-foreground">
-            {truncate(product.name.en, 40)}
+            {truncate(product.name, 40)}
           </span>
           <span className="text-xs text-muted-foreground">
             /{product.slug}
@@ -125,7 +120,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
       header: "Price",
       render: (product) => (
         <span className="text-sm font-medium text-foreground">
-          {priceFormatter.format(product.price)}
+          {formatPrice(product.price)}
         </span>
       ),
     },
@@ -154,7 +149,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
           <Button asChild variant="ghost" size="icon-sm">
             <Link
               href={`/admin/products/${product._id}`}
-              aria-label={`Edit ${product.name.en}`}
+              aria-label={`Edit ${product.name}`}
             >
               <Pencil aria-hidden="true" />
             </Link>
@@ -164,7 +159,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
             variant="ghost"
             size="icon-sm"
             onClick={() => setPending(product)}
-            aria-label={`Delete ${product.name.en}`}
+            aria-label={`Delete ${product.name}`}
           >
             <Trash2 aria-hidden="true" />
           </Button>
@@ -187,7 +182,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
           if (!open) setPending(null);
         }}
         onConfirm={handleDelete}
-        itemLabel={pending ? `"${pending.name.en}"` : "this product"}
+        itemLabel={pending ? `"${pending.name}"` : "this product"}
         isDeleting={isDeleting}
       />
     </>

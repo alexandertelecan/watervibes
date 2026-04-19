@@ -19,7 +19,7 @@ async function main() {
     console.log("[dry-run] Would seed:");
     console.log(`  - ${seedProducts.length} products`);
     for (const p of seedProducts) {
-      console.log(`      · ${p.slug} — ${p.name.en} (${p.size}, ${p.color})`);
+      console.log(`      · ${p.slug} — ${p.name} (${p.size}, ${p.color})`);
     }
     console.log(`  - ${seedTestimonials.length} testimonials`);
     for (const t of seedTestimonials) {

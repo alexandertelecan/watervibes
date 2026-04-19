@@ -1,11 +1,7 @@
-import createMiddleware from "next-intl/middleware";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 import { SESSION_COOKIE_NAME, verifySessionToken } from "@/lib/auth";
-import { routing } from "@/i18n/routing";
-
-const intlMiddleware = createMiddleware(routing);
 
 function isPublicAdminPath(pathname: string): boolean {
   return (
@@ -16,13 +12,18 @@ function isPublicAdminPath(pathname: string): boolean {
   );
 }
 
-async function guardAdmin(request: NextRequest): Promise<NextResponse | null> {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  if (isPublicAdminPath(pathname)) return null;
+
+  if (!pathname.startsWith("/admin") && !pathname.startsWith("/api/admin")) {
+    return NextResponse.next();
+  }
+
+  if (isPublicAdminPath(pathname)) return NextResponse.next();
 
   const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
   const ok = token ? await verifySessionToken(token) : false;
-  if (ok) return null;
+  if (ok) return NextResponse.next();
 
   if (pathname.startsWith("/api/")) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -32,23 +33,8 @@ async function guardAdmin(request: NextRequest): Promise<NextResponse | null> {
   return NextResponse.redirect(loginUrl);
 }
 
-export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
-    const guarded = await guardAdmin(request);
-    if (guarded) return guarded;
-    return NextResponse.next();
-  }
-
-  return intlMiddleware(request);
-}
-
 export default proxy;
 
 export const config = {
-  matcher: [
-    "/((?!api|_next|_vercel|.*\\..*).*)",
-    "/api/admin/:path*",
-  ],
+  matcher: ["/admin/:path*", "/api/admin/:path*"],
 };

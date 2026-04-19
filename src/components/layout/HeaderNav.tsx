@@ -1,25 +1,18 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-// DESIGN.md §5 — Header (desktop nav)
-// Pill-capsule nav: a rounded-full container holding four link pills.
-// Active route gets an aqua fill with white text (bg-accent / accent-fg);
-// inactive routes sit in muted-foreground with a subtle hover background.
-// Current-route detection via next-intl's usePathname so the capsule
-// stays in sync with client-side navigations.
 export function HeaderNav() {
-  const t = useTranslations("nav");
   const pathname = usePathname();
 
   const links = [
-    { href: "/" as const, label: t("home") },
-    { href: "/catalog" as const, label: t("catalog") },
-    { href: "/about" as const, label: t("about") },
-    { href: "/contact" as const, label: t("contact") },
+    { href: "/", label: "Acasă" },
+    { href: "/catalog", label: "Jacuzzi" },
+    { href: "/about", label: "Despre noi" },
+    { href: "/contact", label: "Contact" },
   ] as const;
 
   const isActive = (href: (typeof links)[number]["href"]) => {
@@ -29,8 +22,8 @@ export function HeaderNav() {
 
   return (
     <nav
-      aria-label={t("home")}
-      className="hidden items-center rounded-full border border-border/70 bg-background/70 p-1 text-small font-medium shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/55 md:inline-flex"
+      aria-label="Navigație principală"
+      className="hidden items-center gap-8 text-small font-medium md:inline-flex"
     >
       {links.map((link) => {
         const active = isActive(link.href);
@@ -40,11 +33,12 @@ export function HeaderNav() {
             href={link.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "relative rounded-full px-4 py-1.5 transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "relative rounded-sm py-1 transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-foreground focus-visible:ring-offset-4 focus-visible:ring-offset-accent",
+              "after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.22,1,0.36,1)] hover:after:scale-x-100",
               active
-                ? "bg-accent text-accent-foreground shadow-sm"
-                : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground",
+                ? "text-accent-foreground after:scale-x-100"
+                : "text-accent-foreground/75 hover:text-accent-foreground",
             )}
           >
             {link.label}

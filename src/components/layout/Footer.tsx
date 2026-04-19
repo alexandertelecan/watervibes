@@ -1,119 +1,189 @@
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { Container } from "@/components/shared/Container";
-import { Link } from "@/i18n/navigation";
+import { FadeIn } from "@/components/shared/FadeIn";
 
-// DESIGN.md §5 — Footer
-// Three-column grid on --surface with a big display-sans watermark behind
-// the columns at 6% opacity. Full-width aqua divider above the columns.
-// Photo credit line sits with "Made in Romania" in the microline.
+const BRAND_TAGLINE =
+  "Jacuzzi exterior pentru case, pensiuni și hoteluri din România. Relaxare adevărată, integrată în viața de zi cu zi.";
+
+const EXPLORE_LINKS = [
+  { href: "/", label: "Acasă" },
+  { href: "/catalog", label: "Jacuzzi" },
+  { href: "/about", label: "Despre noi" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
+const INFO_LINKS = [
+  { href: "/termeni", label: "Termeni și condiții" },
+  { href: "/confidentialitate", label: "Politica de confidențialitate" },
+  { href: "/cookies", label: "Politica cookies" },
+  { href: "/retur", label: "Politica de retur" },
+] as const;
+
+const ANPC_BANNERS = [
+  {
+    href: "https://anpc.ro/ce-este-sal/",
+    src: "/anpc-sal.png",
+    alt: "ANPC — Soluționarea alternativă a litigiilor (SAL)",
+  },
+  {
+    href: "https://ec.europa.eu/consumers/odr",
+    src: "/anpc-sol.png",
+    alt: "ANPC — Soluționarea online a litigiilor (SOL)",
+  },
+] as const;
+
 export function Footer() {
-  const t = useTranslations();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative isolate overflow-hidden bg-surface pt-16 md:pt-24">
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-accent" />
-
-      {/* Oversized wordmark watermark behind the columns (decorative). */}
+    <footer className="relative isolate overflow-hidden bg-accent bg-linear-to-br from-accent-tint to-accent text-white">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 select-none text-foreground/5.5"
-        style={{
-          fontFamily: "var(--font-fraunces)",
-          fontSize: "clamp(10rem, 22vw, 18rem)",
-          lineHeight: 0.85,
-          textAlign: "center",
-          transform: "translateY(20%)",
-        }}
-      >
-        {t("brand.name")}
-      </div>
+        className="pointer-events-none absolute -top-56 -left-24 h-144 w-xl rounded-full bg-white/10 blur-3xl"
+      />
 
       <Container as="div" size="wide" className="relative z-10">
-        <div className="grid gap-12 md:grid-cols-3 md:gap-16">
-          <div className="flex flex-col gap-4">
-            <p className="text-h2 text-foreground">{t("brand.name")}</p>
-            <span aria-hidden="true" className="h-px w-12 bg-accent" />
-            <p className="text-body max-w-xs text-foreground/85">
-              {t("brand.tagline")}
-            </p>
-          </div>
-
-          <nav
-            aria-label={t("footer.sections.explore")}
-            className="grid grid-cols-2 gap-8"
-          >
-            <FooterSection title={t("footer.sections.company")}>
-              <FooterLink href="/about" label={t("nav.about")} />
-              <FooterLink href="/contact" label={t("nav.contact")} />
-            </FooterSection>
-            <FooterSection title={t("footer.sections.explore")}>
-              <FooterLink href="/catalog" label={t("nav.catalog")} />
-              <FooterLink href="/" label={t("nav.home")} />
-            </FooterSection>
-          </nav>
-
-          <div className="flex flex-col gap-5">
-            <FooterSection title={t("contact.info.emailLabel")}>
-              <a
-                href={`mailto:${t("contact.info.email")}`}
-                className="text-body text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+        <div className="flex flex-col pt-24 md:pt-32">
+          <FadeIn>
+            <div className="grid items-end gap-10 md:grid-cols-12 md:gap-16">
+              <Link
+                href="/"
+                aria-label="WaterVibe — pagina principală"
+                className="text-wordmark inline-block leading-[0.9] tracking-tight text-white transition-opacity duration-200 hover:opacity-85 focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-white md:col-span-7"
+                style={{ fontSize: "clamp(3rem, 7.5vw, 5.75rem)" }}
               >
-                {t("contact.info.email")}
-              </a>
-            </FooterSection>
-            <FooterSection title={t("contact.info.phoneLabel")}>
-              <p className="text-body text-foreground">{t("contact.info.phone")}</p>
-            </FooterSection>
-            <FooterSection title={t("contact.info.addressLabel")}>
-              <p className="text-body text-foreground">{t("contact.info.address")}</p>
-            </FooterSection>
-          </div>
-        </div>
+                WaterVibe
+              </Link>
+              <p className="text-lede max-w-md text-white/80 md:col-span-5">
+                {BRAND_TAGLINE}
+              </p>
+            </div>
+          </FadeIn>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-2 border-t border-border py-8 text-small text-muted-foreground md:flex-row md:items-center">
-          <p>
-            &copy; {year} {t("brand.name")}. {t("footer.rights")}
-          </p>
-          <p>{t("footer.madeIn")}</p>
-          <p>{t("footer.photoCredit")}</p>
+          <div aria-hidden="true" className="my-16 h-px bg-white/20 md:my-20" />
+
+          <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-12 md:gap-10">
+            <FadeIn className="md:col-span-3">
+              <FooterColumn label="Explorați">
+                <FooterLinkList links={EXPLORE_LINKS} />
+              </FooterColumn>
+            </FadeIn>
+
+            <FadeIn className="md:col-span-3" delay={0.06}>
+              <FooterColumn label="Informații">
+                <FooterLinkList links={INFO_LINKS} />
+              </FooterColumn>
+            </FadeIn>
+
+            <FadeIn className="md:col-span-3" delay={0.12}>
+              <FooterColumn label="Contact">
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="mailto:hello@watervibe.ro"
+                    className="text-body text-white underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    hello@watervibe.ro
+                  </a>
+                  <a
+                    href="tel:+40726793993"
+                    className="text-body text-white underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    +40 726 793 993
+                  </a>
+                  <address className="not-italic text-body text-white/80">
+                    Bulevardul Carol I 90
+                    <br />
+                    Câmpina, Prahova
+                  </address>
+                </div>
+              </FooterColumn>
+            </FadeIn>
+
+            <FadeIn className="md:col-span-3" delay={0.18}>
+              <FooterColumn label="Protecția consumatorului">
+                <div className="flex flex-col gap-3">
+                  {ANPC_BANNERS.map((banner) => (
+                    <AnpcBanner key={banner.src} {...banner} />
+                  ))}
+                </div>
+              </FooterColumn>
+            </FadeIn>
+          </div>
+
+          <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-white/20 py-8 text-small text-white/65 md:mt-20 md:flex-row md:items-center">
+            <p>© {year} WaterVibe. Toate drepturile rezervate.</p>
+            <p>Operat din Câmpina, Prahova. Livrare în toată România.</p>
+          </div>
         </div>
       </Container>
     </footer>
   );
 }
 
-function FooterSection({
-  title,
+function FooterColumn({
+  label,
   children,
 }: {
-  title: string;
+  label: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-3">
-      <p className="text-eyebrow text-accent">{title}</p>
-      <ul className="flex flex-col gap-2">{children}</ul>
+    <div className="flex flex-col gap-4">
+      <p className="text-small font-medium text-white/55">{label}</p>
+      {children}
     </div>
   );
 }
 
-function FooterLink({
-  href,
-  label,
+function FooterLinkList({
+  links,
 }: {
-  href: "/" | "/catalog" | "/about" | "/contact";
-  label: string;
+  links: ReadonlyArray<{ href: string; label: string }>;
 }) {
   return (
-    <li>
-      <Link
-        href={href}
-        className="text-body text-foreground/85 transition-colors hover:text-accent focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
-      >
-        {label}
-      </Link>
-    </li>
+    <ul className="flex flex-col gap-2">
+      {links.map((link) => (
+        <li key={link.href}>
+          <Link
+            href={link.href}
+            className="text-body text-white/85 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-white"
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function AnpcBanner({
+  href,
+  src,
+  alt,
+}: {
+  href: string;
+  src: string;
+  alt: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={alt}
+      className="inline-flex w-fit rounded-sm bg-white/95 p-1 transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        width={160}
+        height={60}
+        loading="lazy"
+        decoding="async"
+        className="block h-auto w-40"
+      />
+    </a>
   );
 }

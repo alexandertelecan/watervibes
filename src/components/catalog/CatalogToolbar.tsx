@@ -1,8 +1,7 @@
 "use client";
 
 import { ArrowUpDown, X } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
 import {
@@ -12,15 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { COLORS, SIZES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-// Toolbar that sits above the product grid:
-//  - left: result count
-//  - right: sort select (pill-styled)
-//  - row 2 (only when filters active): dismissable filter chips
-// URL-state only — stays backward compatible.
 
 export const CATALOG_SORT_VALUES = [
   "featured",
@@ -31,6 +23,20 @@ export const CATALOG_SORT_VALUES = [
 export type CatalogSort = (typeof CATALOG_SORT_VALUES)[number];
 
 const DEFAULT_SORT: CatalogSort = "featured";
+
+const SORT_LABELS: Record<CatalogSort, string> = {
+  featured: "Recomandate",
+  priceAsc: "Preț: de la mic la mare",
+  priceDesc: "Preț: de la mare la mic",
+  newest: "Cele mai noi",
+};
+
+const L = {
+  sortLabel: "Sortați după",
+  active: "Filtre active",
+  clear: "Ștergeți tot",
+  clearOne: "Eliminați filtrul",
+} as const;
 
 function parseSort(value: string | null): CatalogSort {
   if (!value) return DEFAULT_SORT;
@@ -44,8 +50,18 @@ function parseCsv(value: string | null): string[] {
   return value.split(",").map((v) => v.trim()).filter(Boolean);
 }
 
+function formatKicker(count: number): string {
+  if (count === 0) return "Niciun rezultat";
+  if (count === 1) return "1 jacuzzi";
+  if (count < 20) return `${count} jacuzzi`;
+  return `${count} de jacuzzi`;
+}
+
+function formatActiveCount(count: number): string {
+  return count === 1 ? "1 activ" : `${count} active`;
+}
+
 export function CatalogToolbar({ count }: { count: number }) {
-  const t = useTranslations();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -101,11 +117,11 @@ export function CatalogToolbar({ count }: { count: number }) {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-baseline gap-3">
           <p className="text-h3 tabular-nums text-foreground">
-            {t("catalog.kicker", { count })}
+            {formatKicker(count)}
           </p>
           {activeCount > 0 ? (
             <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-accent">
-              {t("catalog.filters.activeCount", { count: activeCount })}
+              {formatActiveCount(activeCount)}
             </span>
           ) : null}
         </div>
@@ -113,11 +129,11 @@ export function CatalogToolbar({ count }: { count: number }) {
         <div className="flex items-center gap-3">
           <span className="inline-flex items-center gap-1.5 text-eyebrow text-muted-foreground">
             <ArrowUpDown aria-hidden="true" className="size-3.5" />
-            {t("catalog.sort.label")}
+            {L.sortLabel}
           </span>
           <Select value={sort} onValueChange={onSortChange}>
             <SelectTrigger
-              aria-label={t("catalog.sort.label")}
+              aria-label={L.sortLabel}
               className={cn(
                 "h-10 gap-2 rounded-full border-foreground/15 bg-background pl-4 pr-3 text-sm font-semibold text-foreground shadow-sm",
                 "hover:border-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -129,7 +145,7 @@ export function CatalogToolbar({ count }: { count: number }) {
             <SelectContent align="end" className="min-w-48">
               {CATALOG_SORT_VALUES.map((v) => (
                 <SelectItem key={v} value={v}>
-                  {t(`catalog.sort.${v}`)}
+                  {SORT_LABELS[v]}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -139,17 +155,15 @@ export function CatalogToolbar({ count }: { count: number }) {
 
       {activeCount > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-eyebrow text-muted-foreground">
-            {t("catalog.filters.active")}
-          </span>
+          <span className="text-eyebrow text-muted-foreground">{L.active}</span>
           {sizes.map((v) => {
             const entry = SIZES.find((s) => s.value === v);
             if (!entry) return null;
             return (
               <FilterChip
                 key={`size-${v}`}
-                label={t(entry.labelKey)}
-                removeLabel={t("catalog.filters.clearOne")}
+                label={entry.label}
+                removeLabel={L.clearOne}
                 onRemove={() => removeSize(v)}
               />
             );
@@ -160,9 +174,9 @@ export function CatalogToolbar({ count }: { count: number }) {
             return (
               <FilterChip
                 key={`color-${v}`}
-                label={t(entry.labelKey)}
+                label={entry.label}
                 swatch={entry.hex}
-                removeLabel={t("catalog.filters.clearOne")}
+                removeLabel={L.clearOne}
                 onRemove={() => removeColor(v)}
               />
             );
@@ -172,7 +186,7 @@ export function CatalogToolbar({ count }: { count: number }) {
             onClick={clearAll}
             className="ml-1 inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            {t("catalog.filters.clear")}
+            {L.clear}
           </button>
         </div>
       ) : null}

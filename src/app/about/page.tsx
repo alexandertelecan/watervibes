@@ -1,51 +1,90 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { HomeCTA } from "@/components/home/HomeCTA";
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
 import { ImagePlaceholder } from "@/components/shared/ImagePlaceholder";
 import { JsonLd } from "@/components/shared/JsonLd";
-import { routing } from "@/i18n/routing";
 import {
   BUSINESS,
   alternatesFor,
-  assertLocale,
   localBusinessSchema,
   openGraphFor,
   twitterFor,
 } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-type PageParams = { locale: string };
+const META_TITLE = "Despre WaterVibe · Jacuzzi Exterior în România";
+const META_DESCRIPTION =
+  "WaterVibe este operat de ENSAMA SRL din Câmpina, Prahova. Alegem, livrăm și oferim suport pentru jacuzzi exterior în case, pensiuni și hoteluri din toată România.";
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+const T = {
+  hero: {
+    eyebrow: "Despre WaterVibe",
+    title:
+      "Jacuzzi exterior pentru case, pensiuni și hoteluri. Aduși mai aproape de România.",
+    subhead:
+      "Trei capitole despre de ce există WaterVibe, cum alegem fiecare jacuzzi și ce primiți efectiv. Cu livrare și suport în toată țara.",
+  },
+  chapter1: {
+    eyebrow: "Capitolul 01",
+    title: "De ce există WaterVibe",
+    p1: "WaterVibe a început dintr-o idee simplă. Relaxarea reală nu ar trebui să fie un lux ocazional pe care îl primiți doar în vacanță.",
+    p2: "Fiecare casă, fiecare pensiune, fiecare hotel poate avea un loc dedicat eliberării. Un spațiu unde corpul se eliberează, mintea iese din ritmul zilei, iar timpul petrecut cu familia sau cu oaspeții devine memorabil.",
+    p3: "Apa face treaba. Hidromasajul destinde tensiunea musculară. Căldura scoate încleștarea din umeri. Jeturile pornesc circulația. În câteva minute sunteți în altă parte. Asta e WaterVibe. Nu vindem jacuzzi. Vindem serile care urmează după.",
+    p4: "Un jacuzzi exterior schimbă spațiul din jurul casei. Terasa devine loc unde vă rupeți de zi. Curtea devine loc de întâlnire. Serile încetinesc. Pentru pensiuni și hoteluri, o proprietate cu jacuzzi devine lucrul despre care oaspeții vorbesc când ajung acasă.",
+  },
+  chapter2: {
+    eyebrow: "Capitolul 02",
+    title: "Cum alegem fiecare jacuzzi",
+    p1: "WaterVibe are o singură sarcină. Să ofere relaxare prin apă care se potrivește cu cât mai multe spații, stiluri și bugete din România.",
+    p2: "Fiecare model își merită locul. Verificăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Colecția este construită în jurul jacuzzi-urilor exterioare pe care le puteți folosi săptămânal fără să le păziți ca pe niște obiecte fragile.",
+    p3: "Gama acoperă nevoi reale. Cadă cu hidromasaj pentru două persoane, pentru cupluri. Modele de patru locuri, pentru întreaga familie. Jacuzzi exterior pentru șase persoane, pentru grupuri de prieteni sau pentru pensiuni și hoteluri mici. Modele compacte pentru terase și curți strâmte. Modele spațioase pentru proprietăți mari.",
+    p4: "Configurațiile de jeturi diferă de la model la model. Fiecare scaun masează altă zonă. Gât, spate, lombari, gambe. Simțiți cum pleacă ziua, pe grupe de mușchi.",
+    p5: "Designul contează la fel de mult ca specificațiile. Alegem finisaje care se așează bine atât în spații moderne, cât și clasice. Un jacuzzi trebuie să completeze terasa sau grădina, nu să le concureze. Tehnologia merge pe aceeași logică. Filtrarea, încălzirea și controlul apei sunt alese mai întâi pentru confort, apoi pentru un consum de energie cu cap.",
+    p6: "Ultimul pas este discuția. Ne uităm la spațiu, la câte persoane vor folosi cada și la cum se integrează cu terasa sau interiorul deja existent. Plecați cu modelul potrivit, prețul livrat în România și pașii tehnici pentru instalare.",
+  },
+  chapter3: {
+    eyebrow: "Capitolul 03",
+    title: "Ce primiți efectiv",
+    p1: "WaterVibe listează jacuzzi moderne cu hidromasaj pentru case private, pensiuni și hoteluri din România. Fiecare model este ales pentru confort, durabilitate și un hidromasaj care se simte tot hidromasaj și peste doi ani.",
+    p2: "În funcție de spațiu și de gust, alegerea se deschide. Modele de interior sau exterior. Dimensiuni diferite. Numere diferite de locuri. Scheme diferite de jeturi. Finisaje diferite. Scopul e simplu. Găsiți un jacuzzi care se potrivește și spațiului, și stilului, fără să cedați pe calitate.",
+    p3: "Pentru pensiuni și hoteluri, un jacuzzi exterior ridică proprietatea. Apare în recenzii. Discutăm cu dumneavoastră fluxul de utilizare, ritmul de curățare și cum se încadrează cada în oferta de cazare.",
+    p4: "Consultanța face parte din ce oferim. Vă explicăm diferențele dintre modele, vă ajutăm să alegeți varianta potrivită pentru numărul de persoane și pentru felul în care o veți folosi. Primiți preț cu livrare în România și pași clari de instalare.",
+  },
+  ensama: {
+    eyebrow: "Firmă · România",
+    title: "Operat de ENSAMA SRL, Câmpina",
+    description:
+      "WaterVibe este marca sub care ENSAMA SRL alege, livrează și oferă suport pentru jacuzzi exterior în toată România. Sediu în Câmpina, județul Prahova.",
+    labels: {
+      company: "Firmă",
+      address: "Sediu",
+      phone: "Telefon · WhatsApp",
+      area: "Livrăm în",
+      social: "Ne găsiți pe",
+    },
+    company: "ENSAMA SRL",
+    address: "Bulevardul Carol I 90, Câmpina, Prahova",
+    phone: "+40 726 793 993",
+    area: "Toată România",
+    facebookLabel: "Facebook",
+  },
+  brandTagline:
+    "Jacuzzi exterior pentru case, pensiuni și hoteluri din România. Relaxare adevărată, integrată în viața de zi cu zi.",
+};
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<PageParams>;
-}): Promise<Metadata> {
-  const { locale: rawLocale } = await params;
-  const locale = assertLocale(rawLocale);
-  const t = await getTranslations({ locale, namespace: "meta.about" });
-  const title = t("title");
-  const description = t("description");
+export const metadata: Metadata = {
+  title: META_TITLE,
+  description: META_DESCRIPTION,
+  alternates: alternatesFor("/about"),
+  openGraph: openGraphFor("/about", {
+    title: META_TITLE,
+    description: META_DESCRIPTION,
+  }),
+  twitter: twitterFor({ title: META_TITLE, description: META_DESCRIPTION }),
+};
 
-  return {
-    title,
-    description,
-    alternates: alternatesFor(locale, "/about"),
-    openGraph: openGraphFor(locale, "/about", { title, description }),
-    twitter: twitterFor({ title, description }),
-  };
-}
-
-// Shared style for the big outlined backing ordinal that watermarks each
-// chapter header — transparent fill with a hairline aqua stroke, sitting
-// behind the eyebrow + title.
 const BACKING_ORDINAL_STYLE: React.CSSProperties = {
   fontFamily: "var(--font-fraunces), sans-serif",
   fontWeight: 700,
@@ -55,68 +94,24 @@ const BACKING_ORDINAL_STYLE: React.CSSProperties = {
     "1.5px color-mix(in oklab, var(--accent) 22%, transparent)",
 };
 
-// DESIGN.md §0+5 — About: editorial masthead + three chapters, each in a
-// different rhetorical register, closing on a centered signature band.
-//
-//   Hero         — MMXXIV masthead · display headline · asymmetric image
-//                  with aqua seal · magazine TOC with dotted leaders.
-//   Chapter 01   — Why: outlined "01" watermark · vertical aqua rule
-//                  beside the standfirst · sticky side image.
-//   Chapter 02   — How (on --surface): horizontal aqua rule standfirst +
-//                  staggered 2-col craft log of 5 numbered field notes.
-//   Chapter 03   — What (inverted): 3-image collage · standfirst inside
-//                  an aqua-tinted quote panel with hanging glyph.
-//   Signature    — Centered display tagline framed by concentric ripples.
-//   HomeCTA      — unchanged.
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<PageParams>;
-}) {
-  const { locale: rawLocale } = await params;
-  const locale = assertLocale(rawLocale);
-  setRequestLocale(locale);
-
-  const t = await getTranslations("about");
-  const tBrand = await getTranslations("brand");
-  const tEnsama = await getTranslations("about.ensama");
-
+export default function AboutPage() {
   const chapters = [
-    {
-      id: "chapter-01",
-      ordinal: "01",
-      eyebrow: t("chapter1.eyebrow"),
-      title: t("chapter1.title"),
-    },
-    {
-      id: "chapter-02",
-      ordinal: "02",
-      eyebrow: t("chapter2.eyebrow"),
-      title: t("chapter2.title"),
-    },
-    {
-      id: "chapter-03",
-      ordinal: "03",
-      eyebrow: t("chapter3.eyebrow"),
-      title: t("chapter3.title"),
-    },
+    { id: "chapter-01", ordinal: "01", eyebrow: T.chapter1.eyebrow, title: T.chapter1.title },
+    { id: "chapter-02", ordinal: "02", eyebrow: T.chapter2.eyebrow, title: T.chapter2.title },
+    { id: "chapter-03", ordinal: "03", eyebrow: T.chapter3.eyebrow, title: T.chapter3.title },
   ];
 
   const chapter2Notes = [
-    t("chapter2.paragraph2"),
-    t("chapter2.paragraph3"),
-    t("chapter2.paragraph4"),
-    t("chapter2.paragraph5"),
-    t("chapter2.paragraph6"),
+    T.chapter2.p2,
+    T.chapter2.p3,
+    T.chapter2.p4,
+    T.chapter2.p5,
+    T.chapter2.p6,
   ];
 
   return (
     <>
-      {/* ================================================================
-          HERO — editorial masthead
-          ================================================================ */}
       <section className="relative isolate overflow-hidden bg-background">
-        {/* Oversize concentric water emblem — top-right */}
         <svg
           aria-hidden="true"
           viewBox="0 0 400 400"
@@ -131,64 +126,36 @@ export default async function AboutPage({
           </g>
         </svg>
 
-        <Container
-          as="div"
-          size="wide"
-          className="relative py-20 md:py-24 lg:py-28"
-        >
-          {/* Issue marker row */}
+        <Container as="div" size="wide" className="relative pt-10 pb-20 md:pt-12 md:pb-24 lg:pt-14 lg:pb-28">
           <FadeIn>
             <div className="flex flex-wrap items-center gap-4 text-eyebrow">
-              <span
-                aria-hidden="true"
-                className="inline-block size-1.5 rounded-full bg-accent"
-              />
+              <span aria-hidden="true" className="inline-block size-1.5 rounded-full bg-accent" />
               <span className="text-accent">MMXXIV</span>
-              <span
-                aria-hidden="true"
-                className="h-px w-10 bg-accent/40"
-              />
-              <span className="text-muted-foreground">
-                {t("hero.eyebrow")}
-              </span>
-              <span
-                aria-hidden="true"
-                className="hidden h-px w-10 bg-border md:inline-block"
-              />
-              <span
-                aria-hidden="true"
-                className="hidden tabular-nums text-muted-foreground md:inline"
-              >
+              <span aria-hidden="true" className="h-px w-10 bg-accent/40" />
+              <span className="text-muted-foreground">{T.hero.eyebrow}</span>
+              <span aria-hidden="true" className="hidden h-px w-10 bg-border md:inline-block" />
+              <span aria-hidden="true" className="hidden tabular-nums text-muted-foreground md:inline">
                 N° 01 — 03
               </span>
             </div>
           </FadeIn>
 
-          {/* Title block + image */}
           <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-12 md:gap-14 lg:gap-20">
             <div className="flex flex-col gap-10 md:col-span-8">
               <FadeIn delay={0.05}>
-                <h1 className="text-display text-foreground">
-                  {t("hero.title")}
-                </h1>
+                <h1 className="text-display text-foreground">{T.hero.title}</h1>
               </FadeIn>
               <FadeIn delay={0.12}>
-                <p className="text-lede max-w-xl text-muted-foreground">
-                  {t("hero.subhead")}
-                </p>
+                <p className="text-lede max-w-xl text-muted-foreground">{T.hero.subhead}</p>
               </FadeIn>
             </div>
 
-            <FadeIn
-              className="relative md:col-span-4 md:self-end"
-              delay={0.18}
-            >
+            <FadeIn className="relative md:col-span-4 md:self-end" delay={0.18}>
               <ImagePlaceholder
                 role="About / cedar interior"
                 aspect="aspect-4/5"
                 className="rounded-(--radius-xl) shadow-lg"
               />
-              {/* Aqua seal — bottom-left, concentric motif */}
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute -bottom-6 -left-6 inline-flex size-24 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-md md:size-28"
@@ -204,21 +171,12 @@ export default async function AboutPage({
             </FadeIn>
           </div>
 
-          {/* Magazine TOC — chapter index with dotted leaders */}
           <FadeIn delay={0.28} className="mt-24 md:mt-32">
             <div className="flex items-baseline justify-between">
-              <span className="text-eyebrow text-muted-foreground">
-                I · II · III
-              </span>
-              <span
-                aria-hidden="true"
-                className="inline-block size-1.5 rounded-full bg-accent"
-              />
+              <span className="text-eyebrow text-muted-foreground">I · II · III</span>
+              <span aria-hidden="true" className="inline-block size-1.5 rounded-full bg-accent" />
             </div>
-            <nav
-              aria-label={t("hero.title")}
-              className="mt-3 border-t border-border"
-            >
+            <nav aria-label={T.hero.title} className="mt-3 border-t border-border">
               <ul className="flex flex-col">
                 {chapters.map((chapter) => (
                   <li key={chapter.id}>
@@ -235,23 +193,16 @@ export default async function AboutPage({
                       >
                         {chapter.ordinal}
                       </span>
-
                       <span className="flex min-w-0 flex-col gap-1">
                         <span className="text-eyebrow text-muted-foreground">
                           {chapter.eyebrow}
                         </span>
-                        <span className="text-h3 text-foreground">
-                          {chapter.title}
-                        </span>
+                        <span className="text-h3 text-foreground">{chapter.title}</span>
                       </span>
-
-                      {/* Dotted leader rule */}
                       <span
                         aria-hidden="true"
                         className="mx-2 hidden h-0 flex-1 self-end border-b border-dotted border-border pb-2 transition-colors duration-200 group-hover/ch:border-accent/60 md:block"
                       />
-
-                      {/* Animated arrow */}
                       <span
                         aria-hidden="true"
                         className="inline-flex shrink-0 items-center self-end pb-1.5 text-accent transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/ch:translate-x-1"
@@ -276,9 +227,6 @@ export default async function AboutPage({
         </Container>
       </section>
 
-      {/* ================================================================
-          CHAPTER 01 — Why WaterVibe exists (manifesto)
-          ================================================================ */}
       <section
         id="chapter-01"
         className="relative scroll-mt-24 bg-background py-28 md:scroll-mt-32 md:py-36 lg:py-40"
@@ -286,7 +234,6 @@ export default async function AboutPage({
         <Container as="div" size="wide">
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
             <div className="flex flex-col gap-12 lg:col-span-7">
-              {/* Title + outlined backing ordinal */}
               <FadeIn>
                 <div className="relative">
                   <span
@@ -298,16 +245,13 @@ export default async function AboutPage({
                   </span>
                   <div className="relative flex flex-col gap-2 pt-2 md:pt-6">
                     <span className="text-eyebrow text-muted-foreground">
-                      {t("chapter1.eyebrow")}
+                      {T.chapter1.eyebrow}
                     </span>
-                    <h2 className="text-h1 text-foreground">
-                      {t("chapter1.title")}
-                    </h2>
+                    <h2 className="text-h1 text-foreground">{T.chapter1.title}</h2>
                   </div>
                 </div>
               </FadeIn>
 
-              {/* Standfirst — vertical aqua rule register */}
               <FadeIn delay={0.1}>
                 <div className="relative max-w-2xl pl-6 md:pl-8">
                   <span
@@ -315,26 +259,21 @@ export default async function AboutPage({
                     className="absolute bottom-2 left-0 top-1 w-0.5 bg-accent"
                   />
                   <p className="text-h3 font-normal leading-[1.45] text-foreground">
-                    {t("chapter1.paragraph1")}
+                    {T.chapter1.p1}
                   </p>
                 </div>
               </FadeIn>
 
-              {/* Body */}
               <FadeIn delay={0.15}>
                 <div className="prose-narrow flex flex-col gap-6 text-body text-foreground/80">
-                  <p>{t("chapter1.paragraph2")}</p>
-                  <p>{t("chapter1.paragraph3")}</p>
-                  <p>{t("chapter1.paragraph4")}</p>
+                  <p>{T.chapter1.p2}</p>
+                  <p>{T.chapter1.p3}</p>
+                  <p>{T.chapter1.p4}</p>
                 </div>
               </FadeIn>
             </div>
 
-            {/* Sticky side image with editorial caption chip */}
-            <FadeIn
-              className="lg:col-span-5 lg:self-start"
-              delay={0.2}
-            >
+            <FadeIn className="lg:col-span-5 lg:self-start" delay={0.2}>
               <div className="lg:sticky lg:top-28">
                 <div className="relative">
                   <ImagePlaceholder
@@ -356,14 +295,10 @@ export default async function AboutPage({
         </Container>
       </section>
 
-      {/* ================================================================
-          CHAPTER 02 — How we do it (craft log on --surface)
-          ================================================================ */}
       <section
         id="chapter-02"
         className="relative scroll-mt-24 overflow-hidden bg-surface py-28 md:scroll-mt-32 md:py-36 lg:py-40"
       >
-        {/* Decorative ripple — quiet bottom-left */}
         <svg
           aria-hidden="true"
           viewBox="0 0 400 400"
@@ -391,28 +326,20 @@ export default async function AboutPage({
                 </span>
                 <div className="relative flex flex-col gap-2 pt-2 md:pt-6">
                   <span className="text-eyebrow text-muted-foreground">
-                    {t("chapter2.eyebrow")}
+                    {T.chapter2.eyebrow}
                   </span>
-                  <h2 className="text-h1 text-foreground">
-                    {t("chapter2.title")}
-                  </h2>
+                  <h2 className="text-h1 text-foreground">{T.chapter2.title}</h2>
                 </div>
               </div>
             </FadeIn>
 
-            {/* Standfirst — horizontal aqua rule register */}
-            <FadeIn
-              delay={0.1}
-              underline
-              className="md:col-span-7 md:pt-4"
-            >
+            <FadeIn delay={0.1} underline className="md:col-span-7 md:pt-4">
               <p className="text-h3 font-normal leading-[1.4] text-foreground">
-                {t("chapter2.paragraph1")}
+                {T.chapter2.p1}
               </p>
             </FadeIn>
           </div>
 
-          {/* 5 field notes — staggered 2-col craft log */}
           <ol className="mt-20 grid gap-12 md:mt-28 md:grid-cols-2 md:gap-x-16 md:gap-y-20 lg:gap-x-24">
             {chapter2Notes.map((body, idx) => (
               <FadeIn
@@ -429,10 +356,7 @@ export default async function AboutPage({
                     >
                       {String(idx + 1).padStart(2, "0")}
                     </span>
-                    <span
-                      aria-hidden="true"
-                      className="h-px flex-1 max-w-24 bg-accent/40"
-                    />
+                    <span aria-hidden="true" className="h-px flex-1 max-w-24 bg-accent/40" />
                   </div>
                   <p className="text-body text-foreground/85">{body}</p>
                 </li>
@@ -442,20 +366,13 @@ export default async function AboutPage({
         </Container>
       </section>
 
-      {/* ================================================================
-          CHAPTER 03 — What we actually offer (inverted / collage)
-          ================================================================ */}
       <section
         id="chapter-03"
         className="relative scroll-mt-24 bg-background py-28 md:scroll-mt-32 md:py-36 lg:py-40"
       >
         <Container as="div" size="wide">
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
-            {/* 3-image collage — signals "the offering" */}
-            <FadeIn
-              className="lg:order-1 lg:col-span-5 lg:self-start"
-              delay={0.18}
-            >
+            <FadeIn className="lg:order-1 lg:col-span-5 lg:self-start" delay={0.18}>
               <div className="lg:sticky lg:top-28">
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
                   <div className="col-span-2">
@@ -491,19 +408,15 @@ export default async function AboutPage({
                   </span>
                   <div className="relative flex flex-col gap-2 pt-2 md:pt-6">
                     <span className="text-eyebrow text-muted-foreground">
-                      {t("chapter3.eyebrow")}
+                      {T.chapter3.eyebrow}
                     </span>
-                    <h2 className="text-h1 text-foreground">
-                      {t("chapter3.title")}
-                    </h2>
+                    <h2 className="text-h1 text-foreground">{T.chapter3.title}</h2>
                   </div>
                 </div>
               </FadeIn>
 
-              {/* Standfirst — aqua-tinted blockquote register */}
               <FadeIn delay={0.12}>
                 <blockquote className="relative overflow-hidden rounded-(--radius-xl) border border-accent/20 bg-accent/5 px-7 py-10 md:px-11 md:py-14">
-                  {/* Oversize open-quote glyph */}
                   <span
                     aria-hidden="true"
                     className="pointer-events-none absolute -left-1 -top-2 select-none text-[7rem] leading-none text-accent/30 md:-left-1 md:-top-6 md:text-[11rem]"
@@ -514,7 +427,6 @@ export default async function AboutPage({
                   >
                     &ldquo;
                   </span>
-                  {/* Small concentric motif, corner */}
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 200 200"
@@ -528,16 +440,16 @@ export default async function AboutPage({
                     </g>
                   </svg>
                   <p className="relative z-10 max-w-2xl pl-10 text-h3 font-normal leading-[1.45] text-foreground md:pl-14">
-                    {t("chapter3.paragraph1")}
+                    {T.chapter3.p1}
                   </p>
                 </blockquote>
               </FadeIn>
 
               <FadeIn delay={0.18}>
                 <div className="prose-narrow flex flex-col gap-6 text-body text-foreground/80">
-                  <p>{t("chapter3.paragraph2")}</p>
-                  <p>{t("chapter3.paragraph3")}</p>
-                  <p>{t("chapter3.paragraph4")}</p>
+                  <p>{T.chapter3.p2}</p>
+                  <p>{T.chapter3.p3}</p>
+                  <p>{T.chapter3.p4}</p>
                 </div>
               </FadeIn>
             </div>
@@ -545,68 +457,45 @@ export default async function AboutPage({
         </Container>
       </section>
 
-      {/* ================================================================
-          ENSAMA — canonical NAP block: gives crawlers (and humans) the
-          registered business behind the brand. Visually a calm, tabular
-          dossier band on --surface so it reads as a factual footer to
-          the chapter tour rather than a marketing section.
-          ================================================================ */}
       <section className="relative bg-surface py-24 md:py-28">
         <Container as="div" size="wide">
           <div className="grid gap-12 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-5">
               <FadeIn>
                 <div className="flex items-center gap-3 text-eyebrow text-accent">
-                  <span
-                    aria-hidden="true"
-                    className="inline-block size-1.5 rounded-full bg-accent"
-                  />
-                  <span>{tEnsama("eyebrow")}</span>
+                  <span aria-hidden="true" className="inline-block size-1.5 rounded-full bg-accent" />
+                  <span>{T.ensama.eyebrow}</span>
                 </div>
               </FadeIn>
               <FadeIn delay={0.05}>
-                <h2 className="mt-6 text-h1 text-foreground">
-                  {tEnsama("title")}
-                </h2>
+                <h2 className="mt-6 text-h1 text-foreground">{T.ensama.title}</h2>
               </FadeIn>
               <FadeIn delay={0.1}>
                 <p className="mt-6 max-w-md text-lede text-muted-foreground">
-                  {tEnsama("description")}
+                  {T.ensama.description}
                 </p>
               </FadeIn>
             </div>
 
-            <FadeIn
-              className="md:col-span-7 md:pt-2"
-              delay={0.15}
-            >
+            <FadeIn className="md:col-span-7 md:pt-2" delay={0.15}>
               <dl className="grid grid-cols-1 divide-y divide-border border-y border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+                <NapRow label={T.ensama.labels.company} value={T.ensama.company} />
+                <NapRow label={T.ensama.labels.address} value={T.ensama.address} />
                 <NapRow
-                  label={tEnsama("labels.company")}
-                  value={tEnsama("company")}
-                />
-                <NapRow
-                  label={tEnsama("labels.address")}
-                  value={tEnsama("address")}
-                />
-                <NapRow
-                  label={tEnsama("labels.phone")}
+                  label={T.ensama.labels.phone}
                   value={
                     <a
                       href={`tel:${BUSINESS.phone}`}
                       className="text-body text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                     >
-                      {tEnsama("phone")}
+                      {T.ensama.phone}
                     </a>
                   }
                 />
-                <NapRow
-                  label={tEnsama("labels.area")}
-                  value={tEnsama("area")}
-                />
+                <NapRow label={T.ensama.labels.area} value={T.ensama.area} />
                 <NapRow
                   className="sm:col-span-2 sm:border-l-0"
-                  label={tEnsama("labels.social")}
+                  label={T.ensama.labels.social}
                   value={
                     <a
                       href={BUSINESS.social.facebook}
@@ -614,12 +503,8 @@ export default async function AboutPage({
                       target="_blank"
                       className="inline-flex items-center gap-2 text-body text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                     >
-                      <span>{tEnsama("facebookLabel")}</span>
-                      <svg
-                        aria-hidden="true"
-                        viewBox="0 0 16 16"
-                        className="size-3.5"
-                      >
+                      <span>{T.ensama.facebookLabel}</span>
+                      <svg aria-hidden="true" viewBox="0 0 16 16" className="size-3.5">
                         <path
                           d="M6 2h8v8M14 2 2 14"
                           fill="none"
@@ -638,11 +523,7 @@ export default async function AboutPage({
         </Container>
       </section>
 
-      {/* ================================================================
-          SIGNATURE BAND — closing typographic statement
-          ================================================================ */}
       <section className="relative isolate overflow-hidden bg-background py-24 md:py-32">
-        {/* Twin concentric motifs flanking the center */}
         <svg
           aria-hidden="true"
           viewBox="0 0 240 240"
@@ -680,7 +561,7 @@ export default async function AboutPage({
           </FadeIn>
           <FadeIn delay={0.1}>
             <p className="mx-auto mt-10 max-w-3xl text-display text-foreground">
-              {tBrand("tagline")}
+              {T.brandTagline}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -688,7 +569,7 @@ export default async function AboutPage({
               className="mt-10 text-small font-medium text-muted-foreground"
               style={{ letterSpacing: "0.28em", textTransform: "uppercase" }}
             >
-              · {tBrand("name")} ·
+              · WaterVibe ·
             </p>
           </FadeIn>
         </Container>
@@ -696,18 +577,11 @@ export default async function AboutPage({
 
       <HomeCTA />
 
-      {/* LocalBusiness — because the About page carries the registered
-          business details, we mount the LocalBusiness schema here so the
-          NAP block and the structured data travel together. */}
-      <JsonLd data={localBusinessSchema(locale)} />
+      <JsonLd data={localBusinessSchema()} />
     </>
   );
 }
 
-// Single NAP row: aqua eyebrow label + the value below, left-aligned with
-// a short rule above (matching the contact page's aside rhythm). Kept as
-// a small helper so the grid reads as a tabular dossier without the
-// verbosity of inline markup.
 function NapRow({
   label,
   value,

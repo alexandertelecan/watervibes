@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { BilingualField } from "@/components/admin/BilingualField";
 import { FormSection } from "@/components/admin/FormSection";
 import { ProductFormBasics } from "@/components/admin/ProductFormBasics";
 import { ProductFormFeatures } from "@/components/admin/ProductFormFeatures";
@@ -15,6 +14,7 @@ import { ProductFormVariant } from "@/components/admin/ProductFormVariant";
 import { Button } from "@/components/shared/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import type { Product } from "@/types/product";
 
 import {
@@ -31,9 +31,9 @@ type ZodIssue = { path: (string | number)[]; message: string };
 
 const EMPTY_DEFAULTS: ProductFormValues = {
   slug: "",
-  name: { en: "", ro: "" },
-  tagline: { en: "", ro: "" },
-  description: { en: "", ro: "" },
+  name: "",
+  tagline: "",
+  description: "",
   size: "" as ProductFormValues["size"],
   color: "" as ProductFormValues["color"],
   colorHex: "",
@@ -47,7 +47,7 @@ const EMPTY_DEFAULTS: ProductFormValues = {
     weightEmpty: "",
     weightFull: "",
   },
-  features: { en: [""], ro: [""] },
+  features: [""],
   featured: false,
   order: 0,
 };
@@ -65,10 +65,7 @@ function toDefaults(initialData?: Product): ProductFormValues {
     price: initialData.price,
     images: initialData.images.length ? initialData.images : [""],
     specs: initialData.specs,
-    features: {
-      en: initialData.features.en.length ? initialData.features.en : [""],
-      ro: initialData.features.ro.length ? initialData.features.ro : [""],
-    },
+    features: initialData.features.length ? initialData.features : [""],
     featured: initialData.featured,
     order: initialData.order,
   };
@@ -94,10 +91,7 @@ export function ProductForm({ mode, initialData }: ProductFormProps) {
     const clean: ProductFormValues = {
       ...values,
       images: values.images.map((v) => v.trim()).filter(Boolean),
-      features: {
-        en: values.features.en.map((v) => v.trim()).filter(Boolean),
-        ro: values.features.ro.map((v) => v.trim()).filter(Boolean),
-      },
+      features: values.features.map((v) => v.trim()).filter(Boolean),
     };
 
     const endpoint =
@@ -161,27 +155,50 @@ export function ProductForm({ mode, initialData }: ProductFormProps) {
       />
 
       <FormSection title="Naming & copy">
-        <BilingualField
-          label="Name"
-          name="name"
-          register={register}
-          errors={errors}
-        />
-        <BilingualField
-          label="Tagline"
-          name="tagline"
-          register={register}
-          errors={errors}
-        />
-        <BilingualField
-          label="Description"
-          name="description"
-          register={register}
-          errors={errors}
-          type="textarea"
-          rows={6}
-          helpText="Markdown supported"
-        />
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="product-name">Name</Label>
+          <Input
+            id="product-name"
+            type="text"
+            placeholder="Azure 4"
+            aria-invalid={errors.name ? true : undefined}
+            {...register("name")}
+          />
+          {errors.name ? (
+            <p className="text-xs text-destructive">{errors.name.message}</p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="product-tagline">Tagline</Label>
+          <Input
+            id="product-tagline"
+            type="text"
+            placeholder="A short, evocative one-liner"
+            aria-invalid={errors.tagline ? true : undefined}
+            {...register("tagline")}
+          />
+          {errors.tagline ? (
+            <p className="text-xs text-destructive">{errors.tagline.message}</p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <div className="flex items-baseline justify-between gap-4">
+            <Label htmlFor="product-description">Description</Label>
+            <span className="text-xs text-muted-foreground">Markdown supported</span>
+          </div>
+          <Textarea
+            id="product-description"
+            rows={6}
+            placeholder="Long-form product description"
+            aria-invalid={errors.description ? true : undefined}
+            {...register("description")}
+          />
+          {errors.description ? (
+            <p className="text-xs text-destructive">{errors.description.message}</p>
+          ) : null}
+        </div>
       </FormSection>
 
       <ProductFormVariant
@@ -194,7 +211,7 @@ export function ProductForm({ mode, initialData }: ProductFormProps) {
 
       <FormSection title="Pricing">
         <div className="max-w-xs">
-          <Label htmlFor="product-price">Price (EUR)</Label>
+          <Label htmlFor="product-price">Price (lei)</Label>
           <Input
             id="product-price"
             type="number"
@@ -264,8 +281,6 @@ export function ProductForm({ mode, initialData }: ProductFormProps) {
         control={control}
         register={register}
         errors={errors}
-        watch={watch}
-        setValue={setValue}
       />
 
       <ProductFormImages

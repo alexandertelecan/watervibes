@@ -72,7 +72,7 @@ export function TestimonialsTable({ testimonials }: TestimonialsTableProps) {
       header: "Quote",
       render: (t) => (
         <span className="text-sm text-foreground/85">
-          “{truncate(t.quote.en, 60)}”
+          “{truncate(t.quote, 60)}”
         </span>
       ),
     },

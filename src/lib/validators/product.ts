@@ -2,16 +2,6 @@ import { z } from "zod";
 
 import { PRODUCT_SIZES } from "@/lib/constants";
 
-const bilingual = z.object({
-  en: z.string().min(1),
-  ro: z.string().min(1),
-});
-
-const bilingualList = z.object({
-  en: z.array(z.string().min(1)).default([]),
-  ro: z.array(z.string().min(1)).default([]),
-});
-
 const specsSchema = z.object({
   dimensions: z.string().min(1),
   jets: z.number().int().min(0),
@@ -30,16 +20,16 @@ const slug = z
 
 export const productSchema = z.object({
   slug,
-  name: bilingual,
-  tagline: bilingual,
-  description: bilingual,
+  name: z.string().min(1),
+  tagline: z.string().min(1),
+  description: z.string().min(1),
   size: z.enum(PRODUCT_SIZES as unknown as [string, ...string[]]),
   color: z.string().min(1),
   colorHex: hexColor,
   price: z.number().positive(),
   images: z.array(z.url()).min(1),
   specs: specsSchema,
-  features: bilingualList,
+  features: z.array(z.string().min(1)).default([]),
   featured: z.boolean().default(false),
   order: z.number().int().default(0),
 });

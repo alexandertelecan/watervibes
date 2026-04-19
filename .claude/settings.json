@@ -1,21 +1,29 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e \"const L = require\\('lucide-react'\\); console.log\\(['Droplet','Leaf','ShieldCheck','Menu','X'].map\\(n=>n+':'+\\(typeof L[n]\\)\\).join\\('\\\\n'\\)\\)\")",
-      "Bash(curl -s -o /dev/null -w \"en/about: %{http_code}\\\\n\" http://localhost:3000/en/about)",
-      "Bash(curl -s -o /dev/null -w \"ro/about: %{http_code}\\\\n\" http://localhost:3000/ro/about)",
-      "Bash(curl -s -o /dev/null -w \"en/nonexistent: %{http_code}\\\\n\" http://localhost:3000/en/nonexistent)",
-      "Bash(curl -s -o /dev/null -w \"sitemap: %{http_code}\\\\n\" http://localhost:3000/sitemap.xml)",
-      "Bash(curl -s -o /dev/null -w \"robots: %{http_code}\\\\n\" http://localhost:3000/robots.txt)",
-      "Bash(curl -s http://localhost:3000/sitemap.xml)",
-      "Bash(git --no-pager diff -- CLAUDE.MD)",
-      "Bash(curl -sI http://localhost:3000/)",
-      "Bash(curl -s -o /tmp/product.html -w \"status=%{http_code} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/catalog/azure-2)",
-      "Bash(curl -s -o /tmp/og.png -w \"og status=%{http_code} ctype=%{content_type} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/opengraph-image)",
-      "Bash(curl -s -o /tmp/og-product.png -w \"og-prod status=%{http_code} ctype=%{content_type} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/catalog/azure-2/opengraph-image)",
-      "Bash(curl -s -o /tmp/about.html -w \"about status=%{http_code} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/about)",
-      "Bash(wait %1 %2)",
-      "Bash(git commit -m ' *)"
+      "Bash(pnpm tsc *)",
+      "Bash(ffmpeg -version)",
+      "Bash(brew --prefix ffmpeg)",
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//opt/homebrew/opt/ffmpeg/**)",
+      "Bash(/opt/homebrew/opt/ffmpeg/bin/ffmpeg -version)",
+      "Read(//opt/homebrew/**)",
+      "Bash(ffmpeg -y -ss 0 -i /Users/alexandertelecan/Development/watervibe/public/videos/hero.mp4 -vframes 1 -q:v 2 /Users/alexandertelecan/Development/watervibe/public/videos/hero-poster.jpg)",
+      "Bash(ffmpeg -y -ss 0 -i /Users/alexandertelecan/Development/watervibe/public/videos/hero.mp4 -frames:v 1 -q:v 2 -update 1 /Users/alexandertelecan/Development/watervibe/public/videos/hero-poster.jpg)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 /Users/alexandertelecan/Development/watervibe/public/videos/hero.mp4)",
+      "Bash(sips -s format jpeg /Users/alexandertelecan/Development/watervibe/public/videos/hero-poster.jpg --getProperty pixelWidth --getProperty pixelHeight)",
+      "Bash(ffmpeg -y -ss 0 -i public/videos/hero.mp4 -frames:v 1 -update 1 -vf \"scale=1920:-2\" -q:v 4 public/videos/hero-poster.jpg)",
+      "Bash(ffmpeg -y -ss 0 -i public/videos/hero.mp4 -frames:v 1 -update 1 -vf \"scale=1920:-2\" -c:v libwebp -quality 72 public/videos/hero-poster.webp)",
+      "Bash(pnpm exec *)",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(node -e ' *)",
+      "Bash(pnpm tsx -e ' *)",
+      "Bash(mkdir -p /tmp/wv-photos)",
+      "Bash(curl -s -o __TRACKED_VAR__.jpg 'https://images.unsplash.com/__TRACKED_VAR__?auto=format&fit=crop&w=900&q=70')",
+      "Bash(curl -s -o /tmp/wv-brandstory.jpg \"https://images.unsplash.com/photo-1681168716884-e3254c4a0148?q=80&w=1400&auto=format&fit=crop\")",
+      "Bash(pnpm -s tsc --noEmit)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")"
     ]
   }
 }

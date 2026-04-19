@@ -1,7 +1,7 @@
 export const SIZES = [
-  { value: "2-person", labelKey: "common.sizes.2-person" },
-  { value: "4-person", labelKey: "common.sizes.4-person" },
-  { value: "6+person", labelKey: "common.sizes.6+person" },
+  { value: "2-person", label: "2 persoane" },
+  { value: "4-person", label: "4 persoane" },
+  { value: "6+person", label: "6+ persoane" },
 ] as const;
 
 export type ProductSize = (typeof SIZES)[number]["value"];
@@ -9,11 +9,11 @@ export type ProductSize = (typeof SIZES)[number]["value"];
 export const PRODUCT_SIZES = SIZES.map((s) => s.value) as readonly ProductSize[];
 
 export const COLORS = [
-  { value: "white", hex: "#FFFFFF", labelKey: "common.colors.white" },
-  { value: "graphite", hex: "#2E2E2E", labelKey: "common.colors.graphite" },
-  { value: "teak", hex: "#8B5E3C", labelKey: "common.colors.teak" },
-  { value: "pearl", hex: "#EDE8DF", labelKey: "common.colors.pearl" },
-  { value: "midnight", hex: "#0E1A24", labelKey: "common.colors.midnight" },
+  { value: "white", hex: "#FFFFFF", label: "Alb" },
+  { value: "graphite", hex: "#2E2E2E", label: "Grafit" },
+  { value: "teak", hex: "#8B5E3C", label: "Teak" },
+  { value: "pearl", hex: "#EDE8DF", label: "Perlat" },
+  { value: "midnight", hex: "#0E1A24", label: "Midnight" },
 ] as const;
 
 export type ProductColor = (typeof COLORS)[number]["value"];

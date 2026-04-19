@@ -1,12 +1,6 @@
-import { getTranslations } from "next-intl/server";
-
 import { cn } from "@/lib/utils";
 import type { ProductSpecs as Specs } from "@/types/product";
 
-// DESIGN.md §5 — "At a glance" specs. Numbers become the aesthetic language.
-// Each spec is a stat-block: thin top hairline, small index numeral in aqua,
-// the value set large in Plus Jakarta Sans 700, and a quiet eyebrow label.
-// The jets count is treated as the signature stat at display scale.
 type StatSize = "display" | "large" | "medium";
 
 type StatEntry = {
@@ -25,44 +19,51 @@ const VALUE_SIZE: Record<StatSize, string> = {
     "text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] leading-[1.05] font-bold tracking-[-0.025em]",
 };
 
-export async function ProductSpecs({ specs }: { specs: Specs }) {
-  const t = await getTranslations("product.specs");
+const UNIT_LABELS = {
+  jets: "duze inox",
+  seats: "locuri",
+  power: "consum maxim",
+  footprint: "amprentă",
+  weightEmpty: "greutate carcasă",
+  weightFull: "greutate cu apă",
+} as const;
 
+export function ProductSpecs({ specs }: { specs: Specs }) {
   const stats: StatEntry[] = [
     {
       index: "01",
       value: String(specs.jets),
-      label: t("units.jets"),
+      label: UNIT_LABELS.jets,
       size: "display",
     },
     {
       index: "02",
       value: String(specs.capacity),
-      label: t("units.seats"),
+      label: UNIT_LABELS.seats,
       size: "display",
     },
     {
       index: "03",
       value: specs.power,
-      label: t("units.power"),
+      label: UNIT_LABELS.power,
       size: "large",
     },
     {
       index: "04",
       value: specs.dimensions,
-      label: t("units.footprint"),
+      label: UNIT_LABELS.footprint,
       size: "medium",
     },
     {
       index: "05",
       value: specs.weightEmpty,
-      label: t("units.weightEmpty"),
+      label: UNIT_LABELS.weightEmpty,
       size: "large",
     },
     {
       index: "06",
       value: specs.weightFull,
-      label: t("units.weightFull"),
+      label: UNIT_LABELS.weightFull,
       size: "large",
     },
   ];
@@ -70,12 +71,9 @@ export async function ProductSpecs({ specs }: { specs: Specs }) {
   return (
     <section aria-labelledby="specs-heading" className="flex flex-col gap-10">
       <div className="flex flex-col gap-2">
-        <span className="text-eyebrow text-accent">{t("eyebrow")}</span>
-        <h2
-          id="specs-heading"
-          className="text-h2 text-foreground font-heading"
-        >
-          {t("title")}
+        <span className="text-eyebrow text-accent">Pe scurt</span>
+        <h2 id="specs-heading" className="text-h2 text-foreground font-heading">
+          Specificații
         </h2>
       </div>
 

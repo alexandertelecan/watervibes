@@ -1,9 +1,8 @@
+import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import type { Locale } from "@/types/product";
 
 type PriceTagProps = {
   price: number;
-  locale: Locale;
   size?: "sm" | "md" | "lg";
   weight?: "normal" | "medium" | "semibold";
   className?: string;
@@ -23,17 +22,10 @@ const weightClass = {
 
 export function PriceTag({
   price,
-  locale,
   size = "md",
   weight = "medium",
   className,
 }: PriceTagProps) {
-  const formatted = new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(price);
-
   return (
     <span
       className={cn(
@@ -43,7 +35,7 @@ export function PriceTag({
         className,
       )}
     >
-      {formatted}
+      {formatPrice(price)}
     </span>
   );
 }

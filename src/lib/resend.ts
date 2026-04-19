@@ -53,7 +53,6 @@ function buildTextBody(data: ContactEmailInput): string {
     `Email: ${data.email}`,
   ];
   if (data.phone) lines.push(`Phone: ${data.phone}`);
-  lines.push(`Locale: ${data.locale}`);
   if (data.productName) {
     lines.push(`Product: ${data.productName}`);
   } else if (data.productSlug) {
@@ -69,7 +68,6 @@ function buildHtmlBody(data: ContactEmailInput): string {
     ["Email", escapeHtml(data.email)],
   ];
   if (data.phone) rows.push(["Phone", escapeHtml(data.phone)]);
-  rows.push(["Locale", escapeHtml(data.locale)]);
   if (data.productName) {
     rows.push(["Product", escapeHtml(data.productName)]);
   } else if (data.productSlug) {

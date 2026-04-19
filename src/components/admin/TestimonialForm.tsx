@@ -7,11 +7,11 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 
-import { BilingualField } from "@/components/admin/BilingualField";
 import { FormSection } from "@/components/admin/FormSection";
 import { Button } from "@/components/shared/Button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { testimonialSchema } from "@/lib/validators/testimonial";
 import type { Testimonial, TestimonialRating } from "@/types/testimonial";
 
@@ -27,7 +27,7 @@ type ZodIssue = { path: (string | number)[]; message: string };
 const DEFAULTS: FormValues = {
   author: "",
   location: "",
-  quote: { en: "", ro: "" },
+  quote: "",
   rating: 5,
   featured: false,
 };
@@ -145,14 +145,19 @@ export function TestimonialForm({ mode, initialData }: TestimonialFormProps) {
       </FormSection>
 
       <FormSection title="Quote">
-        <BilingualField
-          label="Quote"
-          name="quote"
-          register={register}
-          errors={errors}
-          type="textarea"
-          rows={4}
-        />
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="testimonial-quote">Quote</Label>
+          <Textarea
+            id="testimonial-quote"
+            rows={4}
+            placeholder="What the customer said"
+            aria-invalid={errors.quote ? true : undefined}
+            {...register("quote")}
+          />
+          {errors.quote ? (
+            <p className="text-xs text-destructive">{errors.quote.message}</p>
+          ) : null}
+        </div>
       </FormSection>
 
       <FormSection title="Metadata">

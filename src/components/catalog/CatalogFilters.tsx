@@ -1,8 +1,7 @@
 "use client";
 
 import { Check, SlidersHorizontal, X } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/shared/Button";
@@ -14,19 +13,23 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Slider } from "@/components/ui/slider";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { COLORS, SIZES, type ProductSize } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+
+const L = {
+  showFilters: "Filtre",
+  clear: "Ștergeți tot",
+  size: "Dimensiune",
+  sizeAny: "Orice dimensiune",
+  sizeMin: "Mic",
+  sizeMax: "Mare",
+  color: "Culoare",
+} as const;
 
 function parseMulti(value: string | null): string[] {
   if (!value) return [];
   return value.split(",").map((v) => v.trim()).filter(Boolean);
 }
-
-// DESIGN.md §5 — CatalogFilters
-// Desktop: sticky left rail. Size is a labeled 0–5 slider (0 = any, 1-2 =
-// 2-person, 3 = 4-person, 4-5 = 6+). Mobile: chip grid inside a Sheet.
-// URL state stays CSV-backward-compatible: ?size=CSV&color=CSV.
 
 const SIZE_BUCKETS: { max: number; size: ProductSize }[] = [
   { max: 2, size: "2-person" },
@@ -48,7 +51,6 @@ function sizeToSlider(size: ProductSize | null): number {
 }
 
 export function CatalogFilters() {
-  const t = useTranslations();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -107,27 +109,25 @@ export function CatalogFilters() {
     (selectedSizes[0] as ProductSize) ?? null;
   const currentSliderValue = sizeToSlider(primarySize);
   const currentSizeLabel = primarySize
-    ? t(SIZES.find((s) => s.value === primarySize)!.labelKey)
-    : t("catalog.filters.sizeAny");
+    ? (SIZES.find((s) => s.value === primarySize)?.label ?? primarySize)
+    : L.sizeAny;
 
   const desktopBody = (
     <div className="flex flex-col gap-10">
       <header className="flex items-center justify-between">
-        <h2 className="text-eyebrow text-foreground">
-          {t("catalog.filters.showFilters")}
-        </h2>
+        <h2 className="text-eyebrow text-foreground">{L.showFilters}</h2>
         {activeCount > 0 ? (
           <button
             type="button"
             onClick={clearAll}
             className="text-[11px] font-semibold uppercase tracking-[0.08em] text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            {t("catalog.filters.clear")}
+            {L.clear}
           </button>
         ) : null}
       </header>
 
-      <FilterGroup title={t("catalog.filters.size")}>
+      <FilterGroup title={L.size}>
         <div className="flex flex-col gap-4">
           <p
             className={cn(
@@ -143,20 +143,19 @@ export function CatalogFilters() {
             step={1}
             value={[currentSliderValue]}
             onValueChange={([v]) => setSizeSingle(sliderToSize(v ?? 0))}
-            aria-label={t("catalog.filters.size")}
+            aria-label={L.size}
           />
           <div className="flex justify-between text-eyebrow text-muted-foreground">
-            <span>{t("catalog.filters.sizeMinLabel")}</span>
-            <span>{t("catalog.filters.sizeMaxLabel")}</span>
+            <span>{L.sizeMin}</span>
+            <span>{L.sizeMax}</span>
           </div>
         </div>
       </FilterGroup>
 
-      <FilterGroup title={t("catalog.filters.color")}>
+      <FilterGroup title={L.color}>
         <ColorList
           selected={selectedColors}
           onToggle={(v) => toggleColor(v)}
-          t={t}
         />
       </FilterGroup>
     </div>
@@ -164,7 +163,7 @@ export function CatalogFilters() {
 
   const mobileBody = (
     <div className="flex flex-col gap-8">
-      <FilterGroup title={t("catalog.filters.size")}>
+      <FilterGroup title={L.size}>
         <div className="flex flex-wrap gap-2">
           {SIZES.map((s) => {
             const checked = selectedSizes.includes(s.value);
@@ -182,17 +181,16 @@ export function CatalogFilters() {
                     : "border-border bg-transparent text-foreground hover:border-foreground",
                 )}
               >
-                {t(s.labelKey)}
+                {s.label}
               </button>
             );
           })}
         </div>
       </FilterGroup>
-      <FilterGroup title={t("catalog.filters.color")}>
+      <FilterGroup title={L.color}>
         <ColorList
           selected={selectedColors}
           onToggle={(v) => toggleColor(v)}
-          t={t}
         />
       </FilterGroup>
       {activeCount > 0 ? (
@@ -204,7 +202,7 @@ export function CatalogFilters() {
           className="self-start"
         >
           <X aria-hidden="true" className="size-3.5" />
-          <span>{t("catalog.filters.clear")}</span>
+          <span>{L.clear}</span>
         </Button>
       ) : null}
     </div>
@@ -217,7 +215,7 @@ export function CatalogFilters() {
           <SheetTrigger asChild>
             <Button type="button" variant="outline" size="sm">
               <SlidersHorizontal aria-hidden="true" className="size-4" />
-              <span>{t("catalog.filters.showFilters")}</span>
+              <span>{L.showFilters}</span>
               {activeCount > 0 ? (
                 <span className="ml-1 inline-flex size-5 min-w-5 items-center justify-center rounded-full bg-accent text-[11px] font-medium text-accent-foreground">
                   {activeCount}
@@ -230,7 +228,7 @@ export function CatalogFilters() {
             className="w-full max-w-sm overflow-y-auto p-6"
           >
             <SheetHeader className="mb-6 p-0">
-              <SheetTitle>{t("catalog.filters.showFilters")}</SheetTitle>
+              <SheetTitle>{L.showFilters}</SheetTitle>
             </SheetHeader>
             {mobileBody}
           </SheetContent>
@@ -264,23 +262,20 @@ function FilterGroup({
 function ColorList({
   selected,
   onToggle,
-  t,
 }: {
   selected: string[];
   onToggle: (value: string) => void;
-  t: (key: string) => string;
 }) {
   return (
     <ul className="flex flex-col gap-1.5">
       {COLORS.map((c) => {
         const isSelected = selected.includes(c.value);
-        const label = t(c.labelKey);
         return (
           <li key={c.value}>
             <button
               type="button"
               aria-pressed={isSelected}
-              aria-label={label}
+              aria-label={c.label}
               onClick={() => onToggle(c.value)}
               className={cn(
                 "group/color flex w-full items-center justify-between gap-3 rounded-lg border px-3 py-2 text-sm transition-colors",
@@ -297,7 +292,7 @@ function ColorList({
                   style={{ backgroundColor: c.hex }}
                 />
                 <span className={isSelected ? "font-semibold" : undefined}>
-                  {label}
+                  {c.label}
                 </span>
               </span>
               {isSelected ? (

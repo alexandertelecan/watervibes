@@ -1,17 +1,11 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { Button } from "@/components/shared/Button";
-import { Link } from "@/i18n/navigation";
 
-// DESIGN.md §5 — the signature CTA on the product page. Accent-filled pill
-// with trailing arrow for "Request a quote", outline "See specs" smooth-
-// scroll secondary, small reassurance note underneath.
 export function QuoteCTA({ slug }: { slug: string }) {
-  const t = useTranslations("product.quote");
-
   const handleScroll = () => {
     document
       .getElementById("specs")
@@ -20,11 +14,11 @@ export function QuoteCTA({ slug }: { slug: string }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <span className="text-eyebrow text-accent">{t("eyebrow")}</span>
+      <span className="text-eyebrow text-accent">Suntem gata când sunteți</span>
       <div className="flex flex-col gap-3 sm:flex-row">
         <Button asChild variant="accent" size="lg">
           <Link href={`/contact?product=${encodeURIComponent(slug)}`}>
-            <span>{t("primary")}</span>
+            <span>Cereți o ofertă</span>
             <ArrowRight
               aria-hidden="true"
               className="transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-x-0.5"
@@ -37,10 +31,12 @@ export function QuoteCTA({ slug }: { slug: string }) {
           size="lg"
           onClick={handleScroll}
         >
-          {t("secondary")}
+          Vedeți specificațiile
         </Button>
       </div>
-      <p className="text-small text-muted-foreground">{t("note")}</p>
+      <p className="text-small text-muted-foreground">
+        Răspundem într-o zi lucrătoare · Fără obligații
+      </p>
     </div>
   );
 }

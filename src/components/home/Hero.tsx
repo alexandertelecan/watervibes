@@ -1,53 +1,48 @@
-import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
+import { HeroOrb } from "@/components/home/HeroOrb";
 import { HeroVideo } from "@/components/home/HeroVideo";
+import { Perks } from "@/components/home/Perks";
 import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
-import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-// commit push - 2
-// DESIGN.md §5 — Hero
-// Airbnb-warm commercial: parallax video backdrop at ~55% opacity under a
-// transparent→charcoal gradient for text legibility. Big chunky headline
-// in Plus Jakarta Sans. Two pill CTAs — filled accent primary, outline
-// secondary. Bottom fade gradient bleeds the dark slab into the next
-// section's white. Snap-start anchors the section for the homepage's
-// proximity snap scroll.
-export async function Hero() {
-  const t = await getTranslations("hero");
 
+export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-foreground text-primary-foreground">
+    <section className="relative isolate flex min-h-[calc(100dvh-4rem)] flex-col overflow-hidden bg-foreground text-primary-foreground">
       <HeroVideo />
 
-      {/* Soft aqua glow fields — same treatment as HomeCTA: depth on the
-          dark slab without committing to a linear gradient darkening. */}
+      <HeroOrb />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 -right-40 -z-10 h-144 w-xl rounded-full bg-accent/25 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -left-40 -z-10 h-96 w-96 rounded-full bg-accent-tint/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-64 -left-64 -z-10 h-192 w-3xl rounded-full bg-accent-tint/15 blur-[160px]"
       />
 
       <Container
         as="div"
         size="wide"
-        className={cn("grid min-h-[92vh] gap-10 py-24 md:py-32")}
+        className={cn(
+          "flex grow flex-col gap-10 pt-28 pb-10 md:pt-32 md:pb-12",
+        )}
       >
-        <div className="flex max-w-3xl flex-col justify-end gap-7">
-          <h1 className="text-display text-primary-foreground">
-            {t("headline")}
-          </h1>
+        <div className="flex max-w-3xl grow flex-col justify-center gap-7">
+          <div className="flex flex-col gap-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary-foreground/80">
+              WaterVibe
+            </p>
+            <h1 className="text-display text-primary-foreground">
+              O experiență, nu doar un jacuzzi.
+            </h1>
+          </div>
           <p className="text-lede max-w-xl text-primary-foreground/85">
-            {t("subhead")}
+            Relaxare la un alt nivel, pentru acasă, pensiuni și hoteluri.
+            Experiență completă de hidromasaj, construită pentru durabilitate.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button asChild variant="accent" size="lg" className="gap-2">
               <Link href="/catalog">
-                <span>{t("ctaPrimary")}</span>
+                <span>Descoperiți colecția</span>
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 16 16"
@@ -64,19 +59,11 @@ export async function Hero() {
                 </svg>
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-primary-foreground/40 bg-primary-foreground/5 text-primary-foreground hover:border-primary-foreground hover:bg-primary-foreground/15"
-            >
-              <Link href="/contact">
-                <span>{t("ctaSecondary")}</span>
-              </Link>
-            </Button>
           </div>
         </div>
       </Container>
+
+      <Perks />
     </section>
   );
 }

@@ -1,23 +1,13 @@
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { HeaderNav } from "@/components/layout/HeaderNav";
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { MobileNav } from "@/components/layout/MobileNav";
-import { ScrolledHeader } from "@/components/layout/ScrolledHeader";
 import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
-import { Link } from "@/i18n/navigation";
 
-// DESIGN.md §5 — Header
-// Wordmark (left) + pill-capsule HeaderNav (center) + LanguageSwitcher
-// and "Request a quote" CTA (right). Mobile collapses the nav into
-// MobileNav (Sheet). On scroll past 80px, ScrolledHeader shrinks the
-// height and drops a --surface backdrop with an aqua bottom rule.
 export function Header() {
-  const t = useTranslations();
-
   return (
-    <ScrolledHeader>
+    <header className="sticky top-0 z-40 h-16 bg-accent text-accent-foreground shadow-[0_1px_0_0_hsl(0_0%_100%/0.08)]">
       <Container
         as="div"
         size="wide"
@@ -25,19 +15,22 @@ export function Header() {
       >
         <Link
           href="/"
-          className="text-wordmark text-2xl text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+          className="text-wordmark rounded-sm text-2xl text-accent-foreground transition-opacity duration-300 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-accent"
         >
-          {t("brand.name")}
+          WaterVibe
         </Link>
         <HeaderNav />
         <div className="flex items-center gap-3">
-          <LanguageSwitcher />
-          <Button asChild variant="primary" size="sm" className="hidden md:inline-flex">
-            <Link href="/contact">{t("cta.requestQuote")}</Link>
+          <Button
+            asChild
+            size="sm"
+            className="hidden bg-accent-foreground text-accent shadow-sm hover:bg-accent-foreground/90 focus-visible:ring-accent-foreground focus-visible:ring-offset-accent md:inline-flex"
+          >
+            <Link href="/contact">Cereți o ofertă</Link>
           </Button>
           <MobileNav />
         </div>
       </Container>
-    </ScrolledHeader>
+    </header>
   );
 }

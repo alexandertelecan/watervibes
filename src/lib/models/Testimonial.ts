@@ -1,18 +1,10 @@
 import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
 
-const BilingualSchema = new Schema(
-  {
-    en: { type: String, required: true, trim: true },
-    ro: { type: String, required: true, trim: true },
-  },
-  { _id: false },
-);
-
 const TestimonialSchema = new Schema(
   {
     author: { type: String, required: true, trim: true },
     location: { type: String, required: true, trim: true },
-    quote: { type: BilingualSchema, required: true },
+    quote: { type: String, required: true, trim: true },
     rating: {
       type: Number,
       required: true,

@@ -2,38 +2,31 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { productAltText } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import type { Locale, Product } from "@/types/product";
+import type { Product } from "@/types/product";
 
-// DESIGN.md §5 — ProductGallery. Aesop echo: the primary image floats on a
-// --surface panel with --shadow-lg. A "Frame 01 / 03" marker sits as a small
-// eyebrow on the top-left of the panel; numbered thumbs run as a vertical
-// filmstrip on the right (desktop) or horizontally under the panel (mobile).
-// Floating prev/next chevrons sit bottom-right of the panel.
-//
-// Alt text is composed per-image from the product's name + size + color so
-// every frame gets a descriptive label (good for a11y and SEO) rather than
-// the same repeated product name.
+const L = {
+  frame: "Cadru",
+  prev: "Imaginea anterioară",
+  next: "Imaginea următoare",
+  noImages: "Fotografii în pregătire",
+} as const;
+
 export function ProductGallery({
   images,
   product,
-  locale,
 }: {
   images: string[];
   product: Product;
-  locale: Locale;
 }) {
-  const t = useTranslations("product.gallery");
-  const tRoot = useTranslations();
   const [index, setIndex] = useState(0);
   const safe = images.length > 0 ? images : [];
   const count = safe.length;
-  const primaryAlt = productAltText(product, locale, tRoot, index);
-  const stripLabel = productAltText(product, locale, tRoot, 0);
+  const primaryAlt = productAltText(product, index);
+  const stripLabel = productAltText(product, 0);
 
   const move = (delta: number) => {
     if (count === 0) return;
@@ -62,17 +55,14 @@ export function ProductGallery({
   return (
     <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
       <div className="relative order-1 flex-1">
-        {/* Surface panel — Aesop echo */}
         <div className="relative overflow-hidden rounded-xl bg-surface px-6 py-12 shadow-lg md:px-14 md:py-20 lg:py-24">
-          {/* Frame marker (top-left) */}
           <div className="pointer-events-none absolute left-6 top-6 flex items-center gap-2 text-eyebrow text-muted-foreground md:left-10 md:top-10">
-            <span>{t("frame")}</span>
+            <span>{L.frame}</span>
             <span className="tabular-nums text-foreground">{frameCurrent}</span>
             <span aria-hidden="true" className="h-px w-4 bg-border" />
             <span className="tabular-nums">{frameTotal}</span>
           </div>
 
-          {/* Primary image */}
           <div className="relative mx-auto aspect-4/5 w-full overflow-hidden">
             {safe[index] ? (
               <Image
@@ -85,18 +75,17 @@ export function ProductGallery({
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center text-eyebrow text-muted-foreground">
-                {t("noImages")}
+                {L.noImages}
               </div>
             )}
           </div>
 
-          {/* Floating chevrons (only when >1 image) */}
           {count > 1 ? (
             <div className="absolute bottom-6 right-6 flex gap-2 md:bottom-10 md:right-10">
               <button
                 type="button"
                 onClick={() => move(-1)}
-                aria-label={t("prev")}
+                aria-label={L.prev}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-sm transition hover:border-foreground hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <ChevronLeft className="h-5 w-5" aria-hidden="true" />
@@ -104,7 +93,7 @@ export function ProductGallery({
               <button
                 type="button"
                 onClick={() => move(1)}
-                aria-label={t("next")}
+                aria-label={L.next}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-sm transition hover:border-foreground hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <ChevronRight className="h-5 w-5" aria-hidden="true" />
@@ -114,7 +103,6 @@ export function ProductGallery({
         </div>
       </div>
 
-      {/* Numbered filmstrip */}
       {count > 1 ? (
         <div
           role="tablist"
@@ -124,7 +112,7 @@ export function ProductGallery({
           {safe.map((src, i) => {
             const active = i === index;
             const label = String(i + 1).padStart(2, "0");
-            const thumbAlt = productAltText(product, locale, tRoot, i);
+            const thumbAlt = productAltText(product, i);
             return (
               <button
                 key={src}

@@ -2,8 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -19,10 +18,32 @@ const INPUT_STYLES =
 
 const LABEL_STYLES = "text-eyebrow text-foreground";
 
-import type { Locale } from "@/i18n/routing";
+const L = {
+  name: "Numele dumneavoastră",
+  email: "Adresă de email",
+  phone: "Telefon",
+  phoneOptional: "(opțional)",
+  message: "Spuneți-ne despre spațiu",
+  submit: "Trimiteți mesajul",
+  submitting: "Se trimite…",
+  quoteContextLabel: "Ofertă pentru",
+  nameMin: "Vă rugăm să introduceți numele complet.",
+  emailInvalid: "Vă rugăm să introduceți o adresă de email validă.",
+  messageMin:
+    "Un mesaj scurt ne ajută să răspundem cum trebuie. Minim zece caractere.",
+  messageMax: "Vă rugăm să păstrați mesajul sub 2000 de caractere.",
+  successTitle: "Mulțumim. Mesajul este pe drum.",
+  successMessage:
+    "Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare. Între timp, puteți răsfoi colecția.",
+  sendAnother: "Trimiteți încă un mesaj",
+  toastSuccess: "Mesaj trimis. Revenim în curând.",
+  rateLimit:
+    "Ați trimis deja câteva mesaje. Așteptați câteva minute înainte să încercați din nou.",
+  genericError: (email: string) =>
+    `Ceva nu a mers. Încercați din nou sau scrieți-ne direct la ${email}.`,
+} as const;
 
 type ContactFormProps = {
-  locale: Locale;
   productSlug?: string;
 };
 
@@ -40,32 +61,25 @@ type ContactError = {
 };
 
 const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@watervibe.example";
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@watervibe.ro";
 
-export function ContactForm({ locale, productSlug }: ContactFormProps) {
-  const t = useTranslations("contact.form");
-  const tToast = useTranslations("contact.toast");
+const schema = z.object({
+  name: z.string().trim().min(2, L.nameMin).max(80),
+  email: z.email(L.emailInvalid).max(120),
+  phone: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .or(z.literal("").transform(() => undefined)),
+  message: z
+    .string()
+    .trim()
+    .min(10, L.messageMin)
+    .max(2000, L.messageMax),
+});
 
-  const schema = useMemo(
-    () =>
-      z.object({
-        name: z.string().trim().min(2, t("validation.nameMin")).max(80),
-        email: z.email(t("validation.emailInvalid")).max(120),
-        phone: z
-          .string()
-          .trim()
-          .max(40)
-          .optional()
-          .or(z.literal("").transform(() => undefined)),
-        message: z
-          .string()
-          .trim()
-          .min(10, t("validation.messageMin"))
-          .max(2000, t("validation.messageMax")),
-      }),
-    [t],
-  );
-
+export function ContactForm({ productSlug }: ContactFormProps) {
   const {
     register,
     handleSubmit,
@@ -87,8 +101,7 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
       .then(async (res) => (res.ok ? res.json() : null))
       .then((payload) => {
         if (cancelled || !payload?.product?.name) return;
-        const name = payload.product.name as { en?: string; ro?: string };
-        setProductName(name[locale] ?? name.en ?? null);
+        setProductName(String(payload.product.name));
       })
       .catch(() => {
         /* fail silently — chip stays hidden */
@@ -96,7 +109,7 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
     return () => {
       cancelled = true;
     };
-  }, [productSlug, locale]);
+  }, [productSlug]);
 
   async function onSubmit(values: FormValues) {
     try {
@@ -107,12 +120,11 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
           ...values,
           phone: values.phone?.trim() || undefined,
           productSlug,
-          locale,
         }),
       });
 
       if (response.ok) {
-        toast.success(tToast("success"));
+        toast.success(L.toastSuccess);
         setSubmitted(true);
         reset();
         return;
@@ -121,23 +133,28 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
       const payload = (await response.json().catch(() => ({}))) as ContactError;
 
       if (response.status === 429) {
-        toast.error(t("error.rateLimit"));
+        toast.error(L.rateLimit);
         return;
       }
 
       if (response.status === 400 && payload.fieldErrors) {
         for (const [field, message] of Object.entries(payload.fieldErrors)) {
           if (!message) continue;
-          if (field === "name" || field === "email" || field === "phone" || field === "message") {
+          if (
+            field === "name" ||
+            field === "email" ||
+            field === "phone" ||
+            field === "message"
+          ) {
             setError(field, { type: "server", message });
           }
         }
         return;
       }
 
-      toast.error(t("error.generic", { email: CONTACT_EMAIL }));
+      toast.error(L.genericError(CONTACT_EMAIL));
     } catch {
-      toast.error(t("error.generic", { email: CONTACT_EMAIL }));
+      toast.error(L.genericError(CONTACT_EMAIL));
     }
   }
 
@@ -145,7 +162,7 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
     productSlug && productName ? (
       <div className="inline-flex items-center gap-2 rounded-full border border-border bg-accent px-4 py-1.5 text-sm text-foreground">
         <span className="text-xs uppercase tracking-wider text-primary">
-          {t("quoteContextLabel")}
+          {L.quoteContextLabel}
         </span>
         <span className="font-medium">{productName}</span>
       </div>
@@ -157,10 +174,10 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
         {chip}
         <div>
           <h3 className="font-heading text-2xl text-foreground">
-            {t("success.title")}
+            {L.successTitle}
           </h3>
           <p className="mt-2 text-sm text-muted-foreground md:text-base">
-            {t("success.message")}
+            {L.successMessage}
           </p>
         </div>
         <Button
@@ -169,7 +186,7 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
           size="md"
           onClick={() => setSubmitted(false)}
         >
-          <span>{t("success.sendAnother")}</span>
+          <span>{L.sendAnother}</span>
         </Button>
       </div>
     );
@@ -184,7 +201,9 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
       {chip}
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="contact-name" className={LABEL_STYLES}>{t("name")}</Label>
+        <Label htmlFor="contact-name" className={LABEL_STYLES}>
+          {L.name}
+        </Label>
         <Input
           id="contact-name"
           type="text"
@@ -199,7 +218,9 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="contact-email" className={LABEL_STYLES}>{t("email")}</Label>
+        <Label htmlFor="contact-email" className={LABEL_STYLES}>
+          {L.email}
+        </Label>
         <Input
           id="contact-email"
           type="email"
@@ -215,9 +236,9 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="contact-phone" className={LABEL_STYLES}>
-          {t("phone")}
+          {L.phone}
           <span className="ml-2 text-[10px] font-normal normal-case tracking-normal text-muted-foreground">
-            {t("phoneOptional")}
+            {L.phoneOptional}
           </span>
         </Label>
         <Input
@@ -234,7 +255,9 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="contact-message" className={LABEL_STYLES}>{t("message")}</Label>
+        <Label htmlFor="contact-message" className={LABEL_STYLES}>
+          {L.message}
+        </Label>
         <Textarea
           id="contact-message"
           rows={5}
@@ -258,10 +281,10 @@ export function ContactForm({ locale, productSlug }: ContactFormProps) {
         {isSubmitting ? (
           <>
             <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-            <span>{t("submitting")}</span>
+            <span>{L.submitting}</span>
           </>
         ) : (
-          <span>{t("submit")}</span>
+          <span>{L.submit}</span>
         )}
       </Button>
     </form>

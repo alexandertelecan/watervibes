@@ -5,9 +5,6 @@ import { ProductModel } from "@/lib/models/Product";
 import { sendContactEmail } from "@/lib/resend";
 import { contactSchema } from "@/lib/validators/contact";
 
-// Naive sliding-window rate limiter. Max N submissions per IP per WINDOW.
-// NOTE: in-memory; resets on server restart and does not span instances.
-// Replace with Redis/Upstash for production scale.
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const rateBuckets = new Map<string, number[]>();
@@ -36,16 +33,13 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
-async function resolveProductName(
-  slug: string,
-  locale: "en" | "ro",
-): Promise<string | undefined> {
+async function resolveProductName(slug: string): Promise<string | undefined> {
   try {
     await dbConnect();
     const product = await ProductModel.findOne({ slug })
       .select({ name: 1 })
-      .lean<{ name: { en: string; ro: string } }>();
-    return product?.name?.[locale] ?? product?.name?.en;
+      .lean<{ name: string }>();
+    return product?.name;
   } catch {
     return undefined;
   }
@@ -87,7 +81,7 @@ export async function POST(request: NextRequest) {
 
     const data = parsed.data;
     const productName = data.productSlug
-      ? await resolveProductName(data.productSlug, data.locale)
+      ? await resolveProductName(data.productSlug)
       : undefined;
 
     const result = await sendContactEmail({ ...data, productName });

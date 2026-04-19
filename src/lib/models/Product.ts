@@ -2,22 +2,6 @@ import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
 
 import { PRODUCT_SIZES } from "@/types/product";
 
-const BilingualSchema = new Schema(
-  {
-    en: { type: String, required: true, trim: true },
-    ro: { type: String, required: true, trim: true },
-  },
-  { _id: false },
-);
-
-const BilingualListSchema = new Schema(
-  {
-    en: { type: [String], default: [] },
-    ro: { type: [String], default: [] },
-  },
-  { _id: false },
-);
-
 const SpecsSchema = new Schema(
   {
     dimensions: { type: String, required: true },
@@ -40,9 +24,9 @@ const ProductSchema = new Schema(
       trim: true,
       index: true,
     },
-    name: { type: BilingualSchema, required: true },
-    tagline: { type: BilingualSchema, required: true },
-    description: { type: BilingualSchema, required: true },
+    name: { type: String, required: true, trim: true },
+    tagline: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
     size: {
       type: String,
       required: true,
@@ -54,7 +38,7 @@ const ProductSchema = new Schema(
     price: { type: Number, required: true, min: 0 },
     images: { type: [String], default: [] },
     specs: { type: SpecsSchema, required: true },
-    features: { type: BilingualListSchema, default: () => ({ en: [], ro: [] }) },
+    features: { type: [String], default: [] },
     featured: { type: Boolean, default: false, index: true },
     order: { type: Number, default: 0, index: true },
   },

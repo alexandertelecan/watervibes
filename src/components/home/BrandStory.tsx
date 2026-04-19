@@ -1,147 +1,253 @@
-import { getTranslations } from "next-intl/server";
-
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
-import { cn } from "@/lib/utils";
+import { FloatingShape } from "@/components/home/FloatingShape";
+import { ParallaxImage } from "@/components/home/ParallaxImage";
 
-// DESIGN.md §5 + §7 — BrandStory: "a warm card, a promise, three places".
-// Breaks the bland 5/7 prose grid by staging the section in three beats:
-//   1. Marginalia row (aqua tick + eyebrow + hairline + serial).
-//   2. Asymmetric top: h2 title (left, cols 1–5) + aqua-tinted pullquote
-//      panel (right, cols 6–12) with an oversize hanging open-quote and
-//      concentric-arc water motif in its corner.
-//   3. Aqua hairline divider.
-//   4. Three numbered pillars (Nº 01 / 02 / 03 — Context / Offering /
-//      Promise) separated by soft vertical rules.
-// The aqua panel is the color hook between the neutral Featured and
-// Testimonials sections; HomeCTA picks up the dark counterpart later.
-export async function BrandStory() {
-  const t = await getTranslations("brandStory");
+const TITLE = "De ce o experiență și nu doar un jacuzzi?";
+const PULLQUOTE =
+  "Pentru că nu cumperi doar un produs ci un mod de relaxare, comfort zilnic și stare de bine.";
 
-  const pillars = [
-    { label: t("pillars.01"), body: t("paragraph1") },
-    { label: t("pillars.02"), body: t("paragraph2") },
-    { label: t("pillars.03"), body: t("paragraph3") },
-  ] as const;
+const IMAGE_SRC =
+  "https://images.unsplash.com/photo-1681168716884-e3254c4a0148?auto=format&fit=crop&w=1400&q=80";
+const IMAGE_ALT =
+  "Moment de relaxare într-un jacuzzi WaterVibe, în aer liber.";
 
+const PILLARS = [
+  {
+    label: "De ce",
+    body: "WaterVibe a apărut dintr-o idee simplă: relaxarea reală nu ar trebui să fie un lux ocazional. O găsim în vacanțe sau în centre spa, apoi o pierdem când ne întoarcem acasă. Noi credem că trebuie să fie parte din viața de zi cu zi.",
+  },
+  {
+    label: "Cum facem asta",
+    body: "Selectăm fiecare model de jacuzzi cu atenție. Analizăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Alegem modele care oferă o experiență reală de spa și care pot fi folosite constant, fără compromisuri.",
+  },
+  {
+    label: "Ce oferim",
+    body: "Jacuzzi pentru uz rezidențial, potrivite pentru curți, terase sau spații interioare. În funcție de spațiu și preferințe, clienții pot alege modele pentru interior sau exterior, cu diferite dimensiuni, număr de locuri, configurații de jeturi și variante de culori.",
+  },
+] as const;
+
+export function BrandStory() {
   return (
-    <section className="relative isolate overflow-hidden py-24 md:py-32">
-      {/* Chalk → surface bleeds (Oura borrow, DESIGN.md §7). */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 -z-10 h-48 bg-linear-to-b from-surface/60 to-transparent"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-48 bg-linear-to-t from-surface/60 to-transparent"
-      />
-      {/* Decorative water-ripple motif — restrained, below z-index-0 */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 400 400"
-        className="pointer-events-none absolute -bottom-24 -right-24 -z-10 h-112 w-md text-accent/10"
-      >
-        <g fill="none" stroke="currentColor" strokeWidth="1">
-          <circle cx="200" cy="200" r="60" />
-          <circle cx="200" cy="200" r="105" />
-          <circle cx="200" cy="200" r="150" />
-          <circle cx="200" cy="200" r="195" />
-          <circle cx="200" cy="200" r="240" />
-        </g>
-      </svg>
+    <section className="relative isolate bg-surface py-24 md:py-32">
+      <Container as="div" size="wide">
+        <h2 className="sr-only">{TITLE}</h2>
 
-      <Container as="div">
-        {/* Semantic anchor — visually replaced by the pullquote panel. */}
-        <h2 className="sr-only">{t("title")}</h2>
-
-        {/* Eyebrow */}
-        <FadeIn>
-          <div className="flex items-center gap-3 text-eyebrow text-accent">
-            <span aria-hidden="true" className="inline-block size-1.5 rounded-full bg-accent" />
-            <span>{t("eyebrow")}</span>
-          </div>
-        </FadeIn>
-
-        {/* Top row: title (left) + aqua pullquote panel (right) */}
-        <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-12">
-          <FadeIn className="md:col-span-5 md:pt-6" delay={0.05}>
-            <p className="text-h1 text-foreground">{t("title")}</p>
-            <p className="mt-5 max-w-md text-lede text-muted-foreground">
-              {t("intro")}
-            </p>
+        <div className="grid items-center gap-12 md:grid-cols-12 md:gap-20">
+          <FadeIn className="relative md:col-span-5">
+            <FloatingShape
+              className="pointer-events-none absolute hidden text-accent/25 md:block md:-right-24 md:-bottom-12 md:h-32 md:w-32"
+              range={180}
+              rotate={25}
+              bob={14}
+              bobDuration={5}
+            >
+              <svg viewBox="0 0 240 240" className="h-full w-full">
+                <circle
+                  cx="120"
+                  cy="120"
+                  r="110"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="120"
+                  cy="120"
+                  r="75"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="120"
+                  cy="120"
+                  r="40"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </FloatingShape>
+            <FloatingShape
+              className="pointer-events-none absolute hidden text-accent/20 md:block md:-top-6 md:-left-6 md:h-12 md:w-12"
+              range={115}
+              rotate={-18}
+              bob={10}
+              bobDuration={4.2}
+            >
+              <svg viewBox="0 0 200 200" className="h-full w-full">
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="85"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                />
+              </svg>
+            </FloatingShape>
+            <FloatingShape
+              className="pointer-events-none absolute hidden size-1.5 rounded-full bg-accent/40 md:block md:top-10 md:-right-10"
+              range={90}
+              bob={12}
+              bobDuration={3.6}
+            >
+              <span className="block h-full w-full" />
+            </FloatingShape>
+            <ParallaxImage
+              src={IMAGE_SRC}
+              alt={IMAGE_ALT}
+              sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
+            />
           </FadeIn>
 
-          <FadeIn className="md:col-span-7" delay={0.15}>
-            <blockquote className="relative overflow-hidden rounded-(--radius-xl) bg-accent px-8 py-12 text-accent-foreground shadow-md md:px-14 md:py-16">
-              {/* Oversize open-quote glyph hanging over the top-left */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-2 -top-10 select-none text-[11rem] leading-none text-accent-foreground/15 md:-left-4 md:-top-14 md:text-[16rem]"
-                style={{ fontFamily: "var(--font-fraunces), serif", fontWeight: 700 }}
-              >
-                &ldquo;
-              </span>
-              {/* Concentric-arc water motif, bottom-right corner */}
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 240 240"
-                className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 text-accent-foreground/12"
-              >
-                <g fill="none" stroke="currentColor" strokeWidth="1.25">
-                  <circle cx="120" cy="120" r="40" />
-                  <circle cx="120" cy="120" r="70" />
-                  <circle cx="120" cy="120" r="100" />
-                  <circle cx="120" cy="120" r="130" />
-                </g>
+          <FadeIn
+            className="relative md:col-span-6 md:col-start-7"
+            delay={0.1}
+          >
+            <FloatingShape
+              className="pointer-events-none absolute hidden text-accent/15 md:block md:-top-10 md:right-0 md:h-44 md:w-44"
+              range={220}
+              rotate={-28}
+              bob={15}
+              bobDuration={6}
+            >
+              <svg viewBox="0 0 240 240" className="h-full w-full">
+                <circle
+                  cx="120"
+                  cy="120"
+                  r="110"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
               </svg>
+            </FloatingShape>
+            <FloatingShape
+              className="pointer-events-none absolute hidden text-accent/20 md:block md:top-20 md:-left-8 md:h-20 md:w-20"
+              range={140}
+              rotate={22}
+              bob={11}
+              bobDuration={5.6}
+            >
+              <svg viewBox="0 0 200 200" className="h-full w-full">
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="90"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                />
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="55"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                />
+              </svg>
+            </FloatingShape>
+            <FloatingShape
+              className="pointer-events-none absolute hidden size-2 rounded-full bg-accent/40 md:block md:-bottom-4 md:left-4"
+              range={75}
+              bob={11}
+              bobDuration={4}
+            >
+              <span className="block h-full w-full" />
+            </FloatingShape>
+            <p className="relative text-h1 text-foreground">{TITLE}</p>
 
-              <p className="relative z-10 text-h1 leading-tight">
-                {t("pullquote")}
-              </p>
-              <footer className="relative z-10 mt-8 flex items-center gap-3 text-small text-accent-foreground/80">
-                <span aria-hidden="true" className="h-px w-10 bg-accent-foreground/50" />
-                <cite className="not-italic tracking-wide">{t("attribution")}</cite>
-              </footer>
-            </blockquote>
+            <p
+              className="relative mt-10 text-lede italic text-foreground/80 md:mt-12"
+              style={{ fontFamily: "var(--font-fraunces), serif" }}
+            >
+              {PULLQUOTE}
+            </p>
           </FadeIn>
         </div>
 
-        {/* Animated aqua hairline (DESIGN.md §4.2 signature move) */}
-        <FadeIn underline delay={0.25} className="mt-20 md:mt-24">
-          <span aria-hidden="true" className="sr-only" />
-        </FadeIn>
-
-        {/* Three numbered pillars */}
-        <div className="mt-10 grid gap-12 md:mt-12 md:grid-cols-3 md:gap-0">
-          {pillars.map((pillar, idx) => (
-            <FadeIn key={pillar.label} delay={0.3 + idx * 0.08}>
-              <article
-                className={cn(
-                  "flex h-full flex-col gap-5 md:px-8",
-                  idx === 0 && "md:pl-0",
-                  idx > 0 && "md:border-l md:border-border",
-                  idx === pillars.length - 1 && "md:pr-0",
-                )}
-              >
-                <span
-                  aria-hidden="true"
-                  className="text-accent"
-                  style={{
-                    fontFamily: "var(--font-fraunces), serif",
-                    fontSize: "clamp(3.25rem, 5vw, 4.25rem)",
-                    lineHeight: 1,
-                    letterSpacing: "-0.03em",
-                    fontWeight: 700,
-                  }}
-                >
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <div className="flex items-center gap-3">
-                  <span aria-hidden="true" className="h-px w-6 bg-accent" />
-                  <span className="text-eyebrow text-foreground">{pillar.label}</span>
-                </div>
-                <p className="text-body text-foreground/80">{pillar.body}</p>
-              </article>
+        <div className="relative mt-24 grid gap-14 md:mt-32 md:grid-cols-3 md:gap-16 lg:gap-24">
+          <FloatingShape
+            className="pointer-events-none absolute hidden text-accent/20 md:block md:-top-16 md:left-[30%] md:h-20 md:w-20"
+            range={165}
+            rotate={-30}
+            bob={14}
+            bobDuration={5.8}
+          >
+            <svg viewBox="0 0 200 200" className="h-full w-full">
+              <circle
+                cx="100"
+                cy="100"
+                r="90"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              />
+              <circle
+                cx="100"
+                cy="100"
+                r="50"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              />
+            </svg>
+          </FloatingShape>
+          <FloatingShape
+            className="pointer-events-none absolute hidden text-accent/15 md:block md:-bottom-6 md:right-0 md:h-14 md:w-14"
+            range={130}
+            rotate={26}
+            bob={11}
+            bobDuration={6.2}
+          >
+            <svg viewBox="0 0 200 200" className="h-full w-full">
+              <circle
+                cx="100"
+                cy="100"
+                r="90"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+              />
+            </svg>
+          </FloatingShape>
+          <FloatingShape
+            className="pointer-events-none absolute hidden size-1.5 rounded-full bg-accent/45 md:block md:-top-8 md:left-6"
+            range={70}
+            bob={10}
+            bobDuration={3.8}
+          >
+            <span className="block h-full w-full" />
+          </FloatingShape>
+          <FloatingShape
+            className="pointer-events-none absolute hidden text-accent/20 md:block md:top-24 md:left-[68%] md:h-10 md:w-10"
+            range={140}
+            rotate={-18}
+            bob={12}
+            bobDuration={5.4}
+          >
+            <svg viewBox="0 0 200 200" className="h-full w-full">
+              <circle
+                cx="100"
+                cy="100"
+                r="85"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+            </svg>
+          </FloatingShape>
+          {PILLARS.map((pillar, idx) => (
+            <FadeIn
+              key={pillar.label}
+              delay={0.1 + idx * 0.08}
+              className="relative flex flex-col gap-5"
+            >
+              <h3 className="text-h3 text-foreground">{pillar.label}</h3>
+              <p className="text-body text-foreground/70">{pillar.body}</p>
             </FadeIn>
           ))}
         </div>

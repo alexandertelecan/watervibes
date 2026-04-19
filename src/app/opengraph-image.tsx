@@ -2,40 +2,18 @@ import { ImageResponse } from "next/og";
 
 import { BUSINESS } from "@/lib/seo";
 
-// Dynamic OG image for every [locale] page (home, about, catalog list,
-// contact, localized 404 / error). Product detail has its own override
-// one level deeper. Rendered at the edge via next/og — no external image
-// asset required.
-//
-// Sizing: 1200x630 is Facebook + LinkedIn; Twitter summary_large_image
-// accepts the same dimensions.
-
 export const alt = `${BUSINESS.brand}, jacuzzi pentru casă, pensiune și hotel`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const COPY: Record<string, { eyebrow: string; headline: string; foot: string }> = {
-  ro: {
-    eyebrow: "Hidroterapie premium · 2026",
-    headline:
-      "Jacuzzi pentru casă, pensiune și hotel. Relaxare reală, zi de zi.",
-    foot: "watervibe.ro · Livrare în România",
-  },
-  en: {
-    eyebrow: "Premium hydrotherapy · 2026",
-    headline:
-      "Jacuzzis for homes, guesthouses, and hotels. Real relaxation, built into everyday life.",
-    foot: "watervibe.ro · Delivered across Romania",
-  },
-};
+const COPY = {
+  eyebrow: "Hidroterapie premium · 2026",
+  headline:
+    "Jacuzzi pentru casă, pensiune și hotel. Relaxare reală, zi de zi.",
+  foot: "watervibe.ro · Livrare în România",
+} as const;
 
-export default async function Image({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  const copy = COPY[params.locale] ?? COPY.ro;
-
+export default function Image() {
   return new ImageResponse(
     (
       <div
@@ -52,7 +30,6 @@ export default async function Image({
           fontFamily: "sans-serif",
         }}
       >
-        {/* Top — eyebrow row */}
         <div
           style={{
             display: "flex",
@@ -74,10 +51,9 @@ export default async function Image({
               display: "block",
             }}
           />
-          <span>{copy.eyebrow}</span>
+          <span>{COPY.eyebrow}</span>
         </div>
 
-        {/* Middle — headline */}
         <div
           style={{
             display: "flex",
@@ -95,11 +71,10 @@ export default async function Image({
               color: "#ffffff",
             }}
           >
-            {copy.headline}
+            {COPY.headline}
           </div>
         </div>
 
-        {/* Bottom — wordmark + foot */}
         <div
           style={{
             display: "flex",
@@ -138,7 +113,7 @@ export default async function Image({
               letterSpacing: "0.04em",
             }}
           >
-            {copy.foot}
+            {COPY.foot}
           </div>
         </div>
       </div>

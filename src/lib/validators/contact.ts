@@ -14,7 +14,6 @@ export const contactSchema = z.object({
   phone: optionalTrimmed(40),
   message: z.string().trim().min(10).max(2000),
   productSlug: optionalTrimmed(120),
-  locale: z.enum(["en", "ro"]),
 });
 
 export type ContactPayload = z.infer<typeof contactSchema>;

@@ -47,15 +47,15 @@ export function ProductFormBasics({
               onBlur: (event) => {
                 const current = event.target.value.trim();
                 if (current) return;
-                const nameEn = watch("name.en");
-                if (nameEn) {
-                  setValue("slug", slugify(nameEn), { shouldValidate: true });
+                const name = watch("name");
+                if (name) {
+                  setValue("slug", slugify(name), { shouldValidate: true });
                 }
               },
             })}
           />
           <p className="text-xs text-muted-foreground">
-            URL-safe, lowercase. Auto-generated from the English name if left blank.
+            URL-safe, lowercase. Auto-generated from the name if left blank.
           </p>
           {errors.slug ? (
             <p className="text-xs text-destructive">{errors.slug.message}</p>

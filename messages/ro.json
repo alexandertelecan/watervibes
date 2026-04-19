@@ -33,16 +33,31 @@
   },
   "hero": {
     "eyebrow": "Jacuzzi exterior · livrare în toată România",
-    "headline": "Jacuzzi exterior pentru case, pensiuni și hoteluri.",
-    "subhead": "Un jacuzzi exterior este o decizie pe zece ani. Vă ajutăm să alegeți unul pe care îl veți folosi cu drag și după a suta seară. Hidromasaj pentru două, patru sau șase persoane. Modele de interior și exterior. Livrare în orice județ din România.",
+    "headline": "WaterVibe. O experiență, nu doar un jacuzzi.",
+    "subhead": "Relaxare la un alt nivel, pentru acasă, pensiuni și hoteluri. Experiență completă de hidromasaj, construită pentru durabilitate.",
     "ctaPrimary": "Descoperiți colecția",
     "ctaSecondary": "Cereți o ofertă"
   },
+  "perks": {
+    "srLabel": "Avantajele WaterVibe",
+    "price": {
+      "title": "Prețuri competitive",
+      "body": "Oferte ferme, fără costuri surpriză."
+    },
+    "warranty": {
+      "title": "Garanție 5 ani",
+      "body": "Acoperire completă pentru liniștea dumneavoastră."
+    },
+    "delivery": {
+      "title": "Transport gratuit în maxim 72 de ore",
+      "body": "Livrare rapidă în toată România."
+    }
+  },
   "featured": {
-    "eyebrow": "Modele recomandate",
-    "title": "Trei jacuzzi, aleși pentru felul în care îi veți folosi",
+    "eyebrow": "Cele mai vândute",
+    "title": "Modele preferate de clienți pentru utilizare zilnică, acasă sau în spații turistice.",
     "description": "Trei jacuzzi exterior din colecția WaterVibe. Fiecare echilibrează spațiul, finisajul și un hidromasaj pe care îl simțiți. Alegeți dimensiunea potrivită — pentru un cuplu, o familie de patru sau o masă plină.",
-    "viewAll": "Răsfoiți întreaga colecție",
+    "viewAll": "Descoperă întreaga colecție",
     "viewProduct": "Vedeți modelul",
     "finish": "Finisaj",
     "fromPrice": "De la",
@@ -52,30 +67,30 @@
   "brandStory": {
     "eyebrow": "Despre WaterVibe",
     "serial": "2026",
-    "title": "Un jacuzzi exterior, nu un produs. O experiență de spa care rămâne acasă.",
+    "title": "De ce o experiență și nu doar un jacuzzi?",
     "intro": "De ce există WaterVibe, cum alegem fiecare model, ce primiți efectiv. Trei capitole scurte.",
-    "pullquote": "Aducem spa-ul acasă. În orice casă, pensiune sau hotel din România care își dorește asta.",
+    "pullquote": "Pentru că nu cumperi doar un produs ci un mod de relaxare, comfort zilnic și stare de bine.",
     "attribution": "WaterVibe",
     "pillars": {
       "01": "De ce",
-      "02": "Cum alegem",
-      "03": "Ce primiți"
+      "02": "Cum facem asta",
+      "03": "Ce oferim"
     },
-    "paragraph1": "Viața se aglomerează. Momentele reale de liniște se rarefiază. Un jacuzzi exterior acasă transformă orice seară într-un ritual. Nu mai așteptați vacanța sau weekendul la spa.",
-    "paragraph2": "Fiecare model își merită locul. Verificăm patru lucruri — confortul, calitatea materialelor, hidromasajul care încă se simte hidromasaj și după doi ani și un consum pe care îl puteți duce. Pentru două, patru sau șase persoane. Interior sau exterior. În finisaje care se așează bine lângă ce aveți deja.",
-    "paragraph3": "Ce primiți: un jacuzzi care merge și după a suta seară. O discuție reală despre spațiul dumneavoastră. Un preț cu livrare în România. Pașii de instalare pe care îi puteți da instalatorului. În orice județ din țară."
+    "paragraph1": "WaterVibe a apărut dintr-o idee simplă. Oamenii au nevoie de relaxare reală. Viața devine aglomerată. Programul devine tot mai încărcat. Momentele de liniște devin rare. Mulți oameni caută relaxare în vacanțe sau în centre spa. Acea stare de liniște dispare când se întorc acasă. Noi credem că relaxarea nu trebuie să fie un lux ocazional. Trebuie să fie parte din viața de zi cu zi.",
+    "paragraph2": "Selectăm fiecare model de jacuzzi cu atenție. Analizăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Alegem modele care oferă o experiență reală de spa și care pot fi folosite constant, fără compromisuri.",
+    "paragraph3": "Jacuzzi pentru uz rezidențial, potrivite pentru curți, terase sau spații interioare. În funcție de spațiu și preferințe, clienții pot alege modele pentru interior sau exterior, cu diferite dimensiuni, număr de locuri, configurații de jeturi și variante de culori."
   },
   "testimonials": {
     "eyebrow": "De pe terasele clienților",
     "title": "Proprietari adevărați, la un an distanță. În apă, săptămână de săptămână."
   },
   "homeCta": {
-    "eyebrow": "Pasul următor",
-    "headline": "Construiți un loc de relaxare al dumneavoastră, acasă.",
-    "subhead": "Trimiteți-ne câteva detalii despre spațiu — terasă, grădină, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare.",
-    "button": "Cereți o ofertă",
+    "eyebrow": "Contact și Suport",
+    "headline": "Întrebări, lămuriri, recomandări și oferte?",
+    "subhead": "Îți răspundem rapid și îți oferim informațiile de care ai nevoie pentru a lua decizia corectă.",
+    "button": "Contactează-ne",
     "trust": {
-      "reply": "Răspuns într-o zi lucrătoare",
+      "reply": "Răspundem rapid",
       "price": "Preț cu livrare inclus",
       "installation": "Pași de instalare incluși"
     }
@@ -158,7 +173,7 @@
     },
     "info": {
       "emailLabel": "Email",
-      "email": "hello@watervibe.ro",
+      "email": "office@watervibe.ro",
       "phoneLabel": "Telefon · WhatsApp",
       "phone": "+40 726 793 993",
       "addressLabel": "Sediu",
@@ -199,7 +214,7 @@
   "catalog": {
     "title": "Modele de jacuzzi exterior",
     "eyebrow": "Colecția WaterVibe",
-    "description": "Jacuzzi exterior pentru două, patru sau șase persoane. Sunt disponibile și variante de interior. Pompe silențioase. Finisaje oneste. Hidromasaj care merge și după a suta seară.",
+    "description": "Selecție de jacuzzi pentru 2 până la 10 persoane, disponibile în dimensiuni și finisaje diferite. Fiecare model este gândit pentru utilizare reală, cu hidromasaj eficient, funcționare stabilă și integrare ușoară în orice spațiu.",
     "kicker": "{count, plural, =0 {Niciun rezultat} one {# jacuzzi} few {# jacuzzi} other {# de jacuzzi}}",
     "allSizes": "Toate dimensiunile",
     "filters": {

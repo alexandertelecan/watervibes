@@ -1,10 +1,4 @@
-import { getTranslations } from "next-intl/server";
-
-// DESIGN.md §5 — Features. Numbered ordinal list; the ordinal sits in aqua
-// at display weight as a small typographic anchor, then a short aqua rule
-// separates it from the copy. Two columns on desktop, one on mobile.
-export async function ProductFeatures({ features }: { features: string[] }) {
-  const t = await getTranslations("product.features");
+export function ProductFeatures({ features }: { features: string[] }) {
   if (features.length === 0) return null;
 
   return (
@@ -13,12 +7,12 @@ export async function ProductFeatures({ features }: { features: string[] }) {
       className="flex flex-col gap-10"
     >
       <div className="flex flex-col gap-2">
-        <span className="text-eyebrow text-accent">{t("eyebrow")}</span>
+        <span className="text-eyebrow text-accent">Incluse</span>
         <h2
           id="features-heading"
           className="text-h2 text-foreground font-heading"
         >
-          {t("title")}
+          Ce este inclus
         </h2>
       </div>
 

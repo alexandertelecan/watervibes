@@ -1,44 +1,49 @@
 "use client";
 
-import { Users } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { SIZES, type ProductSize } from "@/lib/constants";
+import { type ProductSize } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-// DESIGN.md §5 / §7 — the Airbnb-style "category ribbon" move. A horizontal
-// row of size pills under the intro that acts as a quick single-select
-// filter. Multi-select and nuance still live in the sidebar; this is the
-// "just tap a size" shortcut. Horizontally scrollable on mobile.
-//
-// URL state stays CSV to match the sidebar: `size=2-person,4-person`. This
-// ribbon writes a *single* value, which is how most people will use it.
-
-const DOT_COUNTS: Record<ProductSize, number> = {
-  "2-person": 1,
-  "4-person": 2,
-  "6+person": 3,
+type Item = {
+  value: ProductSize | null;
+  label: string;
+  dots: number;
 };
 
-function SizeDots({ size }: { size: ProductSize }) {
-  const count = DOT_COUNTS[size];
+const ITEMS: readonly Item[] = [
+  { value: null, label: "Toate dimensiunile", dots: 0 },
+  { value: "2-person", label: "2 persoane", dots: 1 },
+  { value: "4-person", label: "4 persoane", dots: 2 },
+  { value: "6+person", label: "6+ persoane", dots: 3 },
+] as const;
+
+function Dots({ filled, active }: { filled: number; active: boolean }) {
   return (
-    <span aria-hidden="true" className="flex items-center gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <span
-          key={i}
-          className="block size-1.5 rounded-full bg-current opacity-70"
-        />
-      ))}
+    <span aria-hidden="true" className="flex items-center gap-1">
+      {Array.from({ length: 3 }).map((_, i) => {
+        const isFilled = i < filled;
+        return (
+          <span
+            key={i}
+            className={cn(
+              "block size-1.5 rounded-full transition-colors duration-200",
+              isFilled
+                ? active
+                  ? "bg-background"
+                  : "bg-foreground/70"
+                : "bg-transparent ring-1 ring-inset",
+              !isFilled && (active ? "ring-background/50" : "ring-foreground/25"),
+            )}
+          />
+        );
+      })}
     </span>
   );
 }
 
 export function SizeRibbon() {
-  const t = useTranslations();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -60,45 +65,31 @@ export function SizeRibbon() {
 
   return (
     <nav
-      aria-label={t("catalog.filters.size")}
+      aria-label="Dimensiune"
       className="-mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-visible md:px-0"
     >
-      <ul className="flex items-center gap-2 whitespace-nowrap md:flex-wrap">
-        <li>
-          <button
-            type="button"
-            onClick={() => setSize(null)}
-            aria-pressed={active === null}
-            className={cn(
-              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-200",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-              active === null
-                ? "border-foreground bg-foreground text-background shadow-sm"
-                : "border-border bg-background text-foreground hover:border-foreground",
-            )}
-          >
-            <Users aria-hidden="true" className="size-3.5" />
-            {t("catalog.allSizes")}
-          </button>
-        </li>
-        {SIZES.map((s) => {
-          const selected = active === s.value;
+      <ul className="flex items-center gap-2.5 whitespace-nowrap md:flex-wrap">
+        {ITEMS.map((item) => {
+          const selected =
+            (item.value === null && active === null) ||
+            (item.value !== null && active === item.value);
+          const canDeselect = item.value !== null && selected;
           return (
-            <li key={s.value}>
+            <li key={item.value ?? "all"}>
               <button
                 type="button"
-                onClick={() => setSize(selected ? null : (s.value as ProductSize))}
+                onClick={() => setSize(canDeselect ? null : item.value)}
                 aria-pressed={selected}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-200",
+                  "inline-flex items-center gap-3 rounded-full border px-5 py-2.5 text-small font-medium transition-colors duration-200",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   selected
-                    ? "border-foreground bg-foreground text-background shadow-sm"
-                    : "border-border bg-background text-foreground hover:border-foreground",
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border bg-background text-foreground/80 hover:border-foreground hover:text-foreground",
                 )}
               >
-                <SizeDots size={s.value as ProductSize} />
-                {t(s.labelKey)}
+                <Dots filled={item.dots} active={selected} />
+                <span>{item.label}</span>
               </button>
             </li>
           );

@@ -1,45 +1,26 @@
 import { ImageResponse } from "next/og";
 
-import { assertLocale, BUSINESS } from "@/lib/seo";
 import { dbConnect } from "@/lib/db";
+import { formatPrice } from "@/lib/format";
 import { ProductModel } from "@/lib/models/Product";
-
-// Per-product OG image — renders the product name, capacity, and price
-// over the aqua/charcoal brand slab. No external photo fetch (edge
-// runtime can't reliably reach arbitrary image hosts inside a tight
-// budget, and we don't want to hard-fail a share card).
+import { BUSINESS } from "@/lib/seo";
 
 export const alt = `${BUSINESS.brand} jacuzzi`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const COPY: Record<string, { eyebrow: string; priceFrom: string; foot: string; personsOne: string; personsMany: string }> = {
-  ro: {
-    eyebrow: "Un model WaterVibe",
-    priceFrom: "De la",
-    foot: "watervibe.ro · Livrare în România",
-    personsOne: "persoană",
-    personsMany: "persoane",
-  },
-  en: {
-    eyebrow: "A WaterVibe model",
-    priceFrom: "From",
-    foot: "watervibe.ro · Delivered across Romania",
-    personsOne: "person",
-    personsMany: "persons",
-  },
-};
+const COPY = {
+  eyebrow: "Un model WaterVibe",
+  foot: "watervibe.ro · Livrare în România",
+  personsOne: "persoană",
+  personsMany: "persoane",
+} as const;
 
 export default async function Image({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: { slug: string };
 }) {
-  const locale = assertLocale(params.locale);
-  const copy = COPY[locale] ?? COPY.ro;
-
-  // Load the product — if it doesn't exist, render the fallback slab so
-  // the share surface never 500s.
   let name: string = BUSINESS.brand;
   let capacity = 0;
   let price = "";
@@ -47,19 +28,15 @@ export default async function Image({
     await dbConnect();
     const doc = await ProductModel.findOne({ slug: params.slug }).lean();
     if (doc) {
-      name = doc.name[locale] ?? doc.name.ro;
+      name = String(doc.name ?? BUSINESS.brand);
       capacity = doc.specs.capacity;
-      price = new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency: "EUR",
-        maximumFractionDigits: 0,
-      }).format(doc.price);
+      price = formatPrice(doc.price);
     }
   } catch {
     // fall through to fallback values
   }
 
-  const personsLabel = capacity === 1 ? copy.personsOne : copy.personsMany;
+  const personsLabel = capacity === 1 ? COPY.personsOne : COPY.personsMany;
 
   return new ImageResponse(
     (
@@ -77,7 +54,6 @@ export default async function Image({
           fontFamily: "sans-serif",
         }}
       >
-        {/* Eyebrow */}
         <div
           style={{
             display: "flex",
@@ -99,11 +75,17 @@ export default async function Image({
               display: "block",
             }}
           />
-          <span>{copy.eyebrow}</span>
+          <span>{COPY.eyebrow}</span>
         </div>
 
-        {/* Product name */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 26, maxWidth: 1020 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 26,
+            maxWidth: 1020,
+          }}
+        >
           <div
             style={{
               fontSize: 104,
@@ -123,12 +105,11 @@ export default async function Image({
                 letterSpacing: "-0.01em",
               }}
             >
-              {capacity} {personsLabel} · {copy.priceFrom} {price}
+              {capacity} {personsLabel} · {price}
             </div>
           ) : null}
         </div>
 
-        {/* Wordmark foot */}
         <div
           style={{
             display: "flex",
@@ -167,7 +148,7 @@ export default async function Image({
               letterSpacing: "0.04em",
             }}
           >
-            {copy.foot}
+            {COPY.foot}
           </div>
         </div>
       </div>

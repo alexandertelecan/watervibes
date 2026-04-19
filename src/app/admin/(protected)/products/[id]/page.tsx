@@ -36,7 +36,7 @@ export default async function EditProductPage({
           <span className="text-foreground">Edit</span>
         </div>
         <h1 className="mt-2 font-[var(--font-fraunces)] text-3xl font-semibold tracking-tight">
-          {product.name.en}
+          {product.name}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">/{product.slug}</p>
       </header>

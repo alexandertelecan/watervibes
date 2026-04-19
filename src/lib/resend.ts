@@ -40,14 +40,14 @@ function escapeHtml(value: string): string {
 
 function buildSubject(data: ContactEmailInput): string {
   if (data.productName) {
-    return `[WaterVibes] New quote request from ${data.name} — ${data.productName}`;
+    return `[WaterVibe] New quote request from ${data.name}: ${data.productName}`;
   }
-  return `[WaterVibes] New contact from ${data.name}`;
+  return `[WaterVibe] New contact from ${data.name}`;
 }
 
 function buildTextBody(data: ContactEmailInput): string {
   const lines = [
-    "New WaterVibes lead",
+    "New WaterVibe lead",
     "",
     `Name: ${data.name}`,
     `Email: ${data.email}`,
@@ -97,7 +97,7 @@ function buildHtmlBody(data: ContactEmailInput): string {
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #E5E7EB;border-radius:16px;overflow:hidden;">
       <tr>
         <td style="padding:24px 28px;border-bottom:1px solid #E5E7EB;background:#E8F1F2;">
-          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#0A6E8C;">WaterVibes</div>
+          <div style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#0A6E8C;">WaterVibe</div>
           <div style="font-size:20px;font-weight:600;margin-top:4px;">${escapeHtml(heading)}</div>
         </td>
       </tr>

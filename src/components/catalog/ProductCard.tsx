@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { SIZES } from "@/lib/constants";
+import { productAltText } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Locale, Product } from "@/types/product";
 
@@ -45,7 +46,7 @@ export function ProductCard({
   return (
     <Link
       href={`/catalog/${product.slug}`}
-      aria-label={`${name} — ${sizeLabel} — ${fromLabel} ${formattedPrice}`}
+      aria-label={`${name}, ${sizeLabel}, ${fromLabel} ${formattedPrice}`}
       className="group block rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
     >
       <div className="transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5">
@@ -58,7 +59,7 @@ export function ProductCard({
           {product.images[0] ? (
             <Image
               src={product.images[0]}
-              alt=""
+              alt={productAltText(product, locale, t)}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"

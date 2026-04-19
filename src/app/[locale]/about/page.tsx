@@ -5,7 +5,16 @@ import { HomeCTA } from "@/components/home/HomeCTA";
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
 import { ImagePlaceholder } from "@/components/shared/ImagePlaceholder";
+import { JsonLd } from "@/components/shared/JsonLd";
 import { routing } from "@/i18n/routing";
+import {
+  BUSINESS,
+  alternatesFor,
+  assertLocale,
+  localBusinessSchema,
+  openGraphFor,
+  twitterFor,
+} from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 type PageParams = { locale: string };
@@ -19,28 +28,18 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
   const t = await getTranslations({ locale, namespace: "meta.about" });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const path = `/${locale}/about`;
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t("title"),
-    description: t("description"),
-    alternates: {
-      canonical: `${siteUrl}${path}`,
-      languages: {
-        en: `${siteUrl}/en/about`,
-        ro: `${siteUrl}/ro/about`,
-      },
-    },
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      url: `${siteUrl}${path}`,
-      locale,
-      type: "website",
-      images: ["/og-image.jpg"],
-    },
+    title,
+    description,
+    alternates: alternatesFor(locale, "/about"),
+    openGraph: openGraphFor(locale, "/about", { title, description }),
+    twitter: twitterFor({ title, description }),
   };
 }
 
@@ -74,11 +73,13 @@ export default async function AboutPage({
 }: {
   params: Promise<PageParams>;
 }) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
   setRequestLocale(locale);
 
   const t = await getTranslations("about");
   const tBrand = await getTranslations("brand");
+  const tEnsama = await getTranslations("about.ensama");
 
   const chapters = [
     {
@@ -276,7 +277,7 @@ export default async function AboutPage({
       </section>
 
       {/* ================================================================
-          CHAPTER 01 — Why WaterVibes exists (manifesto)
+          CHAPTER 01 — Why WaterVibe exists (manifesto)
           ================================================================ */}
       <section
         id="chapter-01"
@@ -545,6 +546,99 @@ export default async function AboutPage({
       </section>
 
       {/* ================================================================
+          ENSAMA — canonical NAP block: gives crawlers (and humans) the
+          registered business behind the brand. Visually a calm, tabular
+          dossier band on --surface so it reads as a factual footer to
+          the chapter tour rather than a marketing section.
+          ================================================================ */}
+      <section className="relative bg-surface py-24 md:py-28">
+        <Container as="div" size="wide">
+          <div className="grid gap-12 md:grid-cols-12 md:gap-16">
+            <div className="md:col-span-5">
+              <FadeIn>
+                <div className="flex items-center gap-3 text-eyebrow text-accent">
+                  <span
+                    aria-hidden="true"
+                    className="inline-block size-1.5 rounded-full bg-accent"
+                  />
+                  <span>{tEnsama("eyebrow")}</span>
+                </div>
+              </FadeIn>
+              <FadeIn delay={0.05}>
+                <h2 className="mt-6 text-h1 text-foreground">
+                  {tEnsama("title")}
+                </h2>
+              </FadeIn>
+              <FadeIn delay={0.1}>
+                <p className="mt-6 max-w-md text-lede text-muted-foreground">
+                  {tEnsama("description")}
+                </p>
+              </FadeIn>
+            </div>
+
+            <FadeIn
+              className="md:col-span-7 md:pt-2"
+              delay={0.15}
+            >
+              <dl className="grid grid-cols-1 divide-y divide-border border-y border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+                <NapRow
+                  label={tEnsama("labels.company")}
+                  value={tEnsama("company")}
+                />
+                <NapRow
+                  label={tEnsama("labels.address")}
+                  value={tEnsama("address")}
+                />
+                <NapRow
+                  label={tEnsama("labels.phone")}
+                  value={
+                    <a
+                      href={`tel:${BUSINESS.phone}`}
+                      className="text-body text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                    >
+                      {tEnsama("phone")}
+                    </a>
+                  }
+                />
+                <NapRow
+                  label={tEnsama("labels.area")}
+                  value={tEnsama("area")}
+                />
+                <NapRow
+                  className="sm:col-span-2 sm:border-l-0"
+                  label={tEnsama("labels.social")}
+                  value={
+                    <a
+                      href={BUSINESS.social.facebook}
+                      rel="me noopener"
+                      target="_blank"
+                      className="inline-flex items-center gap-2 text-body text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                    >
+                      <span>{tEnsama("facebookLabel")}</span>
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        className="size-3.5"
+                      >
+                        <path
+                          d="M6 2h8v8M14 2 2 14"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  }
+                />
+              </dl>
+            </FadeIn>
+          </div>
+        </Container>
+      </section>
+
+      {/* ================================================================
           SIGNATURE BAND — closing typographic statement
           ================================================================ */}
       <section className="relative isolate overflow-hidden bg-background py-24 md:py-32">
@@ -594,13 +688,39 @@ export default async function AboutPage({
               className="mt-10 text-small font-medium text-muted-foreground"
               style={{ letterSpacing: "0.28em", textTransform: "uppercase" }}
             >
-              — {tBrand("name")} —
+              · {tBrand("name")} ·
             </p>
           </FadeIn>
         </Container>
       </section>
 
       <HomeCTA />
+
+      {/* LocalBusiness — because the About page carries the registered
+          business details, we mount the LocalBusiness schema here so the
+          NAP block and the structured data travel together. */}
+      <JsonLd data={localBusinessSchema(locale)} />
     </>
+  );
+}
+
+// Single NAP row: aqua eyebrow label + the value below, left-aligned with
+// a short rule above (matching the contact page's aside rhythm). Kept as
+// a small helper so the grid reads as a tabular dossier without the
+// verbosity of inline markup.
+function NapRow({
+  label,
+  value,
+  className,
+}: {
+  label: string;
+  value: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex flex-col gap-2 px-0 py-6 sm:px-6", className)}>
+      <dt className="text-eyebrow text-accent">{label}</dt>
+      <dd className="text-body text-foreground">{value}</dd>
+    </div>
   );
 }

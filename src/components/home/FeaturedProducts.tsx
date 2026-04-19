@@ -6,18 +6,12 @@ import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { SIZES } from "@/lib/constants";
 import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
+import { assertLocale, productAltText } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import type { Locale } from "@/types/product";
-
-function assertLocale(value: string): Locale {
-  return (routing.locales as readonly string[]).includes(value)
-    ? (value as Locale)
-    : (routing.defaultLocale as Locale);
-}
+import type { ProductColor } from "@/types/product";
 
 // Airbnb-style listing cards — DESIGN.md §5
 // 3 products (admin's `featured: true` first, backfilled from most-recent
@@ -77,6 +71,16 @@ export async function FeaturedProducts() {
             const sizeLabel = sizeEntry ? tRoot(sizeEntry.labelKey) : doc.size;
             const colorLabel = tRoot(`common.colors.${doc.color}`);
             const priceLabel = priceFmt.format(doc.price);
+            const altText = productAltText(
+              {
+                name: doc.name,
+                size: doc.size,
+                color: doc.color as ProductColor,
+                specs: { capacity: doc.specs.capacity },
+              },
+              locale,
+              tRoot,
+            );
 
             return (
               <FadeIn
@@ -91,6 +95,7 @@ export async function FeaturedProducts() {
                   colorLabel={colorLabel}
                   colorHex={doc.colorHex}
                   image={doc.images?.[0]}
+                  imageAlt={altText}
                   priceLabel={priceLabel}
                   fromLabel={t("fromPrice")}
                   saveLabel={t("save")}
@@ -134,6 +139,7 @@ function ListingCard({
   colorLabel,
   colorHex,
   image,
+  imageAlt,
   priceLabel,
   fromLabel,
   saveLabel,
@@ -145,6 +151,7 @@ function ListingCard({
   colorLabel: string;
   colorHex: string;
   image?: string;
+  imageAlt: string;
   priceLabel: string;
   fromLabel: string;
   saveLabel: string;
@@ -152,7 +159,7 @@ function ListingCard({
   return (
     <Link
       href={href as "/catalog/[slug]"}
-      aria-label={`${name} — ${sizeLabel} · ${priceLabel}`}
+      aria-label={`${name}, ${sizeLabel} · ${priceLabel}`}
       className="group/card block rounded-(--radius-lg) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
     >
       <div className="transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:-translate-y-1">
@@ -160,7 +167,7 @@ function ListingCard({
           {image ? (
             <Image
               src={image}
-              alt=""
+              alt={imageAlt}
               fill
               sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
               className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.03]"

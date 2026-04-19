@@ -1,18 +1,18 @@
 {
   "brand": {
-    "name": "WaterVibes",
-    "tagline": "Relaxation, as part of everyday life."
+    "name": "WaterVibe",
+    "tagline": "Jacuzzis for Romanian homes, guesthouses, and hotels. Real relaxation, built into everyday life."
   },
   "nav": {
     "home": "Home",
-    "catalog": "Catalog",
-    "about": "About",
+    "catalog": "Jacuzzis",
+    "about": "About us",
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
   "cta": {
-    "browseCatalog": "Browse catalog",
+    "browseCatalog": "Browse jacuzzis",
     "requestQuote": "Request a quote",
     "getInTouch": "Get in touch"
   },
@@ -23,8 +23,8 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "madeIn": "Made in Romania",
-    "photoCredit": "Imagery: placeholders — photography TBD.",
+    "madeIn": "Operated from Câmpina, Prahova. Delivered across Romania.",
+    "photoCredit": "Imagery: placeholders. Photography in progress.",
     "sections": {
       "company": "Company",
       "explore": "Explore",
@@ -32,48 +32,48 @@
     }
   },
   "hero": {
-    "eyebrow": "Premium hydrotherapy",
-    "headline": "Relaxation, as part of life.",
-    "subhead": "WaterVibes jacuzzis for homes, guesthouses and hotels — selected carefully for comfort, efficient hydromassage and reliable technical systems.",
-    "ctaPrimary": "Explore the Collection",
-    "ctaSecondary": "Request a Quote"
+    "eyebrow": "Premium jacuzzis, delivered across Romania",
+    "headline": "Jacuzzis for homes, guesthouses, and hotels.",
+    "subhead": "Picking a hot tub is a ten year decision. We help you get it right. Hydromassage jacuzzis for 2, 4, or 6 people, indoor or outdoor, delivered to every county in Romania.",
+    "ctaPrimary": "Browse jacuzzi models",
+    "ctaSecondary": "Request a quote"
   },
   "featured": {
     "eyebrow": "Featured models",
-    "title": "Picked for how you'll actually use them",
-    "description": "Three models from the catalog — selected for the right balance of size, finish, and hydromassage experience.",
-    "viewAll": "Show all models",
+    "title": "Three jacuzzis, picked for how you'll actually use them",
+    "description": "Three models from the WaterVibe collection. Chosen for the balance between size, finish, and hydromassage, whether you host two, four, or six.",
+    "viewAll": "See every jacuzzi in the collection",
     "viewProduct": "View product",
     "finish": "Finish",
     "fromPrice": "From",
     "save": "Save",
-    "persons": "{count, plural, one {# person} other {# persons}}"
+    "persons": "{count, plural, one {# person} other {# people}}"
   },
   "brandStory": {
-    "eyebrow": "About us",
-    "serial": "MMXXIV",
-    "title": "Relaxation, as part of life",
-    "intro": "A short take on why we exist, what we offer, and what we promise — in three places.",
-    "pullquote": "To bring real relaxation closer to people — every day, not just on holidays.",
-    "attribution": "WaterVibes",
+    "eyebrow": "About WaterVibe",
+    "serial": "2026",
+    "title": "A jacuzzi, not a product. A spa experience that stays home.",
+    "intro": "Why WaterVibe exists, how we pick every model, and what you actually get. Three short chapters.",
+    "pullquote": "Bringing the spa home. In every Romanian house, guesthouse, and hotel that wants it.",
+    "attribution": "WaterVibe",
     "pillars": {
-      "01": "Context",
-      "02": "Offering",
-      "03": "Promise"
+      "01": "Why",
+      "02": "How we pick",
+      "03": "What you get"
     },
-    "paragraph1": "Life keeps getting busier. Time for quiet keeps getting shorter. We believe relaxation should be part of everyday life — not just something you look for on holiday or at a spa.",
-    "paragraph2": "WaterVibes offers jacuzzis for private homes, guesthouses and hotels. We select models that deliver comfort, efficient hydromassage, and reliable technical systems. Each jacuzzi is chosen to provide a genuine experience of relaxation through water.",
-    "paragraph3": "WaterVibes doesn't just offer products. It creates spaces of relaxation that can become part of your everyday life."
+    "paragraph1": "Life fills up. Real quiet time keeps getting rarer. A hot tub at home turns any evening into a ritual. You stop waiting for the next holiday or the next spa trip.",
+    "paragraph2": "Every jacuzzi we list is chosen for the same four things. Comfort. Material quality. Hydromassage that actually massages. A power bill you can live with. For 2, 4, or 6 people, indoor or outdoor, in finishes that sit well with what's already there.",
+    "paragraph3": "What you get: a hot tub that still runs on the hundredth evening. A real conversation about what fits your space. A delivered price. Installation steps you can hand to your builder. In every county in Romania."
   },
   "testimonials": {
-    "eyebrow": "From the terrace",
-    "title": "Quiet recommendations from people who use theirs daily"
+    "eyebrow": "From our owners' terraces",
+    "title": "People using their WaterVibe jacuzzi every week, a year later"
   },
   "homeCta": {
     "eyebrow": "The next step",
-    "headline": "Create your relaxation space.",
-    "subhead": "Tell us about your space. We'll come back with size options, a delivered price, and installation steps — within one business day.",
-    "button": "Get in Touch",
+    "headline": "Build a relaxation spot that's yours, at home.",
+    "subhead": "Send over a few details about the space. Terrace, garden, interior, guesthouse, hotel. We reply within one business day with matching jacuzzis, the delivered price for Romania, and the installation steps.",
+    "button": "Request a quote",
     "trust": {
       "reply": "One business day reply",
       "price": "Delivered price included",
@@ -82,103 +82,124 @@
   },
   "meta": {
     "home": {
-      "title": "WaterVibes — Relaxation, as part of life",
-      "description": "Jacuzzis selected carefully for homes, guesthouses and hotels. Comfort, efficient hydromassage, and reliable technical systems. Browse the catalog."
+      "title": "Jacuzzis for Homes, Guesthouses & Hotels · WaterVibe Romania",
+      "description": "Hydromassage hot tubs for 2, 4, or 6 people. Indoor or outdoor. Delivered across Romania with consultation and clear installation steps."
     },
     "contact": {
-      "title": "Contact",
-      "description": "Tell us about your space. We'll reply within one business day with size options, a delivered price, and installation steps."
+      "title": "Contact · Get a Jacuzzi Quote",
+      "description": "Tell us about your space. We reply within one business day with matching jacuzzis, a delivered price for Romania, and full installation steps."
     },
     "about": {
-      "title": "About",
-      "description": "Why WaterVibes exists, how we build the offering, and what exactly we offer. Three chapters about relaxation becoming part of everyday life."
+      "title": "About WaterVibe · Jacuzzis in Romania",
+      "description": "WaterVibe is run by ENSAMA SRL from Câmpina, Prahova. We pick, deliver, and support jacuzzis for homes, guesthouses, and hotels across Romania."
+    },
+    "catalog": {
+      "title": "Jacuzzi Models · The WaterVibe Collection",
+      "description": "Jacuzzis for 2, 4, or 6 people. Indoor and outdoor models in several finishes. Filter by size and colour, check specs, get a delivered price for Romania."
     }
   },
   "about": {
     "hero": {
-      "eyebrow": "About WaterVibes",
-      "title": "Relaxation, as part of life",
-      "subhead": "Three chapters on why we exist, how we build the offering, and what exactly we offer."
+      "eyebrow": "About WaterVibe",
+      "title": "Jacuzzis for homes, guesthouses, and hotels. Brought closer to Romania.",
+      "subhead": "Three chapters on why WaterVibe exists, how we pick each jacuzzi, and what you actually get. Delivered and supported across the country."
     },
     "chapter1": {
       "eyebrow": "Chapter 01",
-      "title": "Why WaterVibes exists",
-      "paragraph1": "WaterVibes grew out of a simple idea. People need real relaxation. Life gets busy. Schedules fill up. Moments of quiet become rare. Many people look for relaxation on holidays or at spas — and that calm disappears the moment they come home.",
-      "paragraph2": "We believe relaxation shouldn't be an occasional luxury. It should be part of everyday life. Every home, guesthouse or hotel can have a space dedicated to relaxation. A place where the body lets go. A place where the mind stops running the day's pace. A place where people spend time that matters.",
-      "paragraph3": "Water has a real effect on the body. Hydromassage relaxes muscles. The warmth of the water reduces tension. The jets stimulate circulation. Within a few minutes, a deep state of relaxation sets in. That's where the WaterVibes idea starts. We don't just sell products — we build experiences of relaxation that can be part of everyday life.",
-      "paragraph4": "A jacuzzi changes how people use the space around their home. The terrace becomes a place to relax. The courtyard becomes a place to meet. The evening becomes a moment of quiet. For guesthouses and hotels, the experience matters even more — a space with a jacuzzi turns a simple stay into something memorable. WaterVibes exists for this: to make real relaxation accessible in every home and in every place dedicated to hospitality."
+      "title": "Why WaterVibe exists",
+      "paragraph1": "WaterVibe started from a simple idea. Real relaxation shouldn't be an occasional luxury you only get on holiday.",
+      "paragraph2": "Every home, every guesthouse, every hotel can have a space set aside for relaxation. A place where the body lets go, the head steps out of the day's pace, and time with family or guests turns into something memorable.",
+      "paragraph3": "Water does the work. Hydromassage loosens muscle tension. Warm water releases the clench in your shoulders. The jets get your circulation moving. Within a few minutes, you're somewhere else. That's the point of WaterVibe. We don't sell jacuzzis. We sell the evenings that follow them.",
+      "paragraph4": "A hot tub changes the space around your house. The terrace becomes somewhere to unwind. The courtyard becomes somewhere to meet. Evenings slow down. For guesthouses and hotels, a space with a jacuzzi turns a booking into something guests talk about when they get home."
     },
     "chapter2": {
       "eyebrow": "Chapter 02",
-      "title": "How we do it",
-      "paragraph1": "WaterVibes builds its offering with a clear goal: to provide relaxation solutions that fit as many spaces, styles and needs as possible.",
-      "paragraph2": "We select every jacuzzi model carefully. We look at comfort, material quality, hydromassage performance, and the reliability of the technical systems. We choose models that deliver a genuine spa experience and that can be used constantly, without compromises.",
-      "paragraph3": "The WaterVibes portfolio is designed to cover a wide range of requirements. We offer jacuzzis in different sizes — for two people, for families, or for larger groups. There are compact models for smaller terraces or courtyards, and spacious models for guesthouses or hotels.",
-      "paragraph4": "We include models with different jet configurations for hydromassage. Each seat in a jacuzzi offers a different kind of massage, designed to relax muscles and release accumulated tension.",
-      "paragraph5": "Design matters. We select jacuzzis in colours and finishes that integrate easily into modern or classic spaces. A jacuzzi should complete the terrace, the garden, or the relaxation zone — and become part of the atmosphere of the place. Technology matters just as much. We select filtration, heating, and water-control systems chosen for comfort and optimal energy use.",
-      "paragraph6": "The process continues with consultation on choosing the right model. We review the available space, how many people will use the jacuzzi, and how it will sit in the relaxation area. We provide guidance and recommendations for installation, so each customer understands the technical requirements and the steps needed to mount the jacuzzi correctly."
+      "title": "How we pick every jacuzzi",
+      "paragraph1": "WaterVibe has one job. Offer water-based relaxation that fits as many spaces, styles, and budgets in Romania as possible.",
+      "paragraph2": "Every model earns its place. We check comfort, material quality, hydromassage performance, and the reliability of the technical systems. We list jacuzzis you can use every week without babying them.",
+      "paragraph3": "The range covers real needs. 2-person jacuzzis for couples. 4-person tubs for the whole family. 6-person tubs for groups of friends, or for guesthouses and small hotels. Compact models for tight terraces and courtyards. Spacious models for bigger properties.",
+      "paragraph4": "Jet configurations vary by model. Each seat massages a different zone. Neck, back, lumbar, calves. You feel the day leave you one muscle group at a time.",
+      "paragraph5": "Design matters as much as specs. We pick finishes that sit well in both modern and classic spaces. A jacuzzi should complete a terrace or garden, not compete with it. The technology follows the same rule. Filtration, heating, and water control picked for comfort first and for sensible energy use second.",
+      "paragraph6": "The last step is the conversation. We look at the space, how many people will use the tub, and how it fits with the terrace or interior you already have. You leave with the right model, a delivered price, and clear technical steps for the install."
     },
     "chapter3": {
       "eyebrow": "Chapter 03",
-      "title": "What we actually offer",
-      "paragraph1": "WaterVibes offers water-based relaxation solutions for both private residences and hospitality venues. We select and supply modern jacuzzis designed for comfort, durability, and a real hydromassage experience.",
-      "paragraph2": "Each model is chosen to answer a different use — from private spaces to guesthouses and hotels that want to offer guests something extra, or for quality time with friends.",
-      "paragraph3": "Depending on the space and preferences, customers can choose indoor or outdoor models, with different sizes, seat counts, jet configurations and colour options. The goal is for each customer to find a model that fits both the available space and the style of the place.",
-      "paragraph4": "Consultation is part of what we offer. We help customers understand the differences between models and choose the right variant for their space, the number of users, and how they want to use the jacuzzi. Through this product selection and the support behind it, WaterVibes makes the spa experience more accessible and easier to integrate."
+      "title": "What you actually get",
+      "paragraph1": "WaterVibe offers modern hydromassage jacuzzis for private homes, for guesthouses, and for hotels in Romania. Every model is picked for comfort, durability, and a hydromassage that still feels like hydromassage two years in.",
+      "paragraph2": "Depending on your space and your taste, you can pick indoor or outdoor models. Different sizes. Different seat counts. Different jet layouts. Different finishes. The goal is simple. You find a jacuzzi that suits both your space and its style without giving anything up on build quality.",
+      "paragraph3": "For guesthouses and hotels, a jacuzzi lifts the property. It shows up in reviews. We walk through usage flow, cleaning rhythm, and how the hot tub fits into your accommodation offer.",
+      "paragraph4": "Consultation is part of what we do. We explain the differences between models, help you pick the right one for your head count and how you'll use it, and give you a delivered price for Romania with clear installation steps."
+    },
+    "ensama": {
+      "eyebrow": "Company · Romania",
+      "title": "Operated by ENSAMA SRL, Câmpina",
+      "description": "WaterVibe is the brand ENSAMA SRL uses to pick, deliver, and support jacuzzis across Romania. Head office in Câmpina, Prahova county.",
+      "labels": {
+        "company": "Company",
+        "address": "Office",
+        "phone": "Phone · WhatsApp",
+        "area": "Delivered in",
+        "social": "Find us on"
+      },
+      "company": "ENSAMA SRL",
+      "address": "Bulevardul Carol I 90, Câmpina, Prahova",
+      "phone": "+40 726 793 993",
+      "area": "All of Romania",
+      "facebookLabel": "Facebook"
     }
   },
   "contact": {
     "eyebrow": "Get in touch",
-    "title": "Let's talk about your space",
-    "description": "Share a few details about your space and what you're looking for. We'll reply within one business day with options and a delivered price.",
+    "title": "Get a jacuzzi quote",
+    "description": "Tell us about your space. Terrace, garden, interior, guesthouse, hotel. We reply within one business day with matching jacuzzis, a delivered price for Romania, and the installation steps.",
     "aside": {
-      "pullquote": "We believe relaxation shouldn't be an occasional luxury. It should be part of everyday life.",
-      "pullquoteAttribution": "WaterVibes"
+      "pullquote": "Real relaxation shouldn't be an occasional luxury. It should be part of normal life.",
+      "pullquoteAttribution": "WaterVibe · ENSAMA SRL"
     },
     "info": {
       "emailLabel": "Email",
-      "email": "hello@watervibes.example",
-      "phoneLabel": "Phone",
-      "phone": "+40 700 000 000",
-      "addressLabel": "Studio",
-      "address": "București, Romania",
+      "email": "hello@watervibe.ro",
+      "phoneLabel": "Phone · WhatsApp",
+      "phone": "+40 726 793 993",
+      "addressLabel": "Office",
+      "address": "Bulevardul Carol I 90, Câmpina, Prahova",
       "hoursLabel": "Hours",
-      "hours": "Mon–Fri · 9:00–18:00"
+      "hours": "Mon to Fri · 9:00 to 18:00 · one business day reply"
     },
     "form": {
       "name": "Your name",
       "email": "Email address",
       "phone": "Phone",
       "phoneOptional": "(optional)",
-      "message": "Your message",
+      "message": "Tell us about your space",
       "submit": "Send message",
       "submitting": "Sending…",
       "quoteContextLabel": "Quote for",
       "validation": {
         "nameMin": "Please enter your full name.",
         "emailInvalid": "Please enter a valid email address.",
-        "messageMin": "A short message helps us reply well — 10 characters minimum.",
+        "messageMin": "A short message helps us reply well. 10 characters minimum.",
         "messageMax": "Please keep your message under 2000 characters."
       },
       "success": {
-        "title": "Thanks — your message is on its way.",
-        "message": "We'll be in touch shortly. In the meantime, feel free to keep browsing the collection.",
+        "title": "Thanks. Your message is on its way.",
+        "message": "We'll come back within one business day with matching jacuzzis and a delivered price. Feel free to keep browsing the collection in the meantime.",
         "sendAnother": "Send another message"
       },
       "error": {
-        "generic": "Something went wrong. Please try again or email us directly at {email}.",
-        "rateLimit": "You've sent several messages already. Please wait a few minutes before trying again."
+        "generic": "Something went wrong. Try again, or email us directly at {email}.",
+        "rateLimit": "You've sent several messages already. Wait a few minutes before trying again."
       }
     },
     "toast": {
       "success": "Message sent. We'll be in touch.",
-      "error": "We couldn't send your message. Please try again."
+      "error": "We couldn't send your message. Try again."
     }
   },
   "catalog": {
-    "title": "The collection",
-    "eyebrow": "Catalog",
-    "description": "Every jacuzzi on this page is chosen for how it feels to live with — quiet motors, honest finishes, hydromassage that still works on the hundredth night.",
+    "title": "Jacuzzi models",
+    "eyebrow": "The WaterVibe collection",
+    "description": "Jacuzzis for 2, 4, or 6 people. Indoor or outdoor, in finishes that sit well in real rooms and real gardens. Quiet pumps, honest finishes, hydromassage that still works on the hundredth evening.",
     "kicker": "{count, plural, =0 {No matches} one {# jacuzzi} other {# jacuzzis}}",
     "allSizes": "All sizes",
     "filters": {
@@ -205,18 +226,18 @@
       "favorite": "Save for later"
     },
     "empty": {
-      "title": "Nothing matches — yet.",
-      "message": "No jacuzzis fit the filters you've selected. Try loosening a size or color constraint, or start fresh.",
+      "title": "No jacuzzi fits. Yet.",
+      "message": "None of the jacuzzis match the filters you've set. Try loosening a size or colour option, or clear everything and start fresh.",
       "clearFilters": "Clear all filters"
     }
   },
   "product": {
     "breadcrumb": {
-      "catalog": "The collection",
+      "catalog": "Jacuzzi models",
       "back": "Back to collection"
     },
     "masthead": {
-      "eyebrow": "A WaterVibes model",
+      "eyebrow": "A WaterVibe model",
       "dossier": "Dossier",
       "model": "Model"
     },
@@ -224,7 +245,7 @@
       "frame": "Frame",
       "prev": "Previous image",
       "next": "Next image",
-      "noImages": "Imagery pending"
+      "noImages": "Imagery coming soon"
     },
     "price": {
       "from": "From",
@@ -237,7 +258,7 @@
       "title": "Specifications",
       "eyebrow": "At a glance",
       "dimensions": "Dimensions",
-      "jets": "Jets",
+      "jets": "Hydromassage jets",
       "capacity": "Capacity (persons)",
       "power": "Power draw",
       "weightEmpty": "Weight (empty)",
@@ -264,19 +285,19 @@
     "closing": {
       "eyebrow": "The next step",
       "title": "Let's talk through your space.",
-      "description": "Tell us a few details. We'll come back with size options, a delivered price, and a clear install path — within one business day.",
+      "description": "Tell us a few details. We come back with size options, a delivered price, and a clear install path. Within one business day.",
       "primary": "Start the conversation"
     }
   },
   "errors": {
     "notFound": {
       "title": "Page not found",
-      "message": "The page you were looking for isn't here. It may have moved, or never existed.",
+      "message": "The page you were looking for isn't here. Either it moved, or it never existed.",
       "cta": "Back to homepage"
     },
     "generic": {
       "title": "Something went wrong",
-      "message": "An unexpected error happened on our side. You can try again, or head back home.",
+      "message": "An unexpected error happened on our side. Try again, or head back home.",
       "retry": "Try again"
     }
   },

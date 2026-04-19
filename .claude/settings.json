@@ -8,7 +8,14 @@
       "Bash(curl -s -o /dev/null -w \"sitemap: %{http_code}\\\\n\" http://localhost:3000/sitemap.xml)",
       "Bash(curl -s -o /dev/null -w \"robots: %{http_code}\\\\n\" http://localhost:3000/robots.txt)",
       "Bash(curl -s http://localhost:3000/sitemap.xml)",
-      "Bash(git --no-pager diff -- CLAUDE.MD)"
+      "Bash(git --no-pager diff -- CLAUDE.MD)",
+      "Bash(curl -sI http://localhost:3000/)",
+      "Bash(curl -s -o /tmp/product.html -w \"status=%{http_code} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/catalog/azure-2)",
+      "Bash(curl -s -o /tmp/og.png -w \"og status=%{http_code} ctype=%{content_type} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/opengraph-image)",
+      "Bash(curl -s -o /tmp/og-product.png -w \"og-prod status=%{http_code} ctype=%{content_type} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/catalog/azure-2/opengraph-image)",
+      "Bash(curl -s -o /tmp/about.html -w \"about status=%{http_code} bytes=%{size_download}\\\\n\" http://localhost:3000/ro/about)",
+      "Bash(wait %1 %2)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

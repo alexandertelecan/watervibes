@@ -48,7 +48,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "The Azure 2 is our smallest hot tub. It fits on a balcony or a tight terrace without eating the view. Fourteen hydromassage jets wrap the two contoured seats, and the pump runs quiet enough to have a conversation over.\n\nIt's the right jacuzzi for couples who want a jacuzzi at home but don't want to give up half the terrace to get one.",
-      ro: "Azure 2 este cel mai mic jacuzzi din colecție. Intră pe un balcon sau pe o terasă îngustă fără să consume decorul. Paisprezece duze de hidromasaj încadrează cele două scaune ergonomice, iar pompa merge suficient de silențios ca să poți purta o conversație peste ea.\n\nEste jacuzzi-ul potrivit pentru cupluri care vor un jacuzzi acasă, dar nu vor să renunțe la jumătate de terasă ca să îl aibă.",
+      ro: "Azure 2 este cel mai mic jacuzzi din colecție. Intră pe un balcon sau pe o terasă îngustă fără să consume decorul. Paisprezece duze de hidromasaj încadrează cele două scaune ergonomice, iar pompa merge suficient de silențios ca să purtați o conversație peste ea.\n\nEste cada cu hidromasaj potrivită pentru cupluri care vor un jacuzzi acasă, dar nu vor să renunțe la jumătate de terasă pentru asta.",
     },
     size: "2-person",
     color: "white",
@@ -93,7 +93,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "Azure 4 keeps the clean shape of the Azure 2 and adds room for friends. The shell is finished in a warm ivory white that holds its colour in full sun.\n\nTwo reclined seats face each other across the massage bench. You can talk across the tub and still get hydrotherapy on your lower back at the same time.",
-      ro: "Azure 4 păstrează silueta curată a Azure 2 și adaugă loc pentru prieteni. Carcasa are un finisaj alb ivoire cald care își ține culoarea la soare plin.\n\nDouă scaune înclinate sunt așezate față în față, peste banca de masaj. Poți purta o conversație peste cadă și să primești în același timp hidromasaj pe zona lombară.",
+      ro: "Azure 4 păstrează silueta curată a Azure 2 și adaugă loc pentru prieteni. Carcasa are un finisaj alb ivoire cald care își ține culoarea la soare plin.\n\nDouă scaune înclinate sunt așezate față în față, peste banca de masaj. Puteți purta o conversație peste cadă și primi în același timp hidromasaj pe zona lombară.",
     },
     size: "4-person",
     color: "white",
@@ -140,7 +140,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "Coral Breeze was drawn after a week on the Adriatic coast. Teak-grain composite panels wrap the cabinet. The interior shell is a soft pebble cream that reads warmer the longer you sit in it.\n\nHeadrests come off for cleaning. The skimmer pulls twice the debris of our standard models, which matters more than the spec sheet suggests the first time you leave the cover off on a windy evening.",
-      ro: "Coral Breeze s-a desenat după o săptămână pe litoralul Adriatic. Panouri compozite cu textură teak îmbracă corpul jacuzzi-ului. Carcasa interioară este într-un crem delicat care se citește mai cald pe măsură ce stai în el.\n\nTetierele se scot pentru curățare. Skimmerul colectează de două ori mai multe impurități decât modelele standard, lucru care contează mai mult decât sugerează fișa tehnică prima dată când lași capacul deschis într-o seară cu vânt.",
+      ro: "Coral Breeze s-a desenat după o săptămână pe litoralul Adriatic. Panouri compozite cu textură teak îmbracă corpul cazii. Carcasa interioară este într-un crem delicat care se citește mai cald pe măsură ce stați în ea.\n\nTetierele se scot pentru curățare. Skimmerul colectează de două ori mai multe impurități decât modelele standard. Detaliu care contează mai mult decât sugerează fișa tehnică prima dată când lăsați capacul deschis într-o seară cu vânt.",
     },
     size: "4-person",
     color: "teak",
@@ -187,7 +187,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "Pebble 2 comes out of a single continuous mould in deep graphite. The silhouette sits low and quiet. It's the kind of hot tub that disappears into a courtyard after dusk.\n\nInside, two reclining seats share a central footwell. The built-in waterfall tap works as ambient sound on evenings when you want to skip the jets.",
-      ro: "Pebble 2 este turnat dintr-o singură matriță în grafit profund. Silueta e joasă și discretă. Este jacuzzi-ul care dispare într-o curte interioară la lăsarea serii.\n\nÎn interior, două scaune înclinate împart un spațiu central pentru picioare. Cascada integrată servește și ca sunet ambiental, în serile când vrei să stai fără jeturi.",
+      ro: "Pebble 2 este turnat dintr-o singură matriță în grafit profund. Silueta este joasă și discretă. Este jacuzzi-ul care dispare într-o curte interioară la lăsarea serii.\n\nÎn interior, două scaune înclinate împart un spațiu central pentru picioare. Cascada integrată servește și ca sunet ambiental, în serile în care preferați să stați fără jeturi.",
     },
     size: "2-person",
     color: "graphite",
@@ -279,7 +279,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "Serenity 6 is built for a long soak with the whole family. Five seats sit around the perimeter. One full-length lounger stretches the length of the shell.\n\nThe insulation stack hits an R-16 rating. The heater barely wakes up between sessions, even in winter. This is the tub you buy when you know you'll run it two or three times a week.",
-      ro: "Serenity 6 este gândit pentru o ședere lungă alături de toată familia. Cinci locuri sunt așezate pe perimetru. O canapea pe toată lungimea ocupă întregul fund al jacuzzi-ului.\n\nIzolația atinge un rating R-16. Încălzitorul abia se trezește între sesiuni, chiar și iarna. Este jacuzzi-ul pe care îl cumperi când știi că îl vei folosi de două sau trei ori pe săptămână.",
+      ro: "Serenity 6 este gândit pentru o ședere lungă alături de toată familia. Cinci locuri sunt așezate pe perimetru. O canapea pe toată lungimea ocupă întregul fund al jacuzzi-ului.\n\nIzolația atinge un rating R-16. Încălzitorul abia se trezește între sesiuni, chiar și iarna. Este jacuzzi-ul exterior pe care îl alegeți când știți că îl veți folosi de două sau trei ori pe săptămână.",
     },
     size: "6+person",
     color: "graphite",
@@ -328,7 +328,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "Lagoon Pro is the model our commercial partners pick for boutique hotels and larger guesthouses. Six seats with room to spare. Seven at a push. Every litre of water cycles through the filter every fifteen minutes.\n\nThe shell is pure cast acrylic in a cool arctic white, so the water reads a shade bluer than you expect on bright days.",
-      ro: "Lagoon Pro este modelul pe care partenerii noștri comerciali îl aleg pentru hoteluri boutique și pensiuni mari. Șase locuri confortabile. Șapte la nevoie. Fiecare litru de apă trece prin filtru la fiecare cincisprezece minute.\n\nCarcasa este din acril turnat într-un alb arctic rece, așa că apa se citește cu o nuanță mai albastră decât te-ai aștepta în zilele însorite.",
+      ro: "Lagoon Pro este modelul pe care partenerii noștri comerciali îl aleg pentru hoteluri boutique și pensiuni mari. Șase locuri confortabile. Șapte la nevoie. Fiecare litru de apă trece prin filtru la fiecare cincisprezece minute.\n\nCarcasa este din acril turnat într-un alb arctic rece. Apa se citește cu o nuanță mai albastră decât v-ați aștepta în zilele însorite.",
     },
     size: "6+person",
     color: "white",
@@ -377,7 +377,7 @@ export const seedProducts: SeedProduct[] = [
     },
     description: {
       en: "Oasis Signature is the full WaterVibe expression. Warm teak-grain surfaces run from cabinet to headrest. Every control surface, every cover handle, every footrest trim is wrapped in full-grain leather.\n\nIt ships with white-glove installation and a setup visit from one of our engineers. You're not figuring out jet pressure on your own the first night.",
-      ro: "Oasis Signature este expresia completă WaterVibe. Suprafețele cu textură teak caldă curg din cabinet în tetiere. Fiecare suprafață de comandă, fiecare mâner al capacului, fiecare ornament de la sprijinul pentru picioare este îmbrăcat în piele naturală.\n\nSe livrează cu instalare premium și o vizită de configurare cu unul dintre inginerii noștri. Nu te chinui singur cu presiunea jeturilor în prima seară.",
+      ro: "Oasis Signature este expresia completă WaterVibe. Suprafețele cu textură teak caldă curg din cabinet în tetiere. Fiecare suprafață de comandă, fiecare mâner al capacului, fiecare ornament de la sprijinul pentru picioare este îmbrăcat în piele naturală.\n\nSe livrează cu instalare premium și o vizită de configurare cu unul dintre inginerii noștri. Nu vă chinuiți singur cu presiunea jeturilor în prima seară.",
     },
     size: "6+person",
     color: "teak",

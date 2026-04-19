@@ -22,7 +22,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "WaterVibes Admin",
+  title: "WaterVibe Admin",
   robots: { index: false, follow: false },
 };
 

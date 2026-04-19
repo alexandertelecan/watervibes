@@ -12,11 +12,18 @@ import {
 } from "@/components/catalog/CatalogToolbar";
 import { SizeRibbon } from "@/components/catalog/SizeRibbon";
 import { Container } from "@/components/shared/Container";
-import { routing } from "@/i18n/routing";
+import { JsonLd } from "@/components/shared/JsonLd";
 import { PRODUCT_SIZES } from "@/lib/constants";
 import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
-import type { Locale, Product, ProductColor } from "@/types/product";
+import {
+  alternatesFor,
+  assertLocale,
+  breadcrumbSchema,
+  openGraphFor,
+  twitterFor,
+} from "@/lib/seo";
+import type { Product, ProductColor } from "@/types/product";
 
 type PageParams = { locale: string };
 type PageSearch = { size?: string; color?: string; sort?: string };
@@ -24,12 +31,6 @@ type PageSearch = { size?: string; color?: string; sort?: string };
 function splitCsv(value: string | undefined): string[] {
   if (!value) return [];
   return value.split(",").map((v) => v.trim()).filter(Boolean);
-}
-
-function assertLocale(value: string): Locale {
-  return (routing.locales as readonly string[]).includes(value)
-    ? (value as Locale)
-    : (routing.defaultLocale as Locale);
 }
 
 function parseSort(value: string | undefined): CatalogSort {
@@ -58,28 +59,18 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "catalog" });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const path = `/${locale}/catalog`;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
+  const t = await getTranslations({ locale, namespace: "meta.catalog" });
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t("title"),
-    description: t("description"),
-    alternates: {
-      canonical: `${siteUrl}${path}`,
-      languages: {
-        en: `${siteUrl}/en/catalog`,
-        ro: `${siteUrl}/ro/catalog`,
-      },
-    },
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      url: `${siteUrl}${path}`,
-      locale,
-      type: "website",
-      images: ["/og-image.jpg"],
-    },
+    title,
+    description,
+    alternates: alternatesFor(locale, "/catalog"),
+    openGraph: openGraphFor(locale, "/catalog", { title, description }),
+    twitter: twitterFor({ title, description }),
   };
 }
 
@@ -184,6 +175,13 @@ export default async function CatalogPage({
           </div>
         </div>
       </Container>
+
+      <JsonLd
+        data={breadcrumbSchema(
+          [{ name: t("title"), path: "/catalog" }],
+          locale,
+        )}
+      />
     </>
   );
 }

@@ -69,25 +69,27 @@
     ├── app/
     │   ├── favicon.ico
     │   ├── globals.css                     # Tailwind v4 + CSS custom properties (design tokens)
-    │   ├── sitemap.ts                      # MetadataRoute.Sitemap — /en, /ro static paths + product slugs from MongoDB
-    │   ├── robots.ts                       # MetadataRoute.Robots — allow /, disallow /admin/ + /api/, sitemap ref
+    │   ├── sitemap.ts                      # MetadataRoute.Sitemap — bilingual static paths + product slugs; per-entry alternates.languages (hreflang + x-default)
+    │   ├── robots.ts                       # MetadataRoute.Robots — allow /, disallow /admin/ + /api/, sitemap ref; reads SITE_URL via lib/seo
     │   │
-    │   ├── [locale]/                       # all public pages live here (bilingual)
-    │   │   ├── layout.tsx                  # header + footer + fonts + SkipToContent + <main id="main"> + metadata template + og image
-    │   │   ├── page.tsx                    # HOME → components/home/* (Hero + Featured + Testimonials + CTA)
+    │   ├── [locale]/                       # all public pages live here (bilingual; default locale is ro)
+    │   │   ├── layout.tsx                  # header + footer + fonts + SkipToContent + <main id="main"> + metadata (canonical + hreflang + twitter cards + RO/EN keywords) + emits Organization + WebSite JSON-LD
+    │   │   ├── opengraph-image.tsx         # dynamic 1200x630 OG image (next/og) — per-locale eyebrow + headline + wordmark; applies to home/about/catalog/contact/errors
+    │   │   ├── page.tsx                    # HOME → components/home/* (Hero + Featured + Testimonials + CTA) + LocalBusiness JSON-LD
     │   │   ├── not-found.tsx               # localized 404 — rendered by notFound() inside [locale]
     │   │   ├── error.tsx                   # "use client" — localized error boundary (Try again + Back home)
     │   │   ├── [...rest]/page.tsx          # catch-all — triggers notFound() so unknown localized paths hit not-found.tsx
     │   │   ├── about/
-    │   │   │   └── page.tsx                # ABOUT page (server) → masthead hero w/ magazine TOC (dotted leaders) + 3 chapters in distinct registers (manifesto / craft log on --surface / inverted collage+quote) + centered signature band + HomeCTA
+    │   │   │   └── page.tsx                # ABOUT (server) → masthead hero w/ magazine TOC + 3 chapters in distinct registers + ENSAMA NAP band (address + phone + area served + Facebook) + signature band + HomeCTA; LocalBusiness JSON-LD
     │   │   ├── catalog/
-    │   │   │   ├── page.tsx                # CATALOG list → components/catalog/*
+    │   │   │   ├── page.tsx                # CATALOG list → components/catalog/* + BreadcrumbList JSON-LD
     │   │   │   ├── loading.tsx             # skeleton grid (9 cards) + filter placeholder
     │   │   │   └── [slug]/
-    │   │   │       ├── page.tsx            # PRODUCT DETAIL → components/product/*
+    │   │   │       ├── page.tsx            # PRODUCT DETAIL → components/product/* + Product + Offer + BreadcrumbList JSON-LD; meta title/description auto-generated
+    │   │   │       ├── opengraph-image.tsx # dynamic per-product OG (1200x630) — product name + capacity + price + wordmark; DB-backed via next/og
     │   │   │       └── loading.tsx         # skeleton gallery + text placeholders
     │   │   └── contact/
-    │   │       └── page.tsx                # CONTACT page (server) → components/contact/ContactForm
+    │   │       └── page.tsx                # CONTACT (server) → components/contact/ContactForm + LocalBusiness JSON-LD; ENSAMA address + phone in aside
     │   │
     │   ├── admin/                          # ENGLISH-ONLY — internal CMS, never locale-prefixed
     │   │   ├── layout.tsx                  # root html/body/fonts for the /admin tree (public — includes /admin/login)
@@ -163,6 +165,7 @@
     │   │   ├── Container.tsx               # mx-auto wrapper with size: narrow | default | wide
     │   │   ├── FadeIn.tsx                  # "use client" — fade-up reveal + optional animated aqua hairline
     │   │   ├── ImagePlaceholder.tsx        # surface container with diagonal hairline pattern + role label — used for the 5 IMAGERY.md roles pending URLs
+    │   │   ├── JsonLd.tsx                  # server — renders a <script type="application/ld+json"> block; accepts a single schema or an array (flattened into @graph). Used by layout + pages for structured data
     │   │   ├── PriceTag.tsx                # formatted EUR price display
     │   │   └── SectionHeading.tsx          # asymmetric (default) or center — eyebrow + h2 + floated lede per DESIGN.md §5
     │   │
@@ -185,7 +188,7 @@
     │   │   └── EmptyState.tsx              # shown when filters return zero — surface panel with aqua wash + brand Button
     │   │
     │   ├── product/
-    │   │   ├── ProductGallery.tsx          # primary image + thumbnails
+    │   │   ├── ProductGallery.tsx          # primary image + thumbnails; alt text auto-generated via lib/seo.productAltText (name + size + color + frame #)
     │   │   ├── ProductSpecs.tsx            # dimensions / capacity / power table
     │   │   ├── ProductFeatures.tsx         # bilingual feature bullets
     │   │   ├── ColorSwatch.tsx             # color chip (single-color per SKU)
@@ -207,6 +210,7 @@
     │   ├── resend.ts                       # Resend singleton + sendContactEmail() helper (server-only)
     │   ├── auth.ts                         # bcrypt + jose crypto: verifyPassword, signSessionToken, verifySessionToken, cookie options (Edge-safe)
     │   ├── auth-server.ts                  # Node-only: isAdmin() / requireAdmin() — reads cookies() from next/headers
+    │   ├── seo.ts                          # single source of truth for SITE_URL, ENSAMA business profile (NAP), canonical/hreflang helpers, product meta + alt auto-gen, and JSON-LD builders (Organization, WebSite, LocalBusiness, Product+Offer, BreadcrumbList)
     │   ├── serializers.ts                  # serializeProduct / serializeTestimonial — converts Mongoose docs to plain JSON for client components
     │   ├── models/
     │   │   ├── Product.ts                  # Mongoose schema (bilingual fields)
@@ -249,6 +253,9 @@
 | Localized 404 / error boundary          | [not-found](src/app/[locale]/not-found.tsx) + [error](src/app/[locale]/error.tsx) + catch-all [...rest]/page.tsx |
 | Admin error boundary                    | [src/app/admin/(protected)/error.tsx](src/app/admin/(protected)/error.tsx) |
 | Sitemap / Robots                        | [src/app/sitemap.ts](src/app/sitemap.ts) + [src/app/robots.ts](src/app/robots.ts) |
+| SEO helpers (canonical, NAP, schema)    | [src/lib/seo.ts](src/lib/seo.ts) — SITE_URL, BUSINESS (ENSAMA), `alternatesFor`, `openGraphFor`, `twitterFor`, `productAltText`, `productMetaTitle/Description`, and JSON-LD builders |
+| JSON-LD renderer                        | [src/components/shared/JsonLd.tsx](src/components/shared/JsonLd.tsx) |
+| Dynamic OG images (next/og)             | [src/app/[locale]/opengraph-image.tsx](src/app/[locale]/opengraph-image.tsx) + [per-product](src/app/[locale]/catalog/[slug]/opengraph-image.tsx) |
 | Loading skeletons                       | [catalog](src/app/[locale]/catalog/loading.tsx), [product](src/app/[locale]/catalog/[slug]/loading.tsx), [admin products](src/app/admin/(protected)/products/loading.tsx) + [ProductCardSkeleton](src/components/catalog/ProductCardSkeleton.tsx) |
 | Skip-to-content link                    | [src/components/layout/SkipToContent.tsx](src/components/layout/SkipToContent.tsx) |
 | Mobile navigation (Sheet)               | [src/components/layout/MobileNav.tsx](src/components/layout/MobileNav.tsx) |

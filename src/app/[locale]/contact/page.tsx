@@ -4,7 +4,14 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
-import { routing, type Locale } from "@/i18n/routing";
+import { JsonLd } from "@/components/shared/JsonLd";
+import {
+  alternatesFor,
+  assertLocale,
+  localBusinessSchema,
+  openGraphFor,
+  twitterFor,
+} from "@/lib/seo";
 
 type PageParams = { locale: string };
 type PageSearch = { product?: string | string[] };
@@ -21,28 +28,18 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
   const t = await getTranslations({ locale, namespace: "meta.contact" });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const path = `/${locale}/contact`;
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t("title"),
-    description: t("description"),
-    alternates: {
-      canonical: `${siteUrl}${path}`,
-      languages: {
-        en: `${siteUrl}/en/contact`,
-        ro: `${siteUrl}/ro/contact`,
-      },
-    },
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      url: `${siteUrl}${path}`,
-      locale,
-      type: "website",
-      images: ["/og-image.jpg"],
-    },
+    title,
+    description,
+    alternates: alternatesFor(locale, "/contact"),
+    openGraph: openGraphFor(locale, "/contact", { title, description }),
+    twitter: twitterFor({ title, description }),
   };
 }
 
@@ -58,17 +55,14 @@ export default async function ContactPage({
   params: Promise<PageParams>;
   searchParams: Promise<PageSearch>;
 }) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
   setRequestLocale(locale);
 
   const { product } = await searchParams;
   const productSlug = normalizeSlug(product);
 
   const t = await getTranslations({ locale, namespace: "contact" });
-
-  const typedLocale: Locale = routing.locales.includes(locale as Locale)
-    ? (locale as Locale)
-    : routing.defaultLocale;
 
   return (
     <section className="py-24 md:py-32">
@@ -130,11 +124,15 @@ export default async function ContactPage({
           {/* Form panel — col-span-7, --radius-xl (36px), bg-surface */}
           <FadeIn delay={0.15} className="lg:col-span-7">
             <div className="rounded-xl bg-surface p-8 shadow-md md:p-12">
-              <ContactForm locale={typedLocale} productSlug={productSlug} />
+              <ContactForm locale={locale} productSlug={productSlug} />
             </div>
           </FadeIn>
         </div>
       </Container>
+
+      {/* LocalBusiness — contact page is the canonical NAP surface for
+          crawlers; the schema mirrors the address + phone shown above. */}
+      <JsonLd data={localBusinessSchema(locale)} />
     </section>
   );
 }

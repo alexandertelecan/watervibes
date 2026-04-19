@@ -65,7 +65,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm rounded-lg bg-surface p-10 shadow-md">
         <div className="mb-8 flex flex-col items-center gap-3">
           <span aria-hidden="true" className="h-px w-10 bg-accent" />
-          <h1 className="text-h2 text-foreground">WaterVibes Admin</h1>
+          <h1 className="text-h2 text-foreground">WaterVibe Admin</h1>
           <p className="text-small text-muted-foreground">
             Enter your password to continue.
           </p>

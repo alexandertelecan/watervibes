@@ -10,20 +10,25 @@ import { ProductSpecs } from "@/components/product/ProductSpecs";
 import { QuoteCTA } from "@/components/product/QuoteCTA";
 import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
+import { JsonLd } from "@/components/shared/JsonLd";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { SIZES } from "@/lib/constants";
 import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
-import type { Locale, Product, ProductColor } from "@/types/product";
+import {
+  alternatesFor,
+  assertLocale,
+  breadcrumbSchema,
+  openGraphFor,
+  productMetaDescription,
+  productMetaTitle,
+  productSchema,
+  twitterFor,
+} from "@/lib/seo";
+import type { Product, ProductColor } from "@/types/product";
 
 type PageParams = { locale: string; slug: string };
-
-function assertLocale(value: string): Locale {
-  return (routing.locales as readonly string[]).includes(value)
-    ? (value as Locale)
-    : (routing.defaultLocale as Locale);
-}
 
 async function loadProduct(slug: string): Promise<Product | null> {
   await dbConnect();
@@ -70,28 +75,22 @@ export async function generateMetadata({
   const locale = assertLocale(rawLocale);
   const product = await loadProduct(slug);
   if (!product) return {};
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const path = `/${locale}/catalog/${slug}`;
+
+  const t = await getTranslations({ locale });
+  const title = productMetaTitle(product, locale, t);
+  const description = productMetaDescription(product, locale, t);
+  const path = `/catalog/${slug}`;
+
   return {
-    title: product.name[locale],
-    description: product.tagline[locale],
-    alternates: {
-      canonical: `${siteUrl}${path}`,
-      languages: {
-        en: `${siteUrl}/en/catalog/${slug}`,
-        ro: `${siteUrl}/ro/catalog/${slug}`,
-      },
-    },
-    openGraph: {
-      title: product.name[locale],
-      description: product.tagline[locale],
-      url: `${siteUrl}${path}`,
-      locale,
-      type: "website",
-      images: product.images[0]
-        ? [{ url: product.images[0] }]
-        : ["/og-image.jpg"],
-    },
+    title,
+    description,
+    alternates: alternatesFor(locale, path),
+    openGraph: openGraphFor(locale, path, {
+      title,
+      description,
+      type: "article",
+    }),
+    twitter: twitterFor({ title, description }),
   };
 }
 
@@ -226,7 +225,8 @@ export default async function ProductDetailPage({
       <Container size="wide" className="pt-12 md:pt-20">
         <ProductGallery
           images={product.images}
-          alt={product.name[locale]}
+          product={product}
+          locale={locale}
         />
       </Container>
 
@@ -354,6 +354,19 @@ export default async function ProductDetailPage({
           </div>
         </div>
       </Container>
+
+      <JsonLd
+        data={[
+          productSchema(product, locale, t),
+          breadcrumbSchema(
+            [
+              { name: t("product.breadcrumb.catalog"), path: "/catalog" },
+              { name: product.name[locale], path: `/catalog/${slug}` },
+            ],
+            locale,
+          ),
+        ]}
+      />
     </article>
   );
 }

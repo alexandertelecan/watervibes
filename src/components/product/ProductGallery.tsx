@@ -5,24 +5,35 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
+import { productAltText } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import type { Locale, Product } from "@/types/product";
 
 // DESIGN.md §5 — ProductGallery. Aesop echo: the primary image floats on a
 // --surface panel with --shadow-lg. A "Frame 01 / 03" marker sits as a small
 // eyebrow on the top-left of the panel; numbered thumbs run as a vertical
 // filmstrip on the right (desktop) or horizontally under the panel (mobile).
 // Floating prev/next chevrons sit bottom-right of the panel.
+//
+// Alt text is composed per-image from the product's name + size + color so
+// every frame gets a descriptive label (good for a11y and SEO) rather than
+// the same repeated product name.
 export function ProductGallery({
   images,
-  alt,
+  product,
+  locale,
 }: {
   images: string[];
-  alt: string;
+  product: Product;
+  locale: Locale;
 }) {
   const t = useTranslations("product.gallery");
+  const tRoot = useTranslations();
   const [index, setIndex] = useState(0);
   const safe = images.length > 0 ? images : [];
   const count = safe.length;
+  const primaryAlt = productAltText(product, locale, tRoot, index);
+  const stripLabel = productAltText(product, locale, tRoot, 0);
 
   const move = (delta: number) => {
     if (count === 0) return;
@@ -66,7 +77,7 @@ export function ProductGallery({
             {safe[index] ? (
               <Image
                 src={safe[index]}
-                alt={alt}
+                alt={primaryAlt}
                 fill
                 priority
                 sizes="(min-width: 1024px) 55vw, 100vw"
@@ -107,19 +118,20 @@ export function ProductGallery({
       {count > 1 ? (
         <div
           role="tablist"
-          aria-label={alt}
+          aria-label={stripLabel}
           className="order-2 flex flex-row gap-3 overflow-x-auto md:w-20 md:shrink-0 md:flex-col md:overflow-x-visible"
         >
           {safe.map((src, i) => {
             const active = i === index;
             const label = String(i + 1).padStart(2, "0");
+            const thumbAlt = productAltText(product, locale, tRoot, i);
             return (
               <button
                 key={src}
                 type="button"
                 role="tab"
                 aria-selected={active}
-                aria-label={`${alt} — ${i + 1}`}
+                aria-label={thumbAlt}
                 onClick={() => setIndex(i)}
                 onKeyDown={(event) => handleThumbKey(event, i)}
                 className={cn(
@@ -137,7 +149,7 @@ export function ProductGallery({
                 >
                   <Image
                     src={src}
-                    alt=""
+                    alt={thumbAlt}
                     fill
                     sizes="80px"
                     className="object-cover"

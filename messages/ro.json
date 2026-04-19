@@ -1,20 +1,20 @@
 {
   "brand": {
     "name": "WaterVibe",
-    "tagline": "Jacuzzi pentru case, pensiuni și hoteluri din România. Relaxare reală, zi de zi."
+    "tagline": "Jacuzzi exterior pentru case, pensiuni și hoteluri din România. Relaxare adevărată, integrată în viața de zi cu zi."
   },
   "nav": {
     "home": "Acasă",
     "catalog": "Jacuzzi",
     "about": "Despre noi",
     "contact": "Contact",
-    "openMenu": "Deschide meniul",
-    "closeMenu": "Închide meniul"
+    "openMenu": "Deschideți meniul",
+    "closeMenu": "Închideți meniul"
   },
   "cta": {
-    "browseCatalog": "Vezi jacuzzi",
-    "requestQuote": "Cere o ofertă",
-    "getInTouch": "Ia legătura"
+    "browseCatalog": "Descoperiți colecția",
+    "requestQuote": "Cereți o ofertă",
+    "getInTouch": "Luați legătura"
   },
   "language": {
     "switcher": "Limbă",
@@ -23,57 +23,57 @@
   },
   "footer": {
     "rights": "Toate drepturile rezervate.",
-    "madeIn": "Operat din Câmpina, Prahova. Livrare în toată România.",
-    "photoCredit": "Imagini: placeholder. Fotografii în curs.",
+    "madeIn": "Operat din Câmpina, Prahova. Jacuzzi exterior cu livrare în toată România.",
+    "photoCredit": "Imagini: placeholder. Fotografii de brand în pregătire.",
     "sections": {
       "company": "Companie",
-      "explore": "Explorează",
+      "explore": "Explorați",
       "contact": "Contact"
     }
   },
   "hero": {
-    "eyebrow": "Jacuzzi premium, livrare în toată România",
-    "headline": "Jacuzzi pentru casă, pensiune și hotel.",
-    "subhead": "Un jacuzzi este o decizie pe zece ani. Te ajutăm să o iei bine. Jacuzzi cu hidromasaj pentru 2, 4 sau 6 persoane, pentru interior sau exterior, livrate oriunde în România.",
-    "ctaPrimary": "Vezi modelele de jacuzzi",
-    "ctaSecondary": "Cere o ofertă"
+    "eyebrow": "Jacuzzi exterior · livrare în toată România",
+    "headline": "Jacuzzi exterior pentru case, pensiuni și hoteluri.",
+    "subhead": "Un jacuzzi exterior este o decizie pe zece ani. Vă ajutăm să alegeți unul pe care îl veți folosi cu drag și după a suta seară. Hidromasaj pentru două, patru sau șase persoane. Modele de interior și exterior. Livrare în orice județ din România.",
+    "ctaPrimary": "Descoperiți colecția",
+    "ctaSecondary": "Cereți o ofertă"
   },
   "featured": {
     "eyebrow": "Modele recomandate",
-    "title": "Trei jacuzzi, aleși pentru cum îi vei folosi",
-    "description": "Trei modele din colecția WaterVibe. Aleși pentru echilibrul dintre dimensiune, finisaj și hidromasaj, fie că sunteți doi, patru sau șase.",
-    "viewAll": "Vezi toate modelele de jacuzzi",
-    "viewProduct": "Vezi produsul",
+    "title": "Trei jacuzzi, aleși pentru felul în care îi veți folosi",
+    "description": "Trei jacuzzi exterior din colecția WaterVibe. Fiecare echilibrează spațiul, finisajul și un hidromasaj pe care îl simțiți. Alegeți dimensiunea potrivită — pentru un cuplu, o familie de patru sau o masă plină.",
+    "viewAll": "Răsfoiți întreaga colecție",
+    "viewProduct": "Vedeți modelul",
     "finish": "Finisaj",
     "fromPrice": "De la",
-    "save": "Salvează",
+    "save": "Salvați",
     "persons": "{count, plural, one {# persoană} few {# persoane} other {# de persoane}}"
   },
   "brandStory": {
     "eyebrow": "Despre WaterVibe",
     "serial": "2026",
-    "title": "Un jacuzzi, nu un produs. O experiență de spa care rămâne acasă.",
-    "intro": "De ce există WaterVibe, cum alegem fiecare model, ce primești efectiv. Trei capitole scurte.",
+    "title": "Un jacuzzi exterior, nu un produs. O experiență de spa care rămâne acasă.",
+    "intro": "De ce există WaterVibe, cum alegem fiecare model, ce primiți efectiv. Trei capitole scurte.",
     "pullquote": "Aducem spa-ul acasă. În orice casă, pensiune sau hotel din România care își dorește asta.",
     "attribution": "WaterVibe",
     "pillars": {
       "01": "De ce",
       "02": "Cum alegem",
-      "03": "Ce primești"
+      "03": "Ce primiți"
     },
-    "paragraph1": "Viața se aglomerează. Momentele reale de liniște se rarefiază. Un jacuzzi acasă transformă orice seară într-un ritual. Nu mai aștepți vacanța sau vizita la spa.",
-    "paragraph2": "Fiecare jacuzzi îl alegem după aceleași patru criterii. Confort. Calitatea materialelor. Hidromasaj care chiar masează. Un consum pe care îl duci. Pentru 2, 4 sau 6 persoane, pentru interior sau exterior, în finisaje care se așează bine lângă ce ai deja.",
-    "paragraph3": "Ce primești: un jacuzzi care merge și după a suta seară. O discuție reală despre spațiul tău. Un preț cu livrare. Pașii de instalare pentru instalatorul tău. În orice județ din România."
+    "paragraph1": "Viața se aglomerează. Momentele reale de liniște se rarefiază. Un jacuzzi exterior acasă transformă orice seară într-un ritual. Nu mai așteptați vacanța sau weekendul la spa.",
+    "paragraph2": "Fiecare model își merită locul. Verificăm patru lucruri — confortul, calitatea materialelor, hidromasajul care încă se simte hidromasaj și după doi ani și un consum pe care îl puteți duce. Pentru două, patru sau șase persoane. Interior sau exterior. În finisaje care se așează bine lângă ce aveți deja.",
+    "paragraph3": "Ce primiți: un jacuzzi care merge și după a suta seară. O discuție reală despre spațiul dumneavoastră. Un preț cu livrare în România. Pașii de instalare pe care îi puteți da instalatorului. În orice județ din țară."
   },
   "testimonials": {
     "eyebrow": "De pe terasele clienților",
-    "title": "Oameni care folosesc jacuzzi-ul WaterVibe săptămână de săptămână, la un an distanță"
+    "title": "Proprietari adevărați, la un an distanță. În apă, săptămână de săptămână."
   },
   "homeCta": {
     "eyebrow": "Pasul următor",
-    "headline": "Construiește-ți un loc de relaxare al tău, acasă.",
-    "subhead": "Trimite-ne câteva detalii despre spațiu. Terasă, grădină, interior, pensiune, hotel. Răspundem într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare.",
-    "button": "Cere o ofertă",
+    "headline": "Construiți un loc de relaxare al dumneavoastră, acasă.",
+    "subhead": "Trimiteți-ne câteva detalii despre spațiu — terasă, grădină, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare.",
+    "button": "Cereți o ofertă",
     "trust": {
       "reply": "Răspuns într-o zi lucrătoare",
       "price": "Preț cu livrare inclus",
@@ -82,64 +82,64 @@
   },
   "meta": {
     "home": {
-      "title": "Jacuzzi pentru Casă, Pensiune și Hotel · WaterVibe România",
-      "description": "Jacuzzi cu hidromasaj pentru 2, 4 sau 6 persoane. Interior sau exterior. Livrare în toată România, consultanță și pași clari de instalare."
+      "title": "Jacuzzi Exterior pentru Casă, Pensiune și Hotel · WaterVibe România",
+      "description": "Jacuzzi cu hidromasaj pentru două, patru sau șase persoane. Modele de interior și exterior. Livrare în toată România, consultanță, preț ferm și pași clari de instalare."
     },
     "contact": {
-      "title": "Contact · Ofertă Jacuzzi",
-      "description": "Spune-ne despre spațiul tău. Răspundem într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare."
+      "title": "Contact · Cereți o Ofertă de Jacuzzi",
+      "description": "Spuneți-ne despre spațiu. Grădină, terasă, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare în România."
     },
     "about": {
-      "title": "Despre WaterVibe · Jacuzzi în România",
-      "description": "WaterVibe este operat de ENSAMA SRL din Câmpina, Prahova. Alegem, livrăm și oferim suport pentru jacuzzi, în case, pensiuni și hoteluri din toată România."
+      "title": "Despre WaterVibe · Jacuzzi Exterior în România",
+      "description": "WaterVibe este operat de ENSAMA SRL din Câmpina, Prahova. Alegem, livrăm și oferim suport pentru jacuzzi exterior în case, pensiuni și hoteluri din toată România."
     },
     "catalog": {
-      "title": "Modele de Jacuzzi · Colecția WaterVibe",
-      "description": "Jacuzzi pentru 2, 4 sau 6 persoane. Modele de interior și exterior, în mai multe finisaje. Filtrează după dimensiune și culoare, vezi specificațiile, cere o ofertă cu livrare în România."
+      "title": "Modele Jacuzzi Exterior · Colecția WaterVibe",
+      "description": "Jacuzzi exterior pentru două, patru sau șase persoane. Modele cu hidromasaj în mai multe finisaje. Filtrați după dimensiune și culoare, vedeți specificațiile, primiți o ofertă cu livrare în România."
     }
   },
   "about": {
     "hero": {
       "eyebrow": "Despre WaterVibe",
-      "title": "Jacuzzi pentru case, pensiuni și hoteluri. Aduși mai aproape de România.",
-      "subhead": "Trei capitole despre de ce există WaterVibe, cum alegem fiecare jacuzzi și ce primești efectiv. Cu livrare și suport în toată țara."
+      "title": "Jacuzzi exterior pentru case, pensiuni și hoteluri. Aduși mai aproape de România.",
+      "subhead": "Trei capitole despre de ce există WaterVibe, cum alegem fiecare jacuzzi și ce primiți efectiv. Cu livrare și suport în toată țara."
     },
     "chapter1": {
       "eyebrow": "Capitolul 01",
       "title": "De ce există WaterVibe",
-      "paragraph1": "WaterVibe a început dintr-o idee simplă. Relaxarea reală nu ar trebui să fie un lux ocazional pe care îl ai doar în vacanță.",
-      "paragraph2": "Fiecare casă, fiecare pensiune, fiecare hotel poate avea un spațiu dedicat relaxării. Un loc unde corpul se eliberează, mintea iese din ritmul zilei, iar timpul petrecut cu familia sau cu oaspeții devine memorabil.",
-      "paragraph3": "Apa face treaba. Hidromasajul destinde mușchii. Căldura scoate tensiunea din umeri. Jeturile pornesc circulația. În câteva minute ești în altă parte. Asta e WaterVibe. Nu vindem jacuzzi. Vindem serile care urmează după.",
-      "paragraph4": "Un jacuzzi schimbă spațiul din jurul casei. Terasa devine loc unde te rupi de zi. Curtea devine loc de întâlnire. Serile încetinesc. Pentru pensiuni și hoteluri, un spațiu cu jacuzzi transformă o cazare în ceva despre care oaspeții vorbesc când ajung acasă."
+      "paragraph1": "WaterVibe a început dintr-o idee simplă. Relaxarea reală nu ar trebui să fie un lux ocazional pe care îl primiți doar în vacanță.",
+      "paragraph2": "Fiecare casă, fiecare pensiune, fiecare hotel poate avea un loc dedicat eliberării. Un spațiu unde corpul se eliberează, mintea iese din ritmul zilei, iar timpul petrecut cu familia sau cu oaspeții devine memorabil.",
+      "paragraph3": "Apa face treaba. Hidromasajul destinde tensiunea musculară. Căldura scoate încleștarea din umeri. Jeturile pornesc circulația. În câteva minute sunteți în altă parte. Asta e WaterVibe. Nu vindem jacuzzi. Vindem serile care urmează după.",
+      "paragraph4": "Un jacuzzi exterior schimbă spațiul din jurul casei. Terasa devine loc unde vă rupeți de zi. Curtea devine loc de întâlnire. Serile încetinesc. Pentru pensiuni și hoteluri, o proprietate cu jacuzzi devine lucrul despre care oaspeții vorbesc când ajung acasă."
     },
     "chapter2": {
       "eyebrow": "Capitolul 02",
       "title": "Cum alegem fiecare jacuzzi",
-      "paragraph1": "WaterVibe are o sarcină. Să ofere soluții de relaxare prin apă care se potrivesc cât mai multor spații, stiluri și bugete din România.",
-      "paragraph2": "Fiecare model își merită locul. Verificăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Listăm jacuzzi pe care îi poți folosi săptămânal fără să te porți cu ei ca și cum s-ar sparge.",
-      "paragraph3": "Gama acoperă nevoi reale. Jacuzzi pentru 2 persoane, pentru cupluri. Jacuzzi pentru 4 persoane, pentru familie. Jacuzzi pentru 6 persoane, pentru prieteni, pensiuni sau hoteluri mici. Modele compacte pentru terase și curți strâmte. Modele spațioase pentru proprietăți mari.",
-      "paragraph4": "Configurațiile de jeturi diferă de la model la model. Fiecare scaun masează altă zonă. Gât, spate, lombari, gambe. Simți cum pleacă ziua, pe grupe de mușchi.",
-      "paragraph5": "Designul contează la fel de mult ca specificațiile. Alegem finisaje care se așează bine atât în spații moderne, cât și clasice. Un jacuzzi trebuie să completeze terasa sau grădina, nu să îi concureze. Tehnologia merge pe aceeași logică. Filtrare, încălzire și control al apei alese mai întâi pentru confort, apoi pentru un consum de energie cu cap.",
-      "paragraph6": "Ultimul pas este discuția. Ne uităm la spațiu, la câte persoane vor folosi jacuzzi-ul și la cum se integrează cu terasa sau interiorul pe care îl ai deja. Pleci cu modelul potrivit, prețul livrat și pașii tehnici pentru instalare."
+      "paragraph1": "WaterVibe are o singură sarcină. Să ofere relaxare prin apă care se potrivește cu cât mai multe spații, stiluri și bugete din România.",
+      "paragraph2": "Fiecare model își merită locul. Verificăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Colecția este construită în jurul jacuzzi-urilor exterioare pe care le puteți folosi săptămânal fără să le păziți ca pe niște obiecte fragile.",
+      "paragraph3": "Gama acoperă nevoi reale. Cadă cu hidromasaj pentru două persoane, pentru cupluri. Modele de patru locuri, pentru întreaga familie. Jacuzzi exterior pentru șase persoane, pentru grupuri de prieteni sau pentru pensiuni și hoteluri mici. Modele compacte pentru terase și curți strâmte. Modele spațioase pentru proprietăți mari.",
+      "paragraph4": "Configurațiile de jeturi diferă de la model la model. Fiecare scaun masează altă zonă. Gât, spate, lombari, gambe. Simțiți cum pleacă ziua, pe grupe de mușchi.",
+      "paragraph5": "Designul contează la fel de mult ca specificațiile. Alegem finisaje care se așează bine atât în spații moderne, cât și clasice. Un jacuzzi trebuie să completeze terasa sau grădina, nu să le concureze. Tehnologia merge pe aceeași logică. Filtrarea, încălzirea și controlul apei sunt alese mai întâi pentru confort, apoi pentru un consum de energie cu cap.",
+      "paragraph6": "Ultimul pas este discuția. Ne uităm la spațiu, la câte persoane vor folosi cada și la cum se integrează cu terasa sau interiorul deja existent. Plecați cu modelul potrivit, prețul livrat în România și pașii tehnici pentru instalare."
     },
     "chapter3": {
       "eyebrow": "Capitolul 03",
-      "title": "Ce primești efectiv",
-      "paragraph1": "WaterVibe oferă jacuzzi moderne cu hidromasaj pentru case private, pentru pensiuni și pentru hoteluri din România. Fiecare model este ales pentru confort, durabilitate și un hidromasaj care se simte tot hidromasaj și peste doi ani.",
-      "paragraph2": "În funcție de spațiu și de gust, poți alege modele de interior sau exterior. Dimensiuni diferite. Numere diferite de locuri. Scheme diferite de jeturi. Finisaje diferite. Scopul e simplu. Găsești un jacuzzi care se potrivește și spațiului, și stilului, fără să cedezi pe calitate.",
-      "paragraph3": "Pentru pensiuni și hoteluri, un jacuzzi ridică proprietatea. Apare în recenzii. Discutăm cu tine fluxul de utilizare, ritmul de curățare și cum se încadrează jacuzzi-ul în oferta de cazare.",
-      "paragraph4": "Consultanța face parte din ce oferim. Îți explicăm diferențele dintre modele, te ajutăm să alegi varianta potrivită pentru numărul de persoane și pentru felul în care îl vei folosi. Primești preț cu livrare în România și pași clari de instalare."
+      "title": "Ce primiți efectiv",
+      "paragraph1": "WaterVibe listează jacuzzi moderne cu hidromasaj pentru case private, pensiuni și hoteluri din România. Fiecare model este ales pentru confort, durabilitate și un hidromasaj care se simte tot hidromasaj și peste doi ani.",
+      "paragraph2": "În funcție de spațiu și de gust, alegerea se deschide. Modele de interior sau exterior. Dimensiuni diferite. Numere diferite de locuri. Scheme diferite de jeturi. Finisaje diferite. Scopul e simplu. Găsiți un jacuzzi care se potrivește și spațiului, și stilului, fără să cedați pe calitate.",
+      "paragraph3": "Pentru pensiuni și hoteluri, un jacuzzi exterior ridică proprietatea. Apare în recenzii. Discutăm cu dumneavoastră fluxul de utilizare, ritmul de curățare și cum se încadrează cada în oferta de cazare.",
+      "paragraph4": "Consultanța face parte din ce oferim. Vă explicăm diferențele dintre modele, vă ajutăm să alegeți varianta potrivită pentru numărul de persoane și pentru felul în care o veți folosi. Primiți preț cu livrare în România și pași clari de instalare."
     },
     "ensama": {
       "eyebrow": "Firmă · România",
       "title": "Operat de ENSAMA SRL, Câmpina",
-      "description": "WaterVibe este marca sub care ENSAMA SRL alege, livrează și oferă suport pentru jacuzzi în toată România. Sediu în Câmpina, județul Prahova.",
+      "description": "WaterVibe este marca sub care ENSAMA SRL alege, livrează și oferă suport pentru jacuzzi exterior în toată România. Sediu în Câmpina, județul Prahova.",
       "labels": {
         "company": "Firmă",
         "address": "Sediu",
         "phone": "Telefon · WhatsApp",
         "area": "Livrăm în",
-        "social": "Ne găsești pe"
+        "social": "Ne găsiți pe"
       },
       "company": "ENSAMA SRL",
       "address": "Bulevardul Carol I 90, Câmpina, Prahova",
@@ -149,9 +149,9 @@
     }
   },
   "contact": {
-    "eyebrow": "Ia legătura",
-    "title": "Cere o ofertă de jacuzzi",
-    "description": "Spune-ne despre spațiul tău. Terasă, grădină, interior, pensiune, hotel. Răspundem într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare.",
+    "eyebrow": "Luați legătura",
+    "title": "Cereți o ofertă pentru jacuzzi exterior",
+    "description": "Spuneți-ne despre spațiu. Terasă, grădină, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare.",
     "aside": {
       "pullquote": "Relaxarea reală nu ar trebui să fie un lux ocazional. Ar trebui să facă parte din viața normală.",
       "pullquoteAttribution": "WaterVibe · ENSAMA SRL"
@@ -167,39 +167,39 @@
       "hours": "Luni până Vineri · 9:00 până 18:00 · răspuns într-o zi lucrătoare"
     },
     "form": {
-      "name": "Numele tău",
+      "name": "Numele dumneavoastră",
       "email": "Adresă de email",
       "phone": "Telefon",
       "phoneOptional": "(opțional)",
-      "message": "Spune-ne despre spațiul tău",
-      "submit": "Trimite mesajul",
+      "message": "Spuneți-ne despre spațiu",
+      "submit": "Trimiteți mesajul",
       "submitting": "Se trimite…",
       "quoteContextLabel": "Ofertă pentru",
       "validation": {
-        "nameMin": "Te rugăm să introduci numele complet.",
-        "emailInvalid": "Te rugăm să introduci o adresă de email validă.",
-        "messageMin": "Un mesaj scurt ne ajută să răspundem cum trebuie. Minim 10 caractere.",
-        "messageMax": "Te rugăm să păstrezi mesajul sub 2000 de caractere."
+        "nameMin": "Vă rugăm să introduceți numele complet.",
+        "emailInvalid": "Vă rugăm să introduceți o adresă de email validă.",
+        "messageMin": "Un mesaj scurt ne ajută să răspundem cum trebuie. Minim zece caractere.",
+        "messageMax": "Vă rugăm să păstrați mesajul sub 2000 de caractere."
       },
       "success": {
-        "title": "Mulțumim. Mesajul tău este pe drum.",
-        "message": "Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare. Între timp, poți continua prin colecție.",
-        "sendAnother": "Trimite încă un mesaj"
+        "title": "Mulțumim. Mesajul este pe drum.",
+        "message": "Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare. Între timp, puteți răsfoi colecția.",
+        "sendAnother": "Trimiteți încă un mesaj"
       },
       "error": {
-        "generic": "Ceva nu a mers. Încearcă din nou sau scrie-ne direct la {email}.",
-        "rateLimit": "Ai trimis deja câteva mesaje. Așteaptă câteva minute înainte să încerci din nou."
+        "generic": "Ceva nu a mers. Încercați din nou sau scrieți-ne direct la {email}.",
+        "rateLimit": "Ați trimis deja câteva mesaje. Așteptați câteva minute înainte să încercați din nou."
       }
     },
     "toast": {
       "success": "Mesaj trimis. Revenim în curând.",
-      "error": "Nu am putut trimite mesajul. Încearcă din nou."
+      "error": "Nu am putut trimite mesajul. Încercați din nou."
     }
   },
   "catalog": {
-    "title": "Modele de jacuzzi",
+    "title": "Modele de jacuzzi exterior",
     "eyebrow": "Colecția WaterVibe",
-    "description": "Jacuzzi pentru 2, 4 sau 6 persoane. Interior sau exterior, în finisaje care se așează bine în camere reale și grădini reale. Pompe silențioase, finisaje oneste, hidromasaj care merge și după a suta seară.",
+    "description": "Jacuzzi exterior pentru două, patru sau șase persoane. Sunt disponibile și variante de interior. Pompe silențioase. Finisaje oneste. Hidromasaj care merge și după a suta seară.",
     "kicker": "{count, plural, =0 {Niciun rezultat} one {# jacuzzi} few {# jacuzzi} other {# de jacuzzi}}",
     "allSizes": "Toate dimensiunile",
     "filters": {
@@ -208,14 +208,14 @@
       "sizeMinLabel": "Mic",
       "sizeMaxLabel": "Mare",
       "color": "Culoare",
-      "clear": "Șterge tot",
-      "clearOne": "Elimină filtrul",
+      "clear": "Ștergeți tot",
+      "clearOne": "Eliminați filtrul",
       "showFilters": "Filtre",
       "active": "Filtre active",
       "activeCount": "{count, plural, one {# activ} few {# active} other {# active}}"
     },
     "sort": {
-      "label": "Sortează după",
+      "label": "Sortați după",
       "featured": "Recomandate",
       "priceAsc": "Preț: de la mic la mare",
       "priceDesc": "Preț: de la mare la mic",
@@ -223,12 +223,12 @@
     },
     "card": {
       "from": "De la",
-      "favorite": "Salvează pentru mai târziu"
+      "favorite": "Salvați pentru mai târziu"
     },
     "empty": {
       "title": "Niciun jacuzzi nu se potrivește. Încă.",
-      "message": "Niciun jacuzzi nu se potrivește filtrelor selectate. Încearcă să slăbești o condiție de dimensiune sau culoare, sau ia-o de la zero.",
-      "clearFilters": "Șterge toate filtrele"
+      "message": "Nimic din colecție nu corespunde filtrelor selectate. Slăbiți o condiție de dimensiune sau culoare, sau ștergeți tot și luați-o de la zero.",
+      "clearFilters": "Ștergeți toate filtrele"
     }
   },
   "product": {
@@ -277,28 +277,28 @@
       "eyebrow": "Incluse"
     },
     "quote": {
-      "primary": "Cere o ofertă",
-      "secondary": "Vezi specificațiile",
-      "eyebrow": "Gata când ești tu",
+      "primary": "Cereți o ofertă",
+      "secondary": "Vedeți specificațiile",
+      "eyebrow": "Suntem gata când sunteți",
       "note": "Răspundem într-o zi lucrătoare · Fără obligații"
     },
     "closing": {
       "eyebrow": "Pasul următor",
-      "title": "Hai să vorbim despre spațiul tău.",
-      "description": "Spune-ne câteva detalii. Revenim cu opțiuni de dimensiune, prețul livrat și pașii de instalare. Într-o zi lucrătoare.",
-      "primary": "Începe conversația"
+      "title": "Să discutăm despre spațiul dumneavoastră.",
+      "description": "Trimiteți câteva detalii. Revenim cu opțiuni de dimensiune, prețul livrat și un drum clar pentru instalare. Într-o zi lucrătoare.",
+      "primary": "Începeți conversația"
     }
   },
   "errors": {
     "notFound": {
       "title": "Pagina nu a fost găsită",
-      "message": "Pagina pe care o căutai nu este aici. Fie a fost mutată, fie nu a existat niciodată.",
+      "message": "Pagina pe care o căutați nu este aici. Fie a fost mutată, fie nu a existat niciodată.",
       "cta": "Înapoi la pagina principală"
     },
     "generic": {
       "title": "Ceva nu a mers",
-      "message": "A apărut o eroare neașteptată de partea noastră. Încearcă din nou sau întoarce-te la pagina principală.",
-      "retry": "Încearcă din nou"
+      "message": "A apărut o eroare neașteptată de partea noastră. Încercați din nou sau întoarceți-vă la pagina principală.",
+      "retry": "Încercați din nou"
     }
   },
   "common": {
@@ -315,10 +315,10 @@
       "midnight": "Midnight"
     },
     "a11y": {
-      "skipToContent": "Sari la conținutul principal",
-      "changeLanguage": "Schimbă limba",
-      "openMenu": "Deschide meniul",
-      "closeMenu": "Închide meniul"
+      "skipToContent": "Săriți la conținutul principal",
+      "changeLanguage": "Schimbați limba",
+      "openMenu": "Deschideți meniul",
+      "closeMenu": "Închideți meniul"
     }
   }
 }

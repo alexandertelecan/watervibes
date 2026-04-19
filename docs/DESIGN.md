@@ -69,6 +69,9 @@ Every token above maps into `@theme inline` in [`globals.css`](../src/app/global
   - *Rationale:* Airbnb Cereal is custom; Plus Jakarta Sans is the closest free equivalent — similar open apertures, similar rounded stems, similar warmth without being generic like Inter. Distinctive enough not to read as "SaaS default."
 - **Body: Manrope.** Stays. Pairs well with Plus Jakarta Sans — both humanist, both open-aperture; PJS is slightly chunkier for display, Manrope is slightly more neutral for body. The small rhythm between them keeps the page from feeling single-family.
   - *Rationale:* Manrope is well-rendered on every platform, weight range 200–800. No reason to swap.
+- **Brand wordmark: Fraunces** at 600 weight, with variable axes `SOFT=50` and `opsz=144`. Used **only** on the WaterVibe logo in the header/footer — never for body, headings, or any other UI. The softened curves and display optical size give the mark a typography-logo feel without polluting the commercial sans register used elsewhere.
+  - *Loaded into `--font-wordmark`* in [layout.tsx](../src/app/[locale]/layout.tsx) and exposed via the `.text-wordmark` utility in [globals.css](../src/app/globals.css).
+  - *Rationale:* a dedicated wordmark face is standard practice for brands whose body/headings live in a single commercial sans (cf. Aesop, Stripe Press). Fraunces' humanist curves echo the "water" motif while keeping the rest of the system locked to Plus Jakarta Sans + Manrope.
 
 ### 2.2 Scale & rhythm
 

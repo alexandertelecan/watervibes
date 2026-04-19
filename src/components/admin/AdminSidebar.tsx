@@ -43,7 +43,7 @@ export function AdminSidebar() {
   return (
     <aside className="flex w-64 shrink-0 flex-col border-r border-border bg-background">
       <div className="border-b border-border px-6 py-6">
-        <div className="text-h3 text-foreground">WaterVibes Admin</div>
+        <div className="text-h3 text-foreground">WaterVibe Admin</div>
       </div>
       <nav className="flex-1 px-3 py-4">
         <ul className="flex flex-col gap-1">

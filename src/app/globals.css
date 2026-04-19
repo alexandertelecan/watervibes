@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 
 /* =============================================================
-   WaterVibes — Airbnb-warm commercial design system
+   WaterVibe — Airbnb-warm commercial design system
    Authoritative spec: docs/DESIGN.md §1–3
    Clean white + charcoal ink + aqua-teal punctuation. Pill buttons,
    image-forward cards, Plus Jakarta Sans display over Manrope body.
@@ -81,6 +81,7 @@
   --font-sans: var(--font-manrope);
   --font-heading: var(--font-fraunces);
   --font-display: var(--font-fraunces);
+  --font-logo: var(--font-wordmark);
 }
 
 @layer base {
@@ -188,5 +189,17 @@
 
   .prose-narrow {
     max-width: 68ch;
+  }
+
+  /* Brand wordmark — DESIGN.md §2.1
+     Fraunces with SOFT + opsz axes dialed to display optical size and
+     a softened curve axis so the mark reads as a logo, not a heading.
+     Use only on the header/footer brand wordmark. */
+  .text-wordmark {
+    font-family: var(--font-wordmark), Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-feature-settings: "liga", "dlig", "calt";
   }
 }

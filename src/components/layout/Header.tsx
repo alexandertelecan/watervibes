@@ -25,7 +25,7 @@ export function Header() {
       >
         <Link
           href="/"
-          className="font-heading text-xl font-medium tracking-tight text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+          className="text-wordmark text-2xl text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
         >
           {t("brand.name")}
         </Link>

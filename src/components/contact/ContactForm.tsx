@@ -40,7 +40,7 @@ type ContactError = {
 };
 
 const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@watervibes.example";
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@watervibe.example";
 
 export function ContactForm({ locale, productSlug }: ContactFormProps) {
   const t = useTranslations("contact.form");

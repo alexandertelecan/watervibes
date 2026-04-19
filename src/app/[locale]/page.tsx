@@ -6,6 +6,14 @@ import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { Hero } from "@/components/home/Hero";
 import { HomeCTA } from "@/components/home/HomeCTA";
 import { Testimonials } from "@/components/home/Testimonials";
+import { JsonLd } from "@/components/shared/JsonLd";
+import {
+  alternatesFor,
+  assertLocale,
+  localBusinessSchema,
+  openGraphFor,
+  twitterFor,
+} from "@/lib/seo";
 
 type PageParams = { locale: string };
 
@@ -14,24 +22,19 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
   const t = await getTranslations({ locale, namespace: "meta.home" });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t("title"),
-    description: t("description"),
-    alternates: {
-      canonical: `${siteUrl}/${locale}`,
-      languages: { en: `${siteUrl}/en`, ro: `${siteUrl}/ro` },
-    },
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      url: `${siteUrl}/${locale}`,
-      locale,
-      type: "website",
-      images: ["/og-image.jpg"],
-    },
+    title,
+    description,
+    alternates: alternatesFor(locale, ""),
+    openGraph: openGraphFor(locale, "", { title, description }),
+    twitter: twitterFor({ title, description }),
   };
 }
 
@@ -40,7 +43,8 @@ export default async function HomePage({
 }: {
   params: Promise<PageParams>;
 }) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = assertLocale(rawLocale);
   setRequestLocale(locale);
 
   return (
@@ -50,6 +54,10 @@ export default async function HomePage({
       <BrandStory />
       <Testimonials />
       <HomeCTA />
+      {/* LocalBusiness — declares ENSAMA SRL's address + national service
+          area so the site shows up for "jacuzzi România / Câmpina /
+          Prahova" local queries. */}
+      <JsonLd data={localBusinessSchema(locale)} />
     </>
   );
 }

@@ -180,9 +180,9 @@ export function productMetaDescription(
   const colorLabel = t(`common.colors.${product.color}`).toLowerCase();
 
   if (locale === "ro") {
-    return `Jacuzzi ${name} pentru ${count} persoane. ${jets} duze de hidromasaj, finisaj ${colorLabel}. Livrare în România, instalare inclusă. De la ${price}.`;
+    return `Cadă cu hidromasaj ${name} pentru ${count} persoane. ${jets} duze de hidromasaj, finisaj ${colorLabel}. Livrare în toată România, instalare inclusă. De la ${price}.`;
   }
-  return `${name} jacuzzi for ${count}. ${jets} hydromassage jets, ${colorLabel} finish. Delivered across Romania with installation. From ${price}.`;
+  return `${name} hot tub for ${count}. ${jets} hydromassage jets, ${colorLabel} finish. Delivered across Romania, installation included. From ${price}.`;
 }
 
 // Alt text for the primary product image. Used by gallery + card so

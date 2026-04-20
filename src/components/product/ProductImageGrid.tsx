@@ -7,7 +7,7 @@ import { useState } from "react";
 import { productAltText } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
-
+//build commit
 const THUMB_COL_CAP = 6;
 
 export function ProductImageGrid({

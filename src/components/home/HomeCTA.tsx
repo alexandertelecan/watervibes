@@ -4,9 +4,9 @@ import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
 
-const TITLE = "Întrebări, lămuriri, recomandări sau oferte?";
+const TITLE = "Întrebări, lămuriri sau oferte?";
 const LEDE =
-  "Îți răspundem rapid și îți oferim informațiile de care ai nevoie pentru a lua decizia corectă.";
+  "Îți răspundem rapid și îți oferim informațiile de care ai nevoie pentru a lua o decizie corectă.";
 const CTA = "Contactează-ne";
 
 export function HomeCTA() {

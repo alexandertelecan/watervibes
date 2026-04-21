@@ -16,12 +16,12 @@ export function Perks() {
       key: "warranty",
       Icon: ShieldCheckIcon,
       title: "Garanție 5 ani",
-      body: "Acoperire pentru liniștea dumneavoastră.",
+      body: "Acoperire pentru liniștea ta.",
     },
     {
       key: "delivery",
       Icon: TruckIcon,
-      title: "Transport gratuit în maxim 72h",
+      title: "Transport gratuit în maximum 72 de ore",
       body: "Livrare rapidă în toată România.",
     },
   ] as const;

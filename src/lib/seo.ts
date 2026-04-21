@@ -7,10 +7,9 @@ import type { Product } from "@/types/product";
 // Single source of truth for every absolute URL, canonical link,
 // structured-data NAP, and product SEO copy.
 
-export const SITE_URL = (
+export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "http://localhost:3000"
-);
+  "http://localhost:3000";
 
 // Canonical business profile (ENSAMA SRL). Used by Organization /
 // LocalBusiness schema, the About page NAP block, and the footer.
@@ -26,11 +25,10 @@ export const BUSINESS = {
   phone: "+40726793993",
   phoneDisplay: "+40 726 793 993",
   whatsapp: "+40726793993",
-  email: "hello@watervibe.ro",
+  email: "office@watervibe.ro",
   areaServed: "România",
   social: {
-    facebook:
-      "https://www.facebook.com/people/WaterVibe/61588031158675/",
+    facebook: "https://www.facebook.com/people/WaterVibe/61588031158675/",
   },
 } as const;
 

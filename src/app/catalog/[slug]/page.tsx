@@ -47,7 +47,7 @@ const L = {
   footprint: "amprentă",
   weightEmpty: "greutate carcasă",
   weightFull: "greutate cu apă",
-  priceEyebrow: "Preț de la",
+  priceEyebrow: "Preț",
   priceIncludes: "TVA și livrare în România incluse.",
   colorLabel: "Culoare",
   capacityLabel: "Capacitate",

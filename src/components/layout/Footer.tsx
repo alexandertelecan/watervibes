@@ -4,7 +4,7 @@ import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
 
 const BRAND_TAGLINE =
-  "Jacuzzi exterior pentru case, pensiuni și hoteluri din România. Relaxare adevărată, integrată în viața de zi cu zi.";
+  "Jacuzzi pentru exterior, pentru case, pensiuni și hoteluri din România. Relaxare adevărată, integrată în viața de zi cu zi.";
 
 const EXPLORE_LINKS = [
   { href: "/", label: "Acasă" },
@@ -75,10 +75,10 @@ export function Footer() {
               <FooterColumn label="Contact">
                 <div className="flex flex-col gap-2">
                   <a
-                    href="mailto:hello@watervibe.ro"
+                    href="mailto:office@watervibe.ro"
                     className="text-body text-white underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-white"
                   >
-                    hello@watervibe.ro
+                    office@watervibe.ro
                   </a>
                   <a
                     href="tel:+40726793993"

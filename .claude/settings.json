@@ -42,7 +42,9 @@
       "Bash(node /tmp/wv-inspect.js)",
       "Bash(pkill -f \"remote-debugging-port=9222\")",
       "Bash(echo \"EXIT:$?\")",
-      "Bash(curl -sS -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/admin/products)"
+      "Bash(curl -sS -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/admin/products)",
+      "Bash(curl -sf -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/about)",
+      "Bash(curl -s http://localhost:3000/about)"
     ],
     "additionalDirectories": [
       "/tmp"

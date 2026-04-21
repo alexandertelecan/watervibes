@@ -27,7 +27,7 @@ const T = {
   pullquoteAttribution: "WaterVibe · ENSAMA SRL",
   info: {
     emailLabel: "Email",
-    email: "hello@watervibe.ro",
+    email: "office@watervibe.ro",
     phoneLabel: "Telefon · WhatsApp",
     phone: "+40 726 793 993",
     addressLabel: "Sediu",
@@ -48,7 +48,9 @@ export const metadata: Metadata = {
   twitter: twitterFor({ title: META_TITLE, description: META_DESCRIPTION }),
 };
 
-function normalizeSlug(value: string | string[] | undefined): string | undefined {
+function normalizeSlug(
+  value: string | string[] | undefined,
+): string | undefined {
   if (!value) return undefined;
   const raw = Array.isArray(value) ? value[0] : value;
   const trimmed = raw?.trim();
@@ -72,7 +74,9 @@ export default async function ContactPage({
               <div className="flex flex-col gap-4">
                 <span className="text-eyebrow text-accent">{T.eyebrow}</span>
                 <h1 className="text-h1 text-foreground">{T.title}</h1>
-                <p className="text-lede text-muted-foreground">{T.description}</p>
+                <p className="text-lede text-muted-foreground">
+                  {T.description}
+                </p>
               </div>
             </FadeIn>
 
@@ -105,15 +109,27 @@ export default async function ContactPage({
                 />
                 <AsideBlock
                   label={T.info.phoneLabel}
-                  value={<span className="text-body text-foreground">{T.info.phone}</span>}
+                  value={
+                    <span className="text-body text-foreground">
+                      {T.info.phone}
+                    </span>
+                  }
                 />
                 <AsideBlock
                   label={T.info.addressLabel}
-                  value={<span className="text-body text-foreground">{T.info.address}</span>}
+                  value={
+                    <span className="text-body text-foreground">
+                      {T.info.address}
+                    </span>
+                  }
                 />
                 <AsideBlock
                   label={T.info.hoursLabel}
-                  value={<span className="text-small text-muted-foreground">{T.info.hours}</span>}
+                  value={
+                    <span className="text-small text-muted-foreground">
+                      {T.info.hours}
+                    </span>
+                  }
                 />
               </div>
             </FadeIn>

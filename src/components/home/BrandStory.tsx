@@ -5,17 +5,16 @@ import { ParallaxImage } from "@/components/home/ParallaxImage";
 
 const TITLE = "De ce o experiență și nu doar un jacuzzi?";
 const PULLQUOTE =
-  "Pentru că nu cumperi doar un produs ci un mod de relaxare, comfort zilnic și stare de bine.";
+  "Pentru că nu cumperi doar un produs, ci un mod de relaxare, confort zilnic și stare de bine.";
 
 const IMAGE_SRC =
   "https://images.unsplash.com/photo-1681168716884-e3254c4a0148?auto=format&fit=crop&w=1400&q=80";
-const IMAGE_ALT =
-  "Moment de relaxare într-un jacuzzi WaterVibe, în aer liber.";
+const IMAGE_ALT = "Moment de relaxare într-un jacuzzi WaterVibe, în aer liber.";
 
 const PILLARS = [
   {
-    label: "De ce",
-    body: "WaterVibe a apărut dintr-o idee simplă: relaxarea reală nu ar trebui să fie un lux ocazional. O găsim în vacanțe sau în centre spa, apoi o pierdem când ne întoarcem acasă. Noi credem că trebuie să fie parte din viața de zi cu zi.",
+    label: "De ce WaterVibe",
+    body: "WaterVibe a apărut dintr-o idee simplă. Relaxarea reală nu trebuie să fie un lux ocazional. O găsești în vacanțe sau în centre spa, apoi o pierzi când te întorci acasă. Noi credem că trebuie să fie parte din viața de zi cu zi.",
   },
   {
     label: "Cum facem asta",
@@ -23,7 +22,7 @@ const PILLARS = [
   },
   {
     label: "Ce oferim",
-    body: "Jacuzzi pentru uz rezidențial, potrivite pentru curți, terase sau spații interioare. În funcție de spațiu și preferințe, clienții pot alege modele pentru interior sau exterior, cu diferite dimensiuni, număr de locuri, configurații de jeturi și variante de culori.",
+    body: "Jacuzzi pentru uz rezidențial, potrivite pentru curți, terase sau spații interioare. În funcție de spațiu și preferințe, poți alege modele pentru interior sau exterior, cu dimensiuni diferite, număr variat de locuri, configurații de jeturi și variante de culori.",
   },
 ] as const;
 
@@ -102,10 +101,7 @@ export function BrandStory() {
             />
           </FadeIn>
 
-          <FadeIn
-            className="relative md:col-span-6 md:col-start-7"
-            delay={0.1}
-          >
+          <FadeIn className="relative md:col-span-6 md:col-start-7" delay={0.1}>
             <FloatingShape
               className="pointer-events-none absolute hidden text-accent/15 md:block md:-top-10 md:right-0 md:h-44 md:w-44"
               range={220}

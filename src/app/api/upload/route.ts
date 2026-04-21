@@ -1,6 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { writeFile } from "node:fs/promises";
-import path from "node:path";
+import { put } from "@vercel/blob";
 import type { NextRequest } from "next/server";
 
 import { isAdmin } from "@/lib/auth-server";
@@ -45,12 +44,13 @@ export async function POST(request: NextRequest) {
   }
 
   const ext = EXTENSION_FOR_MIME[file.type] ?? "bin";
-  const filename = `${randomBytes(10).toString("hex")}.${ext}`;
-  const targetDir = path.join(process.cwd(), "public", "uploads");
-  const targetPath = path.join(targetDir, filename);
+  const pathname = `uploads/${randomBytes(10).toString("hex")}.${ext}`;
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(targetPath, buffer);
+  const blob = await put(pathname, file, {
+    access: "public",
+    contentType: file.type,
+    addRandomSuffix: false,
+  });
 
-  return Response.json({ url: `/uploads/${filename}` }, { status: 201 });
+  return Response.json({ url: blob.url }, { status: 201 });
 }

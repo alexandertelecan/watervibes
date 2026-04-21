@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { FloatingShape } from "@/components/home/FloatingShape";
 import { Button } from "@/components/shared/Button";
 import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
-import { ImagePlaceholder } from "@/components/shared/ImagePlaceholder";
 import { JsonLd } from "@/components/shared/JsonLd";
 import {
   alternatesFor,
@@ -214,10 +214,15 @@ export default function AboutPage() {
           <div className="grid gap-12 md:grid-cols-12 md:gap-16 lg:gap-20">
             <FadeIn className="md:col-span-5">
               <div className="md:sticky md:top-28">
-                <ImagePlaceholder
-                  aspect="aspect-4/5"
-                  className="rounded-(--radius-xl) shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--accent)_35%,transparent)]"
-                />
+                <div className="relative aspect-4/5 overflow-hidden rounded-(--radius-xl) shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--accent)_35%,transparent)]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1682906324513-5370a2e99e1a?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Moment de relaxare"
+                    fill
+                    sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </FadeIn>
 

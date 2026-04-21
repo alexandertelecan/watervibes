@@ -1,4 +1,4 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -9,7 +9,6 @@ import { FadeIn } from "@/components/shared/FadeIn";
 import { ImagePlaceholder } from "@/components/shared/ImagePlaceholder";
 import { JsonLd } from "@/components/shared/JsonLd";
 import {
-  BUSINESS,
   alternatesFor,
   localBusinessSchema,
   openGraphFor,
@@ -22,12 +21,12 @@ const META_DESCRIPTION =
 
 const T = {
   hero: {
-    title: "Aducem jacuzzi-ul aproape de casele, pensiunile și hotelurile din România.",
+    titleLead: "Pentru casele, pensiunile și hotelurile care vor",
+    titleEmphasis: "mai mult decât o vacanță.",
     subhead:
-      "Trei răspunsuri simple. De ce există WaterVibe, cum alegem fiecare model și ce primiți efectiv când comandați. Cu livrare și suport în toată țara.",
+      "Alegem jacuzzi exterior pe confort, durabilitate și hidromasaj care se simte la fel și peste doi ani. Livrare și suport în toată România.",
   },
   story: {
-    eyebrow: "De ce existăm",
     title: "Relaxarea reală nu ar trebui să fie un lux ocazional.",
     lede: "O găsim în vacanțe sau în centre spa. Apoi o pierdem când ne întoarcem acasă. Noi credem că ar trebui să facă parte din viața de zi cu zi.",
     paragraphs: [
@@ -37,27 +36,22 @@ const T = {
     ],
   },
   curation: {
-    eyebrow: "Cum alegem fiecare model",
     title: "Un singur criteriu. Să se potrivească la cât mai multe spații și stiluri din România.",
     lede: "Verificăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Fiecare model din colecție își merită locul.",
     principles: [
       {
-        n: "01",
         title: "Gama acoperă nevoi reale",
         body: "Cadă cu hidromasaj pentru două persoane, pentru cupluri. Modele de patru locuri, pentru familie. Jacuzzi exterior pentru șase persoane, pentru pensiuni, hoteluri și grupuri de prieteni. Compacte pentru terase strâmte. Spațioase pentru proprietăți mari.",
       },
       {
-        n: "02",
         title: "Hidromasaj pe grupe de mușchi",
         body: "Configurațiile de jeturi diferă de la model la model. Fiecare scaun masează altă zonă. Gât, spate, lombari, gambe. Simțiți cum pleacă ziua, punct cu punct.",
       },
       {
-        n: "03",
         title: "Designul contează cât specificațiile",
         body: "Alegem finisaje care se așează bine atât în spații moderne, cât și clasice. Un jacuzzi trebuie să completeze terasa sau grădina, nu să le concureze.",
       },
       {
-        n: "04",
         title: "Tehnologie cu cap",
         body: "Filtrarea, încălzirea și controlul apei sunt alese mai întâi pentru confort, apoi pentru un consum de energie pe care îl puteți ține pe termen lung.",
       },
@@ -66,56 +60,24 @@ const T = {
       "Ultimul pas este discuția. Ne uităm la spațiu, la câte persoane vor folosi cada și la cum se integrează cu terasa sau interiorul existent. Plecați cu modelul potrivit, prețul livrat în România și pașii tehnici pentru instalare.",
   },
   delivery: {
-    eyebrow: "Ce primiți efectiv",
     title: "Jacuzzi moderne cu hidromasaj, alese ca să se simtă tot jacuzzi și peste doi ani.",
-    points: [
+    lede: "Modele de interior sau exterior, dimensiuni și capacități diferite, scheme variate de jeturi și finisaje. Găsiți unul care se potrivește spațiului și stilului, fără să cedați pe calitate.",
+    inlineTerms: [
       {
-        title: "Alegere deschisă",
-        body: "Modele de interior sau exterior. Dimensiuni diferite. Capacități diferite. Scheme diferite de jeturi. Finisaje diferite. Găsiți unul care se potrivește spațiului și stilului, fără să cedați pe calitate.",
+        term: "Pentru pensiuni și hoteluri",
+        body: "un jacuzzi exterior ridică proprietatea și apare în recenzii. Discutăm fluxul de utilizare, ritmul de curățare și cum se încadrează cada în oferta de cazare.",
       },
       {
-        title: "Pentru pensiuni și hoteluri",
-        body: "Un jacuzzi exterior ridică proprietatea. Apare în recenzii. Discutăm cu dumneavoastră fluxul de utilizare, ritmul de curățare și cum se încadrează cada în oferta de cazare.",
+        term: "Consultanță inclusă",
+        body: "explicăm diferențele dintre modele și alegem împreună varianta potrivită numărului de persoane și felului în care o veți folosi.",
       },
       {
-        title: "Consultanță inclusă",
-        body: "Vă explicăm diferențele dintre modele și vă ajutăm să alegeți varianta potrivită numărului de persoane și felului în care o veți folosi.",
-      },
-      {
-        title: "Preț complet, pași clari",
-        body: "Primiți prețul cu livrare în România incluse și pașii de instalare, înainte să luați decizia.",
+        term: "Preț complet, pași clari",
+        body: "primiți prețul cu livrare în România incluse și pașii de instalare, înainte să luați decizia.",
       },
     ],
-  },
-  ensama: {
-    eyebrow: "Firmă · România",
-    title: "Operat de ENSAMA SRL, Câmpina.",
-    description:
-      "WaterVibe este marca sub care ENSAMA SRL alege, livrează și oferă suport pentru jacuzzi exterior în toată România. Sediu în Câmpina, județul Prahova.",
-    rows: [
-      {
-        label: "Firmă",
-        value: "ENSAMA SRL",
-        meta: null,
-      },
-      {
-        label: "Sediu",
-        value: "Bulevardul Carol I 90, Câmpina, Prahova",
-        meta: "Vizite cu programare.",
-      },
-      {
-        label: "Livrăm în",
-        value: "Toată România",
-        meta: "Suport tehnic inclus, oriunde în țară.",
-      },
-    ],
-    phone: "+40 726 793 993",
-    phoneLabel: "Telefon · WhatsApp",
-    facebookLabel: "Facebook",
-    socialEyebrow: "Ne găsiți pe",
   },
   cta: {
-    eyebrow: "Pasul următor",
     title: "Spuneți-ne ce spațiu aveți. Vă trimitem modelul potrivit.",
     lede: "Fără formulare lungi. O conversație scurtă, un preț cu livrare inclusă, pașii de instalare. Atât.",
     primary: "Cereți o ofertă",
@@ -137,7 +99,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-accent py-20 text-accent-foreground md:py-28">
+      <section className="relative isolate flex min-h-[90dvh] flex-col justify-end overflow-hidden bg-accent py-20 text-accent-foreground md:py-24">
         <FloatingShape
           className="pointer-events-none absolute hidden text-accent-foreground/25 md:block md:-top-10 md:-right-10 md:h-40 md:w-40"
           range={180}
@@ -230,7 +192,12 @@ export default function AboutPage() {
           <div className="grid items-end gap-10 md:grid-cols-12 md:gap-14">
             <FadeIn className="md:col-span-7">
               <h1 className="text-balance text-display text-accent-foreground">
-                {T.hero.title}
+                {T.hero.titleLead}{" "}
+                <span
+                  className="italic font-normal text-accent-foreground/90"
+                >
+                  {T.hero.titleEmphasis}
+                </span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.1} className="md:col-span-5 md:col-start-8">
@@ -242,60 +209,35 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="relative bg-background py-24 md:py-32">
+      <section className="relative bg-background pt-28 pb-20 md:pt-36 md:pb-24">
         <Container as="div" size="wide">
           <div className="grid gap-12 md:grid-cols-12 md:gap-16 lg:gap-20">
             <FadeIn className="md:col-span-5">
               <div className="md:sticky md:top-28">
-                <div className="relative">
-                  <ImagePlaceholder
-                    role="Why we exist"
-                    aspect="aspect-4/5"
-                    className="rounded-(--radius-xl) shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--accent)_35%,transparent)]"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -bottom-6 -right-4 flex items-baseline gap-3 rounded-full bg-background px-5 py-3 shadow-[0_8px_28px_-12px_color-mix(in_oklab,var(--accent)_30%,transparent)] md:-right-6"
-                  >
-                    <span
-                      className="font-heading text-h3 leading-none text-accent tabular-nums"
-                      style={{ letterSpacing: "-0.02em" }}
-                    >
-                      01
-                    </span>
-                    <span className="text-eyebrow text-muted-foreground">Povestea</span>
-                  </div>
-                  <FloatingShape
-                    className="pointer-events-none absolute hidden text-accent/30 md:block md:-top-8 md:-left-8 md:h-20 md:w-20"
-                    range={120}
-                    rotate={-18}
-                    bob={10}
-                    bobDuration={5.2}
-                  >
-                    <svg viewBox="0 0 200 200" className="h-full w-full">
-                      <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="2.5" />
-                      <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" strokeWidth="2.5" />
-                    </svg>
-                  </FloatingShape>
-                </div>
+                <ImagePlaceholder
+                  aspect="aspect-4/5"
+                  className="rounded-(--radius-xl) shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--accent)_35%,transparent)]"
+                />
               </div>
             </FadeIn>
 
             <div className="flex flex-col gap-10 md:col-span-7 md:col-start-6">
               <FadeIn>
-                <span className="text-eyebrow text-accent">{T.story.eyebrow}</span>
-                <h2 className="mt-4 text-balance text-h1 text-foreground">
+                <h2 className="text-balance text-h1 text-foreground">
                   {T.story.title}
                 </h2>
               </FadeIn>
 
-              <FadeIn delay={0.08} underline>
-                <p
-                  className="text-pretty text-lede italic text-foreground/85"
-                  style={{ fontFamily: "var(--font-fraunces), serif" }}
-                >
-                  {T.story.lede}
-                </p>
+              <FadeIn delay={0.08}>
+                <div className="relative max-w-xl pl-5 md:pl-6">
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-1 left-0 top-1 w-0.5 bg-accent"
+                  />
+                  <p className="text-pretty text-lede italic text-foreground/85">
+                    {T.story.lede}
+                  </p>
+                </div>
               </FadeIn>
 
               <FadeIn delay={0.14}>
@@ -310,9 +252,9 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-surface py-24 md:py-32">
+      <section className="relative isolate overflow-hidden bg-surface pt-24 pb-20 md:pt-32 md:pb-24">
         <FloatingShape
-          className="pointer-events-none absolute hidden text-accent/15 md:block md:-top-16 md:right-[8%] md:h-40 md:w-40"
+          className="pointer-events-none absolute hidden text-accent/12 md:block md:-top-16 md:right-[8%] md:h-40 md:w-40"
           range={200}
           rotate={-24}
           bob={14}
@@ -323,285 +265,87 @@ export default function AboutPage() {
             <circle cx="120" cy="120" r="72" fill="none" stroke="currentColor" strokeWidth="2" />
           </svg>
         </FloatingShape>
-        <FloatingShape
-          className="pointer-events-none absolute hidden size-2 rounded-full bg-accent/40 md:block md:top-24 md:left-[12%]"
-          range={80}
-          bob={10}
-          bobDuration={3.6}
-        >
-          <span className="block h-full w-full" />
-        </FloatingShape>
 
         <Container as="div" size="wide" className="relative">
           <div className="grid items-end gap-10 md:grid-cols-12 md:gap-14">
-            <FadeIn className="md:col-span-6">
-              <span className="text-eyebrow text-accent">{T.curation.eyebrow}</span>
-              <h2 className="mt-4 text-balance text-h1 text-foreground">
+            <FadeIn className="md:col-span-7">
+              <h2 className="text-balance text-h1 text-foreground">
                 {T.curation.title}
               </h2>
             </FadeIn>
-            <FadeIn delay={0.1} className="md:col-span-5 md:col-start-8">
+            <FadeIn delay={0.1} className="md:col-span-4 md:col-start-9">
               <p className="text-pretty text-lede text-muted-foreground">
                 {T.curation.lede}
               </p>
             </FadeIn>
           </div>
 
-          <ol className="mt-16 grid gap-12 md:mt-24 md:grid-cols-2 md:gap-x-16 md:gap-y-16 lg:gap-x-24">
+          <div className="mt-16 grid gap-x-16 gap-y-10 md:mt-24 md:grid-cols-12 md:gap-y-12">
             {T.curation.principles.map((p, i) => (
               <FadeIn
-                key={p.n}
-                delay={0.06 + i * 0.05}
-                className={i % 2 === 1 ? "md:pt-14" : undefined}
+                key={p.title}
+                delay={0.06 + i * 0.04}
+                className="md:col-span-10 md:col-start-3"
               >
-                <li className="flex flex-col">
-                  <span
-                    className="font-heading text-[2.75rem] leading-none text-accent tabular-nums md:text-[3.25rem]"
-                    style={{ letterSpacing: "-0.03em" }}
-                  >
-                    {p.n}
-                  </span>
-                  <h3 className="mt-6 text-h3 text-foreground">{p.title}</h3>
-                  <span
-                    aria-hidden="true"
-                    className="mt-4 block h-px w-10 bg-accent"
-                  />
-                  <p className="mt-5 text-pretty text-body text-foreground/75">
+                <div className="flex flex-col gap-3 border-t border-border pt-6 md:flex-row md:gap-14 md:pt-8">
+                  <h3 className="text-h3 text-foreground md:w-80 md:shrink-0">
+                    {p.title}
+                  </h3>
+                  <p className="text-pretty text-body text-foreground/75 md:flex-1">
                     {p.body}
                   </p>
-                </li>
+                </div>
               </FadeIn>
             ))}
-          </ol>
+          </div>
 
-          <FadeIn delay={0.2} className="mt-20 md:mt-28">
-            <div className="relative max-w-4xl pl-6 md:pl-10">
-              <span
-                aria-hidden="true"
-                className="absolute bottom-1 left-0 top-1 w-0.5 bg-accent"
-              />
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-1 -top-6 select-none text-[6rem] leading-none text-accent/20 md:-top-10 md:text-[9rem]"
-                style={{
-                  fontFamily: "var(--font-fraunces), serif",
-                  fontWeight: 700,
-                }}
-              >
-                &ldquo;
-              </span>
-              <p
-                className="relative text-pretty text-h3 font-normal leading-[1.45] text-foreground"
-                style={{ fontFamily: "var(--font-fraunces), serif" }}
-              >
-                {T.curation.closer}
-              </p>
-            </div>
+          <FadeIn delay={0.2} className="mt-16 md:mt-24">
+            <p className="mx-auto max-w-3xl text-balance text-center text-h3 font-normal italic leading-[1.45] text-foreground md:col-start-2">
+              {T.curation.closer}
+            </p>
           </FadeIn>
         </Container>
       </section>
 
-      <section className="relative bg-background py-24 md:py-32">
+      <section className="relative bg-background pt-28 pb-20 md:pt-36 md:pb-24">
         <Container as="div" size="wide">
-          <div className="grid gap-12 md:grid-cols-12 md:gap-16 lg:gap-20">
-            <div className="md:col-span-5">
-              <FadeIn>
-                <span className="text-eyebrow text-accent">{T.delivery.eyebrow}</span>
-                <h2 className="mt-4 text-balance text-h1 text-foreground">
-                  {T.delivery.title}
-                </h2>
-              </FadeIn>
-
-              <FadeIn delay={0.12} className="mt-12 md:mt-16">
-                <div className="relative">
-                  <ImagePlaceholder
-                    role="What you receive"
-                    aspect="aspect-4/5"
-                    className="rounded-(--radius-xl) shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--accent)_30%,transparent)]"
-                  />
-                  <FloatingShape
-                    className="pointer-events-none absolute hidden text-accent/25 md:block md:-right-8 md:-bottom-8 md:h-24 md:w-24"
-                    range={100}
-                    rotate={22}
-                    bob={9}
-                    bobDuration={5.4}
-                  >
-                    <svg viewBox="0 0 200 200" className="h-full w-full">
-                      <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="2.5" />
-                      <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" strokeWidth="2.5" />
-                    </svg>
-                  </FloatingShape>
-                </div>
-              </FadeIn>
-            </div>
-
-            <FadeIn delay={0.08} className="md:col-span-7 md:col-start-6">
-              <dl className="border-t border-border">
-                {T.delivery.points.map((pt, i) => (
-                  <div
-                    key={pt.title}
-                    className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-2 border-b border-border py-8 md:grid-cols-[auto_minmax(0,1fr)_minmax(0,1.6fr)] md:gap-x-10 md:py-10"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="col-start-1 row-span-2 mt-1 font-heading text-small font-semibold text-accent tabular-nums md:row-span-1 md:self-start"
-                      style={{ letterSpacing: "0.04em" }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <dt className="col-start-2 text-h3 text-foreground">
-                      {pt.title}
-                    </dt>
-                    <dd className="col-span-2 col-start-1 text-pretty text-body text-foreground/75 md:col-span-1 md:col-start-3 md:row-start-1">
-                      {pt.body}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+          <div className="mx-auto max-w-3xl">
+            <FadeIn>
+              <h2 className="text-balance text-h1 text-foreground">
+                {T.delivery.title}
+              </h2>
             </FadeIn>
-          </div>
-        </Container>
-      </section>
 
-      <section className="relative isolate overflow-hidden bg-surface py-24 md:py-28">
-        <FloatingShape
-          className="pointer-events-none absolute hidden text-accent/12 md:block md:-bottom-16 md:-left-12 md:h-48 md:w-48"
-          range={160}
-          rotate={18}
-          bob={10}
-          bobDuration={6.2}
-        >
-          <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="82" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="52" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </FloatingShape>
+            <FadeIn delay={0.08}>
+              <p className="mt-8 text-pretty text-lede text-foreground/80">
+                {T.delivery.lede}
+              </p>
+            </FadeIn>
 
-        <Container as="div" size="wide" className="relative">
-          <div className="grid gap-12 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-5">
-              <FadeIn>
-                <span className="text-eyebrow text-accent">{T.ensama.eyebrow}</span>
-              </FadeIn>
-              <FadeIn delay={0.05}>
-                <h2 className="mt-4 text-h1 text-foreground">{T.ensama.title}</h2>
-              </FadeIn>
-              <FadeIn delay={0.1}>
-                <p className="mt-6 max-w-md text-lede text-muted-foreground">
-                  {T.ensama.description}
-                </p>
-              </FadeIn>
-            </div>
-
-            <FadeIn className="md:col-span-7 md:pt-2" delay={0.15}>
-              <dl className="divide-y divide-border border-y border-border">
-                {T.ensama.rows.map((row) => (
-                  <div
-                    key={row.label}
-                    className="grid gap-1 py-6 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-10 md:py-7"
-                  >
-                    <dt className="text-eyebrow text-accent">{row.label}</dt>
-                    <dd className="flex flex-col gap-1">
-                      <span className="text-body text-foreground">
-                        {row.value}
+            <FadeIn delay={0.14}>
+              <dl className="mt-14 flex flex-col gap-6 text-body text-foreground/80 md:mt-16">
+                {T.delivery.inlineTerms.map((item) => (
+                  <div key={item.term} className="text-pretty">
+                    <dt className="inline font-semibold text-foreground">
+                      {item.term}
+                      <span className="mx-2 text-accent" aria-hidden="true">
+                        —
                       </span>
-                      {row.meta ? (
-                        <span className="text-small text-muted-foreground">
-                          {row.meta}
-                        </span>
-                      ) : null}
-                    </dd>
+                    </dt>
+                    <dd className="inline">{item.body}</dd>
                   </div>
                 ))}
-                <div className="grid gap-1 py-6 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-10 md:py-7">
-                  <dt className="text-eyebrow text-accent">
-                    {T.ensama.phoneLabel}
-                  </dt>
-                  <dd>
-                    <a
-                      href={`tel:${BUSINESS.phone}`}
-                      className="group inline-flex items-center gap-2.5 text-body text-foreground underline-offset-[6px] transition-colors hover:text-accent hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
-                    >
-                      <Phone
-                        aria-hidden="true"
-                        className="size-4 text-accent transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-12"
-                        strokeWidth={1.75}
-                      />
-                      <span className="tabular-nums">{T.ensama.phone}</span>
-                    </a>
-                  </dd>
-                </div>
-                <div className="grid gap-1 py-6 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-10 md:py-7">
-                  <dt className="text-eyebrow text-accent">
-                    {T.ensama.socialEyebrow}
-                  </dt>
-                  <dd>
-                    <a
-                      href={BUSINESS.social.facebook}
-                      rel="me noopener"
-                      target="_blank"
-                      className="group inline-flex items-center gap-2.5 text-body text-foreground underline-offset-[6px] transition-colors hover:text-accent hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
-                    >
-                      {T.ensama.facebookLabel}
-                      <svg
-                        aria-hidden="true"
-                        viewBox="0 0 16 16"
-                        className="size-3.5 text-accent transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      >
-                        <path
-                          d="M6 2h8v8M14 2 2 14"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </a>
-                  </dd>
-                </div>
               </dl>
             </FadeIn>
           </div>
         </Container>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-background py-24 md:py-28">
-        <FloatingShape
-          className="pointer-events-none absolute hidden text-accent/10 md:block md:top-1/2 md:-left-16 md:h-72 md:w-72 md:-translate-y-1/2"
-          range={140}
-          rotate={10}
-          bob={9}
-          bobDuration={6}
-        >
-          <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="82" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="52" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="24" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </FloatingShape>
-        <FloatingShape
-          className="pointer-events-none absolute hidden text-accent/10 md:block md:top-1/2 md:-right-16 md:h-72 md:w-72 md:-translate-y-1/2"
-          range={140}
-          rotate={-10}
-          bob={9}
-          bobDuration={6.4}
-        >
-          <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="82" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="52" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="24" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </FloatingShape>
-
+      <section className="relative isolate overflow-hidden bg-surface pt-24 pb-16 md:pt-32 md:pb-20">
         <Container as="div" size="wide" className="relative">
           <div className="grid items-end gap-10 md:grid-cols-12 md:gap-14">
             <FadeIn className="md:col-span-7">
-              <span className="text-eyebrow text-accent">{T.cta.eyebrow}</span>
-              <h2 className="mt-4 text-balance text-h1 text-foreground">
+              <h2 className="text-balance text-h1 text-foreground">
                 {T.cta.title}
               </h2>
             </FadeIn>

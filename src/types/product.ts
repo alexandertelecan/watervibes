@@ -4,12 +4,15 @@ export { PRODUCT_SIZES } from "@/lib/constants";
 export type { ProductColor, ProductSize } from "@/lib/constants";
 
 export type ProductSpecs = {
-  dimensions: string;
-  jets: number;
+  lengthMm: number;
+  widthMm: number;
+  heightMm: number;
+  waterVolumeL: number;
   capacity: number;
+  loungeSeats: number;
+  seatedSeats: number;
   power: string;
-  weightEmpty: string;
-  weightFull: string;
+  material: string;
 };
 
 export type Product = {

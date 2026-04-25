@@ -105,10 +105,10 @@ export function productMetaTitle(product: Product): string {
 
 export function productMetaDescription(product: Product): string {
   const count = SIZE_PERSON_COUNT[product.size] ?? product.specs.capacity;
-  const jets = product.specs.jets;
+  const volume = product.specs.waterVolumeL;
   const price = formatPrice(product.price);
   const colorLabel = productColorLabel(product.color).toLowerCase();
-  return `Cadă cu hidromasaj ${product.name} pentru ${count} persoane. ${jets} duze de hidromasaj, finisaj ${colorLabel}. Livrare în toată România, instalare inclusă. Preț ${price}.`;
+  return `Cadă cu hidromasaj ${product.name} pentru ${count} persoane. ${volume} litri, finisaj ${colorLabel}. Livrare în toată România, instalare inclusă. Preț ${price}.`;
 }
 
 export type ProductAltSource = {
@@ -225,18 +225,24 @@ export function productSchema(product: Product) {
       },
       {
         "@type": "PropertyValue",
-        name: "Duze hidromasaj",
-        value: product.specs.jets,
+        name: "Volum apă",
+        value: product.specs.waterVolumeL,
+        unitText: "L",
       },
       {
         "@type": "PropertyValue",
         name: "Dimensiuni",
-        value: product.specs.dimensions,
+        value: `${product.specs.lengthMm} × ${product.specs.widthMm} × ${product.specs.heightMm} mm`,
       },
       {
         "@type": "PropertyValue",
-        name: "Consum",
+        name: "Alimentare electrică",
         value: product.specs.power,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Material cuvă",
+        value: product.specs.material,
       },
     ],
     offers: {

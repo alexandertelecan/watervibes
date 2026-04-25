@@ -24,7 +24,7 @@ const L = {
   phone: "Telefon",
   phoneOptional: "(opțional)",
   message: "Spuneți-ne despre spațiu",
-  submit: "Trimiteți mesajul",
+  submit: "Trimite mesajul",
   submitting: "Se trimite…",
   quoteContextLabel: "Ofertă pentru",
   nameMin: "Vă rugăm să introduceți numele complet.",
@@ -35,7 +35,7 @@ const L = {
   successTitle: "Mulțumim. Mesajul este pe drum.",
   successMessage:
     "Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare. Între timp, puteți răsfoi colecția.",
-  sendAnother: "Trimiteți încă un mesaj",
+  sendAnother: "Trimite încă un mesaj",
   toastSuccess: "Mesaj trimis. Revenim în curând.",
   rateLimit:
     "Ați trimis deja câteva mesaje. Așteptați câteva minute înainte să încercați din nou.",
@@ -72,11 +72,7 @@ const schema = z.object({
     .max(40)
     .optional()
     .or(z.literal("").transform(() => undefined)),
-  message: z
-    .string()
-    .trim()
-    .min(10, L.messageMin)
-    .max(2000, L.messageMax),
+  message: z.string().trim().min(10, L.messageMin).max(2000, L.messageMax),
 });
 
 export function ContactForm({ productSlug }: ContactFormProps) {

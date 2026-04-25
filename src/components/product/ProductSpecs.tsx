@@ -20,26 +20,36 @@ const VALUE_SIZE: Record<StatSize, string> = {
 };
 
 const UNIT_LABELS = {
-  jets: "duze inox",
   seats: "locuri",
-  power: "consum maxim",
-  footprint: "amprentă",
-  weightEmpty: "greutate carcasă",
-  weightFull: "greutate cu apă",
+  lounge: "locuri lounge",
+  seated: "locuri în șezut",
+  volume: "volum apă",
+  power: "alimentare",
+  footprint: "dimensiuni",
+  material: "material cuvă",
 } as const;
+
+function formatDimensions(specs: Specs): string {
+  const fmt = (mm: number) =>
+    (mm / 1000).toLocaleString("ro-RO", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  return `${fmt(specs.lengthMm)} × ${fmt(specs.widthMm)} × ${fmt(specs.heightMm)} m`;
+}
 
 export function ProductSpecs({ specs }: { specs: Specs }) {
   const stats: StatEntry[] = [
     {
       index: "01",
-      value: String(specs.jets),
-      label: UNIT_LABELS.jets,
+      value: String(specs.capacity),
+      label: UNIT_LABELS.seats,
       size: "display",
     },
     {
       index: "02",
-      value: String(specs.capacity),
-      label: UNIT_LABELS.seats,
+      value: `${specs.waterVolumeL.toLocaleString("ro-RO")} L`,
+      label: UNIT_LABELS.volume,
       size: "display",
     },
     {
@@ -50,20 +60,20 @@ export function ProductSpecs({ specs }: { specs: Specs }) {
     },
     {
       index: "04",
-      value: specs.dimensions,
+      value: formatDimensions(specs),
       label: UNIT_LABELS.footprint,
       size: "medium",
     },
     {
       index: "05",
-      value: specs.weightEmpty,
-      label: UNIT_LABELS.weightEmpty,
+      value: `${specs.loungeSeats} · ${specs.seatedSeats}`,
+      label: `${UNIT_LABELS.lounge} · ${UNIT_LABELS.seated}`,
       size: "large",
     },
     {
       index: "06",
-      value: specs.weightFull,
-      label: UNIT_LABELS.weightFull,
+      value: specs.material,
+      label: UNIT_LABELS.material,
       size: "large",
     },
   ];

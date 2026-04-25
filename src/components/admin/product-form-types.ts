@@ -1,12 +1,15 @@
 import { z } from "zod";
 
 const specs = z.object({
-  dimensions: z.string().min(1),
-  jets: z.number().int().min(0),
-  capacity: z.number().int().min(1),
-  power: z.string().min(1),
-  weightEmpty: z.string().min(1),
-  weightFull: z.string().min(1),
+  lengthMm: z.number().int().positive("Introduceți lungimea în mm"),
+  widthMm: z.number().int().positive("Introduceți lățimea în mm"),
+  heightMm: z.number().int().positive("Introduceți înălțimea în mm"),
+  waterVolumeL: z.number().int().positive("Introduceți volumul de apă"),
+  capacity: z.number().int().min(1, "Cel puțin o persoană"),
+  loungeSeats: z.number().int().min(0),
+  seatedSeats: z.number().int().min(0),
+  power: z.string().min(1, "Adăugați alimentarea electrică"),
+  material: z.string().min(1, "Adăugați materialul cuvei"),
 });
 
 // `size` is intentionally NOT in this schema — the admin UI lets the operator
@@ -20,9 +23,9 @@ export const productFormSchema = z.object({
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug must be kebab-case")
     .optional()
     .or(z.literal("")),
-  name: z.string().min(1),
-  tagline: z.string().min(1),
-  description: z.string().min(1),
+  name: z.string().min(1, "Adăugați un nume"),
+  tagline: z.string().min(1, "Adăugați un slogan"),
+  description: z.string().min(1, "Adăugați o descriere"),
   color: z.string().min(1, "Adăugați un nume pentru culoare"),
   colorHex: z.string().regex(/^#[0-9a-fA-F]{6}$/, "Cod hex invalid"),
   price: z.number().positive("Introduceți un preț"),

@@ -21,13 +21,14 @@ const META_DESCRIPTION =
 
 const T = {
   hero: {
-    titleLead: "Pentru casele, pensiunile și hotelurile care vor",
+    titleLead:
+      "WaterVive a apărut dintr-o idee simplă. Oamenii au nevoie de relaxare reală.",
     titleEmphasis: "mai mult decât o vacanță.",
     subhead:
       "Alegem jacuzzi exterior pe confort, durabilitate și hidromasaj care se simte la fel și peste doi ani. Livrare și suport în toată România.",
   },
   story: {
-    title: "Relaxarea reală nu ar trebui să fie un lux ocazional.",
+    title: "Motivul din spate.",
     lede: "O găsim în vacanțe sau în centre spa. Apoi o pierdem când ne întoarcem acasă. Noi credem că ar trebui să facă parte din viața de zi cu zi.",
     paragraphs: [
       "Fiecare casă, fiecare pensiune, fiecare hotel poate avea un loc dedicat eliberării. Un spațiu unde corpul se destinde, mintea iese din ritmul zilei, iar timpul petrecut cu familia sau cu oaspeții devine memorabil.",
@@ -36,7 +37,8 @@ const T = {
     ],
   },
   curation: {
-    title: "Un singur criteriu. Să se potrivească la cât mai multe spații și stiluri din România.",
+    title:
+      "Un singur criteriu. Să se potrivească la cât mai multe spații și stiluri din România.",
     lede: "Verificăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Fiecare model din colecție își merită locul.",
     principles: [
       {
@@ -60,7 +62,8 @@ const T = {
       "Ultimul pas este discuția. Ne uităm la spațiu, la câte persoane vor folosi cada și la cum se integrează cu terasa sau interiorul existent. Plecați cu modelul potrivit, prețul livrat în România și pașii tehnici pentru instalare.",
   },
   delivery: {
-    title: "Jacuzzi moderne cu hidromasaj, alese ca să se simtă tot jacuzzi și peste doi ani.",
+    title:
+      "Jacuzzi moderne cu hidromasaj, alese ca să se simtă tot jacuzzi și peste doi ani.",
     lede: "Modele de interior sau exterior, dimensiuni și capacități diferite, scheme variate de jeturi și finisaje. Găsiți unul care se potrivește spațiului și stilului, fără să cedați pe calitate.",
     inlineTerms: [
       {
@@ -108,8 +111,22 @@ export default function AboutPage() {
           bobDuration={5.6}
         >
           <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="110" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="120" cy="120" r="72" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle
+              cx="120"
+              cy="120"
+              r="110"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="72"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
           </svg>
         </FloatingShape>
         <FloatingShape
@@ -128,10 +145,38 @@ export default function AboutPage() {
           bobDuration={6.8}
         >
           <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="82" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="52" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="24" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle
+              cx="120"
+              cy="120"
+              r="112"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="82"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="52"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
           </svg>
         </FloatingShape>
         <FloatingShape
@@ -157,7 +202,11 @@ export default function AboutPage() {
           bob={7}
           bobDuration={5.2}
         >
-          <svg viewBox="0 0 160 32" className="h-full w-full" preserveAspectRatio="none">
+          <svg
+            viewBox="0 0 160 32"
+            className="h-full w-full"
+            preserveAspectRatio="none"
+          >
             <path
               d="M0 16 Q 20 4 40 16 T 80 16 T 120 16 T 160 16"
               fill="none"
@@ -182,9 +231,30 @@ export default function AboutPage() {
           bobDuration={5.8}
         >
           <svg viewBox="0 0 56 56" className="h-full w-full">
-            <circle cx="16" cy="36" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="34" cy="22" r="10" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="44" cy="42" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle
+              cx="16"
+              cy="36"
+              r="7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="34"
+              cy="22"
+              r="10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="44"
+              cy="42"
+              r="4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
           </svg>
         </FloatingShape>
 
@@ -193,11 +263,6 @@ export default function AboutPage() {
             <FadeIn className="md:col-span-7">
               <h1 className="text-balance text-display text-accent-foreground">
                 {T.hero.titleLead}{" "}
-                <span
-                  className="italic font-normal text-accent-foreground/90"
-                >
-                  {T.hero.titleEmphasis}
-                </span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.1} className="md:col-span-5 md:col-start-8">
@@ -239,9 +304,6 @@ export default function AboutPage() {
                     aria-hidden="true"
                     className="absolute bottom-1 left-0 top-1 w-0.5 bg-accent"
                   />
-                  <p className="text-pretty text-lede italic text-foreground/85">
-                    {T.story.lede}
-                  </p>
                 </div>
               </FadeIn>
 
@@ -266,8 +328,22 @@ export default function AboutPage() {
           bobDuration={6.2}
         >
           <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="110" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="120" cy="120" r="72" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle
+              cx="120"
+              cy="120"
+              r="110"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="72"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
           </svg>
         </FloatingShape>
 

@@ -3,12 +3,15 @@ import { z } from "zod";
 import { PRODUCT_SIZES } from "@/lib/constants";
 
 const specsSchema = z.object({
-  dimensions: z.string().min(1),
-  jets: z.number().int().min(0),
+  lengthMm: z.number().int().positive(),
+  widthMm: z.number().int().positive(),
+  heightMm: z.number().int().positive(),
+  waterVolumeL: z.number().int().positive(),
   capacity: z.number().int().min(1),
+  loungeSeats: z.number().int().min(0),
+  seatedSeats: z.number().int().min(0),
   power: z.string().min(1),
-  weightEmpty: z.string().min(1),
-  weightFull: z.string().min(1),
+  material: z.string().min(1),
 });
 
 const hexColor = z.string().regex(/^#[0-9a-fA-F]{6}$/, "colorHex must be #RRGGBB");

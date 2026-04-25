@@ -4,12 +4,15 @@ import { PRODUCT_SIZES } from "@/types/product";
 
 const SpecsSchema = new Schema(
   {
-    dimensions: { type: String, required: true },
-    jets: { type: Number, required: true, min: 0 },
+    lengthMm: { type: Number, required: true, min: 1 },
+    widthMm: { type: Number, required: true, min: 1 },
+    heightMm: { type: Number, required: true, min: 1 },
+    waterVolumeL: { type: Number, required: true, min: 1 },
     capacity: { type: Number, required: true, min: 1 },
-    power: { type: String, required: true },
-    weightEmpty: { type: String, required: true },
-    weightFull: { type: String, required: true },
+    loungeSeats: { type: Number, required: true, min: 0, default: 0 },
+    seatedSeats: { type: Number, required: true, min: 0, default: 0 },
+    power: { type: String, required: true, trim: true },
+    material: { type: String, required: true, trim: true },
   },
   { _id: false },
 );

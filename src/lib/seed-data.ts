@@ -32,12 +32,15 @@ type SeedProduct = {
   price: number;
   images: string[];
   specs: {
-    dimensions: string;
-    jets: number;
+    lengthMm: number;
+    widthMm: number;
+    heightMm: number;
+    waterVolumeL: number;
     capacity: number;
+    loungeSeats: number;
+    seatedSeats: number;
     power: string;
-    weightEmpty: string;
-    weightFull: string;
+    material: string;
   };
   features: string[];
   featured: boolean;
@@ -65,12 +68,15 @@ export const seedProducts: SeedProduct[] = [
     price: 31500,
     images: gallery(0),
     specs: {
-      dimensions: "2.1m × 2.1m × 0.9m",
-      jets: 28,
+      lengthMm: 2100,
+      widthMm: 2100,
+      heightMm: 900,
+      waterVolumeL: 1250,
       capacity: 4,
-      power: "3.2 kW",
-      weightEmpty: "280 kg",
-      weightFull: "1,250 kg",
+      loungeSeats: 1,
+      seatedSeats: 3,
+      power: "220V, 50–60 Hz",
+      material: "Acril ABS",
     },
     features: [
       "28 duze de hidromasaj multi-zonă",
@@ -94,12 +100,15 @@ export const seedProducts: SeedProduct[] = [
     price: 37800,
     images: gallery(1),
     specs: {
-      dimensions: "2.2m × 2.2m × 0.92m",
-      jets: 32,
+      lengthMm: 2200,
+      widthMm: 2200,
+      heightMm: 920,
+      waterVolumeL: 1320,
       capacity: 4,
-      power: "3.5 kW",
-      weightEmpty: "295 kg",
-      weightFull: "1,320 kg",
+      loungeSeats: 2,
+      seatedSeats: 2,
+      power: "220V, 50–60 Hz",
+      material: "Acril sanitar",
     },
     features: [
       "32 duze de hidromasaj de precizie",
@@ -123,12 +132,15 @@ export const seedProducts: SeedProduct[] = [
     price: 86900,
     images: gallery(2),
     specs: {
-      dimensions: "2.5m × 2.4m × 1.02m",
-      jets: 64,
+      lengthMm: 2500,
+      widthMm: 2400,
+      heightMm: 1020,
+      waterVolumeL: 2200,
       capacity: 7,
-      power: "5.0 kW",
-      weightEmpty: "420 kg",
-      weightFull: "2,200 kg",
+      loungeSeats: 2,
+      seatedSeats: 5,
+      power: "380V, 50 Hz",
+      material: "Acril cu finisaj manual",
     },
     features: [
       "64 duze de hidromasaj signature",
@@ -154,12 +166,15 @@ export const seedProducts: SeedProduct[] = [
     price: 18500,
     images: gallery(3),
     specs: {
-      dimensions: "1.9m × 1.5m × 0.8m",
-      jets: 14,
+      lengthMm: 1900,
+      widthMm: 1500,
+      heightMm: 800,
+      waterVolumeL: 780,
       capacity: 2,
-      power: "2.4 kW",
-      weightEmpty: "180 kg",
-      weightFull: "780 kg",
+      loungeSeats: 0,
+      seatedSeats: 2,
+      power: "220V, 50–60 Hz",
+      material: "Acril ABS",
     },
     features: [
       "14 duze inox de hidromasaj",
@@ -182,12 +197,15 @@ export const seedProducts: SeedProduct[] = [
     price: 21900,
     images: gallery(4),
     specs: {
-      dimensions: "2.0m × 1.5m × 0.82m",
-      jets: 16,
+      lengthMm: 2000,
+      widthMm: 1500,
+      heightMm: 820,
+      waterVolumeL: 820,
       capacity: 2,
-      power: "2.6 kW",
-      weightEmpty: "195 kg",
-      weightFull: "820 kg",
+      loungeSeats: 1,
+      seatedSeats: 1,
+      power: "220V, 50–60 Hz",
+      material: "Acril ABS",
     },
     features: [
       "16 duze cu contra-curent",
@@ -210,12 +228,15 @@ export const seedProducts: SeedProduct[] = [
     price: 58400,
     images: gallery(5),
     specs: {
-      dimensions: "2.3m × 2.3m × 0.98m",
-      jets: 52,
+      lengthMm: 2300,
+      widthMm: 2300,
+      heightMm: 980,
+      waterVolumeL: 1980,
       capacity: 6,
-      power: "4.2 kW",
-      weightEmpty: "380 kg",
-      weightFull: "1,980 kg",
+      loungeSeats: 2,
+      seatedSeats: 4,
+      power: "380V, 50 Hz",
+      material: "Acril ABS ranforsat",
     },
     features: [
       "52 duze de hidromasaj multi-zonă",

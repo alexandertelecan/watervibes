@@ -27,7 +27,7 @@ export default async function EditProductPage({
   if (!product) notFound();
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto max-w-7xl">
       <header className="mb-10">
         <nav
           aria-label="Breadcrumb"
@@ -50,12 +50,16 @@ export default async function EditProductPage({
           <span className="text-foreground">Editare</span>
         </nav>
 
-        <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <h1 className="font-(family-name:--font-fraunces) text-3xl font-semibold tracking-tight sm:text-4xl">
+        <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-2">
+            <span className="inline-flex items-center gap-2 text-eyebrow text-accent">
+              <span aria-hidden="true" className="h-px w-6 bg-accent" />
+              Editare produs
+            </span>
+            <h1 className="font-(family-name:--font-fraunces) text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               {product.name}
             </h1>
-            <p className="mt-2 font-mono text-xs text-muted-foreground">
+            <p className="font-mono text-xs text-muted-foreground">
               /{product.slug}
             </p>
           </div>
@@ -63,7 +67,7 @@ export default async function EditProductPage({
             href={`/catalog/${product.slug}`}
             target="_blank"
             rel="noreferrer"
-            className="group/view inline-flex h-10 items-center gap-2 rounded-full border border-border bg-background px-4 text-sm font-medium text-foreground transition-all duration-200 hover:border-foreground hover:bg-surface"
+            className="group/view inline-flex h-10 shrink-0 items-center gap-2 self-start rounded-full border border-border bg-background px-4 text-sm font-medium text-foreground transition-all duration-200 hover:border-foreground hover:bg-surface"
           >
             <span>Vedeți pe site</span>
             <ArrowUpRight

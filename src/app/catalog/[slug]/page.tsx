@@ -1,12 +1,13 @@
 import {
   ArrowLeft,
   ArrowRight,
+  Armchair,
   Check,
   Droplets,
+  Layers,
   Ruler,
-  Scale,
+  Sofa,
   Users,
-  Waves,
   Zap,
   type LucideIcon,
 } from "lucide-react";
@@ -42,11 +43,12 @@ type PageParams = { slug: string };
 const L = {
   backToCatalog: "Catalog",
   seats: "locuri",
-  jetsUnit: "duze inox",
-  powerUnit: "consum maxim",
-  footprint: "amprentă",
-  weightEmpty: "greutate carcasă",
-  weightFull: "greutate cu apă",
+  loungeUnit: "locuri lounge",
+  seatedUnit: "locuri în șezut",
+  volumeUnit: "volum apă",
+  powerUnit: "alimentare",
+  footprint: "dimensiuni",
+  materialUnit: "material cuvă",
   priceEyebrow: "Preț",
   priceIncludes: "TVA și livrare în România incluse.",
   colorLabel: "Culoare",
@@ -56,6 +58,23 @@ const L = {
   trustObligations: "Transport gratuit",
   trustDelivery: "Livrare în maxim 72 de ore",
 } as const;
+
+function formatDimensions(specs: {
+  lengthMm: number;
+  widthMm: number;
+  heightMm: number;
+}): string {
+  const fmt = (mm: number) =>
+    (mm / 1000).toLocaleString("ro-RO", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  return `${fmt(specs.lengthMm)} × ${fmt(specs.widthMm)} × ${fmt(specs.heightMm)} m`;
+}
+
+function formatVolume(litres: number): string {
+  return `${litres.toLocaleString("ro-RO")} L`;
+}
 
 async function loadProduct(slug: string): Promise<Product | null> {
   await dbConnect();
@@ -389,9 +408,24 @@ export default async function ProductDetailPage({
                 label={L.seats}
               />
               <StatCard
+                Icon={Sofa}
+                value={String(product.specs.loungeSeats)}
+                label={L.loungeUnit}
+              />
+              <StatCard
+                Icon={Armchair}
+                value={String(product.specs.seatedSeats)}
+                label={L.seatedUnit}
+              />
+              <StatCard
+                Icon={Ruler}
+                value={formatDimensions(product.specs)}
+                label={L.footprint}
+              />
+              <StatCard
                 Icon={Droplets}
-                value={String(product.specs.jets)}
-                label={L.jetsUnit}
+                value={formatVolume(product.specs.waterVolumeL)}
+                label={L.volumeUnit}
               />
               <StatCard
                 Icon={Zap}
@@ -399,19 +433,9 @@ export default async function ProductDetailPage({
                 label={L.powerUnit}
               />
               <StatCard
-                Icon={Ruler}
-                value={product.specs.dimensions}
-                label={L.footprint}
-              />
-              <StatCard
-                Icon={Scale}
-                value={product.specs.weightEmpty}
-                label={L.weightEmpty}
-              />
-              <StatCard
-                Icon={Waves}
-                value={product.specs.weightFull}
-                label={L.weightFull}
+                Icon={Layers}
+                value={product.specs.material}
+                label={L.materialUnit}
               />
             </dl>
 

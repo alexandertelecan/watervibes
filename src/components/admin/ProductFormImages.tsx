@@ -1,5 +1,6 @@
 "use client";
 
+import { upload } from "@vercel/blob/client";
 import { ImagePlus, Loader2, Star, Trash2, Upload } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useId, useRef, useState } from "react";
@@ -44,21 +45,18 @@ export function ProductFormImages({ errors, watch, setValue }: Props) {
       const uploaded: string[] = [];
       try {
         for (const file of list) {
-          const form = new FormData();
-          form.append("file", file);
-          const res = await fetch("/api/upload", {
-            method: "POST",
-            body: form,
-          });
-          if (!res.ok) {
-            const json = (await res.json().catch(() => ({}))) as {
-              error?: string;
-            };
-            toast.error(json.error ?? `Încărcare eșuată: ${file.name}`);
-            continue;
+          try {
+            const blob = await upload(`uploads/${file.name}`, file, {
+              access: "public",
+              handleUploadUrl: "/api/upload",
+              contentType: file.type,
+            });
+            uploaded.push(blob.url);
+          } catch (err) {
+            const message =
+              err instanceof Error ? err.message : "Încărcare eșuată";
+            toast.error(`${file.name}: ${message}`);
           }
-          const json = (await res.json()) as { url: string };
-          uploaded.push(json.url);
         }
 
         if (uploaded.length) {
@@ -73,8 +71,6 @@ export function ProductFormImages({ errors, watch, setValue }: Props) {
               : `${uploaded.length} imagini încărcate`,
           );
         }
-      } catch {
-        toast.error("Eroare la încărcare. Încercați din nou.");
       } finally {
         setUploading(false);
       }
@@ -242,7 +238,7 @@ export function ProductFormImages({ errors, watch, setValue }: Props) {
                 : "Trageți imaginile aici sau apăsați pentru a alege"}
           </p>
           <p className="text-xs text-muted-foreground">
-            JPG, PNG, WebP sau AVIF · maxim 8 MB per fișier
+            JPG, PNG, WebP sau AVIF · maxim 25 MB per fișier
           </p>
         </div>
       </label>

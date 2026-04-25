@@ -20,10 +20,9 @@ const META_DESCRIPTION =
 
 const T = {
   hero: {
-    titleLead: "Spuneți-ne despre spațiu. Revenim cu",
-    titleEmphasis: "modelul potrivit.",
+    titleLead: "Contactează-ne",
     description:
-      "Terasă, grădină, interior, pensiune, hotel. Răspundem într-o zi lucrătoare cu jacuzzi-ul potrivit, prețul cu livrare pentru România și pașii de instalare.",
+      "Echipa WaterVibe te ajută să alegi modelul potrivit nevoilor tale.",
   },
   formCaption: "Formular · 4 câmpuri · răspuns într-o zi lucrătoare",
   pullquote:
@@ -92,8 +91,22 @@ export default async function ContactPage({
           bobDuration={5.6}
         >
           <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="110" fill="none" stroke="currentColor" strokeWidth="2" />
-            <circle cx="120" cy="120" r="72" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle
+              cx="120"
+              cy="120"
+              r="110"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="72"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
           </svg>
         </FloatingShape>
         <FloatingShape
@@ -104,10 +117,38 @@ export default async function ContactPage({
           bobDuration={6.8}
         >
           <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="82" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="52" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="24" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle
+              cx="120"
+              cy="120"
+              r="112"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="82"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="52"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
           </svg>
         </FloatingShape>
         <FloatingShape
@@ -116,7 +157,11 @@ export default async function ContactPage({
           bob={7}
           bobDuration={5.2}
         >
-          <svg viewBox="0 0 160 32" className="h-full w-full" preserveAspectRatio="none">
+          <svg
+            viewBox="0 0 160 32"
+            className="h-full w-full"
+            preserveAspectRatio="none"
+          >
             <path
               d="M0 16 Q 20 4 40 16 T 80 16 T 120 16 T 160 16"
               fill="none"
@@ -140,9 +185,6 @@ export default async function ContactPage({
             <FadeIn className="md:col-span-7">
               <h1 className="text-balance text-display text-accent-foreground">
                 {T.hero.titleLead}{" "}
-                <span className="italic font-normal text-accent-foreground/90">
-                  {T.hero.titleEmphasis}
-                </span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.1} className="md:col-span-5 md:col-start-8">

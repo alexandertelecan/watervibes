@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { revalidatePath } from "next/cache";
 import type { NextRequest } from "next/server";
 
 import { isAdmin } from "@/lib/auth-server";
@@ -60,6 +61,9 @@ export async function PUT(request: NextRequest, { params }: RouteContext) {
     if (!updated) {
       return Response.json({ error: "Not found" }, { status: 404 });
     }
+    revalidatePath("/");
+    revalidatePath("/catalog");
+    revalidatePath(`/catalog/${updated.slug}`);
     return Response.json({ product: updated });
   } catch {
     return Response.json({ error: "Internal error" }, { status: 500 });
@@ -82,6 +86,9 @@ export async function DELETE(request: NextRequest, { params }: RouteContext) {
     if (!deleted) {
       return Response.json({ error: "Not found" }, { status: 404 });
     }
+    revalidatePath("/");
+    revalidatePath("/catalog");
+    revalidatePath(`/catalog/${deleted.slug}`);
     return Response.json({ ok: true });
   } catch {
     return Response.json({ error: "Internal error" }, { status: 500 });

@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import type { NextRequest } from "next/server";
 
 import { isAdmin } from "@/lib/auth-server";
@@ -65,6 +66,9 @@ export async function POST(request: NextRequest) {
       );
     }
     const created = await ProductModel.create(parsed.data);
+    revalidatePath("/");
+    revalidatePath("/catalog");
+    revalidatePath(`/catalog/${created.slug}`);
     return Response.json({ product: created.toObject() }, { status: 201 });
   } catch {
     return Response.json({ error: "Internal error" }, { status: 500 });

@@ -13,7 +13,7 @@ import {
   twitterFor,
 } from "@/lib/seo";
 
-const TITLE = "Muie ovidiu. Pensiune și Hotel · WaterVibe România";
+const TITLE = "Jacuzzi și căzi cu hidromasaj · Livrare în toată România | WaterVibe";
 const DESCRIPTION =
   "Jacuzzi cu hidromasaj pentru două, patru sau șase persoane. Modele de interior și exterior. Livrare în toată România, consultanță, preț ferm și pași clari de instalare.";
 

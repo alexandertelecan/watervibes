@@ -22,13 +22,13 @@ const L = {
   name: "Numele dumneavoastră",
   email: "Adresă de email",
   phone: "Telefon",
-  phoneOptional: "(opțional)",
-  message: "Spuneți-ne despre spațiu",
+  message: "Mesaj",
   submit: "Trimite mesajul",
   submitting: "Se trimite…",
   quoteContextLabel: "Ofertă pentru",
   nameMin: "Vă rugăm să introduceți numele complet.",
   emailInvalid: "Vă rugăm să introduceți o adresă de email validă.",
+  phoneMin: "Vă rugăm să introduceți un număr de telefon.",
   messageMin:
     "Un mesaj scurt ne ajută să răspundem cum trebuie. Minim zece caractere.",
   messageMax: "Vă rugăm să păstrați mesajul sub 2000 de caractere.",
@@ -50,7 +50,7 @@ type ContactFormProps = {
 type FormValues = {
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   message: string;
 };
 
@@ -66,12 +66,7 @@ const CONTACT_EMAIL =
 const schema = z.object({
   name: z.string().trim().min(2, L.nameMin).max(80),
   email: z.email(L.emailInvalid).max(120),
-  phone: z
-    .string()
-    .trim()
-    .max(40)
-    .optional()
-    .or(z.literal("").transform(() => undefined)),
+  phone: z.string().trim().min(6, L.phoneMin).max(40),
   message: z.string().trim().min(10, L.messageMin).max(2000, L.messageMax),
 });
 
@@ -81,9 +76,10 @@ export function ContactForm({ productSlug }: ContactFormProps) {
     handleSubmit,
     reset,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
+    mode: "onChange",
     defaultValues: { name: "", email: "", phone: "", message: "" },
   });
 
@@ -233,9 +229,6 @@ export function ContactForm({ productSlug }: ContactFormProps) {
       <div className="flex flex-col gap-2">
         <Label htmlFor="contact-phone" className={LABEL_STYLES}>
           {L.phone}
-          <span className="ml-2 text-[10px] font-normal normal-case tracking-normal text-muted-foreground">
-            {L.phoneOptional}
-          </span>
         </Label>
         <Input
           id="contact-phone"
@@ -268,11 +261,11 @@ export function ContactForm({ productSlug }: ContactFormProps) {
 
       <Button
         type="submit"
-        variant="primary"
+        variant="accent"
         size="lg"
         arrow={!isSubmitting}
         className="mt-2 self-start"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !isValid}
       >
         {isSubmitting ? (
           <>

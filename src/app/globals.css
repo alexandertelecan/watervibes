@@ -93,6 +93,9 @@
     scroll-behavior: smooth;
     scrollbar-color: var(--accent) transparent;
     scrollbar-width: thin;
+    /* `document.scrollingElement` is the scroll container Framer Motion's
+       useScroll defaults to; it must be non-static for offset math. */
+    position: relative;
   }
   body::-webkit-scrollbar {
     width: 10px;

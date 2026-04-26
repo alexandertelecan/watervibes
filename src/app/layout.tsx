@@ -113,6 +113,7 @@ export default function RootLayout({
   return (
     <html
       lang="ro"
+      data-scroll-behavior="smooth"
       className={cn(
         manrope.variable,
         jakarta.variable,

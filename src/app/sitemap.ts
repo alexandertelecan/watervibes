@@ -4,7 +4,7 @@ import { dbConnect } from "@/lib/db";
 import { ProductModel } from "@/lib/models/Product";
 import { absoluteUrl } from "@/lib/seo";
 
-const STATIC_PATHS = ["", "/catalog", "/about", "/contact"] as const;
+const STATIC_PATHS = ["", "/catalog", "/about", "/contact", "/termeni", "/retur", "/cookies", "/confidentialitate"] as const;
 
 function staticPriority(path: string): number {
   if (path === "") return 1;

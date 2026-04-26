@@ -24,10 +24,7 @@ const T = {
     description:
       "Echipa WaterVibe te ajută să alegi modelul potrivit nevoilor tale.",
   },
-  formCaption: "Formular · 4 câmpuri · răspuns într-o zi lucrătoare",
-  pullquote:
-    "Relaxarea reală nu ar trebui să fie un lux ocazional. Ar trebui să facă parte din viața normală.",
-  pullquoteAttribution: "WaterVibe · ENSAMA SRL",
+  infoEyebrow: "Detalii de contact",
   info: [
     {
       label: "Email",
@@ -42,12 +39,10 @@ const T = {
     {
       label: "Sediu",
       value: "Bulevardul Carol I 90, Câmpina, Prahova",
-      meta: "Vizite cu programare.",
     },
     {
       label: "Program",
-      value: "Luni până Vineri · 9:00 până 18:00",
-      meta: "Răspuns într-o zi lucrătoare.",
+      value: "Luni — Vineri · 9:00 — 18:00",
     },
   ] as const,
 };
@@ -196,86 +191,47 @@ export default async function ContactPage({
         </Container>
       </section>
 
-      <section className="relative bg-surface py-24 md:py-32">
+      <section className="relative bg-background py-24 md:py-32">
         <Container as="div" size="wide">
-          <div className="grid gap-16 md:grid-cols-12 md:gap-x-14 md:gap-y-20 lg:gap-x-20">
-            <FadeIn
-              delay={0.05}
-              className="order-1 md:order-0 md:col-span-7 md:col-start-6"
-            >
-              <div className="border-t border-border pt-8 md:pt-10">
-                <span className="text-small text-muted-foreground">
-                  {T.formCaption}
-                </span>
-                <div className="mt-8 md:mt-10">
-                  <ContactForm productSlug={productSlug} />
-                </div>
-              </div>
-            </FadeIn>
-
-            <aside className="order-2 flex flex-col gap-16 md:order-0 md:col-span-5 md:col-start-1 md:row-start-1">
-              <FadeIn>
-                <figure className="relative pl-6 md:pl-10">
-                  <span
-                    aria-hidden="true"
-                    className="absolute bottom-1 left-0 top-1 w-0.5 bg-accent"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -left-1 -top-6 select-none text-[5.5rem] leading-none text-accent/20 md:-top-10 md:text-[8rem]"
-                    style={{
-                      fontFamily: "var(--font-fraunces), serif",
-                      fontWeight: 700,
-                    }}
-                  >
-                    &ldquo;
-                  </span>
-                  <blockquote
-                    className="relative text-pretty text-h3 font-normal leading-[1.45] text-foreground"
-                    style={{ fontFamily: "var(--font-fraunces), serif" }}
-                  >
-                    {T.pullquote}
-                  </blockquote>
-                  <figcaption className="mt-6 text-small text-muted-foreground">
-                    — {T.pullquoteAttribution}
-                  </figcaption>
-                </figure>
+          <div className="grid gap-16 md:grid-cols-12 md:gap-x-16 md:gap-y-24 lg:gap-x-24">
+            <aside className="order-2 flex flex-col gap-10 md:order-0 md:col-span-5 md:row-start-1 md:gap-12">
+              <FadeIn delay={0.08}>
+                <p className="text-eyebrow text-accent">{T.infoEyebrow}</p>
               </FadeIn>
 
-              <FadeIn delay={0.08}>
-                <dl className="border-t border-border">
+              <FadeIn delay={0.12}>
+                <dl className="flex flex-col gap-10 md:gap-12">
                   {T.info.map((row) => (
-                    <div
-                      key={row.label}
-                      className="grid grid-cols-1 gap-2 border-b border-border py-6 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-x-8 md:gap-y-1 md:py-7"
-                    >
+                    <div key={row.label} className="flex flex-col gap-2">
                       <dt className="text-small text-muted-foreground">
                         {row.label}
                       </dt>
-                      <dd className="flex flex-col gap-1">
+                      <dd>
                         {"href" in row && row.href ? (
                           <a
                             href={row.href}
-                            className="text-body text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                            className="text-h3 font-normal text-foreground underline-offset-4 transition-colors hover:text-accent focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                           >
                             {row.value}
                           </a>
                         ) : (
-                          <span className="text-body text-foreground">
+                          <span className="text-h3 font-normal text-foreground">
                             {row.value}
                           </span>
                         )}
-                        {"meta" in row && row.meta ? (
-                          <span className="text-small text-muted-foreground">
-                            {row.meta}
-                          </span>
-                        ) : null}
                       </dd>
                     </div>
                   ))}
                 </dl>
               </FadeIn>
             </aside>
+
+            <FadeIn
+              delay={0.05}
+              className="order-1 md:order-0 md:col-span-6 md:col-start-7"
+            >
+              <ContactForm productSlug={productSlug} />
+            </FadeIn>
           </div>
         </Container>
       </section>

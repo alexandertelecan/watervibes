@@ -42,7 +42,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button asChild variant="accent" size="lg" className="gap-2">
               <Link href="/catalog">
-                <span>Descoperiți colecția</span>
+                <span>Descoperă colecția</span>
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 16 16"

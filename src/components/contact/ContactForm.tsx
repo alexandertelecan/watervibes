@@ -19,7 +19,7 @@ const INPUT_STYLES =
 const LABEL_STYLES = "text-eyebrow text-foreground";
 
 const L = {
-  name: "Numele dumneavoastră",
+  name: "Nume și prenume",
   email: "Adresă de email",
   phone: "Telefon",
   message: "Mesaj",

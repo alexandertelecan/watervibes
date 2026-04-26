@@ -21,40 +21,38 @@ const META_DESCRIPTION =
 
 const T = {
   hero: {
-    titleLead:
-      "WaterVibe a apărut dintr-o idee simplă. Oamenii au nevoie de relaxare reală.",
+    titleLead: "WaterVibe a apărut dintr-o idee simplă.",
     titleEmphasis: "mai mult decât o vacanță.",
     subhead:
-      "Viața devine aglomerată. Programul devine tot mai încărcat. Momentele de liniște devin rare.",
+      "Relaxarea nu ar trebui să fie limitată la vacanțe sau centre spa. O experiență bună poate exista și acasă, dar și în spații unde oamenii vin să se relaxeze, precum pensiuni și hoteluri.",
   },
   story: {
-    title: "Motivul din spate.",
-    lede: "O găsim în vacanțe sau în centre spa. Apoi o pierdem când ne întoarcem acasă. Noi credem că ar trebui să facă parte din viața de zi cu zi.",
+    title: "Motivul din spate",
     paragraphs: [
-      "Fiecare casă, fiecare pensiune, fiecare hotel poate avea un loc dedicat eliberării. Un spațiu unde corpul se destinde, mintea iese din ritmul zilei, iar timpul petrecut cu familia sau cu oaspeții devine memorabil.",
-      "Apa face treaba. Hidromasajul destinde tensiunea musculară. Căldura scoate încleștarea din umeri. Jeturile pornesc circulația. În câteva minute sunteți în altă parte.",
-      "Asta e WaterVibe. Nu vindem jacuzzi. Vindem serile care urmează după.",
+      "Apa caldă, aerul rece, lumina serii care se așează peste curte. Câteva minute în care timpul încetinește și ziua rămâne afară. Asta a fost imaginea de la care am pornit.",
+      "Cei mai mulți oameni asociază relaxarea cu vacanța. Cu un weekend la munte, cu un sejur la un centru spa, cu ceva ce se întâmplă rar și se termină repede. WaterVibe a apărut din convingerea că nu ar trebui să fie așa. Confortul real nu este o pauză din viața ta, este parte din ea.",
+      "Construim pentru oamenii care vor să își recupereze serile acasă, după o zi lungă. Și pentru cei care țin o pensiune sau un hotel și știu că un oaspete revine pentru ce a simțit, nu pentru ce a văzut. Indiferent unde ajunge, un jacuzzi WaterVibe face același lucru: transformă un spațiu obișnuit într-un motiv de a rămâne acolo.",
     ],
   },
   curation: {
-    title: "Procesul de selectie.",
-    lede: "WaterVibe selectează jacuzzi pentru locuințe, pensiuni și hoteluri.",
+    title: "Procesul de selecție",
+    lede: "Nu orice jacuzzi de pe piață ajunge în catalogul WaterVibe. Înainte să adăugăm un model, ne uităm la trei lucruri: cum este construit, cum funcționează și cum se potrivește în spațiul tău.",
     principles: [
       {
         title: "Materiale sigure și ușor de întreținut",
-        body: "Bazin din acril sanitar antibacterian Aristech. Suprafață rezistentă, igienă ridicată, curățare rapidă.",
+        body: "Bazin din acril sanitar Aristech, antibacterian și ușor de curățat. Apă caldă, o lavetă moale și gata. Petreci mai mult timp în jacuzzi și mai puțin timp cu întreținerea.",
       },
       {
-        title: "Tehnologie fiabilă",
-        body: "Sisteme Gecko. Control simplu, funcționare stabilă, consum optim.",
+        title: "Tehnologie pe care te poți baza",
+        body: "Sisteme Gecko, platforma de control folosită de marii producători de spa din lume. Pornești seara, intri în apă și restul se face singur. Exact ce vrei de la un jacuzzi care trebuie să meargă ani buni.",
       },
       {
-        title: "Izolație eficientă",
-        body: "Alegem finisaje care se așează bine atât în spații moderne, cât și clasice. Un jacuzzi trebuie să completeze terasa sau grădina, nu să le concureze.",
+        title: "Un jacuzzi care se potrivește locului",
+        body: "Alegem finisaje care funcționează atât în spații moderne, cât și clasice. Un jacuzzi nu ar trebui să fure toată atenția pe terasă, ci să o completeze. Diferența se vede între unul care pare pus acolo și unul care arată ca și cum locul l-a așteptat.",
       },
     ],
     closer:
-      "Ultimul pas este discuția. Ne uităm la spațiu, la câte persoane vor folosi cada și la cum se integrează cu terasa sau interiorul existent. Plecați cu modelul potrivit, prețul livrat în România și pașii tehnici pentru instalare.",
+      "Ultimul pas este o discuție scurtă. Ne uităm împreună la spațiul tău, la câte persoane vor folosi jacuzziul și la cum îl integrezi cu terasa sau cu interiorul. Pleci cu modelul potrivit, prețul cu livrare inclusă în România și pașii pentru instalare.",
   },
   delivery: {
     title: "Rezultatul final",
@@ -65,7 +63,7 @@ const T = {
       },
       {
         term: "Alegi dimensiunea, numărul de locuri și configurația de hidromasaj.",
-        body: "Integrarea este simplă, indiferent că este interior sau exterior.",
+        body: "Integrarea este simplă, indiferent dacă este interior sau exterior.",
       },
       {
         term: "Ai un suport clar în procesul de alegere.",
@@ -80,7 +78,7 @@ const T = {
   cta: {
     title: "Găsim soluția potrivită pentru tine.",
     lede: "Fără formulare lungi. O conversație scurtă, un preț cu livrare inclusă, pașii de instalare. Atât.",
-    primary: "Cereți o ofertă",
+    primary: "Hai să vorbim",
     secondary: "Vedeți colecția",
   },
 };
@@ -99,7 +97,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="relative isolate flex min-h-[90dvh] flex-col justify-end overflow-hidden bg-accent py-20 text-accent-foreground md:py-24">
+      <section className="relative isolate overflow-hidden bg-accent py-20 text-accent-foreground md:py-28">
         <FloatingShape
           className="pointer-events-none absolute hidden text-accent-foreground/25 md:block md:-top-10 md:-right-10 md:h-40 md:w-40"
           range={180}
@@ -295,26 +293,6 @@ export default function AboutPage() {
                     </h2>
                   </FadeIn>
 
-                  <FadeIn delay={0.08}>
-                    <p className="mt-6 text-pretty text-lede text-foreground/80">
-                      {T.story.lede}
-                    </p>
-                  </FadeIn>
-
-                  <FadeIn delay={0.14}>
-                    <div className="mt-10 max-w-sm md:ml-auto">
-                      <div className="relative aspect-4/5 overflow-hidden rounded-(--radius-xl) shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--accent)_35%,transparent)]">
-                        <Image
-                          src="https://images.unsplash.com/photo-1682906324513-5370a2e99e1a?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                          alt="Moment de relaxare"
-                          fill
-                          sizes="(min-width: 768px) 30vw, 80vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
-                  </FadeIn>
-
                   <FadeIn delay={0.2}>
                     <div className="prose-narrow mt-10 flex flex-col gap-6 text-pretty text-body text-foreground/80">
                       {T.story.paragraphs.map((p, i) => (
@@ -404,12 +382,6 @@ export default function AboutPage() {
                       </FadeIn>
                     ))}
                   </div>
-
-                  <FadeIn delay={0.32}>
-                    <p className="mt-12 text-balance text-body italic leading-[1.6] text-foreground md:mt-14">
-                      {T.curation.closer}
-                    </p>
-                  </FadeIn>
                 </div>
 
                 <div className="hidden md:col-start-1 md:row-start-1 md:flex md:items-start md:justify-center md:pt-12">

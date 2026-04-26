@@ -53,7 +53,7 @@ const L = {
   priceIncludes: "TVA și livrare în România incluse.",
   colorLabel: "Culoare",
   capacityLabel: "Capacitate",
-  ctaPrimary: "Cereți o ofertă",
+  ctaPrimary: "Hai să vorbim",
   trustResponse: "Garanție 5 ani",
   trustObligations: "Transport gratuit",
   trustDelivery: "Livrare în maxim 72 de ore",

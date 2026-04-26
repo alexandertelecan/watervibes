@@ -14,15 +14,15 @@ const IMAGE_ALT = "Moment de relaxare într-un jacuzzi WaterVibe, în aer liber.
 const PILLARS = [
   {
     label: "De ce WaterVibe",
-    body: "WaterVibe a apărut dintr-o idee simplă. Relaxarea reală nu trebuie să fie un lux ocazional. O găsești în vacanțe sau în centre spa, apoi o pierzi când te întorci acasă. Noi credem că trebuie să fie parte din viața de zi cu zi.",
+    body: "WaterVibe a apărut dintr-o idee simplă. Relaxarea nu ar trebui să fie limitată la vacanțe sau centre spa. O experiență bună poate exista și acasă, dar și în spații unde oamenii vin să se relaxeze, precum pensiuni și hoteluri.",
   },
   {
     label: "Cum facem asta",
-    body: "Selectăm fiecare model de jacuzzi cu atenție. Analizăm confortul, calitatea materialelor, performanța hidromasajului și fiabilitatea sistemelor tehnice. Alegem modele care oferă o experiență reală de spa și care pot fi folosite constant, fără compromisuri.",
+    body: "Selectăm fiecare model de jacuzzi cu atenție. Verificăm confortul, materialele, performanța hidromasajului și fiabilitatea tehnică. Alegem produse care oferă o experiență stabilă și funcționează bine în utilizare frecventă, indiferent de context.",
   },
   {
     label: "Ce oferim",
-    body: "Jacuzzi pentru uz rezidențial, potrivite pentru curți, terase sau spații interioare. În funcție de spațiu și preferințe, poți alege modele pentru interior sau exterior, cu dimensiuni diferite, număr variat de locuri, configurații de jeturi și variante de culori.",
+    body: "Jacuzzi pentru exterior și interior, potrivite pentru locuințe private, terase, pensiuni, hoteluri și centre spa. Modelele diferă prin dimensiuni, număr de locuri, configurații de hidromasaj și design, astfel încât să se potrivească fiecărui spațiu și tip de utilizare.",
   },
 ] as const;
 

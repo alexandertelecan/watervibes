@@ -37,7 +37,7 @@ type PageSearch = {
 
 const TITLE = "Catalog";
 const DESCRIPTION =
-  "Explorați colecția noastră de jacuzzi. De la variante intime, pentru două persoane, până la modele ample pentru seri cu prietenii. Filtrați după dimensiune sau culoare și găsiți jacuzziul care se potrivește spațiului dumneavoastră.";
+  "Descoperă colecția noastră de jacuzzi. De la modele compacte pentru două persoane, până la variante spațioase pentru momente cu prietenii. Filtrează după preț, capacitate sau culoare și alege modelul potrivit pentru spațiul tău.";
 
 const META_TITLE = "Modele Jacuzzi Exterior · Colecția WaterVibe";
 const META_DESCRIPTION =
@@ -94,7 +94,9 @@ export default async function CatalogPage({
 
   const [priceAgg, rawCapacities, colorAgg] = await Promise.all([
     ProductModel.aggregate<{ min: number; max: number }>([
-      { $group: { _id: null, min: { $min: "$price" }, max: { $max: "$price" } } },
+      {
+        $group: { _id: null, min: { $min: "$price" }, max: { $max: "$price" } },
+      },
     ]),
     ProductModel.distinct("specs.capacity") as Promise<number[]>,
     ProductModel.aggregate<{ value: string; hex: string }>([
@@ -211,10 +213,38 @@ export default async function CatalogPage({
           bobDuration={6.8}
         >
           <svg viewBox="0 0 240 240" className="h-full w-full">
-            <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="82" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="52" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="120" cy="120" r="24" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle
+              cx="120"
+              cy="120"
+              r="112"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="82"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="52"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
           </svg>
         </FloatingShape>
         <FloatingShape
@@ -240,7 +270,11 @@ export default async function CatalogPage({
           bob={7}
           bobDuration={5.2}
         >
-          <svg viewBox="0 0 160 32" className="h-full w-full" preserveAspectRatio="none">
+          <svg
+            viewBox="0 0 160 32"
+            className="h-full w-full"
+            preserveAspectRatio="none"
+          >
             <path
               d="M0 16 Q 20 4 40 16 T 80 16 T 120 16 T 160 16"
               fill="none"
@@ -265,9 +299,30 @@ export default async function CatalogPage({
           bobDuration={5.8}
         >
           <svg viewBox="0 0 56 56" className="h-full w-full">
-            <circle cx="16" cy="36" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="34" cy="22" r="10" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="44" cy="42" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle
+              cx="16"
+              cy="36"
+              r="7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="34"
+              cy="22"
+              r="10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <circle
+              cx="44"
+              cy="42"
+              r="4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
           </svg>
         </FloatingShape>
 
@@ -276,11 +331,10 @@ export default async function CatalogPage({
             <FadeIn className="md:col-span-7">
               <h1 className="text-display text-accent-foreground">{TITLE}</h1>
             </FadeIn>
-            <FadeIn
-              delay={0.1}
-              className="md:col-span-5 md:col-start-8"
-            >
-              <p className="text-lede text-accent-foreground/80">{DESCRIPTION}</p>
+            <FadeIn delay={0.1} className="md:col-span-5 md:col-start-8">
+              <p className="text-lede text-accent-foreground/80">
+                {DESCRIPTION}
+              </p>
             </FadeIn>
           </div>
         </Container>

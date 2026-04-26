@@ -13,7 +13,7 @@
   },
   "cta": {
     "browseCatalog": "Descoperiți colecția",
-    "requestQuote": "Cereți o ofertă",
+    "requestQuote": "Hai să vorbim",
     "getInTouch": "Luați legătura"
   },
   "language": {
@@ -36,7 +36,7 @@
     "headline": "WaterVibe. O experiență, nu doar un jacuzzi.",
     "subhead": "Relaxare la un alt nivel, pentru acasă, pensiuni și hoteluri. Experiență completă de hidromasaj, construită pentru durabilitate.",
     "ctaPrimary": "Descoperiți colecția",
-    "ctaSecondary": "Cereți o ofertă"
+    "ctaSecondary": "Hai să vorbim"
   },
   "perks": {
     "srLabel": "Avantajele WaterVibe",
@@ -101,7 +101,7 @@
       "description": "Jacuzzi cu hidromasaj pentru două, patru sau șase persoane. Modele de interior și exterior. Livrare în toată România, consultanță, preț ferm și pași clari de instalare."
     },
     "contact": {
-      "title": "Contact · Cereți o Ofertă de Jacuzzi",
+      "title": "Contact · Hai să vorbim de Jacuzzi",
       "description": "Spuneți-ne despre spațiu. Grădină, terasă, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare în România."
     },
     "about": {
@@ -165,7 +165,7 @@
   },
   "contact": {
     "eyebrow": "Luați legătura",
-    "title": "Cereți o ofertă pentru jacuzzi exterior",
+    "title": "Hai să vorbim pentru jacuzzi exterior",
     "description": "Spuneți-ne despre spațiu. Terasă, grădină, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți, prețul cu livrare pentru România și pașii de instalare.",
     "aside": {
       "pullquote": "Relaxarea reală nu ar trebui să fie un lux ocazional. Ar trebui să facă parte din viața normală.",
@@ -182,7 +182,7 @@
       "hours": "Luni până Vineri · 9:00 până 18:00 · răspuns într-o zi lucrătoare"
     },
     "form": {
-      "name": "Numele dumneavoastră",
+      "name": "Nume și prenume",
       "email": "Adresă de email",
       "phone": "Telefon",
       "phoneOptional": "(opțional)",
@@ -292,7 +292,7 @@
       "eyebrow": "Incluse"
     },
     "quote": {
-      "primary": "Cereți o ofertă",
+      "primary": "Hai să vorbim",
       "secondary": "Vedeți specificațiile",
       "eyebrow": "Suntem gata când sunteți",
       "note": "Răspundem într-o zi lucrătoare · Fără obligații"

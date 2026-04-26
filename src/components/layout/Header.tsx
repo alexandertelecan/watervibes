@@ -34,7 +34,7 @@ export function Header() {
             size="sm"
             className="hidden bg-accent-foreground text-accent shadow-sm hover:bg-accent-foreground/90 focus-visible:ring-accent-foreground focus-visible:ring-offset-accent md:inline-flex"
           >
-            <Link href="/contact">Cereți o ofertă</Link>
+            <Link href="/contact">Hai să vorbim</Link>
           </Button>
           <MobileNav />
         </div>

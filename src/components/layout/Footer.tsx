@@ -4,7 +4,7 @@ import { Container } from "@/components/shared/Container";
 import { FadeIn } from "@/components/shared/FadeIn";
 
 const BRAND_TAGLINE =
-  "Jacuzzi pentru exterior, pentru case, pensiuni și hoteluri din România. Relaxare adevărată, integrată în viața de zi cu zi.";
+  "Jacuzzi pentru exterior, pentru case, pensiuni și hoteluri din România. Relaxare reală, integrată în viața de zi cu zi.";
 
 const EXPLORE_LINKS = [
   { href: "/", label: "Acasă" },

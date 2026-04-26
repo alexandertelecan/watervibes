@@ -18,7 +18,7 @@ export function QuoteCTA({ slug }: { slug: string }) {
       <div className="flex flex-col gap-3 sm:flex-row">
         <Button asChild variant="accent" size="lg">
           <Link href={`/contact?product=${encodeURIComponent(slug)}`}>
-            <span>Cereți o ofertă</span>
+            <span>Hai să vorbim</span>
             <ArrowRight
               aria-hidden="true"
               className="transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-x-0.5"

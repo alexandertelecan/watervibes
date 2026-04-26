@@ -14,7 +14,7 @@ import {
 
 type PageSearch = { product?: string | string[] };
 
-const META_TITLE = "Contact · Cereți o Ofertă de Jacuzzi";
+const META_TITLE = "Contact · Hai să vorbim de Jacuzzi";
 const META_DESCRIPTION =
   "Spuneți-ne despre spațiu. Grădină, terasă, interior, pensiune, hotel. Revenim într-o zi lucrătoare cu jacuzzi potriviți și prețul cu livrare în România.";
 

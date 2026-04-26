@@ -16,7 +16,7 @@ import type { ProductColor } from "@/types/product";
 const TITLE = "Cele mai vândute";
 const LEDE =
   "Modele preferate de clienți pentru utilizare zilnică, acasă sau în spații turistice.";
-const VIEW_ALL = "Descoperiți întreaga colecție";
+const VIEW_ALL = "Descoperă întreaga colecție";
 
 export async function FeaturedProducts() {
   await dbConnect();
